@@ -1,0 +1,18 @@
+.navbar{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: antiquewhite;
+}
+.site-name{
+    padding:  5px 30px;
+    color: #e74c3c;
+}
+.site-menu{
+    padding: 10px 30px;
+    margin-left: 100px;
+}
+a{
+    text-decoration-color: black;
+    text-decoration: none;
+    margin: 0px 10px;
+}
