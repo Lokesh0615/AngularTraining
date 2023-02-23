@@ -12,5 +12,5 @@ import { Component, OnInit } from '@angular/core';
   // styles:[`div{margin: 10px 0px;padding: 10px 20px; background-color: red;}`]
 })
 export class NavComponent {
-
+  siteName:string="eShopping";
 }

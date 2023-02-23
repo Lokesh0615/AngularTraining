@@ -1,13 +1,16 @@
 .navbar{
     display: flex;
+    align-items: center;
     justify-content: space-evenly;
-    background-color: antiquewhite;
+    background-color: rgb(239, 151, 124);
 }
 .site-name{
     padding:  5px 30px;
     color: #e74c3c;
 }
 .site-menu{
+    display: flex;
+    align-items: center;
     padding: 10px 30px;
     margin-left: 100px;
 }

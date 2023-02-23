@@ -1,1 +1,5 @@
-<p>notification works!</p>
+<!-- <div [class]="alertSuccess" [hidden]="displayNotificatoion"> -->
+<div [class]="alertSuccess" [ngClass]="{fadeOut:displayNotificatoion}">
+    <span>website</span>
+    <button (click)="closeNotification()">click</button>
+</div>

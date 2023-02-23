@@ -3,20 +3,26 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { FormsModule} from "@angular/forms";
+
 // my server component
 import { ServerComponent } from './server/server.component';
 import { NavComponent } from './nav/nav.component';
 import { HeaderComponent } from './header/header.component';
-import { Header1Component } from './header1/header1.component';
 import { NotificationComponent } from './notification/notification.component';
+import { SearchComponent } from './search/search.component';
+import { ProductsComponent } from './products/products.component';
+import { FilterComponent } from './filter/filter.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     ServerComponent,
     NavComponent,
     HeaderComponent,
-    Header1Component,
-    NotificationComponent
+    NotificationComponent,
+    SearchComponent,
+    ProductsComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
