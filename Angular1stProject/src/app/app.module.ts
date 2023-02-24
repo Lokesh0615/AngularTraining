@@ -12,6 +12,11 @@ import { NotificationComponent } from './notification/notification.component';
 import { SearchComponent } from './search/search.component';
 import { ProductsComponent } from './products/products.component';
 import { FilterComponent } from './filter/filter.component';
+import { OutputComponent } from './output/output.component';
+import { Search1Component } from './search1/search1.component';
+import { DemoComponent } from './demo/demo.component';
+import { CustomerListComponent } from './customer-list/customer-list.component';
+import { AgeComponent } from './age/age.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +27,12 @@ import { FilterComponent } from './filter/filter.component';
     NotificationComponent,
     SearchComponent,
     ProductsComponent,
-    FilterComponent
+    FilterComponent,
+    OutputComponent,
+    Search1Component,
+    DemoComponent,
+    CustomerListComponent,
+    AgeComponent
   ],
   imports: [
     BrowserModule,

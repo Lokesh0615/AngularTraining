@@ -11,7 +11,7 @@ export class SearchComponent {
   // searchValue:string='phone';
   changeSearchValue(evenetData:Event){
     // console.log((<HTMLInputElement>evenetData.target).value);
-    this.searchValue=(<HTMLInputElement>evenetData.target).value;
+    // this.searchValue=(<HTMLInputElement>evenetData.target).value;
     
   }
 }

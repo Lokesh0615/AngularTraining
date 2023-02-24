@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
+import { Input } from '@angular/core';
+import { Output } from '@angular/core';
 
 @Component({
   selector: 'app-filter',
@@ -6,7 +8,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./filter.component.css']
 })
 export class FilterComponent {
-  all:number=0;
-  yes:number=0;
-  no:number=0;
+  @Input("Total") all:number=0;
+  @Input() yes:number=0;
+  @Input() no:number=0;
+
+  selectedRadioBtnValue:string="All";
+
+  @Output()
+  filterRadioBtnSelectionChanged =new EventEmitter();
+  onRadioBtnSelectionChanged(){
+    this.filterRadioBtnSelectionChanged.emit(this.selectedRadioBtnValue);
+    // console.log(this.selectedRadioBtnValue);
+
+    
+  }
 }

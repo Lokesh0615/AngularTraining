@@ -1,11 +1,11 @@
-<!-- <div class="search-div" [ngClass]="{changeBackgroung: searchValue != ''}">
-    <span><a>Search:</a></span> -->
+<div class="search-div" [ngClass]="{changeBackgroung: searchValue != ''}">
+    <span><a>Search:</a></span>
     <!-- <input type="text" (keyup)="changeSearchValue($event)"> -->
-    <!-- <input type="text" [(ngModel)]="searchValue"> -->
+    <input type="text" [(ngModel)]="searchValue">
     <!-- <p >you searched for {{searchValue}}</p> -->
-    <!-- <p *ngIf="searchValue.trim()!=''">you searched for {{searchValue}}</p>
-</div> -->
-<div class="search-div">
+    <p *ngIf="searchValue.trim()!=''">you searched for {{searchValue}}</p>
+</div>
+<!-- <div class="search-div">
     <span>Search:</span>
     <input type="text">
-</div>
+</div> -->

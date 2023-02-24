@@ -22,8 +22,29 @@ export class ProductsComponent {
     {id:14, name:" watch", price:123,color:"black", available:"yes", image:"/assets/header.jpg"},
     {id:15, name:"HD tv", price:12222,color:"black-white", available:"yes", image:"/assets/header.jpg"},
     {id:16, name:" watch", price:123,color:"black", available:"no", image:"/assets/header.jpg"}
-
-
-
   ]
+  getToatalProducs() :number{
+    return this.products.length;
+  }
+  getToatalAvailableProducts(){
+    return this.products.filter(p=> p.available==="yes").length;
+  }
+  getTotalNotAvailableProducts(){
+    return this.products.filter(p=> p.available==="no").length;
+  }
+
+
+  productsCountRadioBtn:string="All";
+  onFilterRadioBtnChange(data:string){
+    this.productsCountRadioBtn=data;
+    // console.log(this.productsCountRadioBtn);
+    
+  }
+
+  searchP=""
+  serchProductInParent(data:any){
+    this.searchP=data;
+  }
+ 
+ 
 }

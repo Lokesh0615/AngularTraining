@@ -3,30 +3,40 @@
 </div> -->
 
 <div>
-    <app-search></app-search>
-    <app-filter></app-filter>
+    <!-- <app-search></app-search> -->
+    <app-search1
+        (searchProduct)="serchProductInParent($event)"></app-search1>
+    <app-filter 
+        [Total]="getToatalProducs()"
+        [yes]="getToatalAvailableProducts()"
+        [no]="getTotalNotAvailableProducts()"
+        (filterRadioBtnSelectionChanged)="onFilterRadioBtnChange($event)"
+    ></app-filter>
 </div>
-<div *ngFor="let p of products; let i=index">
-    <!-- <p>{{i}}</p> -->
-    <div class="product-container" [ngStyle]="{backgroundColor: p.available==='yes'? '#D1F1E3':'#FADBD8'}">
-        <!-- <div class="product-container" [ngStyle]="{backgroundColor: p.available==='yes'? '#D1F1E3':'#FADBD8',display: p.available==='yes'? '':'none'}"> -->
-        <div class="image-container"><img [src]="p.image" style="max-height: 50px; max-width: 50px;" alt=""></div>
-        <div>
-            <div class="name-conatiner">
-                <h6>{{p.name}}</h6>
+<ng-container *ngFor="let p of products; let i=index">
+    <!-- <div *ngIf="productsCountRadioBtn ==='All' || productsCountRadioBtn === p.available"> -->
+        <div *ngIf="searchP ==='' ||  p.name.includes(searchP)">
+        <!-- <p>{{i}}</p> -->
+        <div class="product-container" [ngStyle]="{backgroundColor: p.available==='yes'? '#D1F1E3':'#FADBD8'}">
+            <!-- <div class="product-container" [ngStyle]="{backgroundColor: p.available==='yes'? '#D1F1E3':'#FADBD8',display: p.available==='yes'? '':'none'}"> -->
+            <div class="image-container"><img [src]="p.image" style="max-height: 50px; max-width: 50px;" alt=""></div>
+            <div>
+                <div class="name-conatiner">
+                    <h6>{{p.name}}</h6>
+                </div>
+                <div class="detailscontainer">
+                    <div class="detailes" [ngStyle]="{color:p.available==='yes' ? 'Green':'Red'}">{{p.available}}</div>
+                    <div class="detailes">{{p.price}}</div>
+                    <div class="detailes">{{p.color}}</div>
+                </div>
             </div>
-            <div class="detailscontainer">
-                <div class="detailes" [ngStyle]="{color:p.available==='yes' ? 'Green':'Red'}">{{p.available}}</div>
-                <div class="detailes">{{p.price}}</div>
-                <div class="detailes">{{p.color}}</div>
+            <div class="options">
+                <button class="btn btn-success">Show details</button>
+                <button class="btn btn-warning" *ngIf="p.available==='yes'; else notify">Buy now</button>
+                <ng-template #notify>
+                    <button class="btn btn-danger">Notify Me</button>
+                </ng-template>
             </div>
-        </div>
-        <div class="options">
-            <button class="btn btn-success">Show details</button>
-            <button class="btn btn-warning" *ngIf="p.available==='yes'; else notify" >Buy now</button>
-            <ng-template #notify>
-                <button class="btn btn-danger">Notify Me</button>
-            </ng-template>
         </div>
     </div>
-</div>
+</ng-container>
