@@ -1,12 +1,12 @@
 <div class="wrapper">
-  <!-- <app-server>okk</app-server> -->
-  <!-- <app-demo></app-demo>
+  <!-- <app-server>okk</app-server>
+  <app-demo></app-demo>
   <app-customer-list #customer></app-customer-list>
   <p>You have selected {{customer.selectedCustomer?.name}}</p> -->
 
   <!-- age -->
-  <div>
-    <label>DOb:</label>
+  <div> 
+     <label>DOb:</label>
     <input type="date" #dobInput (input)="calAge()">
   </div>
   <div>
@@ -16,3 +16,6 @@
   <app-age></app-age>
   <p>  {{ageComp.sayHello()}} </p>
 </div>
+    
+<!-- <app-output (greetEvent)="gt($event)"></app-output>
+<input type="text" #myV> -->

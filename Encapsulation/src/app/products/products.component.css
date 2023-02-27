@@ -1,0 +1,35 @@
+/* div{
+    width: 50%;
+    border: 2px solid red;
+
+}
+button{
+    border: 1px solid black;
+    background-color: aqua;
+}
+.container{
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+} */
+
+
+.card{
+    padding: 10px ;
+    margin:  0px 10px;
+    background-color: azure;
+    text-align: center;
+}
+.summary{
+    font-size: 15px;
+
+}
+
+.btn-more{
+    min-width: 160px;
+    margin-top: 10px;
+    padding: 10px 0px;
+    background-color: wheat;
+    
+}
+

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AgeComponent } from "./age/age.component";
 
 @Component({
@@ -12,7 +12,7 @@ export class AppComponent {
   ename="lokesh";
 
   // title="ViewChild";
-  @ViewChild('dobInput') dateOfBirth:any;
+  @ViewChild('dobInput') dateOfBirth:ElementRef;
   @ViewChild('ageInput') age:any;
   @ViewChild(AgeComponent, {static: true}) ageComp:any;
 
@@ -31,5 +31,10 @@ export class AppComponent {
     
     
   }
-  
+  // output
+  gt(data:string){
+    alert(data)
+    
+  }
+
 }
