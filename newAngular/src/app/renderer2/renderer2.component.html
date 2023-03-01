@@ -1,7 +1,7 @@
 <div  setBorder  appRenderer2>
-    <p #parentEl>sndjsjnj</p>
+    <p >sndjsjnj</p>
     <p > The first argument is the parent node, where we want to append a new child node. </p>
-    <button class="btn btn-primary">click</button>
+    <button class="btn btn-primary" #parentEl (click)="abcd()">click</button>
     <p>{{co}}</p>
 
 </div>

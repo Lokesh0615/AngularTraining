@@ -42,14 +42,59 @@
 
 </div> -->
 
-<!-- hostlistener -->
-<!-- <div class="container" setBorder>
+<!-- renderer -->
+ <!-- <div class="container" setBorder>
   <p>Implement this callback to add a comment to the DOM of the host element.</p>
-</div>
-<div  setBorder setBackground appHost>
+</div> -->
+<!-- <div  setBorder setBackground appHost>
   <p #pp>Implement this callback to add a comment to the DOM of the host element.</p>
 
-</div> -->
-<div class="container" setBorder hostBinding>
-  <p>HostBinding</p>
 </div>
+<div class="container" setBorder hostBinding [defaultColor]=" 'yellow' "  [highLiguthColor]=" 'green' " >
+  <p>HostBinding</p>
+</div> -->
+<!-- <div class="container" setBorder bindingDirective [bgc]=" 'red' " >
+  <p>HostBinding</p>
+</div> -->
+<!-- rendererListener -->
+<!-- <div class="container" setBorder appRendererListen >
+  <button #clickListen ></button>
+  <p>renderer listener</p>
+</div> -->
+
+<!-- <app-renderer2></app-renderer2> -->
+<!-- <app-conditional-directive></app-conditional-directive> -->
+<!-- <button class="btn btn-primary notice" (click)="displayNotice()">bitton</button><br>
+<div class="info-container notice" *ngIf="display; else noNotice">
+  <h3>this is important notice</h3>
+  <p>this is a notice issues for all website users.</p>
+</div>
+<ng-template #noNotice>
+  <p>there is no any notices</p>
+</ng-template> -->
+
+<!-- custom structural directive -->
+<!-- <button class="btn btn-primary notice" (click)="displayNotice()">bitton</button><br>
+<div class="info-container notice" *appIf="display">
+  <h3>this is important notice</h3>
+  <p>this is a notice issues for all website users.</p>
+</div>
+<ng-template #noNotice>
+  <p>there is no any notices</p>
+</ng-template>  -->
+<!-- hoe structural directive works -->
+
+
+<!-- ngSwitch -->
+<div class="container" [ngSwitch]="occupation">
+  <p *ngSwitchCase="'teacher'">this paragraph will be displayed when occupation is teacher</p>
+  <p *ngSwitchCase="'designer'">this paragraph will be displayed when occupation is desiner</p>
+  <p *ngSwitchCase="'lawyer'">this paragrap will be displayed when occupation is lawyer</p>
+  <p *ngSwitchDefault>this paragraph is displayed when occupatioon is none</p>
+</div>
+
+<!-- <div appClassD [display]="{'change-font':true, container:false}" setBorder>
+  <p>this is a demo HTML content to understand how to create custom appClass</p>
+</div> -->
+ <!-- property binding in components -->
+<!-- <img [src]="source" alt=""> -->

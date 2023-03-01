@@ -1,17 +1,23 @@
-import { Directive,ElementRef, Renderer2,HostBinding , HostListener } from "@angular/core";
+import { Directive,ElementRef, Renderer2,HostBinding , HostListener, Input, OnInit } from "@angular/core";
 
 @Directive({
     selector:"[hostBinding]"
 })
-export class HostBindingDirective{
+export class HostBindingDirective implements OnInit{
     constructor(private el:ElementRef, private rend:Renderer2){
 
     }
 
-    defaultColor:string='transparent';
-    highLiguthColor:string="pink";
+    @Input() defaultColor:string='transparent';
+    @Input() highLiguthColor:string="pink";
+
+
     @HostBinding("style.backgroundColor") background:string=this.defaultColor;
     @HostBinding("style.border") border:string="2px solid black";
+
+    ngOnInit(){
+        this.background=this.defaultColor;
+    }
     @HostListener("click") mose(){
         this.background=this.highLiguthColor;
         // this.background="red"

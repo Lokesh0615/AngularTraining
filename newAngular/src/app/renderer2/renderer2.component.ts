@@ -5,7 +5,7 @@ import { AfterViewInit, Component, ElementRef,Renderer2, ViewChild } from '@angu
   templateUrl: './renderer2.component.html',
   styleUrls: ['./renderer2.component.css']
 })
-export class Renderer2Component implements AfterViewInit {
+export class Renderer2Component  {
   co=0;
   @ViewChild("parentEl", {static:true}) ch!:ElementRef;
   clicklistener:any;
@@ -13,7 +13,14 @@ export class Renderer2Component implements AfterViewInit {
 
   }
   
-  ngAfterViewInit(){
-    this.clicklistener=this.rend.listen(this.ch.nativeElement, 'click', (evt)=>{this.co++})
+  abcd(){
+    this.clicklistener=this.rend.listen(this.ch.nativeElement, 'click', ()=>{this.co++ 
+      this.adddd()})
+}
+adddd(){
+  let a=this.rend.createElement("p");
+  let b=this.rend.createText(`hello ${this.co}`);
+  this.rend.appendChild(a,b);
+  this.rend.appendChild(this.el.nativeElement, a);
 }
 }
