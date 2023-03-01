@@ -19,11 +19,37 @@
 
 <!-- custom attribute directive -->
 
-<h1 setBackground  setBorder setBorderRadius>header</h1>
+<!-- <h1 setBackground  setBorder setBorderRadius>header</h1>
 <div class="container" setBackground setBorder>
   <p  >this is a demo HTML CONTENT to understand custom attribute directive</p>
-</div>
+</div> -->
 
-<div appHighLight >
-  <p  >this is a demo HTML CONTENT to understand custom attribute directive</p>
+<!-- <div setBorder >
+  <p >this is a demo HTML CONTENT to understand custom attribute directive</p>
+</div>
+<app-renderer2></app-renderer2> -->
+
+<!-- <app-content-child>
+  <input type="text"  #para name="" id="">
+</app-content-child> -->
+
+<!-- hostlistener
+<div class="container" setBorder>
+  <p>Implement this callback to add a comment to the DOM of the host element.</p>
+</div>
+<div appHost setBorder setBackground >
+  <p #pp>Implement this callback to add a comment to the DOM of the host element.</p>
+
+</div> -->
+
+<!-- hostlistener -->
+<!-- <div class="container" setBorder>
+  <p>Implement this callback to add a comment to the DOM of the host element.</p>
+</div>
+<div  setBorder setBackground appHost>
+  <p #pp>Implement this callback to add a comment to the DOM of the host element.</p>
+
+</div> -->
+<div class="container" setBorder hostBinding>
+  <p>HostBinding</p>
 </div>

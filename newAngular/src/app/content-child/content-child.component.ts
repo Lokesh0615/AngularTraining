@@ -6,7 +6,7 @@ import { AfterContentInit, Component, ContentChild, ElementRef, OnInit } from '@
   styleUrls: ['./content-child.component.css']
 })
 export class ContentChildComponent implements OnInit, AfterContentInit {
-  @ContentChild("para",{static:false}) para1!:ElementRef;
+  @ContentChild("para",{static:true}) para1!:ElementRef;
   
   ngOnInit(){
     console.log(this.para1);

@@ -17,4 +17,7 @@ export class AppComponent {
   // Destroy(){
   //   this.destroy= false;
   // }
+
+  // renderer
+  
 }

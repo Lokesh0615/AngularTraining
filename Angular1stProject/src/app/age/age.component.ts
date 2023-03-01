@@ -8,7 +8,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 export class AgeComponent {
 
   sayHello(){
-    console.log('hello form age component class');
+    // console.log('hello form age component class');
     
   }
 }

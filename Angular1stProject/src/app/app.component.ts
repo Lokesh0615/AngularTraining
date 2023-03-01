@@ -12,12 +12,14 @@ export class AppComponent {
   ename="lokesh";
 
   // title="ViewChild";
-  @ViewChild('dobInput') dateOfBirth:ElementRef;
+  @ViewChild('dobInput', {static: false}) dateOfBirth:any;
   @ViewChild('ageInput') age:any;
   @ViewChild(AgeComponent, {static: true}) ageComp:any;
 
   calAge(){
     // console.log("nfjdbh");
+    console.log(this.dateOfBirth.nativeElement);
+    
     
     let birthYear=new Date(this.dateOfBirth.nativeElement.value).getFullYear();
     let cYear=new Date().getFullYear();
