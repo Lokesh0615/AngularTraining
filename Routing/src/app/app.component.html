@@ -1,0 +1,13 @@
+<div class="main-container">
+  <div class=" nav nav-container">
+    <ul class="nav">
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="">Home</a></li>
+      <li class="nav-item" [routerLinkActive]="'active'" ><a class="nav-link" routerLink="About">About</a></li>
+      <li class="nav-item" routerLinkActive="active" ><a class="nav-link" [routerLink]="'Contact'">Contact</a></li>
+      <li class="nav-item" routerLinkActive="active" ><a class="nav-link" routerLink="Courses">Courses</a></li>
+    </ul>
+  </div>
+  <div class="component-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>
