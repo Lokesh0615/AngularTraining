@@ -1,2 +1,27 @@
-<p>courses works!</p>
-<a routerLink="/Home">GO to Home</a>
+<!-- <button (click)="navigateToHome()" class="btn btn-primary">GO to Home</button> -->
+<div class="container">
+    <h2>All Courses</h2>
+    <div class="course-container">
+        <ng-container *ngFor="let cousre of localourses">
+
+            <div class="course-card">
+                <div><img src={{cousre.image}} alt="" width="200px" height="50%"></div>
+                <div class="course-name">
+                    <h5>{{cousre.name}}</h5>
+                </div>
+                <div class="course-description">
+                    <h5>{{cousre.description}}</h5>
+                </div>
+                <div class="detailes">
+                    <div class="course-type" [ngStyle]="{color: cousre.type== 'free' ? 'Green':'Red'}">{{cousre.type}}
+                    </div>
+                    <div class="course-price"><b>Price: </b>{{cousre.price}}</div>
+                </div>
+                <div class="buttons">
+                    <button class="btn btn-primary">Buy now</button>
+                    <button class="btn btn-primary" routerLink="/Courses/Coures/{{cousre.id}}">show Detailes</button>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

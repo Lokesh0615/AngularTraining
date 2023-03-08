@@ -1,0 +1,30 @@
+.container{
+    width: 100%;
+}
+
+.course-container{
+    display: flex;
+    /* flex-wrap: nowrap; */
+    flex-direction: row;
+    /* width: 250px; */
+    /* height: 400px; */
+}
+.course-card{
+    width: 250px;
+    height: 400px;
+    border: 1.5px solid black;
+    border-radius: 10px;
+    margin: 0px 5px;
+    text-align: center;
+}
+
+.course-card div img{
+    width: 245px;
+    height: 200px;
+    border-radius: 10px;
+    /* margin: 0px 5px; */
+}
+.buttons, .detailes{
+    display: flex;
+    justify-content: space-evenly;
+}
