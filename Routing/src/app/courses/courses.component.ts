@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesSerive } from 'src/app/services/courses.service';
 
@@ -9,10 +9,20 @@ import { CoursesSerive } from 'src/app/services/courses.service';
   styleUrls: ['./courses.component.css'],
   providers: [CoursesSerive]
 })
-export class CoursesComponent {
-  constructor(private route:Router , private activatedRoute:ActivatedRoute, private courses:CoursesSerive){}
+export class CoursesComponent implements OnInit{
+  constructor(private route:Router , private activatedRoute:ActivatedRoute, private coursesService:CoursesSerive){}
 
-  localourses=this.courses.courses;
+  localourses:any;
+  // localourses=this.coursesService.courses;
+  
+  ngOnInit(){
+    // this.coursesService.getAllCourses().then((data:any)=>{
+    //   this.localourses=data;
+    // })
+
+    // reslove
+    this.localourses= this.activatedRoute.snapshot.data['courses']
+  }
 
   navigateToHome(){
     // navigate and navigateByUrl methods directly takes absolute url, even if u mention (/) or no /

@@ -14,6 +14,7 @@ export class CouresComponent implements OnInit, OnDestroy {
 
 course!:any;
 courseId!:any;
+courseName!:any;
 routeParaObs!:any;
 editMode:boolean=false;
 constructor(private activatedRoute:ActivatedRoute, private service:CoursesSerive, private router:Router){}
@@ -27,8 +28,14 @@ ngOnInit(){
 
   //if the parameter value changes then use Obeservables
   this.routeParaObs=this.activatedRoute.paramMap.subscribe((parm)=>{
-    this.courseId=parm.get('id');
-    this.course=this.service.courses.find((x)=>x.id==this.courseId)
+    // this.courseId=parm.get('id');
+    this.courseName=parm.get('id');
+    console.log(parm);
+    // console.log(this.courseName);
+    
+    
+    // this.course=this.service.courses.find((x)=>x.id==this.courseId)
+    this.course=this.service.courses.find((x)=>x.name==this.courseName);
   })
 
   // this.activatedRoute.snapshot.queryParamMap.get('edit');

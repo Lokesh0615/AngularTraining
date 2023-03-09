@@ -1,1 +1,24 @@
-<p>contact works!</p>
+<div class="container">
+    <div style="text-align: center;">
+        <h2>Contact us </h2>
+        <p>Swing by for a cup of coffee or leave us a messsage:</p>
+    </div>
+    <div class="row">
+        <div class="col form-group">
+            <form >
+                <label for="fname">FIrst Name</label>
+                <input class="form-control" type="text" name="fname" id="fname" placeholder="First Name" [(ngModel)]="firstName">
+                <label for="lname">Last Name</label>
+                <input class="form-control" type="text" name="lname" id="lname" placeholder="last Name" [(ngModel)]="lastName">
+                <label for="country">Country</label>
+                <select class="form-control" name="country" id="country" [(ngModel)]="country">
+                    <option value="India">India</option>
+                    <option value="sreeLanka">sreeLanka</option>
+                </select>
+                <label for="subject">Subject</label>
+                <input class="form-control" type="text" name="subject" id="subject" placeholder="subject" [(ngModel)]="subject">
+                <input class="form-control" type="submit" value="Submit" (click)="canExit()">
+            </form>
+        </div>
+    </div>
+</div>

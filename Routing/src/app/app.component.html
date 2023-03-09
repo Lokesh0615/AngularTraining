@@ -1,22 +1,27 @@
 <div class="main-container">
   <div class=" navbar nav-container">
-    <ul class="nav navbar">
-      <!-- <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="">Home</a></li>
-      <li class="nav-item" [routerLinkActive]="'active'" ><a class="nav-link" routerLink="About">About</a></li>
-      <li class="nav-item" routerLinkActive="active" ><a class="nav-link" [routerLink]="'Contact'">Contact</a></li>
-      <li class="nav-item" routerLinkActive="active" ><a class="nav-link" routerLink="Courses">Courses</a></li> -->
+    <ul class="nav">
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link"
+          routerLink="">Home</a></li>
+      <li class="nav-item" [routerLinkActive]="'active'"><a class="nav-link" routerLink="About">About</a></li>
+      <li class="nav-item" routerLinkActive="active"><a class="nav-link" [routerLink]="'Contact'">Contact</a></li>
+      <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="Courses">Courses</a></li>
 
-      <li class="nav-item" routerLinkActive="active" ><a class="nav-link" routerLink="" fragment="home">Home</a></li>
+      <!-- fragments -->
+      <!-- <li class="nav-item" routerLinkActive="active" ><a class="nav-link" routerLink="" fragment="home">Home</a></li>
       <li class="nav-item" [routerLinkActive]="'active'" ><a class="nav-link" routerLink="" fragment="about">About</a></li>
       <li class="nav-item" routerLinkActive="active" ><a class="nav-link" [routerLink]="''" fragment="contact">Contact</a></li>
-      <li class="nav-item" routerLinkActive="active" ><a class="nav-link" routerLink="" fragment="courses">Courses</a></li>
+      <li class="nav-item" routerLinkActive="active" ><a class="nav-link" routerLink="" fragment="courses">Courses</a></li> -->
+
+      <li (click)="login() " class="nav-item" style="cursor: pointer;"><a class="nav-link">Login</a></li>
+      <li (click)="logOut()" class="nav-item" style="cursor: pointer;"><a class="nav-link">LogOut</a></li>
     </ul>
   </div>
   <div class="component-container">
-    <app-home id="home" ></app-home>
+    <!-- <app-home id="home" ></app-home>
     <app-about id="about" ></app-about>
     <app-contact id="contact" ></app-contact>
-    <app-courses id="courses"></app-courses>
-    <!-- <router-outlet></router-outlet> -->
+    <app-courses id="courses"></app-courses> -->
+    <router-outlet></router-outlet>
   </div>
 </div>

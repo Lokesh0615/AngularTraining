@@ -10,18 +10,14 @@ import { ContactComponent } from './contact/contact.component';
 import { CoursesComponent } from './courses/courses.component';
 import { ErrorComponent } from './error/error.component';
 import { CouresComponent } from './courses/coures/coures.component';
+import { AppRoutingModule } from './app-routing.module';
+import { CourseGuardService } from './services/couresGuard.service';
+import { CoursesSerive } from './services/courses.service';
+import { AuthService } from './services/auth.service';
+import { CanDeactivateGuardService } from './services/canDeactivateGuard.service';
+import { CourseResolveService } from './services/coures-resolve.service';
 
 
-const appRout:Routes=[
-  // { path:"", component:HomeComponent},
-  // {path:"", redirectTo:'Home', pathMatch:'full'},
-  { path:'Home', component:HomeComponent },
-  { path:'About', component:AboutComponent},
-  { path:'Contact', component:ContactComponent},
-  { path:'Courses', component:CoursesComponent},
-  { path:'Courses/Coures/:id', component:CouresComponent},
-  { path:'**', component:ErrorComponent}
-]
 
 @NgModule({
   declarations: [
@@ -32,14 +28,16 @@ const appRout:Routes=[
     CoursesComponent,
     ErrorComponent,
     CouresComponent,
+    
     // FormsModule
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRout),
-    FormsModule
+    // RouterModule.forRoot(appRout),
+    FormsModule,
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [CoursesSerive, CourseGuardService, AuthService, CanDeactivateGuardService, CourseResolveService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

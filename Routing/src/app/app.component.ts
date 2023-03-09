@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'Routing';
-  constructor(private activatedRoute:ActivatedRoute){}
+  constructor(private activatedRoute:ActivatedRoute, private authService:AuthService){}
  
   ngOnInit(): void {
     this.activatedRoute.fragment.subscribe((value)=>{
-      console.log(value);
+      // console.log(value);
       
       this.jumpTo(value)
     })
@@ -25,6 +26,14 @@ export class AppComponent implements OnInit {
 
     let b=String(section);
     let c=document.getElementById(b);
+  }
+
+  // route guard
+  login(){
+    this.authService.login()
+  }
+  logOut(){
+    this.authService.logOut()
   }
 
 }

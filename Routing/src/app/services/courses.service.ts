@@ -23,8 +23,16 @@ export class CoursesSerive{
        {id:103, name:"React for beginners", author:'jonh', duration:'40',type:'Premium',
         price:100, ratings:3.5,image:'assets/React.png',
         description:"In this coures you will learn about the fundamentals of React"
-       }
-
-
+       }  
     ]
+
+
+    getAllCourses():any{
+        const courseList = new Promise((resolve, reject)=>{
+            setTimeout(()=>{
+                resolve(this.courses)
+            }, 5000)
+        })
+        return courseList;
+       };
 }
