@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { IDeactivateComponent } from '../services/canDeactivateGuard.service';
+import { CanLoadService } from '../services/canLoad.service';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.css']
+  styleUrls: ['./contact.component.css'],
+  providers:[CanLoadService]
 })
 export class ContactComponent implements IDeactivateComponent {
   firstName="";

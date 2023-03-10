@@ -16,6 +16,7 @@ import { CoursesSerive } from './services/courses.service';
 import { AuthService } from './services/auth.service';
 import { CanDeactivateGuardService } from './services/canDeactivateGuard.service';
 import { CourseResolveService } from './services/coures-resolve.service';
+import { CanLoadService } from './services/canLoad.service';
 
 
 
@@ -37,7 +38,7 @@ import { CourseResolveService } from './services/coures-resolve.service';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [CoursesSerive, CourseGuardService, AuthService, CanDeactivateGuardService, CourseResolveService],
+  providers: [CoursesSerive, CourseGuardService, AuthService, CanDeactivateGuardService, CourseResolveService, CanLoadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

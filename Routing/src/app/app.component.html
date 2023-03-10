@@ -6,6 +6,7 @@
       <li class="nav-item" [routerLinkActive]="'active'"><a class="nav-link" routerLink="About">About</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" [routerLink]="'Contact'">Contact</a></li>
       <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="Courses">Courses</a></li>
+      <li class="nav-item" routerLinkActive="active"><a class="nav-link" routerLink="Cust">Cust</a></li>
 
       <!-- fragments -->
       <!-- <li class="nav-item" routerLinkActive="active" ><a class="nav-link" routerLink="" fragment="home">Home</a></li>
@@ -23,5 +24,6 @@
     <app-contact id="contact" ></app-contact>
     <app-courses id="courses"></app-courses> -->
     <router-outlet></router-outlet>
+    <div class="spinner" *ngIf="displayLoadingIndicator"></div>
   </div>
 </div>
