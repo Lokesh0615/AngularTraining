@@ -1,0 +1,10 @@
+.btn{
+    margin: 5px ;
+}
+
+input.ng-touched.ng-invalid{
+    border-color: red;
+}
+p{
+    color: red;
+}

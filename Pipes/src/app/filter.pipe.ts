@@ -2,11 +2,14 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { CoursesSerive } from './courses.service';
 
 @Pipe({
-  name: 'filter'
+  name: 'filter',
+  pure:false
 })
 export class FilterPipe implements PipeTransform {
 
   transform(value:any, filterType:string, propName:string): any {
+    console.log("filter pipe is called");
+    
     if(value.length===0|| filterType===''){
       return value
     }
