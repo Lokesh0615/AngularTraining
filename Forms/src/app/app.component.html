@@ -2,37 +2,62 @@
   <h2 id="registration" class="card-header">Registration Form</h2>
   <form (ngSubmit)="onSubmit(myForm)" #myForm="ngForm">
     <div class="card-body">
-    <label for="fname" >First Name</label>
-    <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name" ngModel required #fname="ngModel">
-    <p *ngIf="!fname.valid && fname.touched">Name filed is required!</p>
+      <div ngModelGroup="personal" #personal="ngModelGroup">
+        <label for="fname">First Name</label>
+        <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name" ngModel required
+          #fname="ngModel">
+        <!-- <p *ngIf="!fname.valid && fname.touched">Name filed is required!</p> -->
 
-    <label for="lname" >Last Name</label>
-    <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name" ngModel required>
+        <label for="lname">Last Name</label>
+        <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name" ngModel required>
 
-    <label for="email" >Email</label>
-    <input type="email" class="form-control" name="email" id="email" placeholder="email" ngModel required email>
+        <label for="email">Email</label>
+        <input type="email" class="form-control" name="email" id="email" placeholder="email" ngModel required email>
+        <p *ngIf="personal.invalid && personal.touched">Above mentioned filed is required!</p>
+        <button class="btn btn-warning" (click)="setDefaultValue()">setValue()</button>
+      </div>
 
-    <label for="country" >Country</label>
-    <select id="country" class="form-control" name="country"  [(ngModel)]="defaultCountry">
-      <option value="India" >India</option>
-      <option value="usa">USA</option>
-      <option value="canada">Canada</option>
-    </select>
+      <label for="country">Country</label>
+      <select id="country" class="form-control" name="country" [(ngModel)]="defaultCountry">
+        <option value="India">India</option>
+        <option value="usa">USA</option>
+        <option value="canada">Canada</option>
+      </select>
 
-    <label for="gender" >Gender:</label>
-    <label class="btn btn-secondary" for="male"><input type="radio" name="gender" id="male" value="male" ngModel> Male</label>
-    <label class="btn btn-secondary" for="female"><input type="radio" name="gender" id="female" value="female" ngModel > Female</label>
-    <label class="btn btn-secondary" for="other"><input type="radio" name="gender" id="other" value="other" ngModel > Other</label>
-    <br><br>
+      <label for="gender">Gender:</label>
+      <span *ngFor="let gen of gender">
+        <label class="btn btn-secondary" for={{gen.value}}>
+          <input type="radio" name="gender" id={{gen.id}} value={{gen.value}} [(ngModel)]="defaultGender">
+          {{gen.value}}</label>
+      </span>
 
-    <label >Hobbies <i>(Optional)</i></label>
-    <div class="form-inline">
-      <label class="btn btn-secondary" ><input type="checkbox" name="hobbies" id="sports" ngModel >Sports</label>
-      <label class="btn btn-secondary" ><input type="checkbox" name="hobbies" id="movies" ngModel >movies</label>
-      <label class="btn btn-secondary" ><input type="checkbox" name="hobbies" id="music" ngModel >music</label>
-    </div>
+      <!-- <label for="gender">Gender:</label>
+      <label class="btn btn-secondary" for="male"><input type="radio" name="gender" id="male" value="male" ngModel>
+        Male</label>
+      <label class="btn btn-secondary" for="female"><input type="radio" name="gender" id="female" value="female"
+          ngModel> Female</label>
+      <label class="btn btn-secondary" for="other"><input type="radio" name="gender" id="other" value="other" ngModel>
+        Other</label> -->
+      <br><br>
 
-    <input type="submit" value="Submit" id="btn" class="btn btn-success form-control" >  <!--[disabled]="!myForm.valid" -->
+      <label>Hobbies <i>(Optional)</i></label>
+      <div class="form-inline">
+        <label class="btn btn-secondary"><input type="checkbox" name="hobbies" id="sports" ngModel>Sports</label>
+        <label class="btn btn-secondary"><input type="checkbox" name="hobbies" id="movies" ngModel>movies</label>
+        <label class="btn btn-secondary"><input type="checkbox" name="hobbies" id="music" ngModel>music</label>
+      </div>
+
+      <input type="submit" value="Submit" id="btn" class="btn btn-success form-control">
+      <!--[disabled]="!myForm.valid" -->
     </div>
   </form>
+</div>
+
+<div class="card bg-dark text-white">
+  <h3>Form Detailes</h3>
+  <p>First Name: {{fname1}}</p>
+  <p>Last Name: {{lname1}}</p>
+  <p>Email: {{email1}}</p>
+  <p>Country: {{country1}}</p>
+  <p>Gender: {{gen1}}</p>
 </div>
