@@ -1,10 +1,12 @@
-<div class="card bg-info form">
+<div class="card bg-info form myForm" [ngClass]="formStatus">
   <h2 id="registration" class="card-header">Registration form</h2>
   <form class="card-body" [formGroup]="reactiveForm" (ngSubmit)="onSubmit()" >
   <div formGroupName="personal">
 
     <label for="fname">First Name</label>
     <input class="form-control" type="text" name="fname" id="fname" placeholder="First Name" formControlName="fname">
+    <p *ngIf="reactiveForm.get('personal.fname')?.errors?.['required'] && reactiveForm.get('personal.fname')?.touched">First name is required</p>
+    <p *ngIf="reactiveForm.get('personal.fname')?.errors?.['noSpaceAllowed']">No space is Allowed</p>
 
     <label for="lname">Last Name</label>
     <input class="form-control" type="text" name="lname" id="lname" placeholder="last name" formControlName="lname">
@@ -30,11 +32,22 @@
     <br><br>
 
     <label for="hobbies">hobbies</label>
-    <span class="form-inline">
+    <div class="form-inline">
+      
       <label ><input type="checkbox" name="hobbies"  id="sports" value="sports" formControlName="hobbies">Sports</label>
       <label ><input type="checkbox" name="hobbies" id="music" value="music" formControlName="hobbies">Music</label>
-    </span>
+    </div>
 
-    <input class="form-control btn btn-success" type="submit" value="Submit" *ngIf="!reactiveForm.invalid">
+    <!-- FOrmArry -->
+    <div formArrayName="skills" >
+      <ng-container *ngFor="let skill of reactiveForm.get('skills')?.value; index as i">
+        <input class="form-control" type="text"  placeholder="add skill" [formControlName]='i'>
+      </ng-container>
+      <button class="btn btn-dark" (click)="addSkill()">ADD SKILL</button>
+    </div>
+    <input class="form-control btn btn-success" type="submit" value="Submit" > <!-- *ngIf="!reactiveForm.invalid" -->
   </form>
+  <!-- <input type="text" name="alp" id="alp" #alp>
+  <button class="btn btn-dark" (click)="allAlphabets(alp.value)">check alp</button> -->
+
 </div>
