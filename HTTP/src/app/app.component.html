@@ -1,16 +1,17 @@
-<div class="card bg-info">
+<div class="card bg-light">
   <div class="card-header">
     <h1>Manage Products</h1>
   </div>
   <div class="card-body row">
     <div class="col">
       <h3>Creste product</h3>
-      <form #productsForm="ngForm" (ngSubmit)="sOnProductCreate(productsForm.value)" >
+      <form #productsForm="ngForm" (ngSubmit)="sOnProductCreate(productsForm.value)">
         <label for="pname">Product Name</label>
-        <input class="form-control" type="text" name="pname" ngModel  id="pname" placeholder="Product Name">
+        <input class="form-control" type="text" name="pname" ngModel id="pname" placeholder="Product Name">
 
         <label for="pdescription">Product Description</label>
-        <input class="form-control" type="text" name="pdescription" ngModel id="pdescription" placeholder="Product Descrtiption">
+        <input class="form-control" type="text" name="pdescription" ngModel id="pdescription"
+          placeholder="Product Descrtiption">
 
         <label for="pprice">Product price</label>
         <input class="form-control" type="text" name="pprice" ngModel id="pprice" placeholder="Price">
@@ -29,12 +30,12 @@
             <th scope="col">Name</th>
             <th scope="col">Description</th>
             <th scope="col">Price</th>
-            <th scope="col">Delete Item</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
         <tbody>
-           <tr *ngFor="let product of serverProducts; index as i">
-            <td>{{i+1}}</td>
+          <tr *ngFor="let product of serverProducts; index as i">
+            <td>{{product.id}}</td>
             <td>{{product.pname}}</td>
             <td>{{product.pdescription}}</td>
             <td>{{product.pprice}}</td>
@@ -43,12 +44,41 @@
               <button class="btn btn-dark" (click)="onEditProduct(product.id)">EDIT</button>
             </td>
           </tr>
-          <tr *ngIf="serverProducts.length<1 && !isFetching"><td colspan="5" style="text-align: center;">No Products are Availble</td></tr>
-          <tr *ngIf="isFetching"><td colspan="5" style="text-align: center;">Loading...</td></tr>  
+          <tr *ngIf="serverProducts.length<1 && !isFetching && errorMessage==null">
+            <td colspan="5" style="text-align: center;">No Products are Availble</td>
+          </tr>
+          <tr *ngIf="isFetching && errorMessage==null">
+            <td colspan="5" style="text-align: center;">Loading...</td>
+          </tr>
+          <tr *ngIf="errorMessage !=null ">
+            <td colspan="5" style="text-align: center;">{{errorMessage}}</td>
+          </tr>
         </tbody>
       </table>
       <button type="button" class="btn btn-warning form-control " (click)="sFetchProducts()">Fetch</button>
       <button class="btn btn-dark form-control" (click)="sDeleteAllProducts()">Delete All</button>
     </div>
+  </div>
+  <div>
+    <input type="text" #searchText>
+    <button class="btn btn-dark" (click)="onlyFetch(searchText.value)">Search</button>
+    <table class="table">
+      <thead class="thead-dark">
+        <!-- <td>Id</td> -->
+        <td>Name</td>
+        <td>Description</td>
+        <td>Price</td>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let one of oneData">
+          <tr>
+            <!-- <td>{{one.id}}</td> -->
+            <td>{{one.pname}}</td>
+            <td>{{one.pdescription}}</td>
+            <td>{{one.pprice}}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
   </div>
 </div>

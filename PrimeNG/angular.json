@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "HTTP": {
+    "PrimeNG": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/http",
+            "outputPath": "dist/prime-ng",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -28,8 +28,9 @@
               "src/styles.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/primeicons/primeicons.css",
-              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css"
+              "node_modules/primeng/resources/themes/bootstrap4-light-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeflex/primeflex.css"
             ],
             "scripts": []
           },
@@ -64,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "HTTP:build:production"
+              "browserTarget": "PrimeNG:build:production"
             },
             "development": {
-              "browserTarget": "HTTP:build:development"
+              "browserTarget": "PrimeNG:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "HTTP:build"
+            "browserTarget": "PrimeNG:build"
           }
         },
         "test": {
@@ -100,6 +101,6 @@
     }
   },
   "cli": {
-    "analytics": "a9acaa17-684d-49da-98b7-c3ec1dfb3411"
+    "analytics": false
   }
 }

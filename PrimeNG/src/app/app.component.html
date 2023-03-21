@@ -1,0 +1,153 @@
+<!-- <input type="text" [(ngModel)]="sampleInput" >
+<input type="text" pInputText [(ngModel)]="sampleInput">
+<input type="range" min="10" max="50" > -->
+
+<!-- table -->
+<!-- <button class="btn btn-dark form-control" (click)="fetchProduct()" >Fetch</button>
+<p-table [value]="serverProducts" [paginator]="true" [rows]="2" [rowsPerPageOptions]="[1,2]">
+  <ng-template pTemplate="header" >
+    <tr>
+      <td pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></td>
+      <td pSortableColumn="pname">Name <p-sortIcon field="pname"></p-sortIcon></td>
+      <td pSortableColumn="pdescription" >Description <p-sortIcon field="pdescription"></p-sortIcon></td>
+      <td pSortableColumn="pprice">Price<p-sortIcon field="pprice"></p-sortIcon></td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-product>
+    <tr>
+      <td>{{product.id}}</td>
+      <td>{{product.pname}}</td>
+      <td>{{product.pdescription}}</td>
+      <td>{{product.pprice}}</td>
+    </tr>
+  </ng-template>
+</p-table> -->
+
+<!-- dropdowns -->
+<!-- <button class="btn btn-dark form-control" (click)="fetchProduct()" >Fetch</button>
+<p-dropdown [options]="userList" [(ngModel)]="selectedUser" optionLabel="pname" placeholder="select user" [filter]="true"></p-dropdown>
+<p-dropdown [options]="userList"></p-dropdown> -->
+
+<!-- multiselcet -->
+<!-- <p-multiSelect [options]="userList" optionLabel="pname" [(ngModel)]="selectedUser" optionValue="pprice" display="chip" ></p-multiSelect>
+{{selectedUser| json}} -->
+
+<!-- calender -->
+<!-- <p-calendar [(ngModel)]="dob" dateFormat="dd/mm/yy" [minDate]="minDate" [maxDate]="maxDate" [readonlyInput]="true" [showTime]="true" hourFormat="12" selectionMode="range" (onSelect)="selectedDates($event)"></p-calendar> -->
+<!-- {{dob| date:'mediumDate'}} -->
+
+<!-- <button (click)="getUsersMultipleParams()">asdf</button> -->
+
+<!-- radio button -->
+<!-- <p-radioButton value="male" inputId="123" [(ngModel)]="selectedRadio" label="male"></p-radioButton>
+<p-radioButton value="female" [(ngModel)]="selectedRadio" label="female">Female</p-radioButton>
+<button (click)=" ngOnChanges()">bk</button> -->
+
+
+<!-- checkBox -->
+<!-- <button class="btn btn-dark" (click)=" ngOnChanges()">bk</button>
+<p-checkbox name="gn" [(ngModel)]="checkBox" label="music" value="musci"></p-checkbox>
+<p-checkbox name="gn" [(ngModel)]="checkBox" label="cricket" value="cricket"></p-checkbox> -->
+
+<!-- autocomplete there is some erro -->
+<!-- <p-autoComplete [(ngModel)]="autoCompleteValue" [suggestions]="autocomplet" ></p-autoComplete> -->
+
+<!-- dialog -->
+<!-- <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" ></p-confirmDialog> -->
+<!-- <p-button (onClick)="showModel()"  icon="pi pi-external-link" label="show"></p-button>
+<p-dialog  [(visible)]="dialogShow" [modal]="true" [draggable]="false" [resizable]="false" position="topright">
+  <ng-template pTemplate="header">header</ng-template>
+  <ng-template pTemplate="footer">
+    <p-button label="cancel" (onClick)="dialogShow=false"></p-button>
+    <p-button label="Confirm" (onClick)="dialogShow=false"></p-button>
+  </ng-template>
+  content Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et nesciunt ab molestias a inventore neque, ipsa adipisci tenetur asperiores qui autem commodi, atque nemo. Soluta unde maxime magni eius doloribus?
+</p-dialog> -->
+
+<!-- comfirmDialog -->
+<!-- <p-confirmDialog header="confirmDialog" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-toast position="top-right" ></p-toast>
+<button (click)="confirm()" pButton icon="pi pi-check" label="Confirm"></button> -->
+
+
+<!-- form -->
+<div class="row" style="margin: 0px ;">
+  <button (click)="displayForm=true" class="btn btn-info">ADD DATA</button>
+  <div class="col card bg-info" *ngIf="displayForm">
+    <form (ngSubmit)="onSubmit(myForm)" #myForm="ngForm">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" pInputText placeholder="Name" name="name" id="name" ngModel required>
+      <div class="row">
+        <div class="col">
+          <label for="job">Job</label>
+          <input type="text" class="form-control" name="job" id="job" pInputText placeholder="Job" ngModel required>
+          <label for="age">Age</label>
+          <p-inputNumber mode="decimal" class="form-control" [min]="0" [max]="150" [showButtons]="false" name="age"
+            ngModel></p-inputNumber>
+          <label for="dob">Date Of Birth</label>
+          <p-calendar [inline]="false" class="ui-g-8" name="dob" ngModel></p-calendar>
+        </div>
+        <div class="col">
+          <label for="gender">Gender</label>
+          <div class="form-control">
+            <p-radioButton name="gender" value="male" label="Male" [(ngModel)]="selectedRadio"></p-radioButton>
+            <p-radioButton name="gender" value="female" label="Female" [(ngModel)]="selectedRadio"></p-radioButton>
+          </div>
+          <label for="city">City</label>
+          <p-dropdown [options]="city" class="form-control" name="city" placeholder="select city" ngModel></p-dropdown>
+          <label for="hobbies">Hobbies</label>
+          <div class="form-control">
+            <p-checkbox value="cricket" label="cricket" name="hobbies" [(ngModel)]="checkBox"></p-checkbox>
+            <p-checkbox value="books" label="books" name="hobbies" [(ngModel)]="checkBox"></p-checkbox>
+          </div>
+        </div>
+      </div>
+
+      <button pButton type="success" class="form-control p-button-success" label="SUBMIT"
+        [disabled]="!myForm.valid"></button>
+        <button (click)="displayForm=false">cancel</button>
+        
+        <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" ></p-confirmDialog>
+        <p-button (onClick)="showModel()" icon="pi pi-external-link" label="show"></p-button>
+      <p-dialog [(visible)]="dialogShow" [modal]="true" [draggable]="false" [resizable]="false" position="topright">
+        <ng-template pTemplate="header">header</ng-template>
+        <ng-template pTemplate="footer">
+          <p-button label="cancel" (onClick)="dialogShow=false"></p-button>
+          <p-button label="Confirm" (onClick)="dialogShow=false; showdetailes=true; onSubmit(myForm)"></p-button>
+        </ng-template>
+        content Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et nesciunt ab molestias a inventore neque,
+        ipsa adipisci tenetur asperiores qui autem commodi, atque nemo. Soluta unde maxime magni eius doloribus?
+      </p-dialog>
+
+    </form>
+  </div>
+  <div class="col">
+    <p-table [value]="formData" class="table" styleClass="p-datatable-striped">
+      <ng-template pTemplate="header" class=" t-head thead-primary">
+        <tr>
+          <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+          <th [pSortableColumn]="'job'">Job <p-sortIcon field="job"></p-sortIcon></th>
+          <th pSortableColumn="age">Age <p-sortIcon field="age"></p-sortIcon></th>
+          <th pSortableColumn="dob">Date of Birth <p-sortIcon field="dob"></p-sortIcon></th>
+          <th>Gender</th>
+          <th pSortableColumn="city">City <p-sortIcon field="city"></p-sortIcon> </th>
+          <th>Hobbies</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-data class="t-body tbody-dark">
+        <tr>
+          <td>{{data.name}}</td>
+          <td>{{data.job}}</td>
+          <td>{{data.age}}</td>
+          <td>{{data.dob | date:'shortDate'}}</td>
+          <td>{{data.gender}}</td>
+          <td>{{data.city}}</td>
+          <td>{{data.hobbies}}</td>
+
+        </tr>
+      </ng-template>
+      
+    </p-table>
+    <p-toast position="top-right"></p-toast>
+  </div>
+</div>

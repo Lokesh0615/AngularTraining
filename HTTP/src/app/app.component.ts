@@ -4,20 +4,29 @@ import { map } from 'rxjs';
 import { Products } from './model/products';
 import { NgForm } from '@angular/forms'
 import { ProductsService } from './services/products.service';
+import { OnDestroy } from '@angular/core';
+
+// primeng
+import { TableModule } from 'primeng/table'
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'HTTP';
 
   @ViewChild('productsForm') productsForm!:NgForm;
   serverProducts: Products[] = [];
+  // oneData!:{pname:string, pdescription:string, pprice:string};
+  oneData:{pname:string, pdescription:string, pprice:string}[]=[];
   isFetching:boolean=false;
   editMode:boolean=false;
   currentProductId!:string;
+  errorMessage!:string;
+  errorSub!:any;
 
   constructor(private http: HttpClient, private productService:ProductsService) { }
 
@@ -34,7 +43,17 @@ export class AppComponent implements OnInit {
   }
 
   sFetchProducts(){
-    this.serverProducts=this.productService.fetchProduct()
+    this.productService.fetchProduct().subscribe((products)=>{
+      this.serverProducts=products;
+      this.isFetching=false;
+    }, (err)=>{
+      console.log(err);
+      // console.log(err.message);
+      
+      this.errorMessage=err.error.error;
+      console.log(this.errorMessage);
+      
+    })
     console.log(this.serverProducts);
     
   }
@@ -60,11 +79,21 @@ export class AppComponent implements OnInit {
       
   }
   ngOnInit(): void {
+    this.errorSub=this.productService.error.subscribe(
+    (msg)=>{
+      console.log( msg);
+      
+      this.errorMessage=msg;
+    })
     this.sFetchProducts()
     setTimeout(() => {
       console.log(this.serverProducts);
       
   }, 5000);
+  }
+
+  ngOnDestroy(): void {
+    this.errorSub.unsubscribe()
   }
 
   onProductFetch() {
@@ -126,5 +155,13 @@ export class AppComponent implements OnInit {
 
     // change the button value to edit mode
     this.editMode=true;
+  }
+  onlyFetch(id:string){
+    this.http.get('https://angulartraining-ff5f7-default-rtdb.firebaseio.com/products/'+id+'.json')
+    .subscribe((data:{pname:string, pdescription:string, pprice:string})=>{
+      console.log(data);
+      
+    this.oneData.push(data)
+    })
   }
 }
