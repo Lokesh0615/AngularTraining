@@ -44,18 +44,22 @@ export class AppComponent implements OnChanges {
     // let con=this.confirmAlertService.checkConfirm();
     let con=this.showdetailes;
     let data=myForm.value;
-    console.log(myForm);
+    // console.log(myForm);
+    console.log(con);
+    
     
     if(con){
       this.formData.push({'name':data.name, 'job':data.job, 'age':data.age, 'dob':data.dob, 'gender':data.gender, 'city':data.city, 'hobbies':this.checkBox})
       this.messageService.add({severity:'success', summary:'Confirmed', detail:`${data.name} detaiels added`, life:2000 })
+      // console.log(this.formData);
+      
     }else{
       this.messageService.add({severity:'error', summary:'Canceled', detail:`${data.name} detaiels not added`, life:2000 })
       
     }
     this.displayForm=false
 
-    console.log(this.formData);
+    // console.log(this.formData);
     this.myForm.reset();
     
   }
@@ -128,5 +132,12 @@ export class AppComponent implements OnChanges {
     let queryParams = { "page": 1, "per_page": 1 };
     console.log(this.http.get(url, { params: queryParams }));
     // this.http.get(url,{params:queryParams});
+  }
+  dirty(){
+    if(this.myForm.dirty || this.myForm.touched){
+      console.log(this.myForm);
+      
+      confirm("do you want to leave")
+    }
   }
 }

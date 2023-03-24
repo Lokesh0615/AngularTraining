@@ -20,14 +20,21 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog'
 import {ToastModule} from 'primeng/toast';
 import {InputNumberModule} from 'primeng/inputnumber';
+import { EditorModule } from 'primeng/editor';
+import { KeyFilterModule } from 'primeng/keyfilter';
+
 
 // my services
 import { FormService } from './form.service';
-import { ConfirmAlertService } from './confirmAlert.service'
+import { ConfirmAlertService } from './confirmAlert.service';
+import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
+import { TableComponent } from './table/table.component'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ReactiveFormComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +53,9 @@ import { ConfirmAlertService } from './confirmAlert.service'
     ButtonModule,
     DialogModule,
     ToastModule,
-    InputNumberModule
+    InputNumberModule,
+    EditorModule,
+    KeyFilterModule
   ],
     
     providers: [ ConfirmationService, MessageService, FormService, ConfirmAlertService],

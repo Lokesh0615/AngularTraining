@@ -72,11 +72,15 @@
 
 <!-- form -->
 <div class="row" style="margin: 0px ;">
-  <button (click)="displayForm=true" class="btn btn-info">ADD DATA</button>
+  <button (click)="displayForm=true" class="btn btn-dark btn-lg">ADD DATA</button>
   <div class="col card bg-info" *ngIf="displayForm">
     <form (ngSubmit)="onSubmit(myForm)" #myForm="ngForm">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" pInputText placeholder="Name" name="name" id="name" ngModel required>
+      <div class="p-float-label p-input-icon-right">
+        <i class="pi pi-search"></i>
+        <input type="text" class="form-control" pInputText placeholder="Name" name="name" id="float-input" ngModel required>
+        <label for="float-input">Name</label>
+      </div>
+      
       <div class="row">
         <div class="col">
           <label for="job">Job</label>
@@ -102,19 +106,32 @@
           </div>
         </div>
       </div>
+      <div>
+        number
+        <input type="text" pInputText pKeyFilter="num">
+        alphanumeric
+        <input type="text" pInputText pKeyFilter="alphanum">
+        alpa
+        <input type="text" pInputText pKeyFilter="alpha">
+        integet
+        <input type="text" pInputText pKeyFilter="int">
+        money
+        <input type="text" pInputText pKeyFilter="money">
+      </div>
 
       <button pButton type="success" class="form-control p-button-success" label="SUBMIT"
         [disabled]="!myForm.valid"></button>
-        <button (click)="displayForm=false">cancel</button>
+        <button (click)="displayForm=false;dirty()">cancel</button>
         
         <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" ></p-confirmDialog>
         <p-button (onClick)="showModel()" icon="pi pi-external-link" label="show"></p-button>
       <p-dialog [(visible)]="dialogShow" [modal]="true" [draggable]="false" [resizable]="false" position="topright">
         <ng-template pTemplate="header">header</ng-template>
         <ng-template pTemplate="footer">
-          <p-button label="cancel" (onClick)="dialogShow=false"></p-button>
+          <p-button label="cancel" (onClick)="dialogShow=false; "></p-button>
           <p-button label="Confirm" (onClick)="dialogShow=false; showdetailes=true; onSubmit(myForm)"></p-button>
         </ng-template>
+        
         content Lorem ipsum dolor, sit amet consectetur adipisicing elit. Et nesciunt ab molestias a inventore neque,
         ipsa adipisci tenetur asperiores qui autem commodi, atque nemo. Soluta unde maxime magni eius doloribus?
       </p-dialog>
@@ -123,9 +140,11 @@
   </div>
   <div class="col">
     <p-table [value]="formData" class="table" styleClass="p-datatable-striped">
-      <ng-template pTemplate="header" class=" t-head thead-primary">
+      <ng-template pTemplate="header" class="t-head thead-primary">
         <tr>
-          <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+          <th pSortableColumn="name">Name 
+            <p-sortIcon field="name"></p-sortIcon>
+          </th>
           <th [pSortableColumn]="'job'">Job <p-sortIcon field="job"></p-sortIcon></th>
           <th pSortableColumn="age">Age <p-sortIcon field="age"></p-sortIcon></th>
           <th pSortableColumn="dob">Date of Birth <p-sortIcon field="dob"></p-sortIcon></th>
@@ -133,6 +152,7 @@
           <th pSortableColumn="city">City <p-sortIcon field="city"></p-sortIcon> </th>
           <th>Hobbies</th>
         </tr>
+      
       </ng-template>
       <ng-template pTemplate="body" let-data class="t-body tbody-dark">
         <tr>
@@ -151,3 +171,5 @@
     <p-toast position="top-right"></p-toast>
   </div>
 </div>
+<app-table></app-table>
+
