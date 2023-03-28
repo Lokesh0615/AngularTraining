@@ -1,0 +1,28 @@
+.form-div{
+    margin: 8vh auto  ;
+    width: 450px;
+    padding: 20px 40px;
+    border: 1px solid black;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 10px 3px;
+    background:linear-gradient( to bottom right,  rgb(233, 180, 239), rgb(32, 119, 154)) ;
+    
+}
+.img_container{
+    text-align: center;
+}
+.img_container h2{
+    margin-top: 20px;
+}
+.user_container{
+    margin: 20px 0px;
+}
+.user_container > *{
+    width: 370px;
+}
+.buttons>*{
+ width: 50%;
+}

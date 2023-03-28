@@ -1,0 +1,31 @@
+
+<div class="homePageContainer">
+    <div class="homePageLoggedDetailes">
+        <div class="homePageLogo"><img src="assets/ItorizonLogo.png" alt="noImage"></div>
+        <div class="loggedInDetailes">          
+            <i class="pi pi-bell text-3xl" pBadge value="2"></i>
+            <p-avatar label="A" styleClass="mr-2" size="large" shape="circle"></p-avatar>
+        </div>
+    </div>
+    <div class="navBar">
+        <ul class="nav">
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" ><a routerLink="/Home">Home</a></li>
+            <li  routerLinkActive="active" ><a  routerLink="/Service">Service</a></li>
+            <li  routerLinkActive="active" ><a  routerLink="/Plugins">Plugins</a></li>
+            <li  routerLinkActive="active" ><a  routerLink="Users">Users</a></li>
+        </ul>
+       
+    </div>
+    <div class="dashBoard">
+        <h3>Dashboard</h3>
+
+    </div>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="footer">
+        <p>2022-2023 Itorizon</p>
+    </div>
+    <!-- <p>{{sampleText}}</p>
+    <button pButton class="p-button-danger" label="LogOut" (click)="logOut()"></button> -->
+</div>

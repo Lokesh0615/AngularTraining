@@ -1,26 +1,48 @@
-
-    <p-table selectionMode="multiple" [(selection)]="selectedProducts1" dataKey="asn_id" styleClass="p-datatable-striped"  [scrollable]="true" style="margin-left: 10px;" scrollHeight="500px" [value]="products">
-        <ng-template pTemplate="header" >
-            <tr>
-                <th  style="background: rgba(200, 198, 198, 0.733);"><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
-                <th   style="background: rgba(200, 198, 198, 0.733);" pSortableColumn="asn_id">ASNID <p-sortIcon field="asn_id"></p-sortIcon></th>
-                <th  style="background: rgba(200, 198, 198, 0.733);"pSortableColumn="asn_type">ASNTYPE <p-sortIcon field="asn_type"></p-sortIcon></th>
-                <th   style="background: rgba(200, 198, 198, 0.733);" pSortableColumn="shipmentid">ShipmentID <p-sortIcon field="shipmentid"></p-sortIcon></th>
-                <th   style="background: rgba(200, 198, 198, 0.733);" pSortableColumn="asn_status">ASNstatus <p-sortIcon field="asn_status"></p-sortIcon></th>
-                <th   style="background: rgba(200, 198, 198, 0.733);" pSortableColumn="bussiness_unit">BussinessUint <p-sortIcon field="bussiness_unit"></p-sortIcon></th>
-            </tr>
-            <tr >
-                <td> </td>
-                <td> <p-columnFilter type="text" field="country.name"></p-columnFilter></td>
-                <td><p-columnFilter type="text" field="country.name"></p-columnFilter></td>
-                <td><p-columnFilter type="text" field="country.name"></p-columnFilter></td>
-                <td><p-columnFilter type="text" field="country.name"></p-columnFilter></td>
-                <td><p-columnFilter type="text" field="country.name"></p-columnFilter></td>
+<div class="table-div">
+    <div class="top-div">
+        <button pButton class="p-button-text">Select All</button>
+    </div>
+    <p-table selectionMode="multiple" [(selection)]="selectedProducts1" dataKey="asn_id"
+        styleClass="p-datatable-striped" [scrollable]="true"  scrollHeight="500px" style="margin-left: 10px; width: 600px;"
+        [value]="products">
+        <ng-template pTemplate="header">
+            <tr class="table_head">
+                <th><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+                <th>
+                    <span>ASNID
+                        <p-sortIcon pSortableColumn="asn_id" field="asn_id"></p-sortIcon>
+                    </span>
+                    <p-columnFilter type="text" field="asn_id"></p-columnFilter>
+                </th>
+                <th>
+                    <span>ASNTYPE
+                        <p-sortIcon pSortableColumn="asn_type" field="asn_type"></p-sortIcon>
+                    </span>
+                    <p-columnFilter field="asn_type"></p-columnFilter>
+                </th>
+                <th>
+                    <span>ShipmentID
+                        <p-sortIcon pSortableColumn="shipmentid" field="shipmentid"></p-sortIcon>
+                    </span>
+                    <p-columnFilter field="shipmentid"></p-columnFilter>
+                </th>
+                <th>
+                    <span>ASNstatus
+                        <p-sortIcon pSortableColumn="asn_status" field="asn_status"></p-sortIcon>
+                    </span>
+                    <p-columnFilter field="asn_status"></p-columnFilter>
+                </th>
+                <th>
+                    <span>BussinessUint
+                        <p-sortIcon pSortableColumn="bussiness_unit" field="bussiness_unit"></p-sortIcon>
+                    </span>
+                    <p-columnFilter field="bussiness_unit"></p-columnFilter>
+                </th>
             </tr>
         </ng-template>
-        
+
         <ng-template pTemplate="body" let-product >
-            <tr >
+            <tr>
                 <td> <p-tableCheckbox [value]="product"></p-tableCheckbox> image </td>
                 <td>{{product.asn_id}}</td>
                 <td>{{product.asn_type}}</td>
@@ -31,3 +53,4 @@
 
         </ng-template>
     </p-table>
+</div>
