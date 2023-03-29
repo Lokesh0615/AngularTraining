@@ -1,0 +1,127 @@
+
+<app-navbar>
+<div class="table-div">
+    <div class="top-div">
+        <button pButton class="p-button-info" (click)="showDialog()">ADD</button>
+    </div>
+    <p-dialog [(visible)]="dialogShow" [modal]="true" [style]="{width: '400px'}" position="center">
+        <!-- <ng-template pTemplate="header" >header</ng-template> -->
+        <label >Student ID: </label>
+        <input type="text" placeholder="Student Id"#checkStdId >
+        <ng-template pTemplate="footer">
+          <p-button label="cancel" (onClick)="dialogShow=false"></p-button>
+          <p-button label="Confirm" (onClick)="checkStudentId(checkStdId.value)"></p-button>
+        </ng-template>
+      </p-dialog>
+      <p-toast></p-toast>
+    <p-table selectionMode="multiple" [(selection)]="selectedProducts1" dataKey="studentId"
+        styleClass="p-datatable-striped" [scrollable]="true"  scrollHeight="500px" 
+        [value]="products"  [rowsPerPageOptions]="[1,2]">
+        <!-- <p-paginator [rows]="3" [totalRecords]="selectedProducts1" [rowsPerPageOptions]="[2,4,6]" [showJumpToPageDropdown]="true"></p-paginator> -->
+        <ng-template pTemplate="header">
+            <tr class="table_head">
+                <th><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+                <th>
+                    <span>StudentId
+                        <p-sortIcon pSortableColumn="studentId" field="studentId"></p-sortIcon>
+                    </span>
+                    <!-- <p-columnFilter type="text" field="studentId"></p-columnFilter> -->
+                </th>
+                <th>
+                    <span>First Name 
+                        <p-sortIcon pSortableColumn="firstName" field="firstName"></p-sortIcon>
+                    </span>
+                    <!-- <p-columnFilter field="firstName"></p-columnFilter> -->
+                </th>
+                <th>
+                    <span>Last Name 
+                        <p-sortIcon pSortableColumn="lastName" field="lastName"></p-sortIcon>
+                    </span>
+                    <!-- <p-columnFilter field="lastName"></p-columnFilter> -->
+                </th>
+                <th>
+                    <span>DOB
+                        <p-sortIcon pSortableColumn="dob" field="dob"></p-sortIcon>
+                    </span>
+                    <!-- <p-columnFilter field="dob"></p-columnFilter> -->
+                </th>
+                <th>
+                    <span>PhoneNumber
+                        <p-sortIcon pSortableColumn="phoneNumber" field="phoneNumber"></p-sortIcon>
+                    </span>
+                    <!-- <p-columnFilter field="phoneNumber"></p-columnFilter> -->
+                </th>
+                <th>
+                    <span>DateOfJoining
+                        <p-sortIcon pSortableColumn="dateOfJoining" field="dateOfJoining"></p-sortIcon>
+                    </span>
+                    <!-- <p-columnFilter field="dateOfJoining"></p-columnFilter> -->
+                </th>
+                <th>
+                    <span>createdSource
+                        <p-sortIcon pSortableColumn="createdSource" field="createdSource"></p-sortIcon>
+                    </span>
+                    <!-- <p-columnFilter field="createdSource"></p-columnFilter> -->
+                </th>
+                <th>
+                    <span>createdSourceType
+                        <p-sortIcon pSortableColumn="createdSourceType" field="createdSourceType"></p-sortIcon>
+                    </span>
+                    <!-- <p-columnFilter field="createdSourceType"></p-columnFilter> -->
+                </th>
+                <th>
+                    <span>createdDttm
+                        <p-sortIcon pSortableColumn="createdDttm" field="createdDttm"></p-sortIcon>
+                    </span>
+                    <!-- <p-columnFilter field="createdDttm"></p-columnFilter> -->
+                </th>
+                <th>
+                    <span>modifiedSource 
+                        <p-sortIcon pSortableColumn="modifiedSource" field="modifiedSource"></p-sortIcon>
+                    </span>
+                    <!-- <p-columnFilter field="modifiedSource"></p-columnFilter> -->
+                </th>
+                <th>
+                    <span>modifiedSourceType 
+                        <p-sortIcon pSortableColumn="modifiedSourceType" field="modifiedSourceType"></p-sortIcon>
+                    </span>
+                    <!-- <p-columnFilter field="modifiedSourceType"></p-columnFilter> -->
+                </th>
+                <th>
+                    <span>modifiedDttm
+                        <p-sortIcon pSortableColumn="modifiedDttm" field="modifiedDttm"></p-sortIcon>
+                    </span>
+                    <!-- <p-columnFilter field="modifiedDttm"></p-columnFilter> -->
+                </th>
+                <th>
+                    <span>Delete
+                        <!-- <p-sortIcon pSortableColumn="modifiedDttm" field="modifiedDttm"></p-sortIcon> -->
+                    </span>
+                    <!-- <p-columnFilter field="modifiedDttm"></p-columnFilter> -->
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-product >
+            <tr>
+                <td> <p-tableCheckbox [value]="product"></p-tableCheckbox> image </td>
+                <td>{{product.studentId}}</td>
+                <td>{{product.firstName}}</td>
+                <td>{{product.lastName}}</td>
+                <td>{{product.dob}}</td>
+                <td>{{product.phoneNumber}}</td>
+                <td>{{product.dateOfJoining}}</td>
+                <td>{{product.createdSource}}</td>
+                <td>{{product.createdSourceType}}</td>
+                <td>{{product.createdDttm}}</td>
+                <td>{{product.modifiedSource}}</td>
+                <td>{{product.modifiedSourceType}}</td>
+                <td>{{product.modifiedDttm}}</td>
+                <td><button pButton pRipple type="button" label="Danger" class="p-button-rounded p-button-danger"></button>
+                </td>
+            </tr>
+
+        </ng-template>
+    </p-table>
+</div>
+</app-navbar>

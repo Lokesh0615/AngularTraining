@@ -4,7 +4,8 @@
     </div>
     <p-table selectionMode="multiple" [(selection)]="selectedProducts1" dataKey="asn_id"
         styleClass="p-datatable-striped" [scrollable]="true"  scrollHeight="500px" style="margin-left: 10px; width: 600px;"
-        [value]="products">
+        [value]="products"  [rowsPerPageOptions]="[1,2]">
+        <!-- <p-paginator [rows]="3" [totalRecords]="selectedProducts1" [rowsPerPageOptions]="[2,4,6]" [showJumpToPageDropdown]="true"></p-paginator> -->
         <ng-template pTemplate="header">
             <tr class="table_head">
                 <th><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>

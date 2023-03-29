@@ -1,0 +1,20 @@
+export class StudentDetailesService {
+    studentId!:string;
+    dob!:Date;
+    gender!:string;
+    bloodGroup!:string;
+    phoneNumber!:number;
+    address!:string;
+    department!:string;
+    departmentId!:string;
+    mailId!:string;
+    firstName!:string;
+    lastName!:string;
+    dateOfJoining!:string;
+    createdSource!:string;
+    createdSourceType!:string;
+    createdDttm!:string;
+    modifiedSource!:string;
+    modifiedSourceType!:string;
+    modifiedDttm!:string;
+}

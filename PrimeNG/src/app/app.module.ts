@@ -22,6 +22,10 @@ import {ToastModule} from 'primeng/toast';
 import {InputNumberModule} from 'primeng/inputnumber';
 import { EditorModule } from 'primeng/editor';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { PaginatorModule } from 'primeng/paginator';
+import { TreeTableModule } from 'primeng/treetable';
+
+
 
 
 // my services
@@ -29,6 +33,8 @@ import { FormService } from './form.service';
 import { ConfirmAlertService } from './confirmAlert.service';
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { TableComponent } from './table/table.component'
+import {VirtualScrollerModule} from 'primeng/virtualscroller';
+
 
 @NgModule({
   declarations: [
@@ -55,7 +61,10 @@ import { TableComponent } from './table/table.component'
     ToastModule,
     InputNumberModule,
     EditorModule,
-    KeyFilterModule
+    KeyFilterModule,
+    PaginatorModule,
+    VirtualScrollerModule,
+    TreeTableModule,
   ],
     
     providers: [ ConfirmationService, MessageService, FormService, ConfirmAlertService],
