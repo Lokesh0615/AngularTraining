@@ -13,6 +13,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { StudentComponent } from './student/student.component';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { DepartmentComponent } from './department/department.component';
+import { StudentDetailsComponent } from './student/student-details/student-details.component';
+
 
 // services
 import { LoginService } from './services/login.service';
@@ -31,6 +33,10 @@ import {DialogModule} from 'primeng/dialog';
 import { APIService } from './services/APIservice.service';
 import {MessageService} from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
+import {KeyFilterModule} from 'primeng/keyfilter';
+import { StudentDetailsEditComponent } from './student/student-details-edit/student-details-edit.component';
+import { StudentDetailesService } from './services/studentDetailes';
+
 
 
 const appRoute:Routes=[
@@ -38,7 +44,11 @@ const appRoute:Routes=[
   {path:'Home', canActivate:[AuthGuardService], component:HomeComponent,
     // children:[{path:'Home/Users', component:UsersComponent}]
   },
-  {path:'Student', component:StudentComponent},
+  {path:'Student', component:StudentComponent,
+    children:[{path:'AddStudentDetails', component:StudentDetailsComponent},
+              {path:'StudentDetails/:id', component:StudentDetailsEditComponent}
+              ]
+  },
   {path:'Login', component:LoginComponent},
   // {path:'Home/Users', component:UsersComponent},
   {path:"**",  component:LoginComponent}
@@ -53,6 +63,8 @@ const appRoute:Routes=[
     StudentComponent,
     AttendanceComponent,
     DepartmentComponent,
+    StudentDetailsComponent,
+    StudentDetailsEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,8 +82,9 @@ const appRoute:Routes=[
      TableModule,
      DialogModule,
      ToastModule,
+     KeyFilterModule,
   ],
-  providers: [LoginService, AuthGuardService, APIService, MessageService],
+  providers: [LoginService, AuthGuardService, APIService, MessageService, StudentDetailesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

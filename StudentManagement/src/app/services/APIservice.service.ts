@@ -18,4 +18,9 @@ export class APIService{
        return this.HttpClient.get('http://localhost:9090/studentdetail/findbystudentid?studentId=' + studentId + '')
        
     }
+    deleteByStudentId(studentId:string){
+        return this.HttpClient.delete('http://localhost:9090/studentdetail/deletebystudentid?studentId='+studentId+'')
+        console.log("lll");
+        
+    }
 }

@@ -1,6 +1,6 @@
 
 <app-navbar>
-<div class="table-div">
+<div class="table-div" *ngIf="showStudentDetails">
     <div class="top-div">
         <button pButton class="p-button-info" (click)="showDialog()">ADD</button>
     </div>
@@ -14,10 +14,10 @@
         </ng-template>
       </p-dialog>
       <p-toast></p-toast>
-    <p-table selectionMode="multiple" [(selection)]="selectedProducts1" dataKey="studentId"
+    <p-table selectionMode="multiple" [(selection)]="selectedStudenstData1" dataKey="studentId"
         styleClass="p-datatable-striped" [scrollable]="true"  scrollHeight="500px" 
-        [value]="products"  [rowsPerPageOptions]="[1,2]">
-        <!-- <p-paginator [rows]="3" [totalRecords]="selectedProducts1" [rowsPerPageOptions]="[2,4,6]" [showJumpToPageDropdown]="true"></p-paginator> -->
+        [value]="studentsData"  [rowsPerPageOptions]="[1,2]">
+        <!-- <p-paginator [rows]="3" [totalRecords]="selectedstudentDatas1" [rowsPerPageOptions]="[2,4,6]" [showJumpToPageDropdown]="true"></p-paginator> -->
         <ng-template pTemplate="header">
             <tr class="table_head">
                 <th><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
@@ -46,49 +46,55 @@
                     <!-- <p-columnFilter field="dob"></p-columnFilter> -->
                 </th>
                 <th>
+                    <span>Gender
+                        <p-sortIcon pSortableColumn="gender" field="gender"></p-sortIcon>
+                    </span>
+                    <!-- <p-columnFilter field="dob"></p-columnFilter> -->
+                </th>
+                <th>
                     <span>PhoneNumber
                         <p-sortIcon pSortableColumn="phoneNumber" field="phoneNumber"></p-sortIcon>
                     </span>
                     <!-- <p-columnFilter field="phoneNumber"></p-columnFilter> -->
                 </th>
                 <th>
-                    <span>DateOfJoining
+                    <span>Date Of Joining
                         <p-sortIcon pSortableColumn="dateOfJoining" field="dateOfJoining"></p-sortIcon>
                     </span>
                     <!-- <p-columnFilter field="dateOfJoining"></p-columnFilter> -->
                 </th>
                 <th>
-                    <span>createdSource
+                    <span>CreatedSource
                         <p-sortIcon pSortableColumn="createdSource" field="createdSource"></p-sortIcon>
                     </span>
                     <!-- <p-columnFilter field="createdSource"></p-columnFilter> -->
                 </th>
                 <th>
-                    <span>createdSourceType
+                    <span>CreatedSourceType
                         <p-sortIcon pSortableColumn="createdSourceType" field="createdSourceType"></p-sortIcon>
                     </span>
                     <!-- <p-columnFilter field="createdSourceType"></p-columnFilter> -->
                 </th>
                 <th>
-                    <span>createdDttm
+                    <span>CreatedDttm
                         <p-sortIcon pSortableColumn="createdDttm" field="createdDttm"></p-sortIcon>
                     </span>
                     <!-- <p-columnFilter field="createdDttm"></p-columnFilter> -->
                 </th>
                 <th>
-                    <span>modifiedSource 
+                    <span>ModifiedSource 
                         <p-sortIcon pSortableColumn="modifiedSource" field="modifiedSource"></p-sortIcon>
                     </span>
                     <!-- <p-columnFilter field="modifiedSource"></p-columnFilter> -->
                 </th>
                 <th>
-                    <span>modifiedSourceType 
+                    <span>ModifiedSourceType 
                         <p-sortIcon pSortableColumn="modifiedSourceType" field="modifiedSourceType"></p-sortIcon>
                     </span>
                     <!-- <p-columnFilter field="modifiedSourceType"></p-columnFilter> -->
                 </th>
                 <th>
-                    <span>modifiedDttm
+                    <span>ModifiedDttm
                         <p-sortIcon pSortableColumn="modifiedDttm" field="modifiedDttm"></p-sortIcon>
                     </span>
                     <!-- <p-columnFilter field="modifiedDttm"></p-columnFilter> -->
@@ -101,27 +107,36 @@
                 </th>
             </tr>
         </ng-template>
-
-        <ng-template pTemplate="body" let-product >
-            <tr>
-                <td> <p-tableCheckbox [value]="product"></p-tableCheckbox> image </td>
-                <td>{{product.studentId}}</td>
-                <td>{{product.firstName}}</td>
-                <td>{{product.lastName}}</td>
-                <td>{{product.dob}}</td>
-                <td>{{product.phoneNumber}}</td>
-                <td>{{product.dateOfJoining}}</td>
-                <td>{{product.createdSource}}</td>
-                <td>{{product.createdSourceType}}</td>
-                <td>{{product.createdDttm}}</td>
-                <td>{{product.modifiedSource}}</td>
-                <td>{{product.modifiedSourceType}}</td>
-                <td>{{product.modifiedDttm}}</td>
-                <td><button pButton pRipple type="button" label="Danger" class="p-button-rounded p-button-danger"></button>
+        <ng-template pTemplate="body" let-studentData >
+            <tr (dblclick)="studentDetailesEdit(studentData.studentId)">
+                <td> <p-tableCheckbox [value]="studentData"></p-tableCheckbox> image </td>
+                <td>{{studentData.studentId}}</td>
+                <td>{{studentData.firstName}}</td>
+                <td>{{studentData.lastName}}</td>
+                <td>{{studentData.dob}}</td>
+                <td>{{studentData.gender}}</td>
+                <td>{{studentData.phoneNumber}}</td>
+                <td>{{studentData.dateOfJoining}}</td>
+                <td>{{studentData.createdSource}}</td>
+                <td>{{studentData.createdSourceType}}</td>
+                <td>{{studentData.createdDttm}}</td>
+                <td>{{studentData.modifiedSource}}</td>
+                <td>{{studentData.modifiedSourceType}}</td>
+                <td>{{studentData.modifiedDttm}}</td>
+                <td><button pButton pRipple type="button" label="Danger" class="p-button-rounded p-button-danger" (click)="deleteByStdId(studentData.studentId)"></button>
                 </td>
             </tr>
+            <ng-template  *ngIf="studentsDataLength<=0; " >
+                <tr #noStudentData><td colspan="16">nodata</td>
+                <div style="height: 100px;"></div>
+                </tr>
+            </ng-template>
 
         </ng-template>
     </p-table>
 </div>
+<div *ngIf="!showStudentDetails">
+    <router-outlet (deactivate)="ngOnInit()" ></router-outlet>
+</div>
+
 </app-navbar>

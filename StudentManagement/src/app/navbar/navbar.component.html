@@ -1,21 +1,29 @@
-<div class="homePageLoggedDetailes">
-    <div class="homePageLogo"><img src="assets/ItorizonLogo.png" alt="noImage"></div>
-    <div class="loggedInDetailes">          
-        <i class="pi pi-bell text-3xl" pBadge value="2"></i>
-        <p-avatar label="A" styleClass="mr-2" size="large" shape="circle"></p-avatar>
+<div>
+    <div class="homePageLoggedDetailes">
+        <div class="homePageLogo"><img src="assets/ItorizonLogo.png" alt="noImage"></div>
+        <div class="loggedInDetailes">
+            <i class="pi pi-bell text-3xl" pBadge value="2"></i>
+            <p-avatar label="A" styleClass="mr-2" size="large" shape="circle"></p-avatar>
+        </div>
+    </div>
+    <div class="navBar">
+        <ul class="nav">
+            <li routerLinkActive="active"><a routerLink="/Home">Home</a></li>
+            <li routerLinkActive="active"><a routerLink="/Student">Student</a></li>
+            <li routerLinkActive="active"><a routerLink="/Department">Department</a></li>
+            <li routerLinkActive="active"><a routerLink="/Attendance">Attendance</a></li>
+        </ul>
+
+    </div>
+    <div class="dashBoard">
+        <h3>{{title}}</h3>
+
+    </div>
+    <div class="content">
+        <ng-content></ng-content>
+    </div>
+
+    <div class="footer">
+        <p>2022-2023 Itorizon</p>
     </div>
 </div>
-<div class="navBar">
-    <ul class="nav">
-        <li routerLinkActive="active"  ><a routerLink="/Home">Home</a></li>
-        <li  routerLinkActive="active" ><a  routerLink="/Student">Student</a></li>
-        <li  routerLinkActive="active" ><a  routerLink="/Department">Department</a></li>
-        <li  routerLinkActive="active" ><a  routerLink="/Attendance">Attendance</a></li>
-    </ul>
-   
-</div>
-<ng-content></ng-content>
-<div class="footer">
-    <p>2022-2023 Itorizon</p>
-</div>
-

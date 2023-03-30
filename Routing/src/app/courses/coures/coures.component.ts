@@ -50,6 +50,7 @@ queryPara(){
   this.router.navigate(['/Courses/Coures', this.courseId], {queryParams:{edit:true}})
 
   this.activatedRoute.queryParamMap.subscribe((p)=>{
+    console.log(p.get('edit'));
     this.editMode=Boolean(p.get('edit'));
     
   })

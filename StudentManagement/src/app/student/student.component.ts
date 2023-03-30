@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { APIService } from '../services/APIservice.service';
 import { StudentDetailesService } from '../services/studentDetailes';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-student',
@@ -9,32 +10,54 @@ import { StudentDetailesService } from '../services/studentDetailes';
   styleUrls: ['./student.component.css']
 })
 export class StudentComponent implements OnInit {
+  title="StudentTable"
   dialogShow:boolean=false;
-  products:StudentDetailesService[]=[];
+  studentsData:StudentDetailesService[]=[];
+  studentsDataLength!:number;
+  showStudentDetails!:boolean;
   @ViewChild('checkStdId') checkStdId!:ElementRef;
-  constructor(private APIService:APIService, private MessageService:MessageService){
+  constructor(private APIService:APIService, private MessageService:MessageService, private route:Router , private activatedRoute:ActivatedRoute, ){
 
   }
+  
   ngOnInit(): void {
-     this.APIService.findAllStudents().subscribe((results)=>{
-      this.products=Object.values(results);
-      // console.log(this.products);
-    })
+    this.getAllStudentDetailes()
+    this.showStudentDetails=true;
   }
   showDialog(){
     this.dialogShow=true;
     this.checkStdId.nativeElement.value='';
   }
+  getAllStudentDetailes(){
+    this.APIService.findAllStudents().subscribe((results)=>{
+      this.studentsData=Object.values(results);
+      console.log(results);
+    })
+  }
 
   checkStudentId(stdId:string){
-    let stdIdExist=this.products.find((list)=> list.studentId===stdId);
+    let stdIdExist=this.studentsData.find((list)=> list.studentId===stdId);
     if(!stdIdExist){
       console.log("nextpage");
+      this.route.navigate(['AddStudentDetails'],{relativeTo:this.activatedRoute})
       this.dialogShow=false;
       this.checkStdId.nativeElement.value='';
+      this.showStudentDetails=false;
     }else{
       this.MessageService.add({severity:'error', summary:'error Message', detail:'Student Id already Exists'});
     }
   }
-  selectedProducts1:any=[]
+
+  deleteByStdId(stdId:string){
+    this.APIService.deleteByStudentId(stdId).subscribe((results)=>{ }, (error)=>{
+      console.log(error);
+      this.getAllStudentDetailes();
+    })
+  }
+  studentDetailesEdit(studentId:string){
+    this.route.navigate(['StudentDetails/:'+studentId+''],{relativeTo:this.activatedRoute})
+    this.showStudentDetails=false;
+  }
+
+  selectedStudenstData1:any=[]
 }
