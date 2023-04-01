@@ -19,6 +19,8 @@ import { StudentDetailsComponent } from './student/student-details/student-detai
 // services
 import { LoginService } from './services/login.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { ConfirmExitService } from './services/confirmExit.service';
+import { VariableService } from './services/variable.service';
 
 // primeng
 import { InputTextModule } from 'primeng/inputtext'
@@ -38,13 +40,18 @@ import { StudentDetailsEditComponent } from './student/student-details-edit/stud
 import { StudentDetailesService } from './services/studentDetailes';
 import { MessagesModule } from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
-import { ConfirmExitService } from './services/confirmExit.service';
-import { VariableService } from './services/variable.service';
+import { DropdownModule } from 'primeng/dropdown';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
+import {CalendarModule} from 'primeng/calendar';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import { DepartmentDetailsComponent } from './department/department-details/department-details.component';
 
 
 
 const appRoute:Routes=[
   {path:'', component:LoginComponent},
+  {path:'Login', component:LoginComponent},
   {path:'Home', canActivate:[AuthGuardService], component:HomeComponent,
     // children:[{path:'Home/Users', component:UsersComponent}]
   },
@@ -53,7 +60,10 @@ const appRoute:Routes=[
               {path:'StudentDetails/:id', component:StudentDetailsEditComponent}
               ]
   },
-  {path:'Login', component:LoginComponent},
+  {path:'Department', component:DepartmentComponent, 
+              children:[{path:"DepartmentDetailes/:id", component:DepartmentDetailsComponent, canActivate:[AuthGuardService]}]
+  },
+  {path:"DepartmentDetailes/:id", component:DepartmentDetailsComponent},
   // {path:'Home/Users', component:UsersComponent},
   {path:"**",  component:LoginComponent}
 ]
@@ -69,6 +79,7 @@ const appRoute:Routes=[
     DepartmentComponent,
     StudentDetailsComponent,
     StudentDetailsEditComponent,
+    DepartmentDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,9 +100,14 @@ const appRoute:Routes=[
      KeyFilterModule,
      MessagesModule,
      MessageModule,
-     
+     DropdownModule,
+     ConfirmDialogModule,
+     CalendarModule,
+     AutoCompleteModule
   ],
-  providers: [LoginService, AuthGuardService, APIService, MessageService, StudentDetailesService, ConfirmExitService, VariableService],
+  providers: [LoginService, AuthGuardService, APIService, MessageService, 
+              StudentDetailesService, ConfirmExitService, VariableService,
+              ConfirmationService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

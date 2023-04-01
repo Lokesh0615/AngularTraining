@@ -110,7 +110,7 @@
         <ng-template pTemplate="body" let-studentData >
             <tr (dblclick)="studentDetailesEdit(studentData.studentId)">
                 <td> <p-tableCheckbox [value]="studentData"></p-tableCheckbox> image </td>
-                <td>{{studentData.studentId}}</td>
+                <td>{{studentData.studentId | number}}</td>
                 <td>{{studentData.firstName}}</td>
                 <td>{{studentData.lastName}}</td>
                 <td>{{studentData.dob}}</td>

@@ -44,7 +44,7 @@ export class StudentComponent implements OnInit {
       this.dialogShow=false;
       this.checkStdId.nativeElement.value='';
       this.showStudentDetails=false;
-      this.VariableService.studentId=Number(stdId)
+      this.VariableService.studentId=stdId
     }else{
       this.MessageService.add({severity:'error', summary:'error Message', detail:'Student Id already Exists'});
     }

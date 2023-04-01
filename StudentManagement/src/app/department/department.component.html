@@ -1,1 +1,94 @@
-<p>department works!</p>
+<app-navbar>
+    <div *ngIf="!showDepartmentDetails && !childComponentOpend">
+        <p-table [value]="departmentsData" styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="500px">
+            <ng-template pTemplate="header">
+                <tr class="table_head">
+                    <th>
+                        <span>Department Id
+                            <p-sortIcon pSortableColumn="departmentId" field="departmentId"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter type="text" field="studentId"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>Department Name
+                            <p-sortIcon pSortableColumn="departmentName" field="departmentName"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="firstName"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>No Of Student
+                            <p-sortIcon pSortableColumn="noOfEmployee" field="noOfEmployee"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="lastName"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>Manager Id
+                            <p-sortIcon pSortableColumn="managerId" field="managerId"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="dob"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>Created Source
+                            <p-sortIcon pSortableColumn="createdSource" field="createdSource"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="dob"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>Created Source Type
+                            <p-sortIcon pSortableColumn="createdSourceType" field="createdSourceType"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="phoneNumber"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>CreatedDttm
+                            <p-sortIcon pSortableColumn="createdDttm" field="createdDttm"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="dateOfJoining"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>Modified Source
+                            <p-sortIcon pSortableColumn="modifiedSource" field="modifiedSource"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="modifiedSource"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>ModifiedSourceType
+                            <p-sortIcon pSortableColumn="modifiedSourceType" field="modifiedSourceType"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="modifiedSourceType"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>ModifiedDttm
+                            <p-sortIcon pSortableColumn="modifiedDttm" field="modifiedDttm"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="modifiedDttm"></p-columnFilter> -->
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-departmentData>
+                <tr (dblclick)="departmentDetailes(departmentData.departmentId)">
+                    <td>{{departmentData.departmentId}}</td>
+                    <td>{{departmentData.departmentName}}</td>
+                    <td>{{departmentData.noOfEmployee}}</td>
+                    <td>{{departmentData.managerId}}</td>
+                    <td>{{departmentData.createdSource }}</td>
+                    <td>{{departmentData.createdSourceType}}</td>
+                    <td>{{departmentData.createdDttm}}</td>
+                    <td>{{departmentData.modifiedSource}}</td>
+                    <td>{{departmentData.modifiedSourceType}}</td>
+                    <td>{{departmentData.modifiedDttm}}</td>
+                </tr>
+                <ng-template>
+                    <tr #noStudentData>
+                        <td colspan="16">nodata</td>
+                        <div style="height: 100px;"></div>
+                    </tr>
+                </ng-template>
+
+            </ng-template>
+        </p-table>
+    </div>
+    <div *ngIf="childComponentOpend">
+    <router-outlet (deactivate)="ngOnInit();"></router-outlet>
+    </div>
+</app-navbar>

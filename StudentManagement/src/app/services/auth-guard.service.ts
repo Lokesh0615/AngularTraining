@@ -9,7 +9,7 @@ import { LoginService } from './login.service';
 @Injectable()
 export class AuthGuardService implements CanActivate {
     constructor(private loginService:LoginService){}
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
+    canActivate(){
         if(this.loginService.logged_in){
             return true
         }else{
