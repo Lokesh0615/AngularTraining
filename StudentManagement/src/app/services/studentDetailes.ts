@@ -1,5 +1,5 @@
 export class StudentDetailesService {
-    studentId!:string;
+    studentId!:number;
     dob!:Date;
     gender!:string;
     bloodGroup!:string;
@@ -10,11 +10,11 @@ export class StudentDetailesService {
     mailId!:string;
     firstName!:string;
     lastName!:string;
-    dateOfJoining!:string;
+    dateOfJoining!:Date;
     createdSource!:string;
     createdSourceType!:string;
-    createdDttm!:string;
+    createdDttm!:Date;
     modifiedSource!:string;
     modifiedSourceType!:string;
-    modifiedDttm!:string;
+    modifiedDttm!:Date;
 }

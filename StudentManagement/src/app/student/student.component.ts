@@ -3,6 +3,7 @@ import { MessageService } from 'primeng/api';
 import { APIService } from '../services/APIservice.service';
 import { StudentDetailesService } from '../services/studentDetailes';
 import { ActivatedRoute, Router } from '@angular/router';
+import { VariableService } from '../services/variable.service';
 
 @Component({
   selector: 'app-student',
@@ -16,7 +17,7 @@ export class StudentComponent implements OnInit {
   studentsDataLength!:number;
   showStudentDetails!:boolean;
   @ViewChild('checkStdId') checkStdId!:ElementRef;
-  constructor(private APIService:APIService, private MessageService:MessageService, private route:Router , private activatedRoute:ActivatedRoute, ){
+  constructor(private APIService:APIService, private MessageService:MessageService, private route:Router , private activatedRoute:ActivatedRoute, private VariableService:VariableService ){
 
   }
   
@@ -36,13 +37,14 @@ export class StudentComponent implements OnInit {
   }
 
   checkStudentId(stdId:string){
-    let stdIdExist=this.studentsData.find((list)=> list.studentId===stdId);
+    let stdIdExist=this.studentsData.find((list)=> list.studentId==Number(stdId));
     if(!stdIdExist){
       console.log("nextpage");
       this.route.navigate(['AddStudentDetails'],{relativeTo:this.activatedRoute})
       this.dialogShow=false;
       this.checkStdId.nativeElement.value='';
       this.showStudentDetails=false;
+      this.VariableService.studentId=Number(stdId)
     }else{
       this.MessageService.add({severity:'error', summary:'error Message', detail:'Student Id already Exists'});
     }

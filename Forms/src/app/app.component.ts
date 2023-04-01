@@ -31,12 +31,12 @@ export class AppComponent {
   onSubmit(form:NgForm){
     console.log(form);
     // console.log(this.defaultGender);
-    this.fname1=this.form.value.personal.fname;
-    this.lname1=this.form.value.personal.lname;
-    this.email1=this.form.value.personal.email;
-    this.country1=this.form.value.country;
-    this.gen1=this.form.value.gender;
-    this.form.reset()
+    // this.fname1=this.form.value.personal.fname;
+    // this.lname1=this.form.value.personal.lname;
+    // this.email1=this.form.value.personal.email;
+    // this.country1=this.form.value.country;
+    // this.gen1=this.form.value.gender;
+    // this.form.reset()
     
   }
 

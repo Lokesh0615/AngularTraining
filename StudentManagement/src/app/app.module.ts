@@ -36,6 +36,10 @@ import {ToastModule} from 'primeng/toast';
 import {KeyFilterModule} from 'primeng/keyfilter';
 import { StudentDetailsEditComponent } from './student/student-details-edit/student-details-edit.component';
 import { StudentDetailesService } from './services/studentDetailes';
+import { MessagesModule } from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import { ConfirmExitService } from './services/confirmExit.service';
+import { VariableService } from './services/variable.service';
 
 
 
@@ -83,8 +87,11 @@ const appRoute:Routes=[
      DialogModule,
      ToastModule,
      KeyFilterModule,
+     MessagesModule,
+     MessageModule,
+     
   ],
-  providers: [LoginService, AuthGuardService, APIService, MessageService, StudentDetailesService],
+  providers: [LoginService, AuthGuardService, APIService, MessageService, StudentDetailesService, ConfirmExitService, VariableService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
