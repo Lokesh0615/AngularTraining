@@ -2,11 +2,11 @@ export class StudentDetailesService {
     studentId!:number;
     dob!:Date;
     gender!:string;
-    bloodGroup!:string;
+    bloodGroup!:{type:string};
     phoneNumber!:number;
     address!:string;
-    department!:string;
-    departmentId!:string;
+    department!:{ department: string, departmentId: number };
+    departmentId!:{ department: string, departmentId: number };
     mailId!:string;
     firstName!:string;
     lastName!:string;
@@ -17,4 +17,6 @@ export class StudentDetailesService {
     modifiedSource!:string;
     modifiedSourceType!:string;
     modifiedDttm!:Date;
+
+
 }

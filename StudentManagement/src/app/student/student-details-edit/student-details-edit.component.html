@@ -16,7 +16,7 @@
             </div>
             <div>
                 <label class="col-6">Date Of Birth: </label>
-                <label class="col-6">{{studentData.dob}}</label>
+                <label class="col-6">{{studentData.dob | date: "dd/MM/yyyy"}}</label>
             </div>
             <div>
                 <label class="col-6">Phone Number </label>
@@ -36,13 +36,13 @@
             </div>
             <div>
                 <label class="col-6">Date of Joining: </label>
-                <label class="col-6">{{studentData.dateOfJoining}}</label>
+                <label class="col-6">{{studentData.dateOfJoining | date: "dd/MM/yyyy"}}</label>
             </div>
         </div>
         <div class="col-12  md:col-12 lg:col-6 field eachColumn">
             <div>
                 <label class="col-6">Department: </label>
-                <label class="col-6">{{studentData.department | titlecase}} </label>
+                <label class="col-6">{{studentData.department }} </label>
             </div>
             <div>
                 <label class="col-6">Department ID: </label>
@@ -58,7 +58,7 @@
             </div>
             <div>
                 <label class="col-6">CreatedDttm: </label>
-                <label class="col-6">{{studentData.createdDttm}}</label>
+                <label class="col-6">{{studentData.createdDttm | date :" dd/MM/yyyy, h:mm a "}}</label>
             </div>
             <div>
                 <label class="col-6">Modified Source: </label>
@@ -66,11 +66,11 @@
             </div>
             <div>
                 <label class="col-6">Modified Source Type: </label>
-                <label class="col-6">{{studentData.modifiedSourceType}}</label>
+                <label class="col-6">{{studentData.modifiedSourceType }}</label>
             </div>
             <div>
                 <label class="col-6">ModifiedDttm: </label>
-                <label class="col-6">{{studentData.modifiedDttm}}</label>
+                <label class="col-6">{{studentData.modifiedDttm | date :"dd/MM/yyyy, h:mm a "}}</label>
             </div>
         </div>
     </div>
@@ -80,13 +80,13 @@
     <div class="studentDetailsContainer" [ngStyle]="{'display': showStudentDetailes === false ? 'block' : 'none' }">
         <!-- make form validation method as a service -->
         <!-- work on local and global css -->
-        <form #studentDetailsForm="ngForm">
+        <form (ngSubmit)="   onSubmint()"  #studentDetailsForm="ngForm" ngNativeValidate>
             <div class="formgrid grid">
 
                 <div class="col-12  md:col-6 lg:col-4 field eachColumn">
                     <label>StudentId </label>
                     <input type="text" pInputText id="studentId" name="studentId" placeholder="studentId" ngModel
-                        required [disabled]="true">
+                        required readonly>
                     <label>First Name<span>*</span> </label>
                     <input type="text" pInputText pKeyFilter="alpha" id="firstName" name="firstName"
                         placeholder="firstName" ngModel required>
@@ -113,8 +113,10 @@
                     <label>Department Id<span>*</span></label>
                     <input type="text" pInputText id="departmentId" name="departmentId" placeholder="departmentId"
                         ngModel required>
+
                     <label>Mail Id<span>*</span></label>
                     <input type="text" pInputText id="mailId" name="mailId" placeholder="mailId" ngModel required>
+
                     <label>Date Of Joining<span>*</span></label>
                     <input type="date" pInputText id="dateOfJoining" name="dateOfJoining" placeholder="dateOfJoining"
                         ngModel required>
@@ -122,26 +124,26 @@
                 <div class="col-12 md:col-6 lg:col-4 field eachColumn">
                     <label>CreatedSource</label>
                     <input type="text" pInputText id="createdSource" name="createdSource" placeholder="createdSource"
-                        ngModel [disabled]="true">
+                        ngModel readonly>
                     <label>CreatedSourceType</label>
                     <input type="text" pInputText id="createdSourceType" name="createdSourceType"
-                        placeholder="createdSourceType" ngModel [disabled]="true">
+                        placeholder="createdSourceType" ngModel readonly>
                     <label>CreatedDttm</label>
-                    <input type="text" pInputText id="createdDttm" name="createdDttm" placeholder="createdDttm" ngModel [disabled]="true">
+                    <input type="text" pInputText id="createdDttm" name="createdDttm" placeholder="createdDttm" ngModel readonly>
                     <label>ModifiedSource</label>
                     <input type="text" pInputText id="modifiedSource" name="modifiedSource" placeholder="modifiedSource"
-                        ngModel [disabled]="true">
+                        ngModel readonly>
                     <label>ModifiedSourceType</label>
                     <input type="text" pInputText id="modifiedSourceType" name="modifiedSourceType"
-                        placeholder="modifiedSourceType" ngModel [disabled]="true">
+                        placeholder="modifiedSourceType" ngModel readonly>
                     <label>ModifiedDttm</label>
                     <input type="text" pInputText id="modifiedDttm" name="modifiedDttm" placeholder="modifiedDttm"
-                        ngModel [disabled]="true">
+                        ngModel readonly>
                 </div>
 
 
             </div>
-            <button type="submit" class="btn btn-success" (click)="onSubmint()">Submit</button>
+            <button type="submit" class="btn btn-success" [disabled]="!studentDetailsForm.touched && !studentDetailsForm.dirty">Submit</button>
             <button type="button" class="btn btn-info" (click)="canExit()">Cancel</button>
 
         </form>

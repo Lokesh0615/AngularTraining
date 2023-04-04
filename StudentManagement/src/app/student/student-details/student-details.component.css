@@ -20,6 +20,27 @@ span{
 input.ng-touched.ng-invalid{
     border: 1px solid red;
 }
+.p-dropdown .p-dropdown-label{
+    width: 250px;
+}
+.buttonDiv{
+    height: 40%;
+    display: flex;
+    vertical-align: middle;
+    /* border: 1px solid red; */
+    
+    /* align-items: ; */
+}
+.buttonDiv>*{
+    height: 25%;
+    width: 100%;
+    margin-top: 10%;
+}
+
+:host ::ng-deep .p-dropdown{
+    width: 99% !important;
+    margin-bottom: 20px;
+}
 /* input.ng-invalid{
     border: 1px solid red;
 } */

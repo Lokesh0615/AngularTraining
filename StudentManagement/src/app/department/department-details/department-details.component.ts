@@ -8,7 +8,7 @@ import { LoginService } from 'src/app/services/login.service';
   templateUrl: './department-details.component.html',
   styleUrls: ['./department-details.component.css']
 })
-export class DepartmentDetailsComponent implements OnInit, OnDestroy {
+export class DepartmentDetailsComponent implements OnInit {
   
   showStudentDetailes = true;
   DepartmentId !:string;
@@ -31,12 +31,15 @@ export class DepartmentDetailsComponent implements OnInit, OnDestroy {
   departmentPage(){
     this.router.navigateByUrl('/Department');
     this.LoginService.setChildComponentRefresh(false)
+    console.log("chilc departmentPage");
 
   }
   ngOnDestroy(): void {
-    // this.router.navigateByUrl('/Department');
     this.LoginService.setChildComponentRefresh(false)
+    // this.router.navigateByUrl('/Department');
 
+    console.log("chilc destroy");
+    
     // let admin={user_id:'admin', password:'admin',logged_in:true, childComponentOpend:false}
     //           localStorage.setItem('admin',JSON.stringify(admin))
   }

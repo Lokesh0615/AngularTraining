@@ -33,12 +33,14 @@ export class APIService{
        return this.HttpClient.get('http://localhost:9090/studentdetail/findbystudentid?studentId=' + studentId + '')
        
     }
-    deleteByStudentId(studentId:string){
+    deleteByStudentId(studentId:number){
         return this.HttpClient.delete('http://localhost:9090/studentdetail/deletebystudentid?studentId='+studentId+'')
         console.log("lll");
         
     }
-    updateStudentDetails(studentData:StudentDetailesService){
+    updateStudentDetails(studentData:object){
+        console.log(studentData);
+        
         return this.HttpClient.put('http://localhost:9090/studentdetail/updatestudent', studentData)
     }
 
@@ -48,5 +50,22 @@ export class APIService{
     }
     findDepartmentByDptId(departmentId:string){
         return this.HttpClient.get('http://localhost:9090/departmentdetail/findDepartmentByEmpId?departmentId='+departmentId+'')
+    }
+
+    // Attendance controller
+
+    getAllAttendanceDetailes(){
+        return this.HttpClient.get('http://localhost:9090/attendanceDetail/findAllAttendance')
+    }
+
+    findAttendanceByStudentIdDepartmentId(studentId:string, departmentId:string){
+        return this.HttpClient.get('http://localhost:9090/attendanceDetail/findByEmployeeIdDepartmentId?employeeid='+studentId+'&departmentid='+departmentId+'')
+    }
+
+    deleteAttendanceByStdIdDeptId(studentId:string, departmentId:string){
+        return this.HttpClient.delete('http://localhost:9090/attendanceDetail/deleteByEmpIdDepId?employeeId='+studentId+'&departmentId='+departmentId+'')
+    }
+    findAttendanceByStudentId(studentId:string){
+        return this.HttpClient.get('http://localhost:9090/attendanceDetail/findAttendanceByEmpId?employeeid'+studentId+'')
     }
 }

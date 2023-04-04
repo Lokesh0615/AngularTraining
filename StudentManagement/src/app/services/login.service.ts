@@ -11,14 +11,15 @@ export class LoginService {
     userData!:any;
     logged_in!:boolean;
     logged_in_userId!:number;
-    logged_in_userType!:string;
+    logged_in_user!:string;
+    
     constructor(private httpClient:HttpClient, private route:Router, private APIService:APIService){}
     
     // admin={user_id:'admin', password:'admin',logged_in:this.logged_in}
     sampleInput=''
-    login(user_id:string, password:string){
+    login(userName:string, password:string){
       let checkUser;
-      this.APIService.checkUserExists(user_id, password).subscribe((resluts)=>{
+      this.APIService.checkUserExists(userName, password).subscribe((resluts)=>{
         console.log(resluts);
         checkUser=resluts
         if(checkUser){
@@ -76,6 +77,8 @@ export class LoginService {
              console.log(this.userData.logged_in);
              
              console.log(this.userData.password);
+             console.log(this.userData.childComponentOpend);
+             
              
 
         }

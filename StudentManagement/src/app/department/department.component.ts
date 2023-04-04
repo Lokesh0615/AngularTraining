@@ -11,23 +11,33 @@ import { LoginService } from '../services/login.service';
 export class DepartmentComponent implements OnInit{
 
   departmentsData:{}[]=[];
-  showDepartmentDetails:boolean=true;
-  childComponentOpend=false;
+  showDepartmentDetails!:boolean;
+  childComponentOpend!:boolean;;
   constructor(private APIService:APIService, private route:Router , private activatedRoute:ActivatedRoute, private LoginService:LoginService){}
 
   ngOnInit(): void {
+    console.log("parent open");
+    this.showDepartmentDetails=false;
+    console.log(this.LoginService.userData.childComponentOpend);
+    this.childComponentOpend=this.LoginService.userData.childComponentOpend;
+    console.log(this.showDepartmentDetails);
+    console.log(this.childComponentOpend);
+    
+    
+    this.getAllDepartment()
+   
+    
+  }
+  getAllDepartment(){
     this.APIService.getAllDepartmnet().subscribe((results)=>{
       this.departmentsData=Object.values(results)
     })
-    this.showDepartmentDetails=false;
-    this.childComponentOpend=this.LoginService.userData.childComponentOpend;
-
   }
 
   departmentDetailes(departmenId:string){
     this.childComponentOpend=true;
     this.LoginService.setChildComponentRefresh(true)
-    // let admin={user_id:'admin', password:'admin',logged_in:true, childComponentOpend:true}
+    console.log(this.LoginService.userData.childComponentOpend);    // let admin={user_id:'admin', password:'admin',logged_in:true, childComponentOpend:true}
     //           localStorage.setItem('admin',JSON.stringify(admin))
     this.route.navigate(['DepartmentDetailes/:'+departmenId+''],{relativeTo:this.activatedRoute})
     

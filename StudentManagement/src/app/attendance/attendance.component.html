@@ -1,1 +1,159 @@
-<p>attendance works!</p>
+<app-navbar>
+    <div class="table-div" *ngIf="showAttendanceDetails">
+        <div class="top-div">
+            <button pButton class="p-button-info">ADD</button>
+        </div>
+        <p-dialog [(visible)]="dialogShow" [modal]="true" [style]="{width: '400px'}" position="center">
+            <!-- <ng-template pTemplate="header" >header</ng-template> -->
+            <label>Student ID: </label>
+            <input type="text" placeholder="Student Id" #checkStdId>
+            <ng-template pTemplate="footer">
+                <p-button label="cancel" (onClick)="dialogShow=false"></p-button>
+                <!-- <p-button label="Confirm" (onClick)="checkStudentId(checkStdId.value)"></p-button> -->
+            </ng-template>
+        </p-dialog>
+        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"
+            rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+        <p-toast></p-toast>
+        <p-table selectionMode="multiple" styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="500px"
+            [value]="attendanceData" [rowsPerPageOptions]="[1,2]">
+            <!-- <p-paginator [rows]="3" [totalRecords]="selectedstudentDatas1" [rowsPerPageOptions]="[2,4,6]" [showJumpToPageDropdown]="true"></p-paginator> -->
+            <ng-template pTemplate="header">
+                <tr class="table_head">
+                    <th>
+                        <span>Student Id
+                            <p-sortIcon pSortableColumn="employeeId" field="employeeId"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter type="text" field="studentId"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>Month
+                            <p-sortIcon pSortableColumn="month" field="month"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="firstName"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>Date
+                            <p-sortIcon pSortableColumn="date" field="date"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="lastName"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>Department Id
+                            <p-sortIcon pSortableColumn="departmentId" field="departmentId"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="dob"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>Department Name
+                            <p-sortIcon pSortableColumn="departmentName" field="departmentName"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="dob"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>Available
+                            <p-sortIcon pSortableColumn="available" field="available"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="phoneNumber"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>CheckIn
+                            <p-sortIcon pSortableColumn="checkIn" field="checkIn"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="dateOfJoining"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>Checkout
+                            <p-sortIcon pSortableColumn="checkout" field="checkout"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="createdSource"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>Attendance Count
+                            <p-sortIcon pSortableColumn="attendanceCount" field="attendanceCount"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="createdSourceType"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>Created Source
+                            <p-sortIcon pSortableColumn="createdSource" field="createdSource"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="createdSourceType"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>Created Source Type
+                            <p-sortIcon pSortableColumn="createdSourceType" field="createdSourceType"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="createdSourceType"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>CreatedDttm
+                            <p-sortIcon pSortableColumn="createdDttm" field="createdDttm"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="createdDttm"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>Modified Source
+                            <p-sortIcon pSortableColumn="modifiedSource" field="modifiedSource"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="modifiedSource"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>Modified Source Type
+                            <p-sortIcon pSortableColumn="modifiedSourceType" field="modifiedSourceType"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="modifiedSourceType"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>ModifiedDttm
+                            <p-sortIcon pSortableColumn="modifiedDttm" field="modifiedDttm"></p-sortIcon>
+                        </span>
+                        <!-- <p-columnFilter field="modifiedDttm"></p-columnFilter> -->
+                    </th>
+                    <th>
+                        <span>Delete
+                            <!-- <p-sortIcon pSortableColumn="modifiedDttm" field="modifiedDttm"></p-sortIcon> -->
+                        </span>
+                        <!-- <p-columnFilter field="modifiedDttm"></p-columnFilter> -->
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-attendance>
+                <tr (click)="attendanceDetailesEdit(attendance.employeeId)">
+                    <td>{{attendance.employeeId}}</td>
+                    <td>{{attendance.month}}</td>
+                    <td>{{attendance.date}}</td>
+                    <td>{{attendance.departmentId}}</td>
+                    <td>{{attendance.departmentName}}</td>
+                    <td>{{attendance.available}}</td>
+                    <td>{{attendance.checkIn}}</td>
+                    <td>{{attendance.checkout}}</td>
+                    <td>{{attendance.attendanceCount}}</td>
+                    <td>{{attendance.createdSource}}</td>
+                    <td>{{attendance.createdSourceType}}</td>
+                    <td>{{attendance.createdDttm}}</td>
+                    <td>{{attendance.modifiedSource}}</td>
+                    <td>{{attendance.modifiedSourceType}}</td>
+                    <td>{{attendance.modifiedDttm}}</td>
+
+                    <td><button pButton pRipple type="button" label="Delete"
+                            (click)="deleteAttendanceRecord(attendance.employeeId, attendance.departmentId)"
+                            class="p-button-rounded p-button-danger"></button>
+                    </td>
+                </tr>
+                <ng-template>
+                    <tr #noStudentData>
+                        <td colspan="16">nodata</td>
+                        <div style="height: 100px;"></div>
+                    </tr>
+                </ng-template>
+
+            </ng-template>
+        </p-table>
+    </div>
+
+    <div *ngIf="!showAttendanceDetails">
+        <router-outlet (deactivate)="ngOnInit()"></router-outlet>
+    </div>
+</app-navbar>

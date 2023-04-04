@@ -1,0 +1,17 @@
+.eachColumn>*{
+    display: inline-block;
+    width: 90%;
+    /* border: 1px solid red; */
+}
+.eachColumn>input{
+    margin-bottom: 20px;
+}
+.studentDetailsContainer{
+    padding: 20px;
+}
+span{
+    color: red;
+}
+input.ng-touched.ng-invalid{
+    border: 1px solid red;
+}
