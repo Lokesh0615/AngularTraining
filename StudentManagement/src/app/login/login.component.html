@@ -1,9 +1,9 @@
 <div class="form-div" >
     <form >
         <div class="img_container">
-            <img src="assets/ItorizonLogo.png" alt="" style="width: 60%;">
-            <h2>Login</h2>
-            <p>Please use Registered UserID and Password</p>
+            <img src="assets/ItorizonLogo.png"  style="width: 60%;">
+            <h2>{{formType}}</h2>
+            <p>{{formContent}}</p>
         </div>
         <div class="user_container">
             <label for="user_id">User ID<span style="color: red;">*</span></label>
@@ -15,15 +15,17 @@
                 [inputStyle]="{'width':'370px'}"
                 [toggleMask]="true" 
                 [feedback]="false"
-                #password>
+                #password >
             </p-password>
-            <a ><span style="color: blue;">Forgot Password?</span></a>
+            <a *ngIf="!isSignUp" class="links">Forgot Password?</a>
         </div>
         <div class="buttons">
-            <button pButton class="p-button-primary" label="Login" (click)="login(user_id.value, password.value); "></button>
-            <button pButton class="p-button-danger" label="Cancel"></button>
+            <button *ngIf="!isSignUp" pButton class="p-button-primary" label="Login" (click)="login(user_id.value, password.value); "></button>
+            <button *ngIf="isSignUp" pButton class="p-button-primary" label="SignUp" (click)="signUp(user_id.value, password.value); "></button>
+            <button pButton class="p-button-danger" label="Cancel" (click)="cancel()"></button>
         </div>
-        <p>Dont have an account? <span style="color: blue;">SignUp</span></p>
+        <p *ngIf="!isSignUp">Dont have an account? <a  class="links" (click)="signUpOption()">SignUp</a></p>
+         <a *ngIf="isSignUp"  class="links"  (click)="loginOption()" >Login</a>
        
     </form>
 </div>

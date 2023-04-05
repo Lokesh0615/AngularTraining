@@ -14,6 +14,10 @@ export class APIService{
         return this.HttpClient.get('http://localhost:9090/userAccount/checkuserexists?employeeId='+userId+'&password='+password+'')
         
     }
+    addUser(userId:string, password:string){
+        let userData={employeeId:userId, password:password, type:"User"}
+        return this.HttpClient.post('http://localhost:9090/userAccount/adduseraccount', userData)
+    }
 
     // Student controller
     addStudent(studentData:object){
@@ -66,6 +70,14 @@ export class APIService{
         return this.HttpClient.delete('http://localhost:9090/attendanceDetail/deleteByEmpIdDepId?employeeId='+studentId+'&departmentId='+departmentId+'')
     }
     findAttendanceByStudentId(studentId:string){
-        return this.HttpClient.get('http://localhost:9090/attendanceDetail/findAttendanceByEmpId?employeeid'+studentId+'')
+        return this.HttpClient.get('http://localhost:9090/attendanceDetail/findAttendanceByEmpId?employeeid='+studentId+'')
     }
+
+    updateAttendance(attendanceData:object){
+        // console.log(attendanceData);
+        
+        return this.HttpClient.put('http://localhost:9090/attendanceDetail/updateAttendance', attendanceData)
+    }
+
+   
 }

@@ -37,8 +37,8 @@ input.ng-touched.ng-invalid{
     margin-top: 10%;
 }
 
-:host ::ng-deep .p-dropdown{
-    width: 99% !important;
+:host ::ng-deep .p-dropdown, :host ::ng-deep.p-calendar{
+    width: 100% !important;
     margin-bottom: 20px;
 }
 /* input.ng-invalid{

@@ -32,7 +32,7 @@
             </div>
             <div>
                 <label class="col-6">CreatedDttm: </label>
-                <label class="col-6">{{departmentData.createdDttm}}</label>
+                <label class="col-6">{{departmentData.createdDttm | date :" dd/MM/yyyy, h:mm a"}}</label>
             </div>
             <div>
                 <label class="col-6">Modified Source: </label>
@@ -44,7 +44,7 @@
             </div>
             <div>
                 <label class="col-6">ModifiedDttm: </label>
-                <label class="col-6">{{departmentData.modifiedDttm}}</label>
+                <label class="col-6">{{departmentData.modifiedDttm | date :" dd/MM/yyyy, h:mm a"}}</label>
             </div>
         </div>
     </div>

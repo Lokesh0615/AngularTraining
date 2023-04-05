@@ -18,3 +18,11 @@ p-columnFilter{
 .p-datatable-scrollable-body{
     overflow-y: scroll;
 }
+.available{
+    padding: 4px, 15px;
+    color: green;
+}
+.notAvailable{
+    padding: 4px, 15px;
+    color: red;
+}

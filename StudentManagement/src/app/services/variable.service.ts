@@ -5,7 +5,8 @@ import { StudentDetailesService } from "./studentDetailes";
 export class VariableService {
     showStudentDetails = true;
     studentId!: string;
-   
+    attendanceStudentId!:string;
+    attendenceDepartmentId!:string;
 
     bloodGroupList=[
         {type:"O+"},
@@ -23,6 +24,13 @@ export class VariableService {
         { department: 'Computer scince', departmentId: 3 },
         { department: 'Electronices & Electrical', departmentId: 4 }
     ];
+
+    studentTableHeaders=[
+        {"Student Id":"studentId"}, {"First Name": "firstName"},{"Last Name": "lastName"},
+        // [ "DOB", "dob"], [ "Gender", "gender"], [ "PhoneNumber", "phoneNumber"], [ "Date Of Joining", "dateOfJoining"],
+        // [ "Created Source", "createdSource"],[ "Created Source Type", "createdSourceType"],[ "CreatedDttm", "createdDttm"],
+        // [ "Modified Source", "modifiedSource"],[ "Modified Source Type", "modifiedSourceType"],[ "ModifiedDttm", "modifiedDttm"],
+    ]
 
     formatedStudentData(studentDetailsFormvalue: StudentDetailesService) {
         let studentData = {

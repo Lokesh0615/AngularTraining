@@ -1,15 +1,17 @@
 <app-navbar>
     <div class="table-div" *ngIf="showAttendanceDetails">
         <div class="top-div">
-            <button pButton class="p-button-info">ADD</button>
+            <button pButton class="p-button-info" (click)="showDialog()" >ADD</button>
         </div>
         <p-dialog [(visible)]="dialogShow" [modal]="true" [style]="{width: '400px'}" position="center">
             <!-- <ng-template pTemplate="header" >header</ng-template> -->
             <label>Student ID: </label>
-            <input type="text" placeholder="Student Id" #checkStdId>
+            <input type="text" pInputText pKeyFilter="num" placeholder="Student Id" #checkStdId>
+            <label>Department ID: </label>
+            <input type="text" pKeyFilter="num" pInputText placeholder="Department Id" #checkDeptId>
             <ng-template pTemplate="footer">
-                <p-button label="cancel" (onClick)="dialogShow=false"></p-button>
-                <!-- <p-button label="Confirm" (onClick)="checkStudentId(checkStdId.value)"></p-button> -->
+                <p-button label="Cancel" (onClick)="dialogShow=false"></p-button>
+                <p-button label="confirm" (onClick)="checkStudentId(checkStdId.value, checkDeptId.value)"></p-button>
             </ng-template>
         </p-dialog>
         <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"
@@ -23,16 +25,16 @@
                 <tr class="table_head">
                     <th>
                         <span>Student Id
-                            <p-sortIcon pSortableColumn="employeeId" field="employeeId"></p-sortIcon>
+                            <p-sortIcon pSortableColumn="studentId" field="studentId"></p-sortIcon>
                         </span>
                         <!-- <p-columnFilter type="text" field="studentId"></p-columnFilter> -->
                     </th>
-                    <th>
+                    <!-- <th>
                         <span>Month
                             <p-sortIcon pSortableColumn="month" field="month"></p-sortIcon>
                         </span>
-                        <!-- <p-columnFilter field="firstName"></p-columnFilter> -->
-                    </th>
+                        <p-columnFilter field="firstName"></p-columnFilter>
+                    </th> -->
                     <th>
                         <span>Date
                             <p-sortIcon pSortableColumn="date" field="date"></p-sortIcon>
@@ -42,12 +44,6 @@
                     <th>
                         <span>Department Id
                             <p-sortIcon pSortableColumn="departmentId" field="departmentId"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="dob"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>Department Name
-                            <p-sortIcon pSortableColumn="departmentName" field="departmentName"></p-sortIcon>
                         </span>
                         <!-- <p-columnFilter field="dob"></p-columnFilter> -->
                     </th>
@@ -120,25 +116,27 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-attendance>
-                <tr (click)="attendanceDetailesEdit(attendance.employeeId)">
-                    <td>{{attendance.employeeId}}</td>
-                    <td>{{attendance.month}}</td>
+                <tr ((dblclick))="attendanceDetailesEdit(attendance.studentId)">
+                    
+                    <td>{{attendance.studentId}}</td>
+                    <!-- <td>{{attendance.month}}</td> -->
                     <td>{{attendance.date}}</td>
                     <td>{{attendance.departmentId}}</td>
-                    <td>{{attendance.departmentName}}</td>
-                    <td>{{attendance.available}}</td>
+                    <!-- <ng-container [ngClass]="{available: attendance.available==true }"> -->
+                    <td [ngClass]="{available: attendance.available==true }">{{attendance.available}}</td>
+                <!-- </ng-container> -->
                     <td>{{attendance.checkIn}}</td>
                     <td>{{attendance.checkout}}</td>
                     <td>{{attendance.attendanceCount}}</td>
                     <td>{{attendance.createdSource}}</td>
                     <td>{{attendance.createdSourceType}}</td>
-                    <td>{{attendance.createdDttm}}</td>
+                    <td>{{attendance.createdDttm | date :" dd/MM/yyyy, h:mm a "}}</td>
                     <td>{{attendance.modifiedSource}}</td>
                     <td>{{attendance.modifiedSourceType}}</td>
-                    <td>{{attendance.modifiedDttm}}</td>
-
+                    <td>{{attendance.modifiedDttm | date :" dd/MM/yyyy, h:mm a "}}</td>
+                <!-- </ng-container> -->
                     <td><button pButton pRipple type="button" label="Delete"
-                            (click)="deleteAttendanceRecord(attendance.employeeId, attendance.departmentId)"
+                            (click)="deleteAttendanceRecord(attendance.studentId, attendance.departmentId)"
                             class="p-button-rounded p-button-danger"></button>
                     </td>
                 </tr>

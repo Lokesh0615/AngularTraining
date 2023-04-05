@@ -1,10 +1,10 @@
 import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { APIService } from 'src/app/services/APIservice.service';
 import { ConfirmExitService } from 'src/app/services/confirmExit.service';
 import { LoginService } from 'src/app/services/login.service';
-import { StudentDetailesService } from 'src/app/services/studentDetailes';
 
 @Component({
   selector: 'app-attendance-details-edit',
@@ -18,7 +18,7 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
   attendanceData: any={};
   constructor(private activatedRoute: ActivatedRoute, private router: Router, 
               private APIService: APIService, private ConfirmExitService:ConfirmExitService,
-              private LoginService:LoginService) { }
+              private LoginService:LoginService, private MessageService:MessageService) { }
 
   @ViewChild('attendanceDetailsForm') attendanceDetailsForm!: NgForm;
   ngOnInit() {
@@ -42,17 +42,18 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
     
     this.attendanceDetailsForm.form.patchValue({
       studentId:this.attendanceData.studentId,
-      dob:this.attendanceData.dob,
-      gender:this.attendanceData.gender,
-      bloodGroup:this.attendanceData.bloodGroup,
-      phoneNumber:this.attendanceData.phoneNumber,
-      address:this.attendanceData.address,
-      department:this.attendanceData.department,
       departmentId:this.attendanceData.departmentId,
-      mailId:this.attendanceData.mailId,
-      firstName:this.attendanceData.firstName,
-      lastName:this.attendanceData.lastName,
-      dateOfJoining:this.attendanceData.dateOfJoining,
+      month:this.attendanceData.month,
+      date:this.attendanceData.date,
+      available:this.attendanceData.available,
+      checkIn:this.attendanceData.checkIn,
+      checkout:this.attendanceData.checkout,
+      attendanceCount:this.attendanceData.attendanceCount,
+      // department:this.attendanceData.department,
+      // mailId:this.attendanceData.mailId,
+      // firstName:this.attendanceData.firstName,
+      // lastName:this.attendanceData.lastName,
+      // dateOfJoining:this.attendanceData.dateOfJoining,
       createdSource:this.attendanceData.createdSource,
       createdSourceType:this.attendanceData.createdSourceType,
       createdDttm:this.attendanceData.createdDttm,
@@ -64,8 +65,8 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.router.navigate(['Attendance'])
-    this.LoginService.setChildComponentRefresh(false)
+      this.router.navigateByUrl('/Attendance')
+      this.LoginService.setChildComponentRefresh(false)
   }
   canExit(){
     if(this.attendanceDetailsForm.dirty && this.attendanceDetailsForm.touched){
@@ -81,11 +82,23 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
   }
 
   onSubmint(){
-    this.APIService.updateStudentDetails(this.attendanceDetailsForm.value).subscribe((results)=>{}, (error)=>{
-      // console.log(error);
+    console.log("submint");
+    
+    this.MessageService.add({severity:'success', summary:'success Message', detail:'Student'+this.StudentId+' detailes added successfully'});
+
+    this.attendanceDetailsForm.form.patchValue({
+      // modifiedSource:this.LoginService.logged_in_user,
+      // modifiedSourceType:this.LoginService.logged_in_user,
+      modifiedDttm:new Date().toISOString()
+    })
+    this.APIService.updateAttendance(this.attendanceDetailsForm.value).subscribe((results)=>{}, (error)=>{
+      console.log(error);
   });
+  console.log(this.attendanceDetailsForm.value);
+  
     // this.router.navigateByUrl('/Attendance');
     this.ngOnDestroy()
   }
+ 
 }
 

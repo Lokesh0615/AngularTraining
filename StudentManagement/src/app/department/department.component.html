@@ -1,5 +1,6 @@
 <app-navbar>
     <div *ngIf="!showDepartmentDetails && !childComponentOpend">
+        <p-toast></p-toast>
         <p-table [value]="departmentsData" styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="500px">
             <ng-template pTemplate="header">
                 <tr class="table_head">
@@ -73,10 +74,10 @@
                     <td>{{departmentData.managerId}}</td>
                     <td>{{departmentData.createdSource }}</td>
                     <td>{{departmentData.createdSourceType}}</td>
-                    <td>{{departmentData.createdDttm}}</td>
+                    <td>{{departmentData.createdDttm | date :" dd/MM/yyyy, h:mm a"}}</td>
                     <td>{{departmentData.modifiedSource}}</td>
                     <td>{{departmentData.modifiedSourceType}}</td>
-                    <td>{{departmentData.modifiedDttm}}</td>
+                    <td>{{departmentData.modifiedDttm | date :" dd/MM/yyyy, h:mm a"}}</td>
                 </tr>
                 <ng-template>
                     <tr #noStudentData>
@@ -91,4 +92,5 @@
     <div *ngIf="childComponentOpend">
     <router-outlet (deactivate)="ngOnInit();"></router-outlet>
     </div>
+   
 </app-navbar>

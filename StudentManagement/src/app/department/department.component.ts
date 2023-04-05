@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { APIService } from '../services/APIservice.service';
 import { LoginService } from '../services/login.service';
 
@@ -13,7 +14,7 @@ export class DepartmentComponent implements OnInit{
   departmentsData:{}[]=[];
   showDepartmentDetails!:boolean;
   childComponentOpend!:boolean;;
-  constructor(private APIService:APIService, private route:Router , private activatedRoute:ActivatedRoute, private LoginService:LoginService){}
+  constructor(private APIService:APIService, private route:Router , private MessageService:MessageService, private activatedRoute:ActivatedRoute, private LoginService:LoginService){}
 
   ngOnInit(): void {
     console.log("parent open");
@@ -23,8 +24,10 @@ export class DepartmentComponent implements OnInit{
     console.log(this.showDepartmentDetails);
     console.log(this.childComponentOpend);
     
-    
+    this.MessageService.add({severity:'error', summary:'error Message', detail:'Student Id already Exists'});
+
     this.getAllDepartment()
+  
    
     
   }

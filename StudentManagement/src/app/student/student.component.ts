@@ -8,7 +8,8 @@ import { VariableService } from '../services/variable.service';
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
-  styleUrls: ['./student.component.css']
+  styleUrls: ['./student.component.css'],
+
 })
 export class StudentComponent implements OnInit {
   title="StudentTable"
@@ -16,7 +17,7 @@ export class StudentComponent implements OnInit {
   studentsData:StudentDetailesService[]=[];
   studentsDataLength!:number;
   showStudentDetails!:boolean;
-  
+  studentTableHeaders=this.VariableService.studentTableHeaders;
   @ViewChild('checkStdId') checkStdId!:ElementRef;
   constructor(private APIService:APIService, private MessageService:MessageService, private route:Router ,
                private activatedRoute:ActivatedRoute, private VariableService:VariableService,
@@ -34,16 +35,20 @@ export class StudentComponent implements OnInit {
   }
   getAllStudentDetailes(){
     this.studentsData=[]
+    console.log(this.studentsData);
+    
     this.APIService.findAllStudents().subscribe((results)=>{
       for(let result of Object.values(results)){
         console.log(result);
-        
+        // this.studentsData=results;
         let data=this.VariableService.getFormatedStudentData(result)
         this.studentsData.push(data)
         // console.log(data);
         
       }
     })
+    console.log(this.studentsData);
+    
   }
 
   checkStudentId(stdId:string){
@@ -59,6 +64,7 @@ export class StudentComponent implements OnInit {
       this.MessageService.add({severity:'error', summary:'error Message', detail:'Student Id already Exists'});
     }
   }
+
 
   deleteByStdId(stdId:number){
     this.ConfirmationService.confirm({

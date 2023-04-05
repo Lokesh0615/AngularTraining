@@ -95,4 +95,8 @@ export class LoginService {
         console.log(localStorage.length);
         
       }
+
+      signUpUser(){
+        
+      }
 }

@@ -4,28 +4,25 @@
             <div>
                 <!-- class="col-12 sm:col-12 md:col-6 lg:col-6" -->
                 <label class="col-6">Student ID: </label>
-                <label class="col-6">{{attendanceData.employeeId }} </label>
+                <label class="col-6">{{attendanceData.studentId }} </label>
             </div>
-            <div>
+            <!-- <div>
                 <label class="col-6">Month: </label>
                 <label class="col-6">{{attendanceData.month}}</label>
-            </div>
-            <div>
-                <label class="col-6">Date: </label>
-                <label class="col-6">{{attendanceData.Date}}</label>
-            </div>
+            </div> -->
+           
             <div>
                 <label class="col-6">Department Id: </label>
                 <label class="col-6">{{attendanceData.departmentId}}</label>
             </div>
             <div>
-                <label class="col-6">Department Name: </label>
-                <label class="col-6">{{attendanceData.departmentName}}</label>
-             <div>
+                <label class="col-6">Date: </label>
+                <label class="col-6">{{attendanceData.Date}}</label>
+            </div>
+           
+            <div>
                 <label class="col-6">Available: </label>
                 <label class="col-6">{{attendanceData.available}}</label>
-            </div>
-               <label class="col-6">{{attendanceData.phoneNumber}}</label>
             </div>
             <div>
                 <label class="col-6">CheckIn: </label>
@@ -35,13 +32,14 @@
                 <label class="col-6">Checkout: </label>
                 <label class="col-6">{{attendanceData.checkout}}</label>
             </div>
-            
-        </div>
-        <div class="col-12  md:col-12 lg:col-6 field eachColumn">
             <div>
                 <label class="col-6">Attendance Count: </label>
                 <label class="col-6">{{attendanceData.attendanceCount}}</label>
             </div>
+
+        </div>
+        <div class="col-12  md:col-12 lg:col-6 field eachColumn">
+           
             <div>
                 <label class="col-6">Created Source: </label>
                 <label class="col-6">{{attendanceData.createdSource}}</label>
@@ -52,7 +50,7 @@
             </div>
             <div>
                 <label class="col-6">CreatedDttm: </label>
-                <label class="col-6">{{attendanceData.createdDttm}}</label>
+                <label class="col-6">{{attendanceData.createdDttm | date :" dd/MM/yyyy, h:mm a "}}</label>
             </div>
             <div>
                 <label class="col-6">Modified Source: </label>
@@ -64,79 +62,96 @@
             </div>
             <div>
                 <label class="col-6">ModifiedDttm: </label>
-                <label class="col-6">{{attendanceData.modifiedDttm}}</label>
+                <label class="col-6">{{attendanceData.modifiedDttm | date :" dd/MM/yyyy, h:mm a "}}</label>
             </div>
         </div>
     </div>
     <button pButton label="Edit" (click)="editStudentDetailes()"></button>
     <button pButton label="Back" (click)="ngOnDestroy()"></button>
 </div>
-<div class="studentDetailsContainer" [ngStyle]="{'display': showAttendanceDetailes === false ? 'block' : 'none' }">
+<div class="attendanceDetailsForm" [ngStyle]="{'display': showAttendanceDetailes === false ? 'block' : 'none' }">
     <!-- make form validation method as a service -->
     <!-- work on local and global css -->
-    <form #studentDetailsForm="ngForm">
-        <div class="formgrid grid">
+    <form   #attendanceDetailsForm="ngForm"   >
+        <div class=" grid" >
 
-            <div class="col-12  md:col-6 lg:col-4 field eachColumn">
+            <div class="col-12  md:col-6 lg:col-6 field eachColumn">
                 <label>StudentId </label>
-                <input type="text" pInputText id="studentId" name="studentId" placeholder="studentId" ngModel
-                    required [disabled]="true">
-                <label>First Name<span>*</span> </label>
-                <input type="text" pInputText pKeyFilter="alpha" id="firstName" name="firstName"
-                    placeholder="firstName" ngModel required>
-                <label>Last Name<span>*</span></label>
-                <input type="text" pInputText pKeyFilter="alpha" id="lastName" name="lastName"
-                    placeholder="lastName" ngModel required>
-                <label>DOB<span>*</span></label>
-                <input type="date" pInputText id="dob" name="dob" placeholder="dob" ngModel required>
-                <label>Gender<span>*</span></label>
-                <input type="text" pInputText id="gender" name="gender" placeholder="gender" ngModel required>
-                <label>Blood Group</label>
-                <input type="text" pInputText id="bloodGroup" name="bloodGroup" placeholder="bloodGroup" ngModel>
+                <input type="text" pInputText  id="studentId" name="studentId" placeholder="studentId" ngModel readonly>
+
+                <label>Department Id</label>
+                <input type="text" pInputText  id="departmentId" name="departmentId" placeholder="departmentId" ngModel readonly >
+                <!-- <p-dropdown  ngModel #departmentId="ngModel" dataKey="departmentId"
+                             placeholder="DepartmentId" name="departmentId">
+                </p-dropdown> -->
+                <!-- <small  *ngIf="departmentId.invalid && departmentId.touched" id="username-help" class="p-error">Departmnet Id is required.</small> -->
+
+                <!-- <label>Month<span>*</span></label>
+                <input type="month" pInputText  id="month" name="month" placeholder="month" ngModel required #month="ngModel">
+                <small  *ngIf="month.invalid && month.touched" id="username-help" class="p-error">Month is required</small> -->
+
+                <label>Date<span>*</span></label>
+                <!-- <input type="date" pInputText  id="date" name="date" placeholder="date" ngModel required #date="ngModel"> -->
+                <p-calendar [showTime]="true" hourFormat="12" id="date" name="date" [timeOnly]="true" ngModel [required]="true" #date="ngModel" inputId="time"></p-calendar>
+                <small  *ngIf="date.invalid && date.touched" id="username-help" class="p-error">Date is required</small>
+
+                <label>Available<span>*</span></label>
+                <input type="text" pInputText  id="available" name="available" placeholder="available" ngModel required #available="ngModel">
+                <small  *ngIf="available.invalid && available.touched" id="username-help" class="p-error">Date is required</small>
+
+                <label>CheckIn<span>*</span></label>
+                <input type="text" pInputText  id="checkIn" name="checkIn" placeholder="checkIn" ngModel required #checkIn="ngModel">
+                <small  *ngIf="checkIn.invalid && checkIn.touched" id="username-help" class="p-error">Date is required</small>
+
+                <label>Checkout<span>*</span></label>
+                <input type="text" pInputText  id="checkout" name="checkout" placeholder="checkout" ngModel required #checkout="ngModel">
+                <small  *ngIf="checkout.invalid && checkout.touched" id="username-help" class="p-error">Date is required</small>
+
+               
+                <label>Attendance Count<span>*</span></label>
+                <input type="text" pInputText  id="attendanceCount" name="attendanceCount" placeholder="attendanceCount" ngModel required #attendanceCount="ngModel">
+                <small  *ngIf="attendanceCount.invalid && attendanceCount.touched" id="username-help" class="p-error">Date is required</small>
+
 
             </div>
-            <div class="col-12 md:col-6 lg:col-4 field eachColumn">
-                <label>PhoneNumber</label>
-                <input type="text" pInputText pKeyFilter="num" id="phoneNumber" name="phoneNumber"
-                    placeholder="phoneNumber" ngModel>
-                <label>Address</label>
-                <input type="text" pInputText id="address" name="address" placeholder="address" ngModel>
-                <label>Department<span>*</span></label>
-                <input type="text" pInputText id="department" name="department" placeholder="department" ngModel
-                    required>
-                <label>Department Id<span>*</span></label>
-                <input type="text" pInputText id="departmentId" name="departmentId" placeholder="departmentId"
-                    ngModel required>
-                <label>Mail Id<span>*</span></label>
-                <input type="text" pInputText id="mailId" name="mailId" placeholder="mailId" ngModel required>
-                <label>Date Of Joining<span>*</span></label>
-                <input type="date" pInputText id="dateOfJoining" name="dateOfJoining" placeholder="dateOfJoining"
-                    ngModel required>
-            </div>
-            <div class="col-12 md:col-6 lg:col-4 field eachColumn">
+            <div class="col-12  md:col-6 lg:col-6 field eachColumn">
+
+               
                 <label>CreatedSource</label>
-                <input type="text" pInputText id="createdSource" name="createdSource" placeholder="createdSource"
-                    ngModel [disabled]="true">
+                <input type="text" pInputText  id="createdSource" name="createdSource"  placeholder="createdSource" ngModel readonly>
+                
+               
                 <label>CreatedSourceType</label>
-                <input type="text" pInputText id="createdSourceType" name="createdSourceType"
-                    placeholder="createdSourceType" ngModel [disabled]="true">
-                <label>CreatedDttm</label>
-                <input type="text" pInputText id="createdDttm" name="createdDttm" placeholder="createdDttm" ngModel [disabled]="true">
-                <label>ModifiedSource</label>
-                <input type="text" pInputText id="modifiedSource" name="modifiedSource" placeholder="modifiedSource"
-                    ngModel [disabled]="true">
-                <label>ModifiedSourceType</label>
-                <input type="text" pInputText id="modifiedSourceType" name="modifiedSourceType"
-                    placeholder="modifiedSourceType" ngModel [disabled]="true">
-                <label>ModifiedDttm</label>
-                <input type="text" pInputText id="modifiedDttm" name="modifiedDttm" placeholder="modifiedDttm"
-                    ngModel [disabled]="true">
-            </div>
+                <input type="text" pInputText  id="createdSourceType" name="createdSourceType"  placeholder="createdSourceType" ngModel readonly >
 
+                <label>CreatedDttm</label>
+                <input type="text" pInputText  id="createdDttm" name="createdDttm"   placeholder="createdDttm" ngModel readonly >
+
+                <label>ModifiedSource</label>
+                <input type="text" pInputText  id="modifiedSource" name="modifiedSource" placeholder="modifiedSource" ngModel   readonly>
+
+                <label>ModifiedSourceType</label>
+                <input type="text" pInputText  id="modifiedSourceType" name="modifiedSourceType"  placeholder="modifiedSourceType" ngModel   readonly >
+
+                <label>ModifiedDttm</label>
+                <input type="text" pInputText  id="modifiedDttm" name="modifiedDttm" placeholder="modifiedDttm" ngModel readonly>
+
+
+            </div>
+           
+             
+               
+            
 
         </div>
-        <button type="submit" class="btn btn-success" (click)="onSubmint()">Submit</button>
-        <button type="button" class="btn btn-info" (click)="canExit()">Cancel</button>
+        <div class="buttonDiv">
+            <button type="submit" class="p-button-primary" pButton label="Update" (click)="onSubmint()"></button>
+            <button type="cancel" class="p-button-warning" pButton  label="Cancel" (click)="canExit()"></button>
+        </div>
+        
+        
 
     </form>
+    <p-toast></p-toast>
+
 </div>

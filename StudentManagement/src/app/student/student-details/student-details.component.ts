@@ -19,6 +19,9 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
   createdSource="admin";
   createdSourceType='admin';
   createdDttm=new Date();
+  modifiedSource:string='admin';
+  modifiedSourceType:string='admin';
+  modifiedDttm='';
   
   bloodGroupList=this.VariableService.bloodGroupList;
   departmentList=this.VariableService.departmentList;
@@ -70,10 +73,10 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
   canExit(){
     if(this.studentDetailsForm.dirty && this.studentDetailsForm.touched){
       if(this.ConfirmExitService.canExit()){
-        this.router.navigateByUrl('/Student')
+        this.router.navigateByUrl('/AttendanceDetails')
       }
     }else{
-      this.router.navigateByUrl('/Student')
+      this.router.navigateByUrl('/AttendanceDetails')
     }
   }
 }

@@ -29,6 +29,8 @@ import { InputTextModule } from 'primeng/inputtext'
 import {PasswordModule} from 'primeng/password';
 import {StyleClassModule} from 'primeng/styleclass';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+// import { BrowserModule } from '@angular/platform-browser'
+
 import {ButtonModule} from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
 import { BadgeModule } from 'primeng/badge';
@@ -68,8 +70,8 @@ const appRoute:Routes=[
               children:[{path:"DepartmentDetailes/:id", component:DepartmentDetailsComponent, canActivate:[AuthGuardService]}]
   },
   {path:"Attendance", component:AttendanceComponent, 
-    children:[{ path:"AttendanceDetails/:id", component:AttendanceDetailsEditComponent}
-
+    children:[{ path:"AttendanceDetails/:id", component:AttendanceDetailsEditComponent},
+              { path:"AttendanceDetails", component:AttendanceDetailsComponent}
     ]
   },
   // {path:'Home/Users', component:UsersComponent},

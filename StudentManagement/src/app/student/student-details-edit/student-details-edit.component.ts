@@ -1,6 +1,7 @@
 import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { APIService } from 'src/app/services/APIservice.service';
 import { ConfirmExitService } from 'src/app/services/confirmExit.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -8,14 +9,24 @@ import { StudentDetailesService } from 'src/app/services/studentDetailes';
 import { VariableService } from 'src/app/services/variable.service';
 import { StudentComponent } from '../student.component';
 
+
+
 @Component({
   selector: 'app-student-details-edit',
   templateUrl: './student-details-edit.component.html',
-  styleUrls: ['./student-details-edit.component.css']
+  styleUrls: ['./student-details-edit.component.css'],
+  
 })
 export class StudentDetailsEditComponent implements OnInit, OnDestroy {
   showStudentDetailes = true;
   // studentDetailesEdit = false;
+
+  bloodGroupList=this.VariableService.bloodGroupList;
+  departmentList=this.VariableService.departmentList;
+  
+  genderSelected:string|null=null
+
+  createdDttm=new Date();
   StudentId!: any;
   studentData: any={};
   modifiedSource:string='';
@@ -24,11 +35,14 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
   
   constructor(private activatedRoute: ActivatedRoute, private router: Router, 
               private APIService: APIService, private ConfirmExitService:ConfirmExitService,
-              private LoginService:LoginService,  private VariableService:VariableService, private StudentComponent:StudentComponent) { }
+              private LoginService:LoginService,  private VariableService:VariableService, private StudentComponent:StudentComponent,
+              private MessageService:MessageService) { }
 
   @ViewChild('studentDetailsForm', {static:false}) studentDetailsForm!: NgForm;
   ngOnInit() {
     //if the parameter value changes then use Obeservables
+    this.MessageService.add({severity:'success', summary:'success Message', detail:'Student'+this.StudentId+' detailes added successfully', life:3000});
+
     this.activatedRoute.paramMap.subscribe((parm) => {
       this.StudentId = parm.get('id')?.substring(1);
       this.APIService.findByStudentId(this.StudentId).subscribe((results) => {
@@ -44,6 +58,7 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
     this.showStudentDetailes = false;
     // this.studentDetailesEdit = true;
     console.log("ad");
+    console.log(this.studentDetailsForm);
     
     console.log(this.studentData.mailId);
     console.log(this.studentData.gender);
@@ -90,18 +105,22 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
     // this.VariableService.modifiedSource=this.LoginService.logged_in_user;
     // this.VariableService.modifiedSourceType=this.LoginService.logged_in_user;
     // this.VariableService.modifiedDttm=new Date();
+    this.MessageService.add({severity:'success', summary:'success Message', detail:'Student'+this.StudentId+' detailes added successfully'});
+
     this.studentDetailsForm.form.patchValue({
-      modifiedSource:'loeks',
-      modifiedSourceType:'lokehs',
+      // modifiedSource:this.LoginService.logged_in_user,
+      // modifiedSourceType:this.LoginService.logged_in_user,
       modifiedDttm:new Date().toISOString()
     })
     console.log(this.studentDetailsForm.value);
 
-    this.APIService.updateStudentDetails(this.VariableService.formatedStudentData(this.studentDetailsForm.value)).subscribe((results)=>{}, (error)=>{
+    this.APIService.updateStudentDetails(this.studentDetailsForm.value).subscribe((results)=>{}, (error)=>{
       // console.log(this.studentDetailsForm.value);
       
       // console.log(error);
   });
-    // this.router.navigateByUrl('/Student');
+    this.router.navigateByUrl('/Student');
+    this.ngOnDestroy()
+
   }
 }

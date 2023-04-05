@@ -1,1 +1,79 @@
-<p>attendanceDetails works!</p>
+<div class="studentDetailsContainer">
+    <form   #studentAttendanceForm="ngForm"   >
+        <div class="formgrid grid" >
+
+            <div class="col-12  md:col-6 lg:col-6 field eachColumn">
+                <label>StudentId </label>
+                <input type="text" pInputText  id="studentId" name="studentId" placeholder="studentId" ngModel [(ngModel)]="studentId" readonly>
+
+                <label>Department Id</label>
+                <input type="text" pInputText  id="departmentId" name="departmentId" placeholder="departmentId" ngModel [(ngModel)]="departmentId" readonly >
+                <!-- <p-dropdown  ngModel #departmentId="ngModel" dataKey="departmentId"
+                             placeholder="DepartmentId" name="departmentId">
+                </p-dropdown> -->
+                <!-- <small  *ngIf="departmentId.invalid && departmentId.touched" id="username-help" class="p-error">Departmnet Id is required.</small> -->
+
+                <label>Date<span>*</span></label>
+                <!-- <input type="date" pInputText  id="date" name="date" placeholder="date" ngModel required #date="ngModel"> -->
+                <p-calendar [showTime]="true" hourFormat="12" id="date" name="date" [timeOnly]="true" ngModel [required]="true" #date="ngModel" inputId="time"></p-calendar>
+
+                <small  *ngIf="date.invalid && date.touched" id="username-help" class="p-error">Date is required</small>
+
+                <label>Available<span>*</span></label>
+                <input type="text" pInputText  id="available" name="available" placeholder="available" ngModel required #available="ngModel">
+                <small  *ngIf="available.invalid && available.touched" id="username-help" class="p-error">Date is required</small>
+
+                <label>CheckIn<span>*</span></label>
+                <input type="text" pInputText  id="checkIn" name="checkIn" placeholder="checkIn" ngModel required #checkIn="ngModel">
+                <small  *ngIf="checkIn.invalid && checkIn.touched" id="username-help" class="p-error">Date is required</small>
+
+                <label>Checkout<span>*</span></label>
+                <input type="text" pInputText  id="checkout" name="checkout" placeholder="checkout" ngModel required #checkout="ngModel">
+                <small  *ngIf="checkout.invalid && checkout.touched" id="username-help" class="p-error">Date is required</small>
+
+               
+                <label>Attendance Count<span>*</span></label>
+                <input type="text" pInputText  id="attendanceCount" name="attendanceCount" placeholder="attendanceCount" ngModel required #attendanceCount="ngModel">
+                <small  *ngIf="attendanceCount.invalid && attendanceCount.touched" id="username-help" class="p-error">Date is required</small>
+
+
+              
+
+            </div>
+            <div class="col-12  md:col-6 lg:col-6 field eachColumn">
+
+              
+                <label>CreatedSource</label>
+                <input type="text" pInputText  id="createdSource" name="createdSource"  placeholder="createdSource" ngModel readonly>
+                
+               
+                <label>CreatedSourceType</label>
+                <input type="text" pInputText  id="createdSourceType" name="createdSourceType"  placeholder="createdSourceType" ngModel readonly >
+
+                <label>CreatedDttm</label>
+                <input type="text" pInputText  id="createdDttm" name="createdDttm"   placeholder="createdDttm" ngModel readonly >
+
+                <label>ModifiedSource</label>
+                <input type="text" pInputText  id="modifiedSource" name="modifiedSource" placeholder="modifiedSource" ngModel   readonly>
+
+                <label>ModifiedSourceType</label>
+                <input type="text" pInputText  id="modifiedSourceType" name="modifiedSourceType"  placeholder="modifiedSourceType" ngModel   readonly >
+
+                <label>ModifiedDttm</label>
+                <input type="text" pInputText  id="modifiedDttm" name="modifiedDttm" placeholder="modifiedDttm" ngModel readonly>
+
+
+            </div>
+
+
+        </div>
+        <p-toast></p-toast>
+        <div class="buttonDiv">
+            <button type="submit" class="p-button-primary" pButton label="Save"></button>
+            <button type="cancel" class="p-button-warning" pButton  label="Cancel" (click)="canExit()"></button>
+        </div>
+        
+        
+
+    </form>
+</div>   
