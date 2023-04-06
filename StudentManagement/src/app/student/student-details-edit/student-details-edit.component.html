@@ -99,62 +99,62 @@
                 <label>StudentId </label>
 
                 <input type="text" pInputText id="studentId" name="studentId" placeholder="studentId" ngModel required
-                    readonly>
+                    readonly  ng-disabled="all" [(ngModel)]="studentDetails.studentId" disabled>
                 <label>First Name<span>*</span> </label>
-                <input type="text" pInputText pKeyFilter="alpha" id="firstName" name="firstName" placeholder="firstName"
-                    ngModel required>
+                <input type="text" pInputText   name="firstName" placeholder="firstName" ngModel [(ngModel)]="studentDetails.firstName"
+                     required>
                 <label>Last Name<span>*</span></label>
-                <input type="text" pInputText pKeyFilter="alpha" id="lastName" name="lastName" placeholder="lastName"
-                    ngModel required>
+                <input type="text" pInputText  name="lastName" placeholder="lastName" ngModel [(ngModel)]="studentDetails.lastName"
+                     required>
                 <label>DOB<span>*</span></label>
                 <!-- <input type="date" pInputText id="dob" name="dob" placeholder="dob" ngModel required> -->
-                <p-calendar  [maxDate]="createdDttm"  ngModel name="dob" [readonlyInput]="true" #dob="ngModel" [required]="true" ></p-calendar>
+                <p-calendar  [maxDate]="createdDttm"  ngModel name="dob"  #dob="ngModel" [required]="true" [(ngModel)]="studentDetails.dob" ></p-calendar>
 
                 <label>Gender<span>*</span></label>
                 <div class="flex ">
                     <div class="flex align-items-center">
-                        <p-radioButton name="gender" value="male" [(ngModel)]="genderSelected" inputId="male" ngModel
-                            #gender="ngModel"></p-radioButton>
+                        <p-radioButton name="gender" value="male" [(ngModel)]="studentDetails.gender" inputId="male" ngModel
+                            #genderRequired="ngModel"></p-radioButton>
                         <label for="male" class="ml-2">Male</label>
                     </div>
 
                     <div class="flex align-items-center">
-                        <p-radioButton name="gender" value="female" [(ngModel)]="genderSelected" inputId="female"
-                            ngModel #gender="ngModel"></p-radioButton>
+                        <p-radioButton name="gender" value="female" [(ngModel)]="studentDetails.gender" inputId="female"
+                            ngModel #genderRequired="ngModel"></p-radioButton>
                         <label for="female" class="ml-2">Female</label>
                     </div>
                     <div class="flex align-items-center">
-                        <p-radioButton name="gender" value="others" [(ngModel)]="genderSelected" inputId="others"
-                            ngModel #gender="ngModel"></p-radioButton>
+                        <p-radioButton name="gender" value="others" [(ngModel)]="studentDetails.gender" inputId="others"
+                            ngModel #genderRequired="ngModel"></p-radioButton>
                         <label for="others" class="ml-2">Others</label>
                     </div>
                 </div>
-                <small *ngIf="gender.invalid && gender.touched" id="username-help" class="p-error">Gender is
+                <small *ngIf="genderRequired.invalid && genderRequired.touched" id="username-help" class="p-error">Gender is
                     required.</small>
 
             </div>
             <div class="col-12 sm:col-12 md:col-6 lg:col-3 field eachColumn">
                 <label>Blood Group</label>
-                <p-dropdown [options]="bloodGroupList" ngModel optionLabel="type" placeholder="bloodGroup" dataKey="studentData.bloodGroup"
+                <p-dropdown [options]="bloodGroupList" ngModel optionLabel="type" placeholder="bloodGroup" dataKey="studentDetails.bloodGroup" [(ngModel)]="bloodGroupOption"
                     name="bloodGroup">
                 </p-dropdown>
 
                 <label>PhoneNumber</label>
-                <input type="text" pInputText pKeyFilter="num" id="phoneNumber" name="phoneNumber"
-                    placeholder="phoneNumber" [maxLength]="10" [minlength]="10" ngModel>
+                <input type="text" pInputText  id="phoneNumber" name="phoneNumber"
+                    placeholder="phoneNumber" [maxLength]="10" [minlength]="10" ngModel  [(ngModel)]="studentDetails.phoneNumber">
 
                 <label>Address</label>
-                <input type="text" pInputText id="address" name="address" placeholder="address" ngModel>
+                <input type="text" pInputText id="address" name="address" placeholder="address" ngModel [(ngModel)]="studentDetails.address">
 
                 <label>Mail Id<span>*</span></label>
-                <input type="text" pInputText id="mailId" name="mailId" placeholder="mailId" ngModel #mailId="ngModel"
+                <input type="text" pInputText id="mailId" name="mailId" placeholder="mailId" ngModel #mailId="ngModel" [(ngModel)]="studentDetails.mailId"
                     required email="true">
                 <small *ngIf="mailId.invalid && mailId.touched" id="username-help" class="p-error">Mail Id is
                     required.</small>
 
                 <label>Department<span>*</span></label>
-                <p-dropdown [options]="departmentList" ngModel #department="ngModel" optionLabel="department"
-                    placeholder="Department" name="department"  [required]="true" dataKey="studentData.department"
+                <p-dropdown [options]="departmentList" ngModel #department="ngModel" optionLabel="department" [(ngModel)]="studentDetails.department"
+                    placeholder="Department" name="department"  [required]="true" dataKey="studentDetails.department"
                     >
                 </p-dropdown>
 
@@ -163,8 +163,8 @@
 
                 <label>Department Id<span>*</span></label>
                 <!-- <input type="text" pInputText  id="departmentId" name="departmentId" placeholder="departmentId" ngModel required #departmentId="ngModel" > -->
-                <p-dropdown [options]="departmentList" ngModel #departmentId="ngModel" optionLabel="departmentId"
-                    placeholder="DepartmentId" name="departmentId"  [required]="true" dataKey="studentData.departmentId">
+                <p-dropdown [options]="departmentList" ngModel #departmentId="ngModel" optionLabel="departmentId" [(ngModel)]="studentDetails.departmentId"
+                    placeholder="DepartmentId" name="departmentId"  [required]="true" dataKey="studentDetails.departmentId">
                 </p-dropdown>
                 <small *ngIf="departmentId.invalid && departmentId.touched" id="username-help"
                     class="p-error">Departmnet Id is required.</small>
@@ -172,29 +172,29 @@
                 <label>Date Of Joining<span>*</span></label>
                 <!-- <input type="date" pInputText id="dateOfJoining" name="dateOfJoining" placeholder="dateOfJoining"
                     ngModel required> -->
-                <p-calendar  [minDate]="createdDttm"  ngModel name="dateOfJoining" [readonlyInput]="true" #dateOfJoining="ngModel" [required]="true" ></p-calendar>
+                <p-calendar  [minDate]="createdDttm"  ngModel name="dateOfJoining" [readonlyInput]="true" #dateOfJoining="ngModel" [required]="true" [(ngModel)]="studentDetails.dateOfJoining" ></p-calendar>
 
 
                 <label>CreatedSource</label>
-                <input type="text" pInputText id="createdSource" name="createdSource" placeholder="createdSource"
+                <input type="text" pInputText id="createdSource" name="createdSource" placeholder="createdSource" [(ngModel)]="studentDetails.createdSource"
                     ngModel readonly>
-                <label>CreatedSourceType</label>
-                <input type="text" pInputText id="createdSourceType" name="createdSourceType"
+                <label>CreatedSourceType</label> 
+                <input type="text" pInputText id="createdSourceType" name="createdSourceType" [(ngModel)]="studentDetails.createdSourceType"
                     placeholder="createdSourceType" ngModel readonly>
                 <label>CreatedDttm</label>
-                <input type="text" pInputText id="createdDttm" name="createdDttm" placeholder="createdDttm" ngModel
+                <input type="text" pInputText id="createdDttm" name="createdDttm" placeholder="createdDttm" ngModel [(ngModel)]="studentDetails.createdDttm"
                     readonly>
 
             </div>
             <div class="col-12 sm:col-12 md:col-6 lg:col-3 field eachColumn">
                 <label>ModifiedSource</label>
-                <input type="text" pInputText id="modifiedSource" name="modifiedSource" placeholder="modifiedSource"
+                <input type="text" pInputText id="modifiedSource" name="modifiedSource" placeholder="modifiedSource" [(ngModel)]="studentDetails.modifiedSource"
                     ngModel [(ngModel)]="modifiedSource" readonly>
                 <label>ModifiedSourceType</label>
                 <input type="text" pInputText id="modifiedSourceType" name="modifiedSourceType"
-                    placeholder="modifiedSourceType" ngModel [(ngModel)]="modifiedSourceType" readonly>
+                    placeholder="modifiedSourceType" [disabled]="true" [(ngModel)]="studentDetails.modifiedSourceType" readonly >
                 <label>ModifiedDttm</label>
-                <input type="text" pInputText id="modifiedDttm" name="modifiedDttm" placeholder="modifiedDttm" ngModel
+                <input type="text" pInputText id="modifiedDttm" name="modifiedDttm" placeholder="modifiedDttm" ngModel [(ngModel)]="studentDetails.modifiedDttm"
                     readonly>
                 <div class="buttonDiv">
                     <button type="submit" pButton class="p-button-primary" label="Update"

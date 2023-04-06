@@ -28,6 +28,7 @@ export class StudentComponent implements OnInit {
   ngOnInit(): void {
     this.getAllStudentDetailes()
     this.showStudentDetails=true;
+    
   }
   showDialog(){
     this.dialogShow=true;

@@ -12,6 +12,7 @@ import { LoginService } from '../services/login.service';
 export class DepartmentComponent implements OnInit{
 
   departmentsData:{}[]=[];
+  departmentDataLength!:number;
   showDepartmentDetails!:boolean;
   childComponentOpend!:boolean;;
   constructor(private APIService:APIService, private route:Router , private MessageService:MessageService, private activatedRoute:ActivatedRoute, private LoginService:LoginService){}
@@ -24,7 +25,7 @@ export class DepartmentComponent implements OnInit{
     console.log(this.showDepartmentDetails);
     console.log(this.childComponentOpend);
     
-    this.MessageService.add({severity:'error', summary:'error Message', detail:'Student Id already Exists'});
+    // this.MessageService.add({severity:'error', summary:'error Message', detail:'Student Id already Exists'});
 
     this.getAllDepartment()
   
@@ -34,6 +35,7 @@ export class DepartmentComponent implements OnInit{
   getAllDepartment(){
     this.APIService.getAllDepartmnet().subscribe((results)=>{
       this.departmentsData=Object.values(results)
+      this.departmentDataLength=this.departmentsData.length;
     })
   }
 

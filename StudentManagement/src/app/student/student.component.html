@@ -1,4 +1,4 @@
-<app-navbar>
+<!-- <app-navbar> -->
     <div class="table-div" *ngIf="showStudentDetails">
         <div class="top-div">
             <button pButton class="p-button-info" (click)="showDialog()">ADD</button>
@@ -134,7 +134,7 @@
 
                 </tr>
                 <ng-template *ngIf="studentsDataLength<=0; ">
-                    <tr #noStudentData>
+                    <tr >
                         <td colspan="16">nodata</td>
                         <div style="height: 100px;"></div>
                     </tr>
@@ -147,4 +147,4 @@
         <router-outlet (deactivate)="ngOnInit()"></router-outlet>
     </div>
 
-</app-navbar>
+<!-- </app-navbar> -->

@@ -1,4 +1,4 @@
-<app-navbar>
+<!-- <app-navbar> -->
     <div *ngIf="!showDepartmentDetails && !childComponentOpend">
         <p-toast></p-toast>
         <p-table [value]="departmentsData" styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="500px">
@@ -80,7 +80,7 @@
                     <td>{{departmentData.modifiedDttm | date :" dd/MM/yyyy, h:mm a"}}</td>
                 </tr>
                 <ng-template>
-                    <tr #noStudentData>
+                    <tr *ngIf="departmentDataLength<=0;" >
                         <td colspan="16">nodata</td>
                         <div style="height: 100px;"></div>
                     </tr>
@@ -93,4 +93,4 @@
     <router-outlet (deactivate)="ngOnInit();"></router-outlet>
     </div>
    
-</app-navbar>
+<!-- </app-navbar> -->

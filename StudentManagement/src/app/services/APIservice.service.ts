@@ -79,5 +79,8 @@ export class APIService{
         return this.HttpClient.put('http://localhost:9090/attendanceDetail/updateAttendance', attendanceData)
     }
 
+    addAttendanceDetails(attendanceData:object){
+        return this.HttpClient.post('http://localhost:9090/attendanceDetail/addAttendance', attendanceData)
+    }
    
 }

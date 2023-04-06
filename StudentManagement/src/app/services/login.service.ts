@@ -74,11 +74,14 @@ export class LoginService {
              this.userData=JSON.parse(localStorage.getItem('admin')|| '{}')
              this.sampleInput=this.userData.password;
              this.logged_in=this.userData.logged_in;
+             let path=this.userData.path;
              console.log(this.userData.logged_in);
              
              console.log(this.userData.password);
              console.log(this.userData.childComponentOpend);
+             console.log(this.userData.path);
              
+            //  this.route.navigate(this.userData.path)
              
 
         }

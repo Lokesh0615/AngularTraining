@@ -1,4 +1,4 @@
-<app-navbar>
+<!-- <app-navbar> -->
     <div class="table-div" *ngIf="showAttendanceDetails">
         <div class="top-div">
             <button pButton class="p-button-info" (click)="showDialog()" >ADD</button>
@@ -14,7 +14,7 @@
                 <p-button label="confirm" (onClick)="checkStudentId(checkStdId.value, checkDeptId.value)"></p-button>
             </ng-template>
         </p-dialog>
-        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"
+        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1"
             rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
         <p-toast></p-toast>
@@ -115,8 +115,8 @@
                     </th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-attendance>
-                <tr ((dblclick))="attendanceDetailesEdit(attendance.studentId)">
+            <ng-template pTemplate="body" let-attendance *ngIf="attendanceDataLength>1;else noData">
+                <tr (dblclick)="attendanceDetailesEdit(attendance.studentId)" >
                     
                     <td>{{attendance.studentId}}</td>
                     <!-- <td>{{attendance.month}}</td> -->
@@ -125,8 +125,8 @@
                     <!-- <ng-container [ngClass]="{available: attendance.available==true }"> -->
                     <td [ngClass]="{available: attendance.available==true }">{{attendance.available}}</td>
                 <!-- </ng-container> -->
-                    <td>{{attendance.checkIn}}</td>
-                    <td>{{attendance.checkout}}</td>
+                    <td>{{attendance.checkIn  |date :"  hh:mm a "}}</td>
+                    <td>{{attendance.checkout | date :"  hh:mm a "}}</td>
                     <td>{{attendance.attendanceCount}}</td>
                     <td>{{attendance.createdSource}}</td>
                     <td>{{attendance.createdSourceType}}</td>
@@ -140,13 +140,15 @@
                             class="p-button-rounded p-button-danger"></button>
                     </td>
                 </tr>
-                <ng-template>
-                    <tr #noStudentData>
-                        <td colspan="16">nodata</td>
-                        <div style="height: 100px;"></div>
-                    </tr>
-                </ng-template>
 
+               
+
+            </ng-template>
+            <ng-template #noData pTemplate="body" let-attendance>
+                <tr *ngIf="attendanceDataLength<=1;">
+                    <td colspan="16" [height]="100">nodata</td>
+                    <div style="height: 100px;"></div>
+                </tr>
             </ng-template>
         </p-table>
     </div>
@@ -154,4 +156,4 @@
     <div *ngIf="!showAttendanceDetails">
         <router-outlet (deactivate)="ngOnInit()"></router-outlet>
     </div>
-</app-navbar>
+<!-- </app-navbar> -->

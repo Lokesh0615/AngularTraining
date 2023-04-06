@@ -15,6 +15,7 @@ export class AttendanceComponent implements OnInit {
 
   dialogShow: boolean = false;
   attendanceData: {}[] = [];
+  attendanceDataLength!:number;
   showAttendanceDetails!: boolean;
   studentsData:StudentDetailesService[]=[];
 
@@ -26,6 +27,9 @@ export class AttendanceComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+
+    console.log("table");
+    
     this.getAttendanceDetailes()
     this.showAttendanceDetails = true;
     this.APIService.findAllStudents().subscribe((results)=>{
@@ -37,6 +41,10 @@ export class AttendanceComponent implements OnInit {
         // console.log(data);
         
       }
+      this.attendanceDataLength=this.attendanceData.length;
+      
+      console.log(this.attendanceDataLength);
+      
     })
 
   }
@@ -52,6 +60,13 @@ export class AttendanceComponent implements OnInit {
       console.log(results);
 
       this.attendanceData = Object.values(results)
+      if(this.attendanceData.length==0){
+        this.attendanceData.push({na:"loesh"});
+        console.log("0000");
+        
+      }
+      this.attendanceDataLength=this.attendanceData.length;
+
     }, (error) => {
       console.log("error");
       // this.attendanceData=Object.values(error)
@@ -68,6 +83,7 @@ export class AttendanceComponent implements OnInit {
         this.APIService.deleteAttendanceByStdIdDeptId(studentId, departmentId).subscribe((results) => { }, (error) => {
           console.log(error);
           this.getAttendanceDetailes()
+
         })
       },
       reject: () => {
