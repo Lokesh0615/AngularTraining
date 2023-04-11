@@ -1,6 +1,6 @@
 
                 <!-- class="col-12 sm:col-12 md:col-6 lg:col-6" -->
-    <div class="grid">
+    <div class="grid col-offset-1 container">
         <div class="col-12  md:col-12 lg:col-6 field eachColumn">
            
             <div>
@@ -47,5 +47,10 @@
                 <label class="col-6">{{departmentData.modifiedDttm | date :" dd/MM/yyyy, h:mm a"}}</label>
             </div>
         </div>
+        <div class="detailsButtons col-12  md:col-12 lg:col-6 field">
+            <button pButton class="p-button-secondary addButtons" label="Back" (click)="departmentPage()"></button>
+        </div>
+
+        <!-- <button pButton class="p-button addButtons" label="Back" (click)="departmentPage()"></button> -->
+
     </div>
-    <button pButton label="Back" (click)="departmentPage()"></button>

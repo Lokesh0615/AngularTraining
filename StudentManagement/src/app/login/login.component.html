@@ -22,7 +22,7 @@
         <div class="buttons">
             <button *ngIf="!isSignUp" pButton class="p-button-primary" label="Login" (click)="login(user_id.value, password.value); "></button>
             <button *ngIf="isSignUp" pButton class="p-button-primary" label="SignUp" (click)="signUp(user_id.value, password.value); "></button>
-            <button pButton class="p-button-danger" label="Cancel" (click)="cancel()"></button>
+            <!-- <button pButton class="p-button-danger" label="Cancel" (click)="cancel()"></button> -->
         </div>
         <p *ngIf="!isSignUp">Dont have an account? <a  class="links" (click)="signUpOption()">SignUp</a></p>
          <a *ngIf="isSignUp"  class="links"  (click)="loginOption()" >Login</a>

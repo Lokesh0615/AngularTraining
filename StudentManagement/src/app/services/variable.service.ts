@@ -1,83 +1,129 @@
-import { Injectable } from "@angular/core";
+import { Component, Injectable } from "@angular/core";
+import { Observable, Subject } from "rxjs";
+// import { NavbarComponent } from "../navbar/navbar.component";
 import { StudentDetailesService } from "./studentDetailes";
 
-@Injectable()
+@Injectable({
+
+    providedIn: 'any'
+})
 export class VariableService {
+
     showStudentDetails = true;
     studentId!: string;
-    attendanceStudentId!:string;
-    attendenceDepartmentId!:string;
+    attendanceStudentId!: string;
+    attendenceDepartmentId!: string;
 
-    bloodGroupList=[
-        {type:"O+"},
-        {type:"O-"},
-        {type:"A+"},
-        {type:"A-"},
-        {type:"B+"},
-        {type:"B-"},
-        {type:"AB+"},
-        {type:"AB-"},
+    title!: string;
+
+    bloodGroupList = [
+        { type: "O+" },
+        { type: "O-" },
+        { type: "A+" },
+        { type: "A-" },
+        { type: "B+" },
+        { type: "B-" },
+        { type: "AB+" },
+        { type: "AB-" },
+    ]
+    departmentHeader=[
+        {name:'Department Id', fieldName:'departmentId'},
+        {name:'Department Name', fieldName:'departmentName'},
+        {name:'No Of Student', fieldName:'noOfEmployee'},
+        {name:'Manager Id', fieldName:'managerId'},
+        {name:'Created Source', fieldName:'createdSource'},
+        {name:'Created Source Type', fieldName:'createdSourceType'},
+        {name:'CreatedDttm', fieldName:'createdDttm'},
+        {name:'Modified Source', fieldName:'modifiedSource'},
+        {name:'Modified Source Type', fieldName:'modifiedSourceType'},
+        {name:'ModifiedDttm', fieldName:'modifiedDttm'},
     ]
     departmentList = [
-        { department: 'Civil', departmentId: 1 },
-        { department: 'Mechanical', departmentId: 2 },
-        { department: 'Computer scince', departmentId: 3 },
-        { department: 'Electronices & Electrical', departmentId: 4 }
+        { departmentName: 'Civil', departmentCode:'civil', departmentId: 1 },
+        { departmentName: 'Mechanical', departmentCode:'mechanical', departmentId: 2 },
+        { departmentName: 'Compuetr Scince',departmentCode:'computer scince', departmentId: 3 },
+        { departmentName: 'Electronics & Electrical',departmentCode:'electronics & electical', departmentId: 4 }
     ];
 
-    studentTableHeaders=[
-        {"Student Id":"studentId"}, {"First Name": "firstName"},{"Last Name": "lastName"},
-        // [ "DOB", "dob"], [ "Gender", "gender"], [ "PhoneNumber", "phoneNumber"], [ "Date Of Joining", "dateOfJoining"],
-        // [ "Created Source", "createdSource"],[ "Created Source Type", "createdSourceType"],[ "CreatedDttm", "createdDttm"],
-        // [ "Modified Source", "modifiedSource"],[ "Modified Source Type", "modifiedSourceType"],[ "ModifiedDttm", "modifiedDttm"],
+    
+
+    studentTableHeaders = [
+        {name:'Student Id', fieldName:'studentId'}, 
+        {name:'First Name', fieldName:'firstName'},
+        {name:'Last Name', fieldName:'lastName'},
+        {name:'Date of Birth', fieldName:'dob'},
+        {name:'Gender', fieldName:'gender'},
+        {name:'Phone Number', fieldName:'phoneNumber'},
+        {name:'Date of Joining', fieldName:'dateOfJoining'},
+        {name:'Created Source', fieldName:'createdSource'},
+        {name:'Created Source Type', fieldName:'modifiedDttm'},
+        {name:'CreatedDttm', fieldName:'createdDttm'},
+        {name:'Modified Source', fieldName:'modifiedSource'},
+        {name:'Modified Source Type', fieldName:'modifiedSourceType'},
+        {name:'ModifiedDttm', fieldName:'modifiedDttm'},
     ]
 
-    formatedStudentData(studentDetailsFormvalue: StudentDetailesService) {
-        let studentData = {
-            studentId: studentDetailsFormvalue.studentId,
-            firstName: studentDetailsFormvalue.firstName,
-            lastName: studentDetailsFormvalue.lastName,
-            dob: studentDetailsFormvalue.dob,
-            gender: studentDetailsFormvalue.gender,
-            phoneNumber: studentDetailsFormvalue.phoneNumber,
-            createdSource: studentDetailsFormvalue.createdSource,
-            createdSourceType: studentDetailsFormvalue.createdSourceType,
-            createdDttm: studentDetailsFormvalue.createdDttm,
-            modifiedSource: studentDetailsFormvalue.modifiedSource,
-            modifiedSourceType: studentDetailsFormvalue.modifiedSourceType,
-            modifiedDttm: studentDetailsFormvalue.modifiedDttm,
-            bloodGroup: studentDetailsFormvalue.bloodGroup.type,
-            address: studentDetailsFormvalue.address,
-            dateOfJoining: studentDetailsFormvalue.dateOfJoining,
-            department: studentDetailsFormvalue.department.department,
-            departmentId: studentDetailsFormvalue.departmentId.departmentId,
-            mailId: studentDetailsFormvalue.mailId,
+    attendanceTableHeader=[
+        {name:'Student Id', fieldName:'studentId'},
+        {name:'Date', fieldName:'date'},
+        {name:'Department Id', fieldName:'departmentId'},
+        {name:'Available', fieldName:'available'},
+        {name:'CheckIn', fieldName:'checkIn'},
+        {name:'Checkout', fieldName:'checkout'},
+        {name:'Attendance Count', fieldName:'attendanceCount'},
+        {name:'Created Source', fieldName:'createdSource'},
+        {name:'Created Source Type', fieldName:'createdSourceType'},
+        {name:'CreatedDttm', fieldName:'createdDttm'},
+        {name:'Modified Source', fieldName:'modifiedSource'},
+        {name:'Modified Source Type', fieldName:'modifiedSourceType'},
+        {name:'ModifiedDttm', fieldName:'modifiedDttm'},
+
+    ]
+
+    getFormatedStudentData(data: any) {
+
+        let studentData={
+        studentId:Number(data.studentId),
+        firstName:data.firstName,
+        lastName:data.lastName,
+        dob:data.dob,
+        gender:data.gender,
+        phoneNumber:data.phoneNumber,
+        createdSource:data.createdSource,
+        createdSourceType:data.createdSourceType,
+        createdDttm:data.createdDttm,
+        modifiedSource:data.modifiedSource,
+        modifiedSourceType:data.modifiedSourceType,
+        modifiedDttm:data.modifiedDttm,
+        bloodGroup:data.bloodGroup,
+        address:data.address,
+        department:data.department,
+        departmentId:Number(data.departmentId),
+        mailId:data.mailId,
+        dateOfJoining:data.dateOfJoining,
         }
+
         return studentData;
     }
 
-    getFormatedStudentData(studentDetailsFormvalue: StudentDetailesService){
-
-        let studentData = {
+    getFormatedAttendanceData(studentDetailsFormvalue: any) {
+        console.log(studentDetailsFormvalue);
+        
+        let attendanceData = {
             studentId: Number(studentDetailsFormvalue.studentId),
-            firstName: studentDetailsFormvalue.firstName,
-            lastName: studentDetailsFormvalue.lastName,
-            dob: studentDetailsFormvalue.dob,
-            gender: studentDetailsFormvalue.gender,
-            phoneNumber: studentDetailsFormvalue.phoneNumber,
+            departmentId: Number(studentDetailsFormvalue.departmentId),
+            date: studentDetailsFormvalue.date,
+            available:String(studentDetailsFormvalue.available),
+            checkIn:studentDetailsFormvalue.checkIn,
+            checkout:studentDetailsFormvalue.checkout,
+            attendanceCount: Number(studentDetailsFormvalue.attendanceCount),
             createdSource: studentDetailsFormvalue.createdSource,
             createdSourceType: studentDetailsFormvalue.createdSourceType,
             createdDttm: studentDetailsFormvalue.createdDttm,
             modifiedSource: studentDetailsFormvalue.modifiedSource,
             modifiedSourceType: studentDetailsFormvalue.modifiedSourceType,
             modifiedDttm: studentDetailsFormvalue.modifiedDttm,
-            bloodGroup: studentDetailsFormvalue.bloodGroup,
-            address: studentDetailsFormvalue.address,
-            department: studentDetailsFormvalue.department,
-            departmentId: studentDetailsFormvalue.departmentId,
-            mailId: studentDetailsFormvalue.mailId,
-            dateOfJoining: studentDetailsFormvalue.dateOfJoining,
         }
-        return studentData;
+        return attendanceData;
     }
 }

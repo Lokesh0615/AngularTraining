@@ -1,30 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { APIService } from '../services/APIservice.service';
 import { LoginService } from '../services/login.service';
+import { VariableService } from '../services/variable.service';
 
 @Component({
   selector: 'app-department',
   templateUrl: './department.component.html',
   styleUrls: ['./department.component.css']
 })
-export class DepartmentComponent implements OnInit{
+export class DepartmentComponent implements OnInit, OnDestroy{
 
+  paginatorDropdown=[{rows:5}, {rows:10}, {rows:15}]
+  paginatorValue:number;
+
+  departmentHeader=this.VariableService.departmentHeader;
   departmentsData:{}[]=[];
   departmentDataLength!:number;
   showDepartmentDetails!:boolean;
-  childComponentOpend!:boolean;;
-  constructor(private APIService:APIService, private route:Router , private MessageService:MessageService, private activatedRoute:ActivatedRoute, private LoginService:LoginService){}
+  childComponentOpend!:boolean;
+
+  constructor(private APIService:APIService, private route:Router , private MessageService:MessageService, private activatedRoute:ActivatedRoute, private LoginService:LoginService, private VariableService:VariableService){}
+
+  ngOnDestroy(): void {
+    // this.VariableService.changeTitle("Department Details")
+    // this.VariableService.titleChange.next("Department Details")
+  }
 
   ngOnInit(): void {
+
+    localStorage.setItem('path','Department')
+    // let icons=JSON.plocalStorage.getItem('icon'));
+    localStorage.setItem('icons',JSON.stringify({'title':'Department', 'icon':'pi pi-table'}))
     console.log("parent open");
     this.showDepartmentDetails=false;
     console.log(this.LoginService.userData.childComponentOpend);
     this.childComponentOpend=this.LoginService.userData.childComponentOpend;
     console.log(this.showDepartmentDetails);
     console.log(this.childComponentOpend);
-    
+    // this.VariableService.title='Departmnet Details'
+
     // this.MessageService.add({severity:'error', summary:'error Message', detail:'Student Id already Exists'});
 
     this.getAllDepartment()

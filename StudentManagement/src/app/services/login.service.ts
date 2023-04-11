@@ -1,66 +1,69 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { ActivatedRoute, Router, CanActivate } from '@angular/router';
-import{ map, Subject, catchError } from 'rxjs'
+import { ActivatedRoute, Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import{ map, Subject, catchError, Observable } from 'rxjs'
 import { throwError } from 'rxjs';
 import { identifierName } from '@angular/compiler';
 import { APIService } from './APIservice.service';
 
 @Injectable()
-export class LoginService {
+export class LoginService implements CanActivate {
     userData!:any;
     logged_in!:boolean;
     logged_in_userId!:number;
     logged_in_user!:string;
+    user_password!:string;
     
     constructor(private httpClient:HttpClient, private route:Router, private APIService:APIService){}
+  
+
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+      if(localStorage.length==0){
+        return true
+      }else{
+        let path=localStorage.getItem('path');
+        this.route.navigateByUrl(path);
+        return false
+      }
+    }
     
     // admin={user_id:'admin', password:'admin',logged_in:this.logged_in}
     sampleInput=''
     login(userName:string, password:string){
-      let checkUser;
-      this.APIService.checkUserExists(userName, password).subscribe((resluts)=>{
-        console.log(resluts);
-        checkUser=resluts
-        if(checkUser){
-          console.log(checkUser);
-          
-          this.route.navigateByUrl('Home')
-          this.sampleInput=password;
-          this.logged_in=true;
-              let admin={user_id:'admin', password:'admin',logged_in:this.logged_in,"childComponentOpend":false}
-              localStorage.setItem('admin',JSON.stringify(admin))
-        }else{
-          alert('Incorrect UserID or Password')
-          // return false;
-          
-      }
+      if(userName=='admin' && password=='admin'){
         
-      }, (error)=>{})
-      if(checkUser){
-        console.log(checkUser);
-        
-        // this.route.navigateByUrl('Home')
-        // this.sampleInput=password;
-        // this.logged_in=true;
-        //     // this.admin={user_id:'admin', password:'admin',logged_in:this.logged_in}
-            // localStorage.setItem('admin',JSON.stringify(this.admin))
-      // }
-        // if(user_id===this.admin.user_id && password===this.admin.password){
-        //     this.sampleInput=password;
-        //     this.logged_in=true;
-        //     this.admin={user_id:'admin', password:'admin',logged_in:this.logged_in}
-        //     localStorage.setItem('admin',JSON.stringify(this.admin))
-        //     this.route.navigateByUrl('Home')
-        //     console.log();
-            // return true;
+        this.route.navigateByUrl('Home')
+        this.sampleInput=password;
+        this.logged_in=true;
+        this.logged_in_user='admin'
+            let admin={user_id:'admin', password:'admin',logged_in:this.logged_in,"childComponentOpend":false}
+            localStorage.setItem('admin',JSON.stringify(admin))
+            localStorage.setItem('path','Home')
+      }else{
+        let checkUser;
+        this.APIService.checkUserExists(userName, password).subscribe((resluts)=>{
+          console.log(resluts);
+          checkUser=resluts
+          if(checkUser){
+            console.log(checkUser);
+            this.logged_in_user=userName;
+            this.route.navigateByUrl('Home')
+            this.sampleInput=password;
+            this.logged_in=true;
+            let admin={user_id:userName, password:password,logged_in:this.logged_in,"childComponentOpend":false}
+            
+            localStorage.setItem('admin',JSON.stringify(admin))
+            localStorage.setItem('path','Home')
+            this.logged_in_user=this.userData.user_id;
+          }else{
+            alert('Incorrect UserID or Password')
+            // return false;
             
         }
-        // else{
-        //     alert('Incorrect UserID or Password')
-        //     // return false;
-            
-        // }
+          
+        }, (error)=>{})
+      }
+  
       }
       autoLogin(){
         
@@ -74,6 +77,7 @@ export class LoginService {
              this.userData=JSON.parse(localStorage.getItem('admin')|| '{}')
              this.sampleInput=this.userData.password;
              this.logged_in=this.userData.logged_in;
+             this.logged_in_user=this.userData.user_id;
              let path=this.userData.path;
              console.log(this.userData.logged_in);
              
@@ -88,8 +92,9 @@ export class LoginService {
       }
      
       setChildComponentRefresh(value:boolean){
-        let admin={user_id:'admin', password:'admin',logged_in:true, childComponentOpend:value}
-        localStorage.setItem('admin',JSON.stringify(admin))
+        let admin={user_id:this.logged_in_user, password:this.user_password,logged_in:true, childComponentOpend:value}
+        localStorage.setItem('admin',JSON.stringify(admin));
+        this.userData=JSON.parse(localStorage.getItem('admin')|| '{}')
       }
       logOut(){
         this.logged_in=false;

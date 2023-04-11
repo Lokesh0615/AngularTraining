@@ -21,7 +21,6 @@ import { AttendanceDetailsEditComponent } from './attendance/attendance-details-
 // services
 import { LoginService } from './services/login.service';
 import { AuthGuardService } from './services/auth-guard.service';
-import { ConfirmExitService } from './services/confirmExit.service';
 import { VariableService } from './services/variable.service';
 
 // primeng
@@ -50,28 +49,29 @@ import {ConfirmationService, ConfirmEventType} from 'primeng/api';
 import {CalendarModule} from 'primeng/calendar';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { PaginatorModule } from 'primeng/paginator';
 
 
 
 
 
 const appRoute:Routes=[
-  {path:'', component:LoginComponent},
+  {path:'', component:LoginComponent , canActivate:[LoginService]},
   {path:'Login', component:LoginComponent},
-  {path:'Home', canActivate:[AuthGuardService], component:HomeComponent,
+  {path:'Home', canActivate:[AuthGuardService], component:NavbarComponent,
     // children:[{path:'Home/Users', component:UsersComponent}]
   },
-  {path:'Student', component:StudentComponent,
-    children:[{path:'AddStudentDetails', component:StudentDetailsComponent},
+  {path:'Student', component:StudentComponent, canActivate:[AuthGuardService],
+    children:[{path:'AddStudentDetails/:id', component:StudentDetailsComponent},
               {path:'StudentDetails/:id', component:StudentDetailsEditComponent}
               ]
   },
-  {path:'Department', component:DepartmentComponent, 
+  {path:'Department', component:DepartmentComponent, canActivate:[AuthGuardService],
               children:[{path:"DepartmentDetailes/:id", component:DepartmentDetailsComponent, canActivate:[AuthGuardService]}]
   },
-  {path:"Attendance", component:AttendanceComponent, 
+  {path:"Attendance", component:AttendanceComponent, canActivate:[AuthGuardService],
     children:[{ path:"AttendanceDetails/:id", component:AttendanceDetailsEditComponent},
-              { path:"AttendanceDetails", component:AttendanceDetailsComponent}
+              { path:"AddAttendanceDetails/:id/:did", component:AttendanceDetailsComponent}
     ]
   },
   // {path:'Home/Users', component:UsersComponent},
@@ -117,12 +117,13 @@ const appRoute:Routes=[
      ConfirmDialogModule,
      CalendarModule,
      AutoCompleteModule,
-     RadioButtonModule
+     RadioButtonModule,
+     PaginatorModule
      
   ],
   providers: [LoginService, AuthGuardService, APIService, MessageService, 
-              StudentDetailesService, ConfirmExitService, VariableService,
-              ConfirmationService, ],
+              StudentDetailesService, VariableService,
+              ConfirmationService,NavbarComponent ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

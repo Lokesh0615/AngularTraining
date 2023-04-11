@@ -1,3 +1,6 @@
+.container{
+ margin: 30px 10px 0px;
+}
 .eachColumn>*{
     display: inline-block;
     width: 90%;
@@ -37,10 +40,32 @@ input.ng-touched.ng-invalid{
     margin-top: 10%;
 }
 
+.detailsButtons{
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    /* text-align: right; */
+    margin: 0px 20px;
+}
+.addButtons{
+    margin: 0px 5px;
+    width: 100px;
+}
+
 :host ::ng-deep .p-dropdown, :host ::ng-deep.p-calendar{
     width: 100% !important;
     margin-bottom: 20px;
 }
+:host ::ng-deep .p-calendar.p-calendar-w-btn{
+    position: relative;
+    top: 0px;
+    width: 10px;
+    
+}
+:host ::ng-deep .p-button.addButtons{
+    font-size:17px;  
+    padding: 10px 1px;
+  }
 /* input.ng-invalid{
     border: 1px solid red;
 } */

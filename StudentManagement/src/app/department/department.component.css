@@ -6,7 +6,8 @@
 }
 .table-div{
     margin: auto;
-    width: 1200px;
+    /* width: 1200px; */
+    padding: 10px;
     border: 1px solid rgba(200, 198, 198, 0.97) ;
 }
 .top-div{
@@ -17,4 +18,29 @@ p-columnFilter{
 }
 .p-datatable-scrollable-body{
     overflow-y: scroll;
+}
+
+.caption{
+    display: flex;
+    justify-content: space-between;
+}
+
+:host ::ng-deep .p-paginator{
+    display: flex;
+    justify-content: right;
+    float: right;
+    max-width:max-content;
+    margin: 14px 10px;
+    height: auto;
+    background-color: whitesmoke;
+    border:none;
+}
+
+
+:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page , :host ::ng-deep .p-paginator-next, :host ::ng-deep .p-paginator-prev {
+    border-radius: 0px;
+    height: 30px;
+    width: 50px;
+    margin: 0px;
+    border: 1px solid black;
 }

@@ -11,8 +11,10 @@
 .eachColumn>input{
     margin-bottom: 20px;
 }
-.studentDetailsContainer{
+.attendanceDetailsContainer{
     padding: 20px;
+    margin: 30px 10px 0px;
+
 }
 span{
     color: red;
@@ -26,11 +28,32 @@ input.ng-touched.ng-invalid{
 .buttonDiv{
     /* height: 40%; */
     display: flex;
-    vertical-align: middle;
+    /* vertical-align: middle; */
+    justify-content: right;
+    position: absolute;
+    bottom: 0px;
     /* border: 1px solid red; */
     
     /* align-items: ; */
 }
+.detailsButtons{
+    width: 80%;
+    display: flex;
+    justify-content: right;
+    /* text-align: right; */
+    margin: 0px 20px;
+    position: absolute;
+    bottom: 0px;
+}
+.addButtons{
+    margin: 0px 5px;
+    width: 100px;
+   
+}
+:host ::ng-deep .p-button.addButtons{
+    font-size:17px;  
+    padding: 10px 1px;
+  }
 .buttonDiv>*{
     /* height: 25%;
     width: 100%;

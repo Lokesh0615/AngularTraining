@@ -23,26 +23,31 @@ export class LoginComponent {
   }
 
   signUp(user_id: string, password: string) {
-    this.APIService.addUser(user_id, password).subscribe((results) => {
-      this.MessageService.add({ severity: 'success', summary: 'Successe', detail: 'User ' + user_id + ' is registered' });
-      this.isSignUp = false;
-      this.user_id.nativeElement.value = '';
-      this.password.input.nativeElement.value = ''
-      // console.log(results);
-
-    }, (error) => {
-      alert(error.error)
-      console.log(error);
-
-    })
+    if(user_id.toLocaleLowerCase()=='admin'){
+      alert('User Admin is already exist')
+    }else{
+      this.APIService.addUser(user_id, password).subscribe((results) => {
+        this.MessageService.add({ severity: 'success', summary: 'Successe', detail: 'User ' + user_id + ' is registered' });
+        this.isSignUp = false;
+        this.user_id.nativeElement.value = '';
+        this.password.input.nativeElement.value = ''
+        // console.log(results);
+  
+      }, (error) => {
+        alert(error.error)
+        console.log(error);
+  
+      })
+    }
+  
   }
 
-  cancel() {
-    this.user_id.nativeElement.value = '';
-    // console.log(this.password);
+  // cancel() {
+  //   this.user_id.nativeElement.value = '';
+  //   // console.log(this.password);
     
-    this.password.input.nativeElement.value = ''
-  }
+  //   this.password.input.nativeElement.value = ''
+  // }
   signUpOption() {
     this.formType = 'SignUp';
     this.formContent = "Please Register using UserID and Password"

@@ -5,24 +5,78 @@
     background-color:rgba(200, 198, 198, 0.97) ;
 }
 .table-div{
-    margin: auto;
-    width: 1200px;
+    /* margin: auto; */
+    /* width: 1200px; */
     border: 1px solid rgba(200, 198, 198, 0.97) ;
+    padding: 10px;
 }
 .top-div{
-    display: inline-block;
+    display: flex;
+    /* flex-direction: row; */
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 10px 20px;
+    
 }
+
+.topButtons{
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+.topButtons>*{
+    margin-left: 5px;
+}
+.addButtons{
+    /* margin: 0px 5px; */
+    width: 100px;
+}
+:host ::ng-deep .p-button.addButtons{
+    font-size:17px;  
+    padding: 10px 1px;
+  }
+
 p-columnFilter{
     width: 100%;
 }
 .p-datatable-scrollable-body{
     overflow-y: scroll;
 }
-.available{
-    padding: 4px, 15px;
-    color: green;
+.availabelButton{
+    padding: 4px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: auto;
 }
-.notAvailable{
-    padding: 4px, 15px;
-    color: red;
+
+/* .dialogInputContainer{
+   display: flex; 
+   justify-content: space-between;
+   align-items: baseline;
+} */
+
+:host ::ng-deep .p-inputtext{
+    width: 98%;
+}
+:host ::ng-deep .p-paginator{
+    display: flex;
+    justify-content: right;
+    float: right;
+    max-width:max-content;
+    margin: 14px 10px;
+    height: auto;
+    background-color: whitesmoke;
+    border:none;
+}
+
+
+:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page , :host ::ng-deep .p-paginator-next, :host ::ng-deep .p-paginator-prev {
+    border-radius: 0px;
+    height: 30px;
+    width: 50px;
+    margin: 0px;
+    border: 1px solid black;
 }

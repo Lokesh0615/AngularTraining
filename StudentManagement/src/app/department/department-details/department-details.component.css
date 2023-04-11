@@ -1,3 +1,6 @@
+.container{
+    margin: 30px 10px 0px;
+   }
 .eachColumn>*{
     display: inline-block;
     width: 90%;
@@ -15,3 +18,27 @@ span{
 input.ng-touched.ng-invalid{
     border: 1px solid red;
 }
+
+.content{
+    display: flex;
+    justify-content: center;
+}
+
+.detailsButtons{
+    width: 80%;
+    display: flex;
+    justify-content: right;
+    /* text-align: right; */
+    margin: 0px 20px;
+    position: absolute;
+    bottom: 0px;
+}
+.addButtons{
+    margin: 0px 5px;
+    width: 100px;
+   
+}
+:host ::ng-deep .p-button.addButtons{
+    font-size:17px;  
+    padding: 10px 1px;
+  }

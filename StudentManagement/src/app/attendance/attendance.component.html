@@ -1,132 +1,81 @@
-<!-- <app-navbar> -->
-    <div class="table-div" *ngIf="showAttendanceDetails">
-        <div class="top-div">
-            <button pButton class="p-button-info" (click)="showDialog()" >ADD</button>
-        </div>
-        <p-dialog [(visible)]="dialogShow" [modal]="true" [style]="{width: '400px'}" position="center">
-            <!-- <ng-template pTemplate="header" >header</ng-template> -->
-            <label>Student ID: </label>
-            <input type="text" pInputText pKeyFilter="num" placeholder="Student Id" #checkStdId>
-            <label>Department ID: </label>
-            <input type="text" pKeyFilter="num" pInputText placeholder="Department Id" #checkDeptId>
+<app-navbar>
+    <div class="table-div" *ngIf="showAttendanceDetails && !childComponentOpend">
+
+        <p-dialog [(visible)]="dialogShow" [modal]="true" [style]="{width: '300px'}" position="center">
+            <ng-template pTemplate="header">
+                <h3>Student Detailes</h3>
+            </ng-template>
+            <div class="dialogInputContainer">
+                <label>Student ID: </label>
+                <!-- <p-calendar  id="date" name="date"  ngModel [required]="true" #date="ngModel" appendTo="body" inputId="time" [(ngModel)]="attendanceDetails.date" ></p-calendar> -->
+                <input type="text" pInputText  pattern="[0-9]+$" placeholder="Student Id"  ngModel required #checkStdId="ngModel">
+                <p  *ngIf="checkStdId.invalid && checkStdId.touched" id="username-help" class="p-error">Student Id is required (Number)</p>
+
+            </div>
+
+            <div class="dialogInputContainer">
+                <label>Department ID: </label>
+                <input type="text" pInputText  pattern="[0-9]+$"  placeholder="Department Id" ngModel  required #checkDeptId="ngModel">
+                <p  *ngIf="checkDeptId.invalid && checkDeptId.touched" id="username-help" class="p-error">Departmnet Id is required (Number)</p>
+            </div>
             <ng-template pTemplate="footer">
                 <p-button label="Cancel" (onClick)="dialogShow=false"></p-button>
                 <p-button label="confirm" (onClick)="checkStudentId(checkStdId.value, checkDeptId.value)"></p-button>
+                <!-- <small  *ngIf="date.invalid && date.touched" id="username-help" class="p-error">Date is required</small> -->
             </ng-template>
         </p-dialog>
         <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1"
             rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
         <p-toast></p-toast>
-        <p-table selectionMode="multiple" styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="500px"
-            [value]="attendanceData" [rowsPerPageOptions]="[1,2]">
+        <p-table #dt styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="500px" [value]="attendanceData"
+            [rows]="paginatorValue" [globalFilterFields]="['studentId']" [paginator]="true" [resizableColumns]="true"
+            [totalRecords]="attendanceData.length" pageLinkSize="5" [showJumpToPageDropdown]="false"
+            [showFirstLastIcon]="false">
             <!-- <p-paginator [rows]="3" [totalRecords]="selectedstudentDatas1" [rowsPerPageOptions]="[2,4,6]" [showJumpToPageDropdown]="true"></p-paginator> -->
+            <ng-template pTemplate="caption">
+                <div class="table-header">
+                    <div class="top-div">
+                        <h3>Attendance List</h3>
+                        <div class="topButtons">
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text"
+                                    (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                    placeholder="Global Search" />
+                            </span>
+                            <p-dropdown [options]="paginatorDropdown" optionValue="rows" optionLabel="rows"
+                                [(ngModel)]="paginatorValue"></p-dropdown>
+                            <button *ngIf="loggedInUser=='admin' " pButton class="p-button-info addButtons"
+                                (click)="showDialog()" label="+ADD"></button>
+                        </div>
+                    </div>
+
+                </div>
+            </ng-template>
+
             <ng-template pTemplate="header">
                 <tr class="table_head">
-                    <th>
-                        <span>Student Id
-                            <p-sortIcon pSortableColumn="studentId" field="studentId"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter type="text" field="studentId"></p-columnFilter> -->
-                    </th>
-                    <!-- <th>
-                        <span>Month
-                            <p-sortIcon pSortableColumn="month" field="month"></p-sortIcon>
-                        </span>
-                        <p-columnFilter field="firstName"></p-columnFilter>
-                    </th> -->
-                    <th>
-                        <span>Date
-                            <p-sortIcon pSortableColumn="date" field="date"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="lastName"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>Department Id
-                            <p-sortIcon pSortableColumn="departmentId" field="departmentId"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="dob"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>Available
-                            <p-sortIcon pSortableColumn="available" field="available"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="phoneNumber"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>CheckIn
-                            <p-sortIcon pSortableColumn="checkIn" field="checkIn"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="dateOfJoining"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>Checkout
-                            <p-sortIcon pSortableColumn="checkout" field="checkout"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="createdSource"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>Attendance Count
-                            <p-sortIcon pSortableColumn="attendanceCount" field="attendanceCount"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="createdSourceType"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>Created Source
-                            <p-sortIcon pSortableColumn="createdSource" field="createdSource"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="createdSourceType"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>Created Source Type
-                            <p-sortIcon pSortableColumn="createdSourceType" field="createdSourceType"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="createdSourceType"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>CreatedDttm
-                            <p-sortIcon pSortableColumn="createdDttm" field="createdDttm"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="createdDttm"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>Modified Source
-                            <p-sortIcon pSortableColumn="modifiedSource" field="modifiedSource"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="modifiedSource"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>Modified Source Type
-                            <p-sortIcon pSortableColumn="modifiedSourceType" field="modifiedSourceType"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="modifiedSourceType"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>ModifiedDttm
-                            <p-sortIcon pSortableColumn="modifiedDttm" field="modifiedDttm"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="modifiedDttm"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>Delete
-                            <!-- <p-sortIcon pSortableColumn="modifiedDttm" field="modifiedDttm"></p-sortIcon> -->
-                        </span>
-                        <!-- <p-columnFilter field="modifiedDttm"></p-columnFilter> -->
-                    </th>
+                    <ng-container *ngFor="let header of attendanceTableHeader">
+                        <th><span>{{header.name}}</span><p-sortIcon pSortableColumn="{{header.fieldName}}" field="{{header.fieldName}}"></p-sortIcon></th>
+                    </ng-container>
+                    <th><span>Delete</span></th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-attendance *ngIf="attendanceDataLength>1;else noData">
-                <tr (dblclick)="attendanceDetailesEdit(attendance.studentId)" >
-                    
+            <ng-template pTemplate="body" let-attendance>
+                <tr (dblclick)="attendanceDetailesEdit(attendance.studentId)">
+
                     <td>{{attendance.studentId}}</td>
                     <!-- <td>{{attendance.month}}</td> -->
-                    <td>{{attendance.date}}</td>
+                    <td>{{attendance.date | date :" dd/MM/yyyy "}}</td>
                     <td>{{attendance.departmentId}}</td>
                     <!-- <ng-container [ngClass]="{available: attendance.available==true }"> -->
-                    <td [ngClass]="{available: attendance.available==true }">{{attendance.available}}</td>
-                <!-- </ng-container> -->
-                    <td>{{attendance.checkIn  |date :"  hh:mm a "}}</td>
-                    <td>{{attendance.checkout | date :"  hh:mm a "}}</td>
+                    <td><button class="availabelButton"
+                            [ngStyle]="{'background-color':attendance.available == 'true' ? 'rgb(75, 230, 75)' : 'rgb(232, 42, 42)' }">{{attendance.available
+                            | titlecase}}</button></td>
+                    <!-- </ng-container> -->
+                    <td>{{attendance.checkIn |date :" hh:mm a "}}</td>
+                    <td>{{attendance.checkout | date :" hh:mm a "}}</td>
                     <td>{{attendance.attendanceCount}}</td>
                     <td>{{attendance.createdSource}}</td>
                     <td>{{attendance.createdSourceType}}</td>
@@ -134,26 +83,22 @@
                     <td>{{attendance.modifiedSource}}</td>
                     <td>{{attendance.modifiedSourceType}}</td>
                     <td>{{attendance.modifiedDttm | date :" dd/MM/yyyy, h:mm a "}}</td>
-                <!-- </ng-container> -->
-                    <td><button pButton pRipple type="button" label="Delete"
+                    <!-- </ng-container> -->
+                    <td><button pButton type="button" label="Delete" [disabled]="loggedInUser!='admin' "
                             (click)="deleteAttendanceRecord(attendance.studentId, attendance.departmentId)"
                             class="p-button-rounded p-button-danger"></button>
                     </td>
                 </tr>
-
-               
-
             </ng-template>
-            <ng-template #noData pTemplate="body" let-attendance>
-                <tr *ngIf="attendanceDataLength<=1;">
-                    <td colspan="16" [height]="100">nodata</td>
-                    <div style="height: 100px;"></div>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td style="text-align: center;" colspan="16">no data available</td>
                 </tr>
             </ng-template>
         </p-table>
     </div>
 
-    <div *ngIf="!showAttendanceDetails">
+    <div *ngIf="childComponentOpend">
         <router-outlet (deactivate)="ngOnInit()"></router-outlet>
     </div>
-<!-- </app-navbar> -->
+</app-navbar>

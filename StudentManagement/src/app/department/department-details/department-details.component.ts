@@ -10,19 +10,23 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class DepartmentDetailsComponent implements OnInit {
   
-  showStudentDetailes = true;
+  // showStudentDetailes = true;
   DepartmentId !:string;
   departmentData: any={};
   constructor(private activatedRoute: ActivatedRoute, private router: Router,private APIService: APIService, private LoginService:LoginService){}
  
 
   ngOnInit() {
+
+
     //if the parameter value changes then use Obeservables
     this.activatedRoute.paramMap.subscribe((parm) => {
       this.DepartmentId = String(parm.get('id')?.substring(1));
       this.APIService.findDepartmentByDptId(this.DepartmentId).subscribe((results) => {
       console.log(results);
       this.departmentData = results;
+      localStorage.setItem('path','Department/DepartmentDetailes/:'+this.DepartmentId+'')
+
     })
     })
     
@@ -35,7 +39,10 @@ export class DepartmentDetailsComponent implements OnInit {
 
   }
   ngOnDestroy(): void {
+    // this.LoginService.userData.userData=false
     this.LoginService.setChildComponentRefresh(false)
+    console.log(localStorage);
+    
     // this.router.navigateByUrl('/Department');
 
     console.log("chilc destroy");

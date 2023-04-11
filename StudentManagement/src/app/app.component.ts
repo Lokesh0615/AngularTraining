@@ -13,5 +13,7 @@ export class AppComponent {
   ngOnInit(){
     this.loginService.autoLogin()
     this.logged_in=this.loginService.logged_in;
+    console.log(this.logged_in);
+    
   }
 }

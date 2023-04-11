@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { APIService } from '../services/APIservice.service';
+import { LoginService } from '../services/login.service';
 import { StudentDetailesService } from '../services/studentDetailes';
 import { VariableService } from '../services/variable.service';
 
@@ -13,58 +14,70 @@ import { VariableService } from '../services/variable.service';
 })
 export class AttendanceComponent implements OnInit {
 
+  paginatorDropdown=[{rows:5}, {rows:10}, {rows:15}]
+  paginatorValue:number;
+  attendanceTableHeader=this.VariableService.attendanceTableHeader;
+
+  loggedInUser!:string;
   dialogShow: boolean = false;
   attendanceData: {}[] = [];
   attendanceDataLength!:number;
   showAttendanceDetails!: boolean;
-  studentsData:StudentDetailesService[]=[];
+  childComponentOpend:boolean;
+  studentsData:any=[];
 
   @ViewChild('checkStdId') checkStdId!: ElementRef;
   @ViewChild('checkDeptId') checkDeptId!: ElementRef;
   constructor(private APIService: APIService, private MessageService: MessageService, private route: Router,
-    private activatedRoute: ActivatedRoute, private VariableService: VariableService,
+    private activatedRoute: ActivatedRoute, private VariableService: VariableService, private LoginService:LoginService,
     private ConfirmationService: ConfirmationService, private StudentDetailesService: StudentDetailesService,
     ) { }
 
   ngOnInit(): void {
 
+    localStorage.setItem('path','Attendance')
+    localStorage.setItem('icons',JSON.stringify({'title':'Attendance', 'icon':'pi pi-table'}))
+    this.childComponentOpend=this.LoginService.userData.childComponentOpend;
+    this.showAttendanceDetails=false;
+    this.loggedInUser=this.LoginService.logged_in_user;
+
+    // this.studentsData=[]
     console.log("table");
-    
+    this.VariableService.title='Attendance Details'
+
     this.getAttendanceDetailes()
     this.showAttendanceDetails = true;
+    // i need to check whether studentId And department Id matches or not , so i need student data
     this.APIService.findAllStudents().subscribe((results)=>{
-      for(let result of Object.values(results)){
-        console.log(result);
-        // this.studentsData=results;
-        let data=this.VariableService.getFormatedStudentData(result)
-        this.studentsData.push(data)
-        // console.log(data);
-        
-      }
-      this.attendanceDataLength=this.attendanceData.length;
-      
-      console.log(this.attendanceDataLength);
+      this.studentsData=results
       
     })
 
   }
   showDialog() {
     this.dialogShow = true;
-    this.checkStdId.nativeElement.value = '';
-    this.checkDeptId.nativeElement.value = '';
+    // this.checkStdId.nativeElement.value = '';
+    // this.checkDeptId.nativeElement.value = '';
 
   }
 
   getAttendanceDetailes() {
+    // this.studentsData=[]
+    this.attendanceData=[]
     this.APIService.getAllAttendanceDetailes().subscribe((results) => {
       console.log(results);
-
-      this.attendanceData = Object.values(results)
-      if(this.attendanceData.length==0){
-        this.attendanceData.push({na:"loesh"});
-        console.log("0000");
+      for(let result of Object.values(results)){
+        let data=this.VariableService.getFormatedAttendanceData(result)
+        console.log(result);
         
+        this.attendanceData.push(data);
       }
+      // this.attendanceData = Object.values(results)
+      // if(this.attendanceData.length==0){
+      //   this.attendanceData.push({na:"loesh"});
+      //   console.log("0000");
+        
+      // }
       this.attendanceDataLength=this.attendanceData.length;
 
     }, (error) => {
@@ -94,8 +107,10 @@ export class AttendanceComponent implements OnInit {
 
   attendanceDetailesEdit(studentId: string) {
     this.route.navigate(['AttendanceDetails/:' + studentId + ''], { relativeTo: this.activatedRoute })
-    this.showAttendanceDetails = false;
-
+    // this.showAttendanceDetails = false;
+    this.childComponentOpend=true;
+    this.LoginService.setChildComponentRefresh(true)
+    
     // this.showStudentDetails=false;
   }
   findAttendanceByStudentIdDepartmentId() { }
@@ -114,10 +129,12 @@ export class AttendanceComponent implements OnInit {
       this.VariableService.attendanceStudentId=studentId;
       this.VariableService.attendenceDepartmentId=departmentId;
       console.log("nextpage");
-      this.route.navigate(["AttendanceDetails"], { relativeTo: this.activatedRoute })
-      this.checkStdId.nativeElement.value = '';
-      this.checkDeptId.nativeElement.value = '';
-
+      this.route.navigate(['AddAttendanceDetails/:'+studentId+'/:'+departmentId+''], { relativeTo: this.activatedRoute })
+      // this.checkStdId.nativeElement.value = '';
+      // this.checkDeptId.nativeElement.value = '';
+      this.childComponentOpend=true
+      // this.childComponentOpend=true;
+    this.LoginService.setChildComponentRefresh(true)
 
     }else{
       // this.dialogShow = false;

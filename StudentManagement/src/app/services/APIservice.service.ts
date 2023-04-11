@@ -22,11 +22,7 @@ export class APIService{
     // Student controller
     addStudent(studentData:object){
         
-        this.HttpClient.post('http://localhost:9090/studentdetail/addstudent', studentData).subscribe((results)=>{}, (error)=>{
-            console.log(error);
-            console.log(studentData);
-            
-          })
+        return this.HttpClient.post('http://localhost:9090/studentdetail/addstudent', studentData)
     }
     
     findAllStudents(){

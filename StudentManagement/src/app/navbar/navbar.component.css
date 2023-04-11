@@ -10,12 +10,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 10px 20px 40px;
+    padding: 20px 10px 20px 30px;
     /* margin: 20px 20px; */
 }
 
 .homePageLogo {
     width: 15%;
+    min-width: 130px;
 }
 
 .homePageLogo img {
@@ -23,9 +24,11 @@
 }
 
 .loggedInDetailes {
-    width: 100px;
+    width: 180px;
     display: flex;
     justify-content: space-around;
+    /* ju */
+
     align-items: baseline;
 }
 
@@ -35,6 +38,8 @@
 }
 
 .nav {
+    /* display: flex; */
+    /* justify-content: space-between; */
     list-style-type: none;
     margin: auto 40px;
 }
@@ -64,6 +69,15 @@
     height: 90px;
     padding: 20px 20px 20px 40px;
     background-color: rgb(36, 202, 240);
+}
+.dashBoard>*{
+    display: inline-block;
+    margin-left: 2%;
+    font-size: x-large;
+    color: white;
+    font-weight: bold;
+    /* size: 300%; */
+    /* size: ; */
 }
 
 .content {

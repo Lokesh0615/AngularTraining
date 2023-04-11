@@ -8,7 +8,8 @@
     justify-content: center;
     align-items: center;
     box-shadow: 0px 0px 10px 3px;
-    background:linear-gradient( to bottom right,  rgb(233, 180, 239), rgb(32, 119, 154)) ;
+    background-color: whitesmoke;
+    /* background:linear-gradient( to bottom right,  rgb(233, 180, 239), rgb(32, 119, 154)) ; */
     
 }
 .img_container{
@@ -24,7 +25,7 @@
     width: 370px;
 }
 .buttons>*{
- width: 50%;
+ width: 100%;
 }
 .links{
     color: blue;

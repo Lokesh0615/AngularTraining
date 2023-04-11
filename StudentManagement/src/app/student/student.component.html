@@ -1,114 +1,44 @@
-<!-- <app-navbar> -->
-    <div class="table-div" *ngIf="showStudentDetails">
-        <div class="top-div">
-            <button pButton class="p-button-info" (click)="showDialog()">ADD</button>
+<app-navbar>
+    <div class="table-div" *ngIf="!showStudentDetails && !childComponentOpend">
+        <div class="top-div" >
+            <h3>Student List</h3>
+            <div class="topButtons">
+                <p-dropdown [options]="paginatorDropdown"  optionValue="rows"  optionLabel="rows" [(ngModel)]="paginatorValue"  ></p-dropdown>
+                <button *ngIf="loggedInUser=='admin' " pButton  Class="p-button-sm" (click)="showDialog()" label="+ADD"></button>
+
+
+            </div>
         </div>
         <p-dialog [(visible)]="dialogShow" [modal]="true" [style]="{width: '400px'}" position="center">
-            <!-- <ng-template pTemplate="header" >header</ng-template> -->
+            <ng-template pTemplate="header" ><h3>Student Details</h3></ng-template>
             <label>Student ID: </label>
-            <input type="text" pKeyFilter="num" placeholder="Student Id" #checkStdId>
+            <input pInputText type="text" pKeyFilter="num" placeholder="Student Id" #checkStdId>
             <ng-template pTemplate="footer">
                 <p-button label="cancel" (onClick)="dialogShow=false"></p-button>
                 <p-button label="Confirm" (onClick)="checkStudentId(checkStdId.value)"></p-button>
             </ng-template>
         </p-dialog>
-        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"
-            rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
         <p-toast></p-toast>
-        <p-table selectionMode="multiple" [(selection)]="selectedStudenstData1" dataKey="studentId"
-            styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="500px" [value]="studentsData"
-            [rowsPerPageOptions]="[1,2]">
-            <!-- <p-paginator [rows]="3" [totalRecords]="selectedstudentDatas1" [rowsPerPageOptions]="[2,4,6]" [showJumpToPageDropdown]="true"></p-paginator> -->
+        <!-- <p-paginator [rows]="4" [totalRecords]="studentsData.length" [pageLinkSize]="5" 
+        [showJumpToPageDropdown]="false" [showFirstLastIcon]="false" [showPageLinks]="false"></p-paginator> -->
+
+        <p-table   [rows]="paginatorValue" [paginator]="true" 
+        [totalRecords]="studentsData.length" pageLinkSize="5" [resizableColumns]="true"
+        [showJumpToPageDropdown]="false" [showFirstLastIcon]="false" 
+            styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="500px" [value]="studentsData" 
+            >
+            
             <ng-template pTemplate="header">
-                <tr class="table_head">
-                    <th>
-                        <span>Student Id
-                            <p-sortIcon pSortableColumn="studentId" field="studentId"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter type="text" field="studentId"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>First Name
-                            <p-sortIcon pSortableColumn="firstName" field="firstName"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="firstName"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>Last Name
-                            <p-sortIcon pSortableColumn="lastName" field="lastName"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="lastName"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>DOB
-                            <p-sortIcon pSortableColumn="dob" field="dob"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="dob"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>Gender
-                            <p-sortIcon pSortableColumn="gender" field="gender"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="dob"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>PhoneNumber
-                            <p-sortIcon pSortableColumn="phoneNumber" field="phoneNumber"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="phoneNumber"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>Date Of Joining
-                            <p-sortIcon pSortableColumn="dateOfJoining" field="dateOfJoining"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="dateOfJoining"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>Created Source
-                            <p-sortIcon pSortableColumn="createdSource" field="createdSource"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="createdSource"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>Created Source Type
-                            <p-sortIcon pSortableColumn="createdSourceType" field="createdSourceType"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="createdSourceType"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>CreatedDttm
-                            <p-sortIcon pSortableColumn="createdDttm" field="createdDttm"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="createdDttm"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>Modified Source
-                            <p-sortIcon pSortableColumn="modifiedSource" field="modifiedSource"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="modifiedSource"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>Modified Source Type
-                            <p-sortIcon pSortableColumn="modifiedSourceType" field="modifiedSourceType"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="modifiedSourceType"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>ModifiedDttm
-                            <p-sortIcon pSortableColumn="modifiedDttm" field="modifiedDttm"></p-sortIcon>
-                        </span>
-                        <!-- <p-columnFilter field="modifiedDttm"></p-columnFilter> -->
-                    </th>
-                    <th>
-                        <span>Delete
-                            <!-- <p-sortIcon pSortableColumn="modifiedDttm" field="modifiedDttm"></p-sortIcon> -->
-                        </span>
-                        <!-- <p-columnFilter field="modifiedDttm"></p-columnFilter> -->
-                    </th>
+                <tr class="table_head" >
+                    <ng-container *ngFor="let header of studentTableHeaders">
+                        <th><span>{{header.name}}</span><p-sortIcon pSortableColumn="{{header.fieldName}}" field="{{header.fieldName}}"></p-sortIcon></th>
+                    </ng-container>
+                   <th>Delete</th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-studentData>
+            <ng-template pTemplate="body" let-studentData >
                 <tr (dblclick)="studentDetailesEdit(studentData.studentId)">
                     <!-- <ng-container *ngFor="let key of studentData | keyvalue ; let i=index">
                         <ng-container *ngIf="i<13">
@@ -118,7 +48,7 @@
                     <td>{{studentData.firstName}}</td>
                     <td>{{studentData.lastName}}</td>
                     <td>{{studentData.dob | date:"dd/MM/yyyy"}}</td>
-                    <td>{{studentData.gender}}</td>
+                    <td>{{studentData.gender | titlecase}}</td>
                     <td>{{studentData.phoneNumber}}</td>
                     <td>{{studentData.dateOfJoining | date :"dd/MM/yyyy"}}</td>
                     <td>{{studentData.createdSource}}</td>
@@ -128,23 +58,26 @@
                     <td>{{studentData.modifiedSourceType}}</td>
                     <td>{{studentData.modifiedDttm | date :" dd/MM/yyyy, h:mm a"}}</td>
                     <!-- </ng-container> -->
-                    <td><button pButton pRipple type="button" label="Delete" class="p-button-rounded p-button-danger"
+                    <td><button [disabled]="loggedInUser!='admin'" pButton pRipple type="button" label="Delete" class="p-button-rounded p-button-danger"
                             (click)="deleteByStdId(studentData.studentId)"></button>
                     </td>
 
                 </tr>
-                <ng-template *ngIf="studentsDataLength<=0; ">
-                    <tr >
-                        <td colspan="16">nodata</td>
-                        <div style="height: 100px;"></div>
-                    </tr>
-                </ng-template>
+              
 
             </ng-template>
+            <ng-template pTemplate="emptymessage" >
+                <tr  >
+                    <td  style="text-align: center;" colspan="16" >no data available</td>
+                </tr>
+            </ng-template>
         </p-table>
+        <!-- <p-paginator [rows]="4" [totalRecords]="studentsData.length" [pageLinkSize]="5" 
+                     [showJumpToPageDropdown]="false" [showFirstLastIcon]="false" [showPageLinks]="false"></p-paginator> -->
+
     </div>
-    <div *ngIf="!showStudentDetails">
+    <div *ngIf="childComponentOpend">
         <router-outlet (deactivate)="ngOnInit()"></router-outlet>
     </div>
 
-<!-- </app-navbar> -->
+</app-navbar>
