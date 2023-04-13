@@ -80,3 +80,7 @@ p-columnFilter{
     margin: 0px;
     border: 1px solid black;
 }
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td{
+    /* text-align: center; */
+    padding: 7px 10px;
+   }

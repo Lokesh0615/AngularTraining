@@ -83,6 +83,16 @@
                 <label class="col-6">ModifiedDttm: </label>
                 <label class="col-6">{{studentDetails.modifiedDttm | date :"dd/MM/yyyy, h:mm a "}}</label>
             </div>
+            <div>
+                <label class="col-6">Image Name: </label>
+                <label class="col-6">{{studentDetails.imageName}}</label>
+            </div>
+            <div>
+                <label class="col-6">Image: </label>
+                <!-- <label class="col-6">{{studentDetails.imagePath }}</label> -->
+                <!-- <a [href]="studentDetails.imagePath">sdfgh</a> -->
+                <img [src]="studentDetails.imagePath " alt="">
+            </div>
         </div>
         <div class="detailsButtons">
             <button [disabled]="loggedInUser!='admin'" pButton label="Edit" class="p-button-primary addButtons"
@@ -98,52 +108,48 @@
 
 
 <div class="studentDetailsContainer" [ngStyle]="{'display': showStudentDetailes === false ? 'block' : 'none' }">
-    <!-- make form validation method as a service -->
-    <!-- work on local and global css -->
-    <form (ngSubmit)="   onSubmint()" #studentDetailsForm="ngForm" ngNativeValidate>
-        <div class="formgrid grid">
+ 
+    <form  #studentDetailsForm="ngForm" >
+        <div class="grid">
 
             <div class="col-12 sm:col-12 md:col-6 lg:col-3 field eachColumn">
 
                 <label>StudentId </label>
-                <input type="text" pInputText name="studentId" placeholder="studentId"
-                    [(ngModel)]="studentDetails.studentId" disabled>
+                <input type="text" pInputText  id="studentId" name="studentId" placeholder="studentId" [(ngModel)]="studentDetails.studentId"  disabled>
 
                 <label>First Name<span>*</span> </label>
-                <input type="text" pInputText name="firstName" placeholder="firstName" pattern="[A-Za-z]+" ngModel
-                    [(ngModel)]="studentDetails.firstName" required>
+                <input type="text" pInputText  id="firstName" name="firstName"  placeholder="firstName" pattern="[A-Za-z]+"  required #firstName="ngModel" [(ngModel)]="studentDetails.firstName">
+                <small  *ngIf="firstName.invalid && (firstName.touched || !fieldSelected)" id="username-help" class="p-error">First Name is required.</small>
 
                 <label>Last Name<span>*</span></label>
-                <input type="text" pInputText name="lastName" placeholder="lastName" pattern="[A-Za-z]+" ngModel
-                    [(ngModel)]="studentDetails.lastName" required>
+                <input type="text" pInputText  id="lastName" name="lastName" placeholder="lastName" pattern="[A-Za-z]+"  required #lastName="ngModel" [(ngModel)]="studentDetails.lastName">
+                <small  *ngIf="lastName.invalid && (lastName.touched || !fieldSelected)" id="username-help" class="p-error">Last Name is required.</small>
 
                 <label>Blood Group</label>
-                <p-dropdown [options]="bloodGroupList" ngModel optionLabel="type" optionValue="type"
-                    placeholder="bloodGroup" [(ngModel)]="studentDetails.bloodGroup" name="bloodGroup">
+                <p-dropdown [options]="bloodGroupList"   optionValue="bloodGroup"
+                            optionLabel="type" placeholder="bloodGroup" name="bloodGroup" [(ngModel)]="studentDetails.bloodGroup"
+                            >
                 </p-dropdown>
-
-                <label>Gender<span>*</span></label>
-                <div class="flex ">
+            
+                <label for="gender">Gender<span>*</span></label>
+                <div class="flex">
                     <div class="flex align-items-center">
-                        <p-radioButton name="gender" value="male" [(ngModel)]="studentDetails.gender" inputId="male"
-                            ngModel #genderRequired="ngModel"></p-radioButton>
+                        <p-radioButton name="gender" value="male" inputId="male"  #gender="ngModel" [(ngModel)]="studentDetails.gender" [required]="true"></p-radioButton>
                         <label for="male" class="ml-2">Male</label>
                     </div>
-
+                    
                     <div class="flex align-items-center">
-                        <p-radioButton name="gender" value="female" [(ngModel)]="studentDetails.gender" inputId="female"
-                            ngModel #genderRequired="ngModel"></p-radioButton>
+                        <p-radioButton name="gender" value="female" inputId="female"  #gender="ngModel" [(ngModel)]="studentDetails.gender" required></p-radioButton>
                         <label for="female" class="ml-2">Female</label>
                     </div>
                     <div class="flex align-items-center">
-                        <p-radioButton name="gender" value="others" [(ngModel)]="studentDetails.gender" inputId="others"
-                            ngModel #genderRequired="ngModel"></p-radioButton>
+                        <p-radioButton name="gender" value="others" inputId="others"  #gender="ngModel" [(ngModel)]="studentDetails.gender" required></p-radioButton>
                         <label for="others" class="ml-2">Others</label>
                     </div>
                 </div>
-                <small *ngIf="genderRequired.invalid && genderRequired.touched" id="username-help"
-                    class="p-error">Gender is
-                    required.</small>
+                <small  *ngIf="gender.invalid && (gender.touched || !fieldSelected)  " id="username-help" class="p-error">Gender is required.</small>
+
+               
 
             </div>
             <div class="col-12 sm:col-12 md:col-6 lg:col-3 field eachColumn">
@@ -158,38 +164,57 @@
                 <input type="text" pInputText id="address" name="address" placeholder="address" ngModel
                     [(ngModel)]="studentDetails.address">
 
-                <label>DOB<span>*</span></label>
-                <!-- <input type="date" pInputText id="dob" name="dob" placeholder="dob" ngModel required> -->
-                <p-calendar [maxDate]="createdDttm" ngModel name="dob" #dob="ngModel" appendTo="body" [required]="true"
-                    [(ngModel)]="studentDetails.dob"></p-calendar>
-
-                <label>Mail Id<span>*</span></label>
-                <input type="text" pInputText id="mailId" name="mailId" placeholder="mailId" ngModel #mailId="ngModel"
-                    [(ngModel)]="studentDetails.mailId" required email="true">
-                <small *ngIf="mailId.invalid && mailId.touched" id="username-help" class="p-error">Mail Id is
-                    required.</small>
-
-                <label>Department<span>*</span></label>
-                <p-dropdown [options]="departmentList" ngModel optionLabel="departmentName" optionValue="departmentCode"
-                    [(ngModel)]="studentDetails.department" placeholder="Department" name="department"
-                    [required]="true">
-                </p-dropdown>
+                    <label>DOB<span>*</span></label>
+                    <!-- <input type="date" pInputText  id="dob" name="dob" placeholder="dob" ngModel required #dob="ngModel"> -->
+                    <!-- <p-calendar  id="date" name="date"  ngModel [required]="true" #date="ngModel" appendTo="body" inputId="time" [(ngModel)]="attendanceDetails.date" ></p-calendar> -->
+    
+                    <p-calendar  [maxDate]="createdDttm"  ngModel name="dob"  #dob="ngModel" appendTo="body" [required]="true" [(ngModel)]="studentDetails.dob"  ></p-calendar>
+                    <small  *ngIf="dob.invalid && (dob.touched || !fieldSelected)" id="username-help" class="p-error">Date of Birth is required</small>
+    
+                   
+    
+                    <label>Mail Id<span>*</span></label>
+                    <input type="text" pInputText id="mailId" name="mailId" placeholder="mailId" ngModel #mailId="ngModel" required email="true" [(ngModel)]="studentDetails.mailId" >
+                    <small  *ngIf="mailId.invalid && (mailId.touched || !fieldSelected)" id="username-help" class="p-error">Mail Id is required.</small> 
+    
+    
+                    <label>Department<span>*</span></label>
+                    <p-dropdown [options]="departmentList" ngModel  #department="ngModel" optionValue="departmentCode" [required]="true"
+                                optionLabel="departmentName" placeholder="Department" name="department" [(ngModel)]="studentDetails.department"
+                                
+                                >
+                    </p-dropdown>
+                    <small  *ngIf="department.invalid && (department.touched || !fieldSelected)" id="username-help" class="p-error">Departmnet is required.</small>
+    
 
             </div>
             <div class="col-12 sm:col-12 md:col-6 lg:col-3 field eachColumn">
 
                 <label>Department Id<span>*</span></label>
                 <!-- <input type="text" pInputText  id="departmentId" name="departmentId" placeholder="departmentId" ngModel required #departmentId="ngModel" > -->
-                <p-dropdown [options]="departmentList" ngModel optionLabel="departmentId" optionValue="departmentId"
-                    [(ngModel)]="studentDetails.departmentId" placeholder="DepartmentId" name="departmentId"
-                    [required]="true">
+                <p-dropdown [options]="departmentList" ngModel #departmentId="ngModel" optionValue="departmentId"
+                            optionLabel="departmentId" placeholder="DepartmentId" name="departmentId" [required]="true" [(ngModel)]="studentDetails.departmentId"
+                            >
                 </p-dropdown>
+                <small  *ngIf="departmentId.invalid && (departmentId.touched || !fieldSelected)" id="username-help" class="p-error">Departmnet Id is required.</small>
+
+               
 
                 <label>Date Of Joining<span>*</span></label>
-                <!-- <input type="date" pInputText id="dateOfJoining" name="dateOfJoining" placeholder="dateOfJoining"
-                    ngModel required> -->
-                <p-calendar [minDate]="createdDttm" ngModel name="dateOfJoining" appendTo="body" [readonlyInput]="true"
-                    #dateOfJoining="ngModel" [required]="true" [(ngModel)]="studentDetails.dateOfJoining"></p-calendar>
+                <!-- <input type="date" pInputText  id="dateOfJoining" name="dateOfJoining" placeholder="dateOfJoining" ngModel required #dateOfJoining="ngModel"> -->
+                <p-calendar  [minDate]="createdDttm"  ngModel name="dateOfJoining"  #dateOfJoining="ngModel" appendTo="body" [required]="true" [(ngModel)]="studentDetails.dateOfJoining" ></p-calendar>
+                <small  *ngIf="dateOfJoining.invalid && (dateOfJoining.touched || !fieldSelected)" id="username-help" class="p-error">Date Of Joining is required</small>
+
+                <label for="image" >Image</label>
+                <div *ngIf="!imageEditOption" class="imageNameContainer">
+                    <label >{{studentDetails.imageName}} </label>
+                    <label class="pi pi-pencil" (click)="showImageEdit(true)" ></label>
+                </div>
+                <div *ngIf="imageEditOption"  class="imageNameContainer">
+                    <input type="file" #imagePath  id="imagePath" name="imagePath"  ngModel  (change)="onFileSelect($event)"> 
+                    <label class="pi pi-times"(click)="showImageEdit(false)" ></label>
+                </div>
+                <small  *ngIf="!imageSize" id="username-help" class="p-error">Image size should be lessthan 30KB</small>
 
 
                 <label>CreatedSource</label>
@@ -198,12 +223,15 @@
                 <label>CreatedSourceType</label>
                 <input type="text" pInputText id="createdSourceType" name="createdSourceType"
                     [(ngModel)]="studentDetails.createdSourceType" placeholder="createdSourceType" ngModel disabled>
+               
+            </div>
+            <div class="col-12 sm:col-12 md:col-6 lg:col-3 field eachColumn">
+               
                 <label>CreatedDttm</label>
                 <input type="text" pInputText id="createdDttm" name="createdDttm" placeholder="createdDttm" ngModel
                     [(ngModel)]="studentDetails.createdDttm" disabled>
 
-            </div>
-            <div class="col-12 sm:col-12 md:col-6 lg:col-3 field eachColumn">
+               
                 <label>ModifiedSource</label>
                 <input type="text" pInputText id="modifiedSource" name="modifiedSource" placeholder="modifiedSource"
                     [(ngModel)]="studentDetails.modifiedSource" ngModel disabled>
@@ -219,8 +247,8 @@
             </div>
 
             <div class="detailsButtons">
-                <button type="submit" pButton class="p-button addButtons" label="Update"
-                    [disabled]="!studentDetailsForm.dirty"></button>
+                <button type="button" pButton class="p-button addButtons" label="Update" (click)="fieldSelected=false; studentDetailsForm.valid && onSubmint()"
+                    [disabled]="studentDetailsForm.pristine"></button>
                 <button type="button" pButton class="p-button-secondary addButtons" label="Cancel"
                     (click)="canExit()"></button>
             </div>

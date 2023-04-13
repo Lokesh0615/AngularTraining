@@ -65,7 +65,7 @@
             <div class="detailsButtons">
                 <button pButton class="p-button-primary addButtons" label="Edit" *ngIf="loggedInUser=='admin' "
                     (click)="editStudentDetailes()"></button>
-                <button pButton class="p-button-secondary addButtons" label="Back" (click)="ngOnDestroy()"></button>
+                <button pButton class="p-button-secondary addButtons" label="Back" (click)="canExit()"></button>
             </div>
         </div>
 
@@ -73,7 +73,7 @@
     <div class="attendanceDetailsForm" [ngStyle]="{'display': showAttendanceDetailes === false ? 'block' : 'none' }">
         <!-- make form validation method as a service -->
         <!-- work on local and global css -->
-        <form (ngSubmit)="attendanceDetailsForm.valid && onSubmit()" #attendanceDetailsForm="ngForm" ngNativeValidate>
+        <form (ngSubmit)=" onSubmit()" #attendanceDetailsForm="ngForm" ngNativeValidate>
             <div class=" grid col-offset-1">
 
                 <div class="col-12  md:col-6 lg:col-6 field eachColumn">
@@ -170,7 +170,7 @@
 
 
                 <div class="detailsButtons">
-                    <button type="submit" class="p-button-primary addButtons" pButton label="Save"></button>
+                    <button [disabled]="attendanceDetailsForm.pristine" type="submit" class="p-button-primary addButtons" pButton label="Save"></button>
                     <button type="button" class="p-button-secondary addButtons" pButton label="Cancel"
                         (click)="canExit()"></button>
                 </div>

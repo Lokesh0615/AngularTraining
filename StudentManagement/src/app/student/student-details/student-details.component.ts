@@ -1,5 +1,6 @@
-import { Component, OnDestroy, ViewChild, Input, OnInit } from '@angular/core';
+import { Component, OnDestroy, ViewChild, Input, OnInit, Sanitizer, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { APIService } from 'src/app/services/APIservice.service';
@@ -17,7 +18,8 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
 
   bloodGroupList = this.VariableService.bloodGroupList;
   departmentList = this.VariableService.departmentList;
-
+  imageSize=true;
+  fieldSelected=true;
   // for min date in dob
   createdDttm = new Date()
 
@@ -25,58 +27,109 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
     studentId: null,
     firstName: '',
     lastName: '',
-    dob: null,
-    gender: '',
+    dob: undefined,
+    gender: undefined,
     bloodGroup: '',
     phoneNumber: '',
     address: '',
     mailId: '',
-    department: '',
-    departmentId: null,
-    dateOfJoining: null,
-    imagePath:'',
+    department: undefined,
+    departmentId: undefined,
+    dateOfJoining: undefined,
     createdDttm: null,
     createdSource: "admin",
     createdSourceType: 'admin',
     modifiedSource: '',
     modifiedSourceType: '',
-    modifiedDttm: null
+    modifiedDttm: null,
+
+    imagePath: null,
+    imageName:''
   }
 
   // selectedDepartment=''
   @ViewChild('studentDetailsForm') studentDetailsForm!: NgForm;
+
   constructor(private APIService: APIService, private router: Router, private activatedRoute: ActivatedRoute,
-    private VariableService: VariableService,  private ConfirmationService: ConfirmationService,
-    private MessageService: MessageService, private LoginService: LoginService) { }
+    private VariableService: VariableService, private ConfirmationService: ConfirmationService,
+    private MessageService: MessageService, private LoginService: LoginService, private DomSanitizer: DomSanitizer) { }
 
 
   ngOnInit(): void {
     this.studentDetails.studentId = Number(this.VariableService.studentId);
-    localStorage.setItem('path','Student/AddStudentDetails/:'+this.studentDetails.studentId+'')
+    localStorage.setItem('path', 'Student/AddStudentDetails/:' + this.studentDetails.studentId + '')
     this.activatedRoute.paramMap.subscribe((parm) => {
       this.studentDetails.studentId = parm.get('id')?.substring(1);
-  })
-}
+    })
+  }
 
+  onFileSelect(event) {
+
+    if(event.target.files[0].size>30000){
+      this.imageSize=false;
+    }else{
+      if (event.target.files[0]) {
+        let file = event.target.files[0]
+        this.imageSize=true;
+        this.studentDetails.imageName=event.target.files[0].name;
+        // console.log(this.studentDetails.imageName);
+        
+        let reader= new FileReader();
+        reader.addEventListener('load', ()=>{
+          this.studentDetails.imagePath=reader.result;
+          console.log(this.studentDetails.imagePath);
+          console.log(reader.result);
+          console.log(reader);
+          
+          
+          
+        })
+        reader.readAsDataURL(file)
+        // let fileHnadlle = {
+        //   file: file,
+        //   url: this.DomSanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file))
+        // }
+        // let url=this.DomSanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file))
+        // this.DomSanitizer.bypassSecurityTrustUrl(this.studentDetails.imagePath);
+        // this.studentDetails.imagePath = fileHnadlle.url.toString()
+  
+        // // console.log(url);
+        // console.log(fileHnadlle);
+        
+        // console.log(this.studentDetails.imagePath);
+  
+  
+      }else{
+        this.MessageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+  
+    }
+  }
+   
+    
+  }
 
   onSubmit() {
-
+    
     this.studentDetails.createdDttm = new Date()
-    this.APIService.addStudent(this.studentDetails).subscribe((resluts)=>{
+    this.APIService.addStudent(this.studentDetails).subscribe((resluts) => {
       console.log(resluts);
-      
-    }, (err)=>{
+
+    }, (err) => {
       console.log(err);
+      console.log(this.studentDetails);
+
       this.MessageService.add({ severity: 'success', summary: 'success Message', detail: 'Student' + this.studentDetails.studentId + ' detailes added successfully' });
+      this.router.navigateByUrl('/Student');
       this.ngOnDestroy()
     })
     // console.log(studentDetailsForm);
-    
+
 
   }
 
   ngOnDestroy(): void {
     this.LoginService.setChildComponentRefresh(false)
+    this.fieldSelected=true;
   }
   canExit() {
     if (this.studentDetailsForm.dirty && this.studentDetailsForm.touched) {
@@ -90,9 +143,9 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
           this.router.navigateByUrl('/Student');
           this.ngOnDestroy()
         },
-        reject: () => {}
+        reject: () => { }
       });
-      
+
     }
     else {
       // this.router.navigateByUrl('/Student')

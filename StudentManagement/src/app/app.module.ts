@@ -50,7 +50,8 @@ import {CalendarModule} from 'primeng/calendar';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { PaginatorModule } from 'primeng/paginator';
-
+import {FileUploadModule} from 'primeng/fileupload';
+import { AdminGuardServie } from './services/adminGuard.service';
 
 
 
@@ -58,24 +59,24 @@ import { PaginatorModule } from 'primeng/paginator';
 const appRoute:Routes=[
   {path:'', component:LoginComponent , canActivate:[LoginService]},
   {path:'Login', component:LoginComponent},
-  {path:'Home', canActivate:[AuthGuardService], component:NavbarComponent,
+  {path:'Home', canActivate:[AuthGuardService], component:HomeComponent,
     // children:[{path:'Home/Users', component:UsersComponent}]
   },
-  {path:'Student', component:StudentComponent, canActivate:[AuthGuardService],
-    children:[{path:'AddStudentDetails/:id', component:StudentDetailsComponent},
-              {path:'StudentDetails/:id', component:StudentDetailsEditComponent}
+  {path:'Student', component:StudentComponent, canActivate:[AuthGuardService, ],
+    children:[{path:'AddStudentDetails/:id', component:StudentDetailsComponent, canActivate:[AdminGuardServie]},
+              {path:'StudentDetails/:id', component:StudentDetailsEditComponent, canActivate:[AuthGuardService]}
               ]
   },
-  {path:'Department', component:DepartmentComponent, canActivate:[AuthGuardService],
-              children:[{path:"DepartmentDetailes/:id", component:DepartmentDetailsComponent, canActivate:[AuthGuardService]}]
+  {path:'Department', component:DepartmentComponent, canActivate:[AdminGuardServie],
+              children:[{path:"DepartmentDetailes/:id", component:DepartmentDetailsComponent, canActivate:[AdminGuardServie]}]
   },
   {path:"Attendance", component:AttendanceComponent, canActivate:[AuthGuardService],
-    children:[{ path:"AttendanceDetails/:id", component:AttendanceDetailsEditComponent},
-              { path:"AddAttendanceDetails/:id/:did", component:AttendanceDetailsComponent}
+    children:[{ path:"AttendanceDetails/:id", component:AttendanceDetailsEditComponent, canActivate:[AuthGuardService]},
+              { path:"AddAttendanceDetails/:id/:did", component:AttendanceDetailsComponent, canActivate:[AdminGuardServie]}
     ]
   },
   // {path:'Home/Users', component:UsersComponent},
-  {path:"**",  component:LoginComponent}
+  {path:"**",  component:LoginComponent, }
 ]
 
 @NgModule({
@@ -118,11 +119,12 @@ const appRoute:Routes=[
      CalendarModule,
      AutoCompleteModule,
      RadioButtonModule,
-     PaginatorModule
+     PaginatorModule,
+     FileUploadModule
      
   ],
   providers: [LoginService, AuthGuardService, APIService, MessageService, 
-              StudentDetailesService, VariableService,
+              StudentDetailesService, VariableService, AdminGuardServie,
               ConfirmationService,NavbarComponent ],
   bootstrap: [AppComponent]
 })

@@ -91,27 +91,32 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
   }
 
   canExit() {
-   
-    if (this.attendanceDetailsForm.dirty && this.attendanceDetailsForm.touched) {
-      // if (this.ConfirmExitService.canExit()) {
-      // this.router.navigateByUrl('/Student')
-      this.ConfirmationService.confirm({
-        message: 'Do you want to exit',
-        header: 'Confirmation',
-        icon: 'pi pi-exclamation-triangle',
-        accept: () => {
-          this.router.navigateByUrl('/Attendance')
-          this.ngOnDestroy()
-        },
-        reject: () => {}
-      });
-      
-    }
-    else {
-      // this.router.navigateByUrl('/Student')
+    if(this.showAttendanceDetailes){
       this.router.navigateByUrl('/Attendance')
       this.ngOnDestroy()
+    }else{
+      if (this.attendanceDetailsForm.dirty && this.attendanceDetailsForm.touched) {
+        // if (this.ConfirmExitService.canExit()) {
+        // this.router.navigateByUrl('/Student')
+        this.ConfirmationService.confirm({
+          message: 'Do you want to exit',
+          header: 'Confirmation',
+          icon: 'pi pi-exclamation-triangle',
+          accept: () => {
+            this.router.navigateByUrl('/Attendance')
+            this.ngOnDestroy()
+          },
+          reject: () => {}
+        });
+        
+      }
+      else {
+        // this.router.navigateByUrl('/Student')
+        this.router.navigateByUrl('/Attendance')
+        this.ngOnDestroy()
+      }
     }
+   
   }
 
   onSubmit() {

@@ -23,7 +23,9 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
 
   bloodGroupList = this.VariableService.bloodGroupList;
   departmentList = this.VariableService.departmentList;
-
+  imageSize=true;
+  imageEditOption=false;
+  fieldSelected=true;
 
   studentId: any={}
 
@@ -48,7 +50,11 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
     createdSourceType: '',
     modifiedSource: 'admin',
     modifiedSourceType: 'admin',
-    modifiedDttm: new Date()
+    modifiedDttm: new Date(),
+
+    imagePath:null,
+    imageName:''
+
   }
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
     private APIService: APIService,  private ConfirmationService: ConfirmationService,
@@ -56,14 +62,13 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
     private MessageService: MessageService) { }
 
   @ViewChild('studentDetailsForm', { static: false }) studentDetailsForm!: NgForm;
- 
+
   ngOnInit() {
     // this.studentDetails.bloodGroup = this.bloodGroupOption.type ;
 
-    localStorage.setItem('path', 'Student/StudentDetails/:' + this.studentDetails.studentId + '')
 
     this.loggedInUser = this.LoginService.logged_in_user;
-
+    
     //if the parameter value changes then use Obeservables
     this.MessageService.add({ severity: 'success', summary: 'success Message', detail: 'Student' + this.studentId + ' detailes added successfully', life: 3000 });
 
@@ -75,20 +80,79 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
         this.studentDetails.dob = new Date(results.dob);
         this.studentDetails.departmentId = Number(results.departmentId);
         this.studentDetails.dateOfJoining = new Date(results.dateOfJoining)
-        console.log(this.studentDetails.department);
-        
 
+        localStorage.setItem('path', 'Student/StudentDetails/:' + this.studentDetails.studentId + '')
+
+        // console.log(this.studentDetails.department);
+        // console.log(results.imagePath);
+        // this.studentDetails.imageName=results.imageName;
+        // // this.imagePath.nativeElement.name='lsos.jpg';
+        // console.log(results.imageName);
+        
+        // this.imagePath.nativeElement.selected=results.imagePath;
+        // // this.imagePath.nativeElement.name=results.imageName;
+
+       
+        
       })
     })
 
   }
+
+  onFileSelect(event) {
+
+    if(event.target.files[0].size>30000){
+      this.imageSize=false;
+    }else{
+      if (event.target.files[0]) {
+        let file = event.target.files[0]
+        this.imageSize=true;
+        let reader= new FileReader();
+        reader.addEventListener('load', ()=>{
+          if(this.imageEditOption){
+            this.studentDetails.imagePath=reader.result;
+            this.studentDetails.imageName=event.target.files[0].name;
+
+          }
+          console.log(this.studentDetails.imagePath);
+          console.log(reader.result);
+          console.log(reader);
+          
+          
+          
+        })
+        reader.readAsDataURL(file)
+        // let fileHnadlle = {
+        //   file: file,
+        //   url: this.DomSanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file))
+        // }
+        // let url=this.DomSanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file))
+        // this.DomSanitizer.bypassSecurityTrustUrl(this.studentDetails.imagePath);
+        // this.studentDetails.imagePath = fileHnadlle.url.toString()
+  
+        // // console.log(url);
+        // console.log(fileHnadlle);
+        
+        // console.log(this.studentDetails.imagePath);
+  
+  
+      }
+  }
+  }
+
+  showImageEdit(status:boolean){
+    this.imageEditOption=status; 
+  }
+
   editStudentDetailes() {
 
     this.showStudentDetailes = false;
+ 
   }
 
   ngOnDestroy(): void {
     this.LoginService.setChildComponentRefresh(false)
+    this.fieldSelected=true;
   }
   canExit() {
     if (this.studentDetailsForm.dirty && this.studentDetailsForm.touched) {
@@ -115,6 +179,7 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
 
   onSubmint() {
     console.log(";skdf");
+    console.log(this.studentDetailsForm);
 
     this.studentDetails.modifiedSource = 'admin';
     this.studentDetails.modifiedSourceType = 'admin';

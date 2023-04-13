@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { APIService } from '../services/APIservice.service';
-import { StudentDetailesService } from '../services/studentDetailes';
+// import { StudentDetailesService } from '../services/studentDetailes';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VariableService } from '../services/variable.service';
 import { LoginService } from '../services/login.service';
@@ -41,6 +41,7 @@ export class StudentComponent implements OnInit {
     this.VariableService.title='Student Details'
     this.loggedInUser=this.LoginService.logged_in_user;
     localStorage.setItem('path','Student')
+    // localStorage.setItem('admin',JSON.stringify(this.LoginService.admin))
 
     
   }

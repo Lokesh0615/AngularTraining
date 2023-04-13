@@ -7,12 +7,14 @@ import { identifierName } from '@angular/compiler';
 import { LoginService } from './login.service';
 
 @Injectable()
-export class AuthGuardService implements CanActivate {
-    constructor(private loginService:LoginService){}
+export class AdminGuardServie implements CanActivate {
+    constructor(private loginService:LoginService, private route:Router){}
     canActivate(){
-        if(this.loginService.logged_in && localStorage.length!=0){
+        if(this.loginService.logged_in_user.toLowerCase() == 'admin'){
             return true
         }else{
+            // let path=localStorage.getItem('path');
+            // this.route.navigateByUrl(path);
             return false
         }
         // return true;

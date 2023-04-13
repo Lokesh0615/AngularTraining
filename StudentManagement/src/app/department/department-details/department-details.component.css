@@ -25,13 +25,13 @@ input.ng-touched.ng-invalid{
 }
 
 .detailsButtons{
-    width: 80%;
+    width: 93%;
     display: flex;
     justify-content: right;
     /* text-align: right; */
     margin: 0px 20px;
-    position: absolute;
-    bottom: 0px;
+    /* position: absolute;
+    bottom: 0px; */
 }
 .addButtons{
     margin: 0px 5px;

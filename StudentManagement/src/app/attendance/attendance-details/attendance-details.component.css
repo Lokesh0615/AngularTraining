@@ -37,13 +37,13 @@ input.ng-touched.ng-invalid{
     /* align-items: ; */
 }
 .detailsButtons{
-    width: 80%;
+    width: 100%;
     display: flex;
     justify-content: right;
     /* text-align: right; */
-    margin: 0px 20px;
+    /* margin: 0px 20px;
     position: absolute;
-    bottom: 0px;
+    bottom: 0px; */
 }
 .addButtons{
     margin: 0px 5px;

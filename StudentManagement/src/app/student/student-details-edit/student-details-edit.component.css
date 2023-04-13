@@ -40,12 +40,20 @@ input.ng-touched.ng-invalid{
     margin-top: 10%;
 }
 
+.imageNameContainer{
+    display:flex !important;
+    /* justify-content: space-between; */
+    /* text-align: right; */
+    justify-content: space-between;
+    margin-top: 12px;
+    margin-bottom: 33px !important;
+}
 .detailsButtons{
     width: 100%;
     display: flex;
     justify-content: right;
     /* text-align: right; */
-    margin: 0px 20px;
+    /* margin: 0px 20px; */
 }
 .addButtons{
     margin: 0px 5px;

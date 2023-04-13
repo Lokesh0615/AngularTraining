@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
-import { StudentDetailesService } from "./studentDetailes";
+// import { StudentDetailesService } from "./studentDetailes";
 
 
 @Injectable()

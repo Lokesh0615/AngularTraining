@@ -1,26 +1,23 @@
 <app-navbar>
     <div class="table-div" *ngIf="showAttendanceDetails && !childComponentOpend">
 
-        <p-dialog [(visible)]="dialogShow" [modal]="true" [style]="{width: '300px'}" position="center">
+        <p-dialog [(visible)]="dialogShow" [modal]="true" [style]="{width: '500px'}" position="center">
             <ng-template pTemplate="header">
                 <h3>Student Detailes</h3>
             </ng-template>
-            <div class="dialogInputContainer">
-                <label>Student ID: </label>
-                <!-- <p-calendar  id="date" name="date"  ngModel [required]="true" #date="ngModel" appendTo="body" inputId="time" [(ngModel)]="attendanceDetails.date" ></p-calendar> -->
-                <input type="text" pInputText  pattern="[0-9]+$" placeholder="Student Id"  ngModel required #checkStdId="ngModel">
-                <p  *ngIf="checkStdId.invalid && checkStdId.touched" id="username-help" class="p-error">Student Id is required (Number)</p>
+            
+            <label>Student ID: </label>
+            <!-- <p-calendar  id="date" name="date"  ngModel [required]="true" #date="ngModel" appendTo="body" inputId="time" [(ngModel)]="attendanceDetails.date" ></p-calendar> -->
+            <input type="text" pInputText  pattern="[0-9]+$" placeholder="Student Id"  ngModel required #checkStd="ngModel" #checkStdId>
+            <p  *ngIf="checkStd.invalid && checkStd.dirty" id="username-help" class="p-error">Student Id is required (Number)</p>
 
-            </div>
+            <label>Department ID: </label>
+            <input type="text" pInputText  pattern="[0-9]+$"  placeholder="Department Id" ngModel  required #checkDept="ngModel" #checkDeptId >
+            <p  *ngIf="checkDept.invalid && checkDept.dirty" id="username-help" class="p-error">Departmnet Id is required (Number)</p>
 
-            <div class="dialogInputContainer">
-                <label>Department ID: </label>
-                <input type="text" pInputText  pattern="[0-9]+$"  placeholder="Department Id" ngModel  required #checkDeptId="ngModel">
-                <p  *ngIf="checkDeptId.invalid && checkDeptId.touched" id="username-help" class="p-error">Departmnet Id is required (Number)</p>
-            </div>
             <ng-template pTemplate="footer">
                 <p-button label="Cancel" (onClick)="dialogShow=false"></p-button>
-                <p-button label="confirm" (onClick)="checkStudentId(checkStdId.value, checkDeptId.value)"></p-button>
+                <p-button label="confirm" (onClick)=" checkStudentId(checkStd.value, checkDept.value)"></p-button>
                 <!-- <small  *ngIf="date.invalid && date.touched" id="username-help" class="p-error">Date is required</small> -->
             </ng-template>
         </p-dialog>
@@ -92,7 +89,7 @@
             </ng-template>
             <ng-template pTemplate="emptymessage">
                 <tr>
-                    <td style="text-align: center;" colspan="16">no data available</td>
+                    <td  colspan="16">no data available</td>
                 </tr>
             </ng-template>
         </p-table>

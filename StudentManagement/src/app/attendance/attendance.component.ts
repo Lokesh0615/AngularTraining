@@ -26,17 +26,18 @@ export class AttendanceComponent implements OnInit {
   childComponentOpend:boolean;
   studentsData:any=[];
 
-  @ViewChild('checkStdId') checkStdId!: ElementRef;
-  @ViewChild('checkDeptId') checkDeptId!: ElementRef;
+  @ViewChild('checkStdId') checkStdId: ElementRef;
+  @ViewChild('checkDeptId') checkDeptId: ElementRef;
   constructor(private APIService: APIService, private MessageService: MessageService, private route: Router,
     private activatedRoute: ActivatedRoute, private VariableService: VariableService, private LoginService:LoginService,
     private ConfirmationService: ConfirmationService, private StudentDetailesService: StudentDetailesService,
     ) { }
 
   ngOnInit(): void {
-
+    // localStorage.setItem('admin',JSON.stringify(this.LoginService.admin))
     localStorage.setItem('path','Attendance')
     localStorage.setItem('icons',JSON.stringify({'title':'Attendance', 'icon':'pi pi-table'}))
+    
     this.childComponentOpend=this.LoginService.userData.childComponentOpend;
     this.showAttendanceDetails=false;
     this.loggedInUser=this.LoginService.logged_in_user;
@@ -56,8 +57,9 @@ export class AttendanceComponent implements OnInit {
   }
   showDialog() {
     this.dialogShow = true;
-    // this.checkStdId.nativeElement.value = '';
-    // this.checkDeptId.nativeElement.value = '';
+    
+    this.checkStdId.nativeElement.value = '';
+    this.checkDeptId.nativeElement.value = '';
 
   }
 
@@ -66,8 +68,8 @@ export class AttendanceComponent implements OnInit {
     this.attendanceData=[]
     this.APIService.getAllAttendanceDetailes().subscribe((results) => {
       console.log(results);
-      for(let result of Object.values(results)){
-        let data=this.VariableService.getFormatedAttendanceData(result)
+      for(let result in results){
+        let data=this.VariableService.getFormatedAttendanceData(results[result])
         console.log(result);
         
         this.attendanceData.push(data);

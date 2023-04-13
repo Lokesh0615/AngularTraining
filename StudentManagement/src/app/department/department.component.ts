@@ -32,6 +32,7 @@ export class DepartmentComponent implements OnInit, OnDestroy{
 
     localStorage.setItem('path','Department')
     // let icons=JSON.plocalStorage.getItem('icon'));
+    // localStorage.setItem('admin',JSON.stringify(this.LoginService.admin))
     localStorage.setItem('icons',JSON.stringify({'title':'Department', 'icon':'pi pi-table'}))
     console.log("parent open");
     this.showDepartmentDetails=false;

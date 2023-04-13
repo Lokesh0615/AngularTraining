@@ -1,6 +1,7 @@
 .eachColumn>*{
     display: inline-block;
     width: 90%;
+    
     /* border: 1px solid red; */
 }
 .dropdown{
@@ -33,6 +34,15 @@ input.ng-touched.ng-invalid{
     
     /* align-items: ; */
 }
+
+#imagePath{
+    /* display:flex !important; */
+    /* justify-content: space-between; */
+    /* text-align: right; */
+    /* justify-content: space-between; */
+    margin-top: 11px;
+    margin-bottom: 30px !important;
+}
 .buttonDiv>*{
     height: 25%;
     width: 100%;
@@ -43,7 +53,7 @@ input.ng-touched.ng-invalid{
     display: flex;
     justify-content: right;
     /* text-align: right; */
-    margin: 0px 20px;
+    /* margin: 0px 20px; */
 }
 .addButtons{
     margin: 0px 5px;
