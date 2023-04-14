@@ -67,7 +67,7 @@ const appRoute:Routes=[
               {path:'StudentDetails/:id', component:StudentDetailsEditComponent, canActivate:[AuthGuardService]}
               ]
   },
-  {path:'Department', component:DepartmentComponent, canActivate:[AdminGuardServie],
+  {path:'Department', component:DepartmentComponent, canActivate:[AuthGuardService,AdminGuardServie],
               children:[{path:"DepartmentDetailes/:id", component:DepartmentDetailsComponent, canActivate:[AdminGuardServie]}]
   },
   {path:"Attendance", component:AttendanceComponent, canActivate:[AuthGuardService],
@@ -76,7 +76,7 @@ const appRoute:Routes=[
     ]
   },
   // {path:'Home/Users', component:UsersComponent},
-  {path:"**",  component:LoginComponent, }
+  {path:"**",  component:HomeComponent, canActivate:[LoginService]}
 ]
 
 @NgModule({

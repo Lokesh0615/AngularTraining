@@ -18,12 +18,12 @@ export class LoginService implements CanActivate {
   
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-      if(!localStorage.getItem('admin')){
+      if(!localStorage.getItem('loggedIn')){
         return true
       }else{
         let path=localStorage.getItem('path');
         this.route.navigateByUrl(path);
-        let admin=JSON.parse(localStorage.getItem('admin'))
+        // let admin=JSON.parse(localStorage.getItem('admin'))
 
         // this.logged_in_user=admin.user_id;
         // // this.route.navigateByUrl('Home')
@@ -50,6 +50,7 @@ export class LoginService implements CanActivate {
             let admin={user_id:'admin', password:'admin',logged_in:this.logged_in,"childComponentOpend":false}
             localStorage.setItem('admin',JSON.stringify(admin))
             localStorage.setItem('path','Home')
+            localStorage.setItem('loggedIn','true')
             this.route.navigateByUrl('Home')
       }else{
         let checkUser;
@@ -59,13 +60,18 @@ export class LoginService implements CanActivate {
           if(checkUser){
             console.log(checkUser);
             this.logged_in_user=userName;
+            console.log(this.logged_in_user);
+            
             this.sampleInput=password;
             this.logged_in=true;
             let admin={user_id:userName, password:password,logged_in:this.logged_in,"childComponentOpend":false}
-            
+            localStorage.setItem('loggedIn','true')
+
             localStorage.setItem('admin',JSON.stringify(admin))
             localStorage.setItem('path','Home')
-            this.logged_in_user=this.userData.user_id;
+
+            // here i reassigned loggedInUse so, that user icon name is not working
+            // this.logged_in_user=this.userData.user_id;
             this.route.navigateByUrl('Home')
 
           }else{
@@ -111,7 +117,9 @@ export class LoginService implements CanActivate {
       }
       logOut(){
         this.logged_in=false;
+        localStorage.setItem('loggedIn','true')
         localStorage.clear();
+
         this.route.navigateByUrl('')
         // localStorage.setItem('path', '')
         console.log(localStorage.length);

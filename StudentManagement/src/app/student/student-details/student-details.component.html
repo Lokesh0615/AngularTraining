@@ -21,10 +21,12 @@
     <div class="col-6">6</div>
 </div> -->
 <div class="studentDetailsContainer">
+    <p-toast></p-toast>
+
     <form (ngSubmit)="   onSubmit()"   #studentDetailsForm="ngForm"   >
         <div class="grid" >
 
-            <div class="col-12 sm:col-12 md:col-6 lg:col-3 field eachColumn">
+            <div class="col-12 sm:col-12 md:col-6 lg:col-3 field eachColumn" >
                 <label>StudentId </label>
                 <input type="text" pInputText  id="studentId" name="studentId" placeholder="studentId" [(ngModel)]="studentDetails.studentId"  disabled>
 
@@ -150,7 +152,6 @@
 
                
                 
-                <p-toast></p-toast>
             </div>
             <!-- <div class="detailsButtons">
                 <button [disabled]="loggedInUser!='admin'" pButton label="Edit" class="p-button addButtons" (click)="editStudentDetailes()"></button>
@@ -165,7 +166,6 @@
         
 
     </form>
-    <p-toast></p-toast>
     <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
 </div>   

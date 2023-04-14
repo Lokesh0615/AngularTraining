@@ -113,8 +113,12 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
     this.studentDetails.createdDttm = new Date()
     this.APIService.addStudent(this.studentDetails).subscribe((resluts) => {
       console.log(resluts);
+      console.log('re');
+      
 
     }, (err) => {
+      console.log('err');
+      
       console.log(err);
       console.log(this.studentDetails);
 

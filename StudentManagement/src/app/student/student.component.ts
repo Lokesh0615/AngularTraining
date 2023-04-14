@@ -95,9 +95,9 @@ export class StudentComponent implements OnInit {
         accept: () => {
           // console.log("acc");
           
-          this.MessageService.add({severity:'success', summary:'Confirmed', detail:'Record is deleted successfully'});
           this.APIService.deleteByStudentId(stdId).subscribe((results)=>{ }, (error)=>{
             console.log(error);
+            this.MessageService.add({severity:'success', summary:'Confirmed', detail:'Record is deleted successfully'});
             this.getAllStudentDetailes();
           })
         },

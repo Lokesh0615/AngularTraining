@@ -14,7 +14,7 @@
             <label>Student ID: </label>
             <input pInputText type="text" pKeyFilter="num" placeholder="Student Id" #checkStdId>
             <ng-template pTemplate="footer">
-                <p-button label="cancel" (onClick)="dialogShow=false"></p-button>
+                <p-button label="Cancel" (onClick)="dialogShow=false"></p-button>
                 <p-button label="Confirm" (onClick)="checkStdId.value!='' && checkStudentId(checkStdId.value)"></p-button>
             </ng-template>
         </p-dialog>
@@ -35,7 +35,7 @@
                     <ng-container *ngFor="let header of studentTableHeaders">
                         <th><span>{{header.name}}</span><p-sortIcon pSortableColumn="{{header.fieldName}}" field="{{header.fieldName}}"></p-sortIcon></th>
                     </ng-container>
-                   <th>Delete</th>
+                   <th *ngIf="loggedInUser=='admin' ">Delete</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-studentData >
@@ -51,14 +51,14 @@
                     <td>{{studentData.gender | titlecase}}</td>
                     <td>{{studentData.phoneNumber}}</td>
                     <td>{{studentData.dateOfJoining | date :"dd/MM/yyyy"}}</td>
-                    <td>{{studentData.createdSource}}</td>
+                    <td>{{studentData.createdSource | titlecase}}</td>
                     <td>{{studentData.createdSourceType}}</td>
                     <td>{{studentData.createdDttm | date :" dd/MM/yyyy, h:mm a"}}</td>
                     <td>{{studentData.modifiedSource}}</td>
                     <td>{{studentData.modifiedSourceType}}</td>
                     <td>{{studentData.modifiedDttm | date :" dd/MM/yyyy, h:mm a"}}</td>
                     <!-- </ng-container> -->
-                    <td><button [disabled]="loggedInUser!='admin'" pButton  type="button" label="Delete" class="p-button-rounded p-button-danger"
+                    <td *ngIf="loggedInUser=='admin' "><button [disabled]="loggedInUser!='admin'" pButton  type="button" label="Delete" class="p-button-rounded p-button-danger"
                             (click)="deleteByStdId(studentData.studentId)"></button>
                     </td>
 

@@ -1,30 +1,38 @@
-.container{
-    margin: 30px 10px 0px;
-   }
-.eachColumn>*{
+.container {
+    margin: 30px 10px 30px;
+    width: auto;
+}
+
+
+
+.eachColumn>* {
     display: inline-block;
     width: 90%;
     /* border: 1px solid red; */
 }
-.eachColumn>input{
+
+.eachColumn>input {
     margin-bottom: 20px;
 }
-.studentDetailsContainer{
+
+.studentDetailsContainer {
     padding: 20px;
 }
-span{
+
+span {
     color: red;
 }
-input.ng-touched.ng-invalid{
+
+input.ng-touched.ng-invalid {
     border: 1px solid red;
 }
 
-.content{
+.content {
     display: flex;
     justify-content: center;
 }
 
-.detailsButtons{
+.detailsButtons {
     width: 93%;
     display: flex;
     justify-content: right;
@@ -33,12 +41,14 @@ input.ng-touched.ng-invalid{
     /* position: absolute;
     bottom: 0px; */
 }
-.addButtons{
+
+.addButtons {
     margin: 0px 5px;
     width: 100px;
-   
+
 }
-:host ::ng-deep .p-button.addButtons{
-    font-size:17px;  
+
+:host ::ng-deep .p-button.addButtons {
+    font-size: 17px;
     padding: 10px 1px;
-  }
+}

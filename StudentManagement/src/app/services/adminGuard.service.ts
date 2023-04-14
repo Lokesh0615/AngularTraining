@@ -13,8 +13,8 @@ export class AdminGuardServie implements CanActivate {
         if(this.loginService.logged_in_user.toLowerCase() == 'admin'){
             return true
         }else{
-            // let path=localStorage.getItem('path');
-            // this.route.navigateByUrl(path);
+            let path=localStorage.getItem('path');
+            this.route.navigateByUrl(path);
             return false
         }
         // return true;

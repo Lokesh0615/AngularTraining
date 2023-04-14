@@ -18,7 +18,7 @@
                 <!-- <input type="text" pInputText  id="available" name="available" placeholder="available" ngModel required #available="ngModel" [(ngModel)]="attendanceDetails.available"> -->
                 <p-dropdown [options]="availability"  #available="ngModel" optionValue="type"  optionLabel="name" [required]="true" 
                 name="available" [(ngModel)]="attendanceDetails.available" ></p-dropdown>
-                <small  *ngIf="available.invalid && available.touched" id="username-help" class="p-error">Date is required</small>
+                <small  *ngIf="available.invalid && available.touched" id="username-help" class="p-error">Available is required</small>
 
                 <label>Date<span>*</span></label>
                 <!-- <input type="date" pInputText  id="date" name="date" placeholder="date" ngModel required #date="ngModel"> -->
@@ -28,16 +28,16 @@
 
                 <label>CheckIn<span>*</span></label>
                 <p-calendar [showTime]="true" hourFormat="12" id="checkIn" name="checkIn" [timeOnly]="true" ngModel [required]="true" #checkIn="ngModel" [(ngModel)]="attendanceDetails.checkIn" ></p-calendar>
-                <small  *ngIf="checkIn.invalid && checkIn.touched" id="username-help" class="p-error">Date is required</small>
+                <small  *ngIf="checkIn.invalid && checkIn.touched" id="username-help" class="p-error">CheckIn is required</small>
 
                 <label>Checkout<span>*</span></label>
                 <p-calendar [showTime]="true" hourFormat="12" id="checkout" name="checkout" [timeOnly]="true" ngModel [required]="true" #checkout="ngModel" [(ngModel)]="attendanceDetails.checkout" ></p-calendar>
-                <small  *ngIf="checkout.invalid && checkout.touched" id="username-help" class="p-error">Date is required</small>
+                <small  *ngIf="checkout.invalid && checkout.touched" id="username-help" class="p-error">Checkout is required</small>
 
                
                 <label>Attendance Count<span>*</span></label>
                 <input type="text" pInputText  id="attendanceCount" name="attendanceCount" placeholder="attendanceCount"  pattern="[0-9]" ngModel required #attendanceCount="ngModel" [(ngModel)]="attendanceDetails.attendanceCount">
-                <small  *ngIf="attendanceCount.invalid && attendanceCount.touched" id="username-help" class="p-error">Date is required</small>
+                <small  *ngIf="attendanceCount.invalid && attendanceCount.pristine" id="username-help" class="p-error">Attendance Count is required</small>
 
 
               
