@@ -1,6 +1,5 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
-// import { StudentDetailesService } from "./studentDetailes";
 
 
 @Injectable()
@@ -45,7 +44,7 @@ export class APIService{
     }
 
     // department controller
-    getAllDepartmnet(){
+    getAllDepartmnetDetailes(){
         return this.HttpClient.get('http://localhost:9090/departmentdetail/findalldepartment')
     }
     findDepartmentByDptId(departmentId:string){

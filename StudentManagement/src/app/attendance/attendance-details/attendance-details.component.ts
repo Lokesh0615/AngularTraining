@@ -15,6 +15,7 @@ import { VariableService } from 'src/app/services/variable.service';
 export class AttendanceDetailsComponent implements OnInit, OnDestroy {
 
   availability = [{ type: 'true', name:'True' }, { type: 'false', name:'False' }]
+  fieldSelected=true;
 
   attendanceDetails = {
     studentId: null,
@@ -108,7 +109,7 @@ export class AttendanceDetailsComponent implements OnInit, OnDestroy {
 
       }, (error)=>{
         console.log(error);
-        this.MessageService.add({severity:'success', summary:'success Message', detail:'Student'+this.attendanceDetails.studentId+' detailes added successfully'});
+        this.MessageService.add({severity:'success', detail:'Student'+this.attendanceDetails.studentId+' detailes added successfully'});
         this.router.navigateByUrl('/Attendance')
         this.ngOnDestroy()
         

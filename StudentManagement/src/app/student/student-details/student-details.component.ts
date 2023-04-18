@@ -99,10 +99,7 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
         // console.log(this.studentDetails.imagePath);
   
   
-      }else{
-        this.MessageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
-  
-    }
+      }
   }
    
     
@@ -122,7 +119,7 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
       console.log(err);
       console.log(this.studentDetails);
 
-      this.MessageService.add({ severity: 'success', summary: 'success Message', detail: 'Student' + this.studentDetails.studentId + ' detailes added successfully' });
+      this.MessageService.add({ severity: 'success', detail: 'Student' + this.studentDetails.studentId + ' detailes added successfully' });
       this.router.navigateByUrl('/Student');
       this.ngOnDestroy()
     })

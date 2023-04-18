@@ -1,21 +1,22 @@
 <app-navbar>
-    <div class="table-div" *ngIf="!showStudentDetails && !childComponentOpend">
-        <div class="top-div" >
+    <div class="tableContainer" *ngIf="!showStudentDetails && !childComponentOpend">
+        <div class="topContainer" >
             <h3>Student List</h3>
-            <div class="topButtons">
+            <div class="topContainerButtons">
                 <p-dropdown [options]="paginatorDropdown"  optionValue="rows"  optionLabel="rows" [(ngModel)]="paginatorValue"  ></p-dropdown>
                 <button *ngIf="loggedInUser=='admin' " pButton  Class="p-button-sm" (click)="showDialog()" label="+ADD"></button>
 
 
             </div>
         </div>
-        <p-dialog [(visible)]="dialogShow" [modal]="true" [style]="{width: '400px'}" position="center">
+        <p-dialog [(visible)]="dialogShow" [modal]="true" [style]="{width: '350px'}" position="center">
             <ng-template pTemplate="header" ><h3>Student Details</h3></ng-template>
             <label>Student ID: </label>
-            <input pInputText type="text" pKeyFilter="num" placeholder="Student Id" #checkStdId>
+            <input pInputText type="text" pattern="[A-Z]{2}[0-9]{4}"  placeholder="Student Id"  #checkStdId="ngModel" [(ngModel)]="studentId">
+            <p  *ngIf="checkStdId.touched && checkStdId.invalid " id="username-help" class="p-error" style="text-align: right;">StudentId Name is Invalid.</p>
             <ng-template pTemplate="footer">
                 <p-button label="Cancel" (onClick)="dialogShow=false"></p-button>
-                <p-button label="Confirm" (onClick)="checkStdId.value!='' && checkStudentId(checkStdId.value)"></p-button>
+                <p-button label="Confirm" (onClick)="(checkStdId.value!='' && checkStdId.valid) && checkStudentId(checkStdId.value)"></p-button>
             </ng-template>
         </p-dialog>
         <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
@@ -24,7 +25,7 @@
         <!-- <p-paginator [rows]="4" [totalRecords]="studentsData.length" [pageLinkSize]="5" 
         [showJumpToPageDropdown]="false" [showFirstLastIcon]="false" [showPageLinks]="false"></p-paginator> -->
 
-        <p-table   [rows]="paginatorValue" [paginator]="true" 
+        <p-table   [rows]="paginatorValue" [paginator]="paginatorValue<studentsData.length" 
         [totalRecords]="studentsData.length" pageLinkSize="5" [resizableColumns]="true"
         [showJumpToPageDropdown]="false" [showFirstLastIcon]="false" 
             styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="500px" [value]="studentsData" 
@@ -32,6 +33,7 @@
             
             <ng-template pTemplate="header">
                 <tr class="table_head" >
+                    <!-- <th ><span>Student Id</span><p-sortIcon pSortableColumn="studentId"  field="studentId" ></p-sortIcon></th> -->
                     <ng-container *ngFor="let header of studentTableHeaders">
                         <th><span>{{header.name}}</span><p-sortIcon pSortableColumn="{{header.fieldName}}" field="{{header.fieldName}}"></p-sortIcon></th>
                     </ng-container>
@@ -58,7 +60,7 @@
                     <td>{{studentData.modifiedSourceType}}</td>
                     <td>{{studentData.modifiedDttm | date :" dd/MM/yyyy, h:mm a"}}</td>
                     <!-- </ng-container> -->
-                    <td *ngIf="loggedInUser=='admin' "><button [disabled]="loggedInUser!='admin'" pButton  type="button" label="Delete" class="p-button-rounded p-button-danger"
+                    <td *ngIf="loggedInUser=='admin' "><button  pButton  type="button" label="Delete" class="p-button-rounded p-button-danger"
                             (click)="deleteByStdId(studentData.studentId)"></button>
                     </td>
 

@@ -1,12 +1,12 @@
 .container{
     margin: 30px 10px 0px;
    }
-.eachColumn>*{
+.detailsColumn>*{
     display: inline-block;
     width: 90%;
     /* border: 1px solid red; */
 }
-.eachColumn>input{
+.detailsColumn>input{
     margin-bottom: 20px;
 }
 .studentDetailsContainer{

@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
-import { ActivatedRoute, Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import{ map, Subject, catchError } from 'rxjs'
-import { throwError } from 'rxjs';
-import { identifierName } from '@angular/compiler';
+import { Router, CanActivate } from '@angular/router';
 import { LoginService } from './login.service';
 
 @Injectable()

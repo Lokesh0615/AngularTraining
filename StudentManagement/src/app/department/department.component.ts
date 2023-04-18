@@ -16,7 +16,7 @@ export class DepartmentComponent implements OnInit, OnDestroy{
   paginatorValue:number;
 
   departmentHeader=this.VariableService.departmentHeader;
-  departmentsData:{}[]=[];
+  departmentsData:any=[];
   departmentDataLength!:number;
   showDepartmentDetails!:boolean;
   childComponentOpend!:boolean;
@@ -37,21 +37,21 @@ export class DepartmentComponent implements OnInit, OnDestroy{
     console.log("parent open");
     this.showDepartmentDetails=false;
     console.log(this.LoginService.userData.childComponentOpend);
-    this.childComponentOpend=this.LoginService.userData.childComponentOpend;
+    this.childComponentOpend=JSON.parse(localStorage.getItem('admin')).childComponentOpend;
     console.log(this.showDepartmentDetails);
     console.log(this.childComponentOpend);
     // this.VariableService.title='Departmnet Details'
 
     // this.MessageService.add({severity:'error', summary:'error Message', detail:'Student Id already Exists'});
 
-    this.getAllDepartment()
+    this.getAllDepartments()
   
    
     
   }
-  getAllDepartment(){
-    this.APIService.getAllDepartmnet().subscribe((results)=>{
-      this.departmentsData=Object.values(results)
+  getAllDepartments(){
+    this.APIService.getAllDepartmnetDetailes().subscribe((results)=>{
+      this.departmentsData=results
       this.departmentDataLength=this.departmentsData.length;
     })
   }

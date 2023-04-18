@@ -4,14 +4,14 @@
 .table_head th:hover{
     background-color:rgba(200, 198, 198, 0.97) ;
 }
-.table-div{
+.tableContainer{
     margin: auto;
     /* width: 1200px; */
     border: 1px solid rgba(200, 198, 198, 0.97) ;
     padding: 10px;
     
 }
-.top-div{
+.topContainer{
     /* display: inline-block;
      */
      display: flex;
@@ -23,7 +23,7 @@
      /* background-color: white; */
 
 }
-.topButtons{
+.topContainerButtons{
     width: 200px;
     display: flex;
     flex-direction: row;

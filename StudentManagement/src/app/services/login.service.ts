@@ -95,9 +95,10 @@ export class LoginService implements CanActivate {
             // to avoid error we provide {}, 
              this.userData=JSON.parse(localStorage.getItem('admin')|| '{}')
              this.sampleInput=this.userData.password;
-             this.logged_in=this.userData.logged_in;
+             this.logged_in=true;
              this.logged_in_user=this.userData.user_id;
-            //  let path=this.userData.path;
+             
+             let path=this.userData.path;
              console.log(this.userData.logged_in);
              
              console.log(this.userData.password);

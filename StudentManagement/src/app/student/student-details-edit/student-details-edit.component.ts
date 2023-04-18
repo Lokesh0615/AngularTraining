@@ -27,7 +27,7 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
   imageEditOption=false;
   fieldSelected=true;
 
-  studentId: any={}
+  studentId: any;
 
   // for min date in calender
   createdDttm = new Date()
@@ -43,7 +43,7 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
     address: '',
     mailId: '',
     department: '',
-    departmentId: 1,
+    departmentId: null,
     dateOfJoining: new Date(),
     createdDttm: new Date(),
     createdSource: "",
@@ -70,7 +70,6 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
     this.loggedInUser = this.LoginService.logged_in_user;
     
     //if the parameter value changes then use Obeservables
-    this.MessageService.add({ severity: 'success', summary: 'success Message', detail: 'Student' + this.studentId + ' detailes added successfully', life: 3000 });
 
     this.activatedRoute.paramMap.subscribe((parm) => {
       this.studentId = parm.get('id')?.substring(1);
@@ -80,6 +79,8 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
         this.studentDetails.dob = new Date(results.dob);
         this.studentDetails.departmentId = Number(results.departmentId);
         this.studentDetails.dateOfJoining = new Date(results.dateOfJoining)
+        console.log(results.bloodGroup);
+        
 
         localStorage.setItem('path', 'Student/StudentDetails/:' + this.studentDetails.studentId + '')
 
@@ -187,7 +188,7 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
 
     this.APIService.updateStudentDetails(this.studentDetails).subscribe((results) => { }, (error) => {
       console.log(this.studentDetails);
-      this.MessageService.add({ severity: 'success', summary: 'success Message', detail: 'Student' + this.studentId + ' detailes added successfully' });
+      this.MessageService.add({ severity: 'success', detail: 'Student' + this.studentId + ' detailes added successfully' });
       this.router.navigate(['Student'])
       this.ngOnDestroy()
 

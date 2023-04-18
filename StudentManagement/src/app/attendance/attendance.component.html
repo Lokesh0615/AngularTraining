@@ -1,5 +1,5 @@
 <app-navbar>
-    <div class="table-div" *ngIf="showAttendanceDetails && !childComponentOpend">
+    <div class="tableContainer" *ngIf="showAttendanceDetails && !childComponentOpend">
 
         <p-dialog [(visible)]="dialogShow" [modal]="true" [style]="{width: '500px'}" position="center">
             <ng-template pTemplate="header">
@@ -21,12 +21,11 @@
                 <!-- <small  *ngIf="date.invalid && date.touched" id="username-help" class="p-error">Date is required</small> -->
             </ng-template>
         </p-dialog>
-        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1"
-            rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
         <p-toast></p-toast>
         <p-table #dt styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="500px" [value]="attendanceData"
-            [rows]="paginatorValue" [globalFilterFields]="['studentId']" [paginator]="true" [resizableColumns]="true"
+            [rows]="paginatorValue" [globalFilterFields]="['studentId']" [paginator]="paginatorValue<attendanceData.length" [resizableColumns]="true"
             [totalRecords]="attendanceData.length" pageLinkSize="5" [showJumpToPageDropdown]="false"
             [showFirstLastIcon]="false">
             <!-- <p-paginator [rows]="3" [totalRecords]="selectedstudentDatas1" [rowsPerPageOptions]="[2,4,6]" [showJumpToPageDropdown]="true"></p-paginator> -->
@@ -34,7 +33,7 @@
                 <div class="table-header">
                     <div class="top-div">
                         <h3>Attendance List</h3>
-                        <div class="topButtons">
+                        <div class="topContainerButtons">
                             <span class="p-input-icon-left">
                                 <i class="pi pi-search"></i>
                                 <input pInputText type="text"
@@ -56,7 +55,7 @@
                     <ng-container *ngFor="let header of attendanceTableHeader">
                         <th><span>{{header.name}}</span><p-sortIcon pSortableColumn="{{header.fieldName}}" field="{{header.fieldName}}"></p-sortIcon></th>
                     </ng-container>
-                    <th><span>Delete</span></th>
+                    <th *ngIf="loggedInUser=='admin' "><span>Delete</span></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-attendance>
@@ -66,11 +65,9 @@
                     <!-- <td>{{attendance.month}}</td> -->
                     <td>{{attendance.date | date :" dd/MM/yyyy "}}</td>
                     <td>{{attendance.departmentId}}</td>
-                    <!-- <ng-container [ngClass]="{available: attendance.available==true }"> -->
                     <td><button class="availabelButton"
-                            [ngStyle]="{'background-color':attendance.available == 'true' ? 'rgb(75, 230, 75)' : 'rgb(232, 42, 42)' }">{{attendance.available
-                            | titlecase}}</button></td>
-                    <!-- </ng-container> -->
+                            [ngStyle]="{'background-color':attendance.available == 'true' ? 'rgb(75, 230, 75)' : 'rgb(232, 42, 42)' }">
+                            {{attendance.available| titlecase}}</button></td>
                     <td>{{attendance.checkIn |date :" hh:mm a "}}</td>
                     <td>{{attendance.checkout | date :" hh:mm a "}}</td>
                     <td>{{attendance.attendanceCount}}</td>
@@ -81,7 +78,7 @@
                     <td>{{attendance.modifiedSourceType}}</td>
                     <td>{{attendance.modifiedDttm | date :" dd/MM/yyyy, h:mm a "}}</td>
                     <!-- </ng-container> -->
-                    <td><button pButton type="button" label="Delete" [disabled]="loggedInUser!='admin' "
+                    <td *ngIf="loggedInUser=='admin' "><button pButton type="button" label="Delete"
                             (click)="deleteAttendanceRecord(attendance.studentId, attendance.departmentId)"
                             class="p-button-rounded p-button-danger"></button>
                     </td>

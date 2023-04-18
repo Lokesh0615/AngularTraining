@@ -2,11 +2,11 @@
 
 
     <div *ngIf="showStudentDetailes">
-        <div class="grid ">
-            <div  class="col-12 sm:col-12 md:col-3 lg:col-3 offset">
-                <div>
-                    <h3>{{studentDetails.firstName}} Details</h3>
-                    <div class="homePageLogo"><img [src]="studentDetails.imagePath" alt="noImage"></div>
+        <div class="grid offset">
+            <div  class="col-12 sm:col-12 md:col-3 lg:col-3  xl:col-3   detailContainer">
+                <div  >
+                    <!-- <h3>{{studentDetails.firstName}} Details</h3> -->
+                    <div class="studentImage"><img [src]="studentDetails.imagePath" alt="noImage"></div>
                     <div>
                         <label class="col-6">Student ID:</label>
                         <label class="col-6">{{studentDetails.studentId}}</label>
@@ -26,10 +26,14 @@
 
                 </div>
             </div>
-            <div  class="col  offset">
+            <div  class="col-12 sm:col-12 md:col-8 lg:col-8 xl:col-8  detailContainer">
+                <div>
+                    <h3>{{studentDetails.studentId}} Details</h3>
+                </div>
+                <hr>
                 <div class="grid grid-nogutter">
                     <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                        <label class="col-6">Phone Number </label>
+                        <label class="col-6">Phone Number: </label>
                         <label class="col-6">{{studentDetails.phoneNumber}}</label>
 
                     </div>
@@ -43,7 +47,7 @@
                 <div class="grid grid-nogutter">
                     <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                         <label class="col-6">Blood Group: </label>
-                        <label class="col-6" #bloodGroup>{{studentDetails.bloodGroup}}</label>
+                        <label class="col-6" >{{studentDetails.bloodGroup}}</label>
                     </div>
                     <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                         <label class="col-6">Address: </label>
@@ -64,7 +68,7 @@
                 <div class="grid grid-nogutter">
                     <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                         <label class="col-6">Department ID: </label>
-                        <label class="col-6" #departmentId>{{studentDetails.departmentId}}</label>
+                        <label class="col-6">{{studentDetails.departmentId}}</label>
 
                     </div> 
                     <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
@@ -95,21 +99,23 @@
                     </div>
                 </div>
                 <div class="grid grid-nogutter">
-                    <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
+                    <div class="col-12 sm:col-12 md:col-6 lg:col-6  grid-nogutter">
                         <label class="col-6">ModifiedDttm: </label>
                         <label class="col-6">{{studentDetails.modifiedDttm | date :"dd/MM/yyyy, h:mm a "}}</label>
 
                     </div>
+                    <div class="detailsButtons">
+                        <button [disabled]="loggedInUser!='admin'" pButton label="Edit" class="p-button-primary addButtons"
+                            (click)="editStudentDetailes()"></button>
+            
+                        <button pButton label="Back" class="p-button-secondary addButtons" (click)="canExit()"></button>
+                    </div>
                 </div>
 
+               
             </div>
         
-        <div class="detailsButtons">
-            <button [disabled]="loggedInUser!='admin'" pButton label="Edit" class="p-button-primary addButtons"
-                (click)="editStudentDetailes()"></button>
-
-            <button pButton label="Back" class="p-button-secondary addButtons" (click)="canExit()"></button>
-        </div>
+       
         </div>
         <p-toast></p-toast>
     </div>
@@ -120,7 +126,7 @@
         <form #studentDetailsForm="ngForm">
             <div class="grid">
 
-                <div class="col-12 sm:col-12 md:col-6 lg:col-3 field eachColumn">
+                <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
                     <label>StudentId </label>
                     <input type="text" pInputText id="studentId" name="studentId" placeholder="studentId"
@@ -129,17 +135,18 @@
                     <label>First Name<span>*</span> </label>
                     <input type="text" pInputText id="firstName" name="firstName" placeholder="firstName"
                         pattern="[A-Za-z]+" required #firstName="ngModel" [(ngModel)]="studentDetails.firstName">
-                    <small *ngIf="firstName.invalid && (firstName.touched || !fieldSelected)" id="username-help"
-                        class="p-error">First Name is required.</small>
+                        <small  *ngIf="!firstName.touched && firstName.invalid &&  !fieldSelected" id="username-help" class="p-error">First Name is required.</small>
+                        <small  *ngIf="firstName.invalid && firstName.touched " id="username-help" class="p-error">First Name is Inavild.</small>
+        
 
                     <label>Last Name<span>*</span></label>
                     <input type="text" pInputText id="lastName" name="lastName" placeholder="lastName"
                         pattern="[A-Za-z]+" required #lastName="ngModel" [(ngModel)]="studentDetails.lastName">
-                    <small *ngIf="lastName.invalid && (lastName.touched || !fieldSelected)" id="username-help"
-                        class="p-error">Last Name is required.</small>
-
+                        <small  *ngIf="!lastName.touched && lastName.invalid  &&  !fieldSelected" id="username-help" class="p-error">Last Name is required.</small>
+                        <small  *ngIf="lastName.invalid && lastName.touched " id="username-help" class="p-error">Last Name is Inavild.</small>
+        
                     <label>Blood Group</label>
-                    <p-dropdown [options]="bloodGroupList" optionValue="bloodGroup" optionLabel="type"
+                    <p-dropdown [options]="bloodGroupList" optionValue="type" optionLabel="type" 
                         placeholder="bloodGroup" name="bloodGroup" [(ngModel)]="studentDetails.bloodGroup">
                     </p-dropdown>
 
@@ -162,19 +169,20 @@
                             <label for="others" class="ml-2">Others</label>
                         </div>
                     </div>
-                    <small *ngIf="gender.invalid && (gender.touched || !fieldSelected)  " id="username-help"
-                        class="p-error">Gender is required.</small>
+                    <!-- <small *ngIf="gender.invalid && (gender.touched || !fieldSelected)  " id="username-help"
+                        class="p-error">Gender is required.</small> -->
 
 
 
                 </div>
-                <div class="col-12 sm:col-12 md:col-6 lg:col-3 field eachColumn">
+                <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
 
                     <label>PhoneNumber</label>
                     <input type="text" pInputText id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}"
                         placeholder="phoneNumber" [maxLength]="10" [minlength]="10" ngModel
                         [(ngModel)]="studentDetails.phoneNumber">
+                        
 
                     <label>Address</label>
                     <input type="text" pInputText id="address" name="address" placeholder="address" ngModel
@@ -186,16 +194,17 @@
 
                     <p-calendar [maxDate]="createdDttm" ngModel name="dob" #dob="ngModel" appendTo="body"
                         [required]="true" [(ngModel)]="studentDetails.dob"></p-calendar>
-                    <small *ngIf="dob.invalid && (dob.touched || !fieldSelected)" id="username-help"
-                        class="p-error">Date of Birth is required</small>
+                    <!-- <small *ngIf="dob.invalid && (dob.touched || !fieldSelected)" id="username-help"
+                        class="p-error">Date of Birth is required</small> -->
 
 
 
                     <label>Mail Id<span>*</span></label>
                     <input type="text" pInputText id="mailId" name="mailId" placeholder="mailId" ngModel
                         #mailId="ngModel" required email="true" [(ngModel)]="studentDetails.mailId">
-                    <small *ngIf="mailId.invalid && (mailId.touched || !fieldSelected)" id="username-help"
-                        class="p-error">Mail Id is required.</small>
+                        <small  *ngIf="!mailId.touched && mailId.invalid &&  !fieldSelected" id="username-help" class="p-error">MailId is required.</small>
+                        <small  *ngIf="mailId.invalid && mailId.touched " id="username-help" class="p-error">MailID is Inavild.</small>
+        
 
 
                     <label>Department<span>*</span></label>
@@ -203,12 +212,12 @@
                         [required]="true" optionLabel="departmentName" placeholder="Department" name="department"
                         [(ngModel)]="studentDetails.department">
                     </p-dropdown>
-                    <small *ngIf="department.invalid && (department.touched || !fieldSelected)" id="username-help"
-                        class="p-error">Departmnet is required.</small>
+                    <!-- <small *ngIf="department.invalid && (department.touched || !fieldSelected)" id="username-help"
+                        class="p-error">Departmnet is required.</small> -->
 
 
                 </div>
-                <div class="col-12 sm:col-12 md:col-6 lg:col-3 field eachColumn">
+                <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
                     <label>Department Id<span>*</span></label>
                     <!-- <input type="text" pInputText  id="departmentId" name="departmentId" placeholder="departmentId" ngModel required #departmentId="ngModel" > -->
@@ -216,8 +225,8 @@
                         optionLabel="departmentId" placeholder="DepartmentId" name="departmentId" [required]="true"
                         [(ngModel)]="studentDetails.departmentId">
                     </p-dropdown>
-                    <small *ngIf="departmentId.invalid && (departmentId.touched || !fieldSelected)" id="username-help"
-                        class="p-error">Departmnet Id is required.</small>
+                    <!-- <small *ngIf="departmentId.invalid && (departmentId.touched || !fieldSelected)" id="username-help"
+                        class="p-error">Departmnet Id is required.</small> -->
 
 
 
@@ -225,12 +234,12 @@
                     <!-- <input type="date" pInputText  id="dateOfJoining" name="dateOfJoining" placeholder="dateOfJoining" ngModel required #dateOfJoining="ngModel"> -->
                     <p-calendar [minDate]="createdDttm" ngModel name="dateOfJoining" #dateOfJoining="ngModel"
                         appendTo="body" [required]="true" [(ngModel)]="studentDetails.dateOfJoining"></p-calendar>
-                    <small *ngIf="dateOfJoining.invalid && (dateOfJoining.touched || !fieldSelected)" id="username-help"
-                        class="p-error">Date Of Joining is required</small>
+                    <!-- <small *ngIf="dateOfJoining.invalid && (dateOfJoining.touched || !fieldSelected)" id="username-help"
+                        class="p-error">Date Of Joining is required</small> -->
 
                     <label for="image">Image</label>
                     <div *ngIf="!imageEditOption" class="imageNameContainer">
-                        <label>{{studentDetails.imageName}} </label>
+                        <label id='imagePath'>{{studentDetails.imageName}} </label>
                         <label class="pi pi-pencil" (click)="showImageEdit(true)"></label>
                     </div>
                     <div *ngIf="imageEditOption" class="imageNameContainer">
@@ -250,7 +259,7 @@
                         [(ngModel)]="studentDetails.createdSourceType" placeholder="createdSourceType" ngModel disabled>
 
                 </div>
-                <div class="col-12 sm:col-12 md:col-6 lg:col-3 field eachColumn">
+                <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
                     <label>CreatedDttm</label>
                     <input type="text" pInputText id="createdDttm" name="createdDttm" placeholder="createdDttm" ngModel
@@ -272,9 +281,10 @@
                 </div>
 
                 <div class="detailsButtons">
-                    <button type="button" pButton class="p-button addButtons" label="Update"
+                    <!-- pristine is ture when any chnages are not made -->
+                    <button type="button" pButton class="p-button addButtons" label="Save"
                         (click)="fieldSelected=false; studentDetailsForm.valid && onSubmint()"
-                        [disabled]="studentDetailsForm.pristine"></button>
+                        [disabled]="studentDetailsForm.pristine"  ></button>
                     <button type="button" pButton class="p-button-secondary addButtons" label="Cancel"
                         (click)="canExit()"></button>
                 </div>

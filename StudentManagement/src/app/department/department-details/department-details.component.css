@@ -5,13 +5,13 @@
 
 
 
-.eachColumn>* {
+.detailsColumn>* {
     display: inline-block;
     width: 90%;
     /* border: 1px solid red; */
 }
 
-.eachColumn>input {
+.detailsColumn>input {
     margin-bottom: 20px;
 }
 

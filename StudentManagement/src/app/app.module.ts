@@ -27,7 +27,7 @@ import { VariableService } from './services/variable.service';
 import { InputTextModule } from 'primeng/inputtext'
 import {PasswordModule} from 'primeng/password';
 import {StyleClassModule} from 'primeng/styleclass';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { BrowserModule } from '@angular/platform-browser'
 
 import {ButtonModule} from 'primeng/button';
@@ -40,7 +40,7 @@ import {MessageService} from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
 import {KeyFilterModule} from 'primeng/keyfilter';
 import { StudentDetailsEditComponent } from './student/student-details-edit/student-details-edit.component';
-import { StudentDetailesService } from './services/studentDetailes';
+// import { StudentDetailesService } from './services/studentDetailes';
 import { MessagesModule } from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import { DropdownModule } from 'primeng/dropdown';
@@ -67,7 +67,7 @@ const appRoute:Routes=[
               {path:'StudentDetails/:id', component:StudentDetailsEditComponent, canActivate:[AuthGuardService]}
               ]
   },
-  {path:'Department', component:DepartmentComponent, canActivate:[AuthGuardService,AdminGuardServie],
+  {path:'Department', component:DepartmentComponent, canActivate:[AdminGuardServie],
               children:[{path:"DepartmentDetailes/:id", component:DepartmentDetailsComponent, canActivate:[AdminGuardServie]}]
   },
   {path:"Attendance", component:AttendanceComponent, canActivate:[AuthGuardService],
@@ -120,12 +120,13 @@ const appRoute:Routes=[
      AutoCompleteModule,
      RadioButtonModule,
      PaginatorModule,
-     FileUploadModule
+     FileUploadModule,
+     
      
   ],
   providers: [LoginService, AuthGuardService, APIService, MessageService, 
-              StudentDetailesService, VariableService, AdminGuardServie,
-              ConfirmationService,NavbarComponent ],
+               VariableService, AdminGuardServie,
+              ConfirmationService,NavbarComponent,  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { APIService } from '../services/APIservice.service';
-// import { StudentDetailesService } from '../services/studentDetailes';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VariableService } from '../services/variable.service';
 import { LoginService } from '../services/login.service';
@@ -22,9 +21,10 @@ export class StudentComponent implements OnInit {
   showStudentDetails!:boolean;
   childComponentOpend:boolean
   loggedInUser!:string;
+  studentId:string;
   // studentTableHeaders=this.VariableService.studentTableHeaders;
 
-  @ViewChild('checkStdId') checkStdId!:ElementRef;
+  // @ViewChild('checkStdId') checkStdId!:ElementRef;
   constructor(private APIService:APIService, private MessageService:MessageService, private route:Router ,
                private activatedRoute:ActivatedRoute, private VariableService:VariableService,
                private ConfirmationService:ConfirmationService, private LoginService:LoginService ){
@@ -32,10 +32,12 @@ export class StudentComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    // console.log("cheke");
+    
     localStorage.setItem('icons',JSON.stringify({'title':'Student', 'icon':'pi pi-table'}))
     this.getAllStudentDetailes()
     this.showStudentDetails=false;
-    this.childComponentOpend=this.LoginService.userData.childComponentOpend;
+    this.childComponentOpend=JSON.parse(localStorage.getItem('admin')).childComponentOpend;
     console.log(this.childComponentOpend);
     
     this.VariableService.title='Student Details'
@@ -47,7 +49,8 @@ export class StudentComponent implements OnInit {
   }
   showDialog(){
     this.dialogShow=true;
-    this.checkStdId.nativeElement.value='';
+    // this.checkStdId.nativeElement.value='';
+    this.studentId=''
   }
   getAllStudentDetailes(){
     this.studentsData=[]
@@ -69,12 +72,13 @@ export class StudentComponent implements OnInit {
   }
 
   checkStudentId(stdId:string){
-    let stdIdExist=this.studentsData.find((list)=> list.studentId==Number(stdId));
+    let stdIdExist=this.studentsData.find((list)=> list.studentId==stdId);
     if(!stdIdExist){
       console.log("nextpage");
       this.route.navigate(['AddStudentDetails/:'+stdId+''],{relativeTo:this.activatedRoute})
       this.dialogShow=false;
-      this.checkStdId.nativeElement.value='';
+      // this.checkStdId.nativeElement.value='';
+      this.studentId=''
       this.showStudentDetails=false;
       this.VariableService.studentId=stdId
       this.childComponentOpend=true
@@ -82,7 +86,7 @@ export class StudentComponent implements OnInit {
 
 
     }else{
-      this.MessageService.add({severity:'error', summary:'error Message', detail:'Student Id already Exists'});
+      this.MessageService.add({severity:'error', detail:'Student Id already Exists'});
     }
   }
 
@@ -97,14 +101,14 @@ export class StudentComponent implements OnInit {
           
           this.APIService.deleteByStudentId(stdId).subscribe((results)=>{ }, (error)=>{
             console.log(error);
-            this.MessageService.add({severity:'success', summary:'Confirmed', detail:'Record is deleted successfully'});
+            this.MessageService.add({severity:'success', detail:'Record is deleted successfully'});
             this.getAllStudentDetailes();
           })
         },
         reject: () => {
           // console.log("no");
           
-          this.MessageService.add({severity:'error', summary:'Rejected', detail:'Record is not Deleted'});
+          this.MessageService.add({severity:'error', detail:'Record is not Deleted'});
         }
     });
 }
@@ -121,6 +125,25 @@ export class StudentComponent implements OnInit {
     this.LoginService.setChildComponentRefresh(true)
 
   }
+
+//   onStudentIdSort(event) {
+
+
+//     console.log(event);
+    
+//     let comparer = function (a, b) {
+//             let result = -1;
+
+//             if (a.studentId.length > b.studentId.length) result = 1;
+
+//             return result * event.order;
+//         };
+    
+//     this.studentsData.sort(comparer);
+//     // this.studentsData=this.studentsData.sort(comparer)
+//     // console.log(this.studentsData);
+    
+//   }
 
   selectedStudenstData1:any=[]
 }

@@ -1,7 +1,7 @@
 <app-navbar>
-    <div class="table-div" *ngIf="!showDepartmentDetails && !childComponentOpend">
+    <div class="tableContainer" *ngIf="!showDepartmentDetails && !childComponentOpend">
         <p-toast></p-toast>
-        <p-table [rows]="paginatorValue" [paginator]="true" [resizableColumns]="true"
+        <p-table [rows]="paginatorValue" [paginator]="paginatorValue<departmentsData.length" [resizableColumns]="true"
             [totalRecords]="departmentsData.length" pageLinkSize="5" [showJumpToPageDropdown]="false"
             [showFirstLastIcon]="false" [value]="departmentsData" styleClass="p-datatable-striped" [scrollable]="true"
             scrollHeight="500px">

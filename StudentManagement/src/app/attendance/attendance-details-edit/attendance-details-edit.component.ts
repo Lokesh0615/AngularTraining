@@ -13,7 +13,7 @@ import { LoginService } from 'src/app/services/login.service';
 export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
 
   loggedInUser!: string;
-
+  fieldSelected=true
   showAttendanceDetailes = true;
   // attendanceDetailesEdit = false;
   StudentId!: any;
@@ -130,7 +130,7 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
 
     this.APIService.updateAttendance(this.attendanceDetails).subscribe((results) => { }, (error) => {
       console.log(error);
-      this.MessageService.add({ severity: 'success', summary: 'success Message', detail: 'Student' + this.StudentId + ' detailes added successfully' });
+      this.MessageService.add({ severity: 'success', detail: 'Student' + this.StudentId + ' detailes added successfully' });
       this.router.navigateByUrl('/Attendance')
       this.ngOnDestroy()
 

@@ -1,7 +1,7 @@
 import { Component, Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
-// import { NavbarComponent } from "../navbar/navbar.component";
-import { StudentDetailesService } from "./studentDetailes";
+// // import { NavbarComponent } from "../navbar/navbar.component";
+// import { StudentDetailesService } from "./studentDetailes";
 
 @Injectable({
 
@@ -83,7 +83,7 @@ export class VariableService {
     getFormatedStudentData(data: any) {
 
         let studentData={
-        studentId:Number(data.studentId),
+        studentId:data.studentId,
         firstName:data.firstName,
         lastName:data.lastName,
         dob:data.dob,

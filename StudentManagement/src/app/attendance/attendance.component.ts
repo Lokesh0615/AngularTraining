@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { APIService } from '../services/APIservice.service';
 import { LoginService } from '../services/login.service';
-import { StudentDetailesService } from '../services/studentDetailes';
 import { VariableService } from '../services/variable.service';
 
 @Component({
@@ -30,7 +29,7 @@ export class AttendanceComponent implements OnInit {
   @ViewChild('checkDeptId') checkDeptId: ElementRef;
   constructor(private APIService: APIService, private MessageService: MessageService, private route: Router,
     private activatedRoute: ActivatedRoute, private VariableService: VariableService, private LoginService:LoginService,
-    private ConfirmationService: ConfirmationService, private StudentDetailesService: StudentDetailesService,
+    private ConfirmationService: ConfirmationService,
     ) { }
 
   ngOnInit(): void {
@@ -38,7 +37,7 @@ export class AttendanceComponent implements OnInit {
     localStorage.setItem('path','Attendance')
     localStorage.setItem('icons',JSON.stringify({'title':'Attendance', 'icon':'pi pi-table'}))
     
-    this.childComponentOpend=this.LoginService.userData.childComponentOpend;
+    this.childComponentOpend=JSON.parse(localStorage.getItem('admin')).childComponentOpend;
     this.showAttendanceDetails=false;
     this.loggedInUser=this.LoginService.logged_in_user;
 
@@ -94,7 +93,7 @@ export class AttendanceComponent implements OnInit {
       header: 'Confirmation',
       // icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.MessageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Record is deleted successfully' });
+        this.MessageService.add({ severity: 'success',  detail: 'Record is deleted successfully' });
         this.APIService.deleteAttendanceByStdIdDeptId(studentId, departmentId).subscribe((results) => { }, (error) => {
           console.log(error);
           this.getAttendanceDetailes()
@@ -102,16 +101,17 @@ export class AttendanceComponent implements OnInit {
         })
       },
       reject: () => {
-        this.MessageService.add({ severity: 'error', summary: 'Rejected', detail: 'Record is not Deleted' });
+        this.MessageService.add({ severity: 'error', detail: 'Record is not Deleted' });
       }
     });
   }
 
   attendanceDetailesEdit(studentId: string) {
-    this.route.navigate(['AttendanceDetails/:' + studentId + ''], { relativeTo: this.activatedRoute })
-    // this.showAttendanceDetails = false;
     this.childComponentOpend=true;
     this.LoginService.setChildComponentRefresh(true)
+    this.route.navigate(['AttendanceDetails/:' + studentId + ''], { relativeTo: this.activatedRoute })
+    // this.showAttendanceDetails = false;
+   
     
     // this.showStudentDetails=false;
   }
@@ -142,7 +142,7 @@ export class AttendanceComponent implements OnInit {
       // this.dialogShow = false;
       console.log("elsepart");
       
-      this.MessageService.add({severity:'error', summary:'error Message', detail:'Student Id and Department Id dose not exist'});
+      this.MessageService.add({severity:'error', detail:'Student Id and Department Id dose not exist'});
     }
     // this.dialogShow=true;
     // if(){

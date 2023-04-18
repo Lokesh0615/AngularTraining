@@ -4,7 +4,7 @@
 .table_head th:hover{
     background-color:rgba(200, 198, 198, 0.97) ;
 }
-.table-div{
+.tableContainer{
     margin: auto;
     /* width: 1200px; */
     padding: 10px;
