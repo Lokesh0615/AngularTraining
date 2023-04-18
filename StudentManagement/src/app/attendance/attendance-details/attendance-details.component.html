@@ -16,7 +16,7 @@
               
                 <label>Available<span>*</span></label>
                 <!-- <input type="text" pInputText  id="available" name="available" placeholder="available" ngModel required #available="ngModel" [(ngModel)]="attendanceDetails.available"> -->
-                <p-dropdown [options]="availability"  #available="ngModel" optionValue="type"  optionLabel="name" [required]="true" 
+                <p-dropdown [options]="availability"  #available="ngModel" optionValue="type" appendTo="body"  optionLabel="name" [required]="true" 
                 name="available" [(ngModel)]="attendanceDetails.available" ></p-dropdown>
                 <small  *ngIf="!available.touched &&  !fieldSelected" id="username-help" class="p-error">Available is required.</small>
                 <!-- <small  *ngIf="available.invalid && available.touched " id="username-help" class="p-error">MailId is Inavild.</small> -->
@@ -28,11 +28,11 @@
                 <!-- <small  *ngIf="date.invalid && date.touched " id="username-help" class="p-error">MailId is Inavild.</small> -->
 
                 <label>CheckIn<span>*</span></label>
-                <p-calendar [showTime]="true" hourFormat="12" id="checkIn" name="checkIn" [timeOnly]="true" ngModel [required]="true" #checkIn="ngModel" [(ngModel)]="attendanceDetails.checkIn" ></p-calendar>
+                <p-calendar [showTime]="true" hourFormat="12" id="checkIn" name="checkIn" appendTo="body" [timeOnly]="true" ngModel [required]="true" #checkIn="ngModel" [(ngModel)]="attendanceDetails.checkIn" ></p-calendar>
                 <small  *ngIf="!checkIn.touched &&  !fieldSelected" id="username-help" class="p-error">CheckIn is required.</small>
 
                 <label>Checkout<span>*</span></label>
-                <p-calendar [showTime]="true" hourFormat="12" id="checkout" name="checkout" [timeOnly]="true" ngModel [required]="true" #checkout="ngModel" [(ngModel)]="attendanceDetails.checkout" ></p-calendar>
+                <p-calendar [showTime]="true" hourFormat="12" id="checkout" name="checkout" appendTo="body" [timeOnly]="true" ngModel [required]="true" #checkout="ngModel" [(ngModel)]="attendanceDetails.checkout" ></p-calendar>
                 <small  *ngIf="!checkout.touched &&  !fieldSelected" id="username-help" class="p-error">Checkout is required.</small>
 
                

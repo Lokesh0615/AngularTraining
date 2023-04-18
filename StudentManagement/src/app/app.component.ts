@@ -11,9 +11,8 @@ export class AppComponent {
   logged_in!:boolean;
   constructor(private loginService:LoginService){}
   ngOnInit(){
-    this.loginService.autoLogin()
     this.logged_in=this.loginService.logged_in;
-    console.log(this.logged_in);
-    
+    // console.log(this.logged_in);
+    this.loginService.autoLogin()
   }
 }

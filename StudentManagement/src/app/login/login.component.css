@@ -1,4 +1,4 @@
-.form-div{
+.loginFormContainer{
     margin: 8vh auto  ;
     width: 450px;
     padding: 20px 40px;
@@ -12,16 +12,19 @@
     /* background:linear-gradient( to bottom right,  rgb(233, 180, 239), rgb(32, 119, 154)) ; */
     
 }
-.img_container{
+.imgContainer{
     text-align: center;
 }
-.img_container h2{
+.imgContainer img{
+    width: 60%;
+}
+.imgContainer h2{
     margin-top: 20px;
 }
-.user_container{
+.userConatiner{
     margin: 20px 0px;
 }
-.user_container > *{
+.userConatiner > *{
     width: 370px;
 }
 .buttons>*{
@@ -30,4 +33,7 @@
 .links{
     color: blue;
     
+}
+span{
+    color: red;
 }

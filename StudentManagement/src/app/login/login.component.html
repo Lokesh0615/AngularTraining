@@ -1,15 +1,15 @@
-<div class="form-div" >
+<div class="loginFormContainer" >
     <form >
-        <div class="img_container">
-            <img src="assets/ItorizonLogo.png"  style="width: 60%;">
+        <div class="imgContainer">
+            <img src="assets/ItorizonLogo.png"  >
             <h2>{{formType}}</h2>
             <p>{{formContent}}</p>
         </div>
-        <div class="user_container">
-            <label for="user_id">User ID<span style="color: red;">*</span></label>
+        <div class="userConatiner">
+            <label for="user_id">User ID<span >*</span></label>
             <input pInputText type="text" name="user_id" id="user_id" #user_id>
 
-            <label for="password">Password<span style="color: red;">*</span></label>
+            <label for="password">Password<span >*</span></label>
             <!-- <input type="text" pPassword   [feedback]="false" (toggle)="true" placeholder="Enter Password" > -->
             <p-password 
                 [inputStyle]="{'width':'370px'}"

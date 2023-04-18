@@ -21,6 +21,7 @@ export class LoginService implements CanActivate {
       if(!localStorage.getItem('loggedIn')){
         return true
       }else{
+        this.autoLogin()
         let path=localStorage.getItem('path');
         this.route.navigateByUrl(path);
         // let admin=JSON.parse(localStorage.getItem('admin'))

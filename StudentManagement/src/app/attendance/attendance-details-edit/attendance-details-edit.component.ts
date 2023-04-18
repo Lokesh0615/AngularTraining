@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,7 +18,7 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
   showAttendanceDetailes = true;
   // attendanceDetailesEdit = false;
   StudentId!: any;
-  attendanceData: any = {};
+  // attendanceData: any = {};
 
   availability = [{ type: 'true', name:'True' }, { type: 'false', name:'False' }]
 
@@ -56,13 +57,14 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
     this.activatedRoute.paramMap.subscribe((parm) => {
       this.attendanceDetails.studentId = parm.get('id')?.substring(1);
       this.APIService.findAttendanceByStudentId(this.attendanceDetails.studentId).subscribe((results: any) => {
-        console.log(results);
-        this.attendanceData = results;
         this.attendanceDetails = results;
+        this.attendanceDetails.date = new Date(results.date);
+        this.attendanceDetails.checkIn = new Date(results.checkIn);
+        this.attendanceDetails.checkout = new Date(results.checkout);
+        this.attendanceDetails.createdDttm=new Date(results.createdDttm)
+        this.attendanceDetails.modifiedDttm=new Date(results.modifiedDttm)
         localStorage.setItem('path', 'Attendance/AttendanceDetails/:' + this.attendanceDetails.studentId + '')
         this.attendanceDetails.available = String(results.available);
-        console.log(Boolean(results.available));
-        console.log(this.attendanceDetails.available);
 
 
 
@@ -73,15 +75,10 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
 
   editStudentDetailes() {
     this.showAttendanceDetailes = false;
-    console.log("ad");
 
-    console.log(this.attendanceDetails.available);
-    this.attendanceDetails.available = this.attendanceData.available;
-    console.log(this.attendanceDetails.available);
+    this.attendanceDetails.available = this.attendanceDetails.available;
 
-    this.attendanceDetails.date = new Date(this.attendanceData.date);
-    this.attendanceDetails.checkIn = new Date(this.attendanceData.checkIn);
-    this.attendanceDetails.checkout = new Date(this.attendanceData.checkout);
+   
 
 
   }
@@ -96,8 +93,6 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
       this.ngOnDestroy()
     }else{
       if (this.attendanceDetailsForm.dirty && this.attendanceDetailsForm.touched) {
-        // if (this.ConfirmExitService.canExit()) {
-        // this.router.navigateByUrl('/Student')
         this.ConfirmationService.confirm({
           message: 'Do you want to exit',
           header: 'Confirmation',
@@ -111,7 +106,6 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
         
       }
       else {
-        // this.router.navigateByUrl('/Student')
         this.router.navigateByUrl('/Attendance')
         this.ngOnDestroy()
       }
@@ -120,16 +114,15 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log("submit");
     this.attendanceDetails.modifiedSource = "admin";
     this.attendanceDetails.modifiedSourceType = "admin",
       this.attendanceDetails.modifiedDttm = new Date()
     this.attendanceDetails.available =this.attendanceDetails.available
     // })
-    console.log(this.attendanceDetailsForm.value.modifiedDttm);
 
     this.APIService.updateAttendance(this.attendanceDetails).subscribe((results) => { }, (error) => {
-      console.log(error);
+      
+      
       this.MessageService.add({ severity: 'success', detail: 'Student' + this.StudentId + ' detailes added successfully' });
       this.router.navigateByUrl('/Attendance')
       this.ngOnDestroy()

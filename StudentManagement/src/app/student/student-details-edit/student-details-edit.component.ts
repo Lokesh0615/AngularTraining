@@ -30,7 +30,7 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
   studentId: any;
 
   // for min date in calender
-  createdDttm = new Date()
+  todaysDate = new Date()
 
   studentDetails = {
     studentId: '',
@@ -79,6 +79,11 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
         this.studentDetails.dob = new Date(results.dob);
         this.studentDetails.departmentId = Number(results.departmentId);
         this.studentDetails.dateOfJoining = new Date(results.dateOfJoining)
+        this.studentDetails.createdDttm=new Date(results.createdDttm)
+        if(results.modifiedDttm !=''){
+          this.studentDetails.modifiedDttm=new Date(results.modifiedDttm)
+
+        }
         console.log(results.bloodGroup);
         
 

@@ -1,22 +1,18 @@
-<div>
+<div class="navContainer">
     <div class="homePageLoggedDetailes">
         <div class="homePageLogo"><img src="assets/ItorizonLogo.png" alt="noImage"></div>
         <div class="loggedInDetailes">
-            <!-- <i class="pi pi-bell text-3xl" pBadge value="2"></i> -->
             <p-avatar [label]='userIcon' styleClass="mr-2" size="large" shape="circle"></p-avatar>
             <button pButton Class="p-button-primary" (click)="logOut()" >LogOut</button>
         </div>
     </div>
     <div class="navBar">
         <ul class="nav">
-            <li routerLinkActive="active" ><a (click)="changeTitle('Home','pi pi-home')" routerLink="/Home">Home</a></li>
-            <li  routerLinkActive="active"><a (click)="changeTitle('Student', 'pi pi-users')" routerLink="/Student">Student</a></li>
-            <li *ngIf="loggedInUser=='admin' " routerLinkActive="active"><a (click)="changeTitle('Department', 'pi pi-table')" routerLink="/Department">Department</a></li>
-            <li routerLinkActive="active"><a (click)="changeTitle('Attendance', 'pi pi-table')" routerLink="/Attendance">Attendance</a></li>
+            <li routerLinkActive="active" ><a  routerLink="/Home">Home</a></li>
+            <li  routerLinkActive="active"><a  routerLink="/Student">Student</a></li>
+            <li *ngIf="loggedInUser=='admin' " routerLinkActive="active"><a  routerLink="/Department">Department</a></li>
+            <li routerLinkActive="active"><a  routerLink="/Attendance">Attendance</a></li>
         </ul>
-        <!-- <div> -->
-           
-        <!-- </div> -->
     </div>
     <div class="dashBoard">
         <span  [class]="icon"></span>
@@ -24,7 +20,7 @@
 
     </div>
     <div class="content">
-        <ng-content (change)="ngOnInit()" ></ng-content>
+        <ng-content  (change)="ngOnInit()" ></ng-content>
     </div>
 
     <div class="footer">

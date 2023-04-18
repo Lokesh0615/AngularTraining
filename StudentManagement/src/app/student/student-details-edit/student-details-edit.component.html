@@ -1,131 +1,115 @@
 <div class="container">
 
-
-    <div *ngIf="showStudentDetailes">
-        <div class="grid offset">
-            <div  class="col-12 sm:col-12 md:col-3 lg:col-3  xl:col-3   detailContainer">
-                <div  >
-                    <!-- <h3>{{studentDetails.firstName}} Details</h3> -->
-                    <div class="studentImage"><img [src]="studentDetails.imagePath" alt="noImage"></div>
-                    <div>
-                        <label class="col-6">Student ID:</label>
-                        <label class="col-6">{{studentDetails.studentId}}</label>
-                    </div>
-                    <div>
-                        <label class="col-6">Name: </label>
-                        <label class="col-6">{{studentDetails.firstName +" "+ studentDetails.lastName}}</label>
-                    </div>
-                    <div>
-                        <label class="col-6">Date Of Birth: </label>
-                        <label class="col-6">{{studentDetails.dob | date: "dd/MM/yyyy"}}</label>
-                    </div>
-                    <div>
-                        <label class="col-6">Gender: </label>
-                        <label class="col-6">{{studentDetails.gender | titlecase}}</label>
-                    </div>
-
-                </div>
+    <div class="grid " *ngIf="showStudentDetailes">
+        <div class="col-12 sm:col-12 md:col-3 lg:col-3  xl:col-3   detailContainer">
+            <div class="studentImageContainer"><img [src]="studentDetails.imagePath" alt="noImage"></div>
+            <div>
+                <label class="col-6">Student ID:</label>
+                <label class="col-6">{{studentDetails.studentId}}</label>
             </div>
-            <div  class="col-12 sm:col-12 md:col-8 lg:col-8 xl:col-8  detailContainer">
-                <div>
-                    <h3>{{studentDetails.studentId}} Details</h3>
-                </div>
-                <hr>
-                <div class="grid grid-nogutter">
-                    <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                        <label class="col-6">Phone Number: </label>
-                        <label class="col-6">{{studentDetails.phoneNumber}}</label>
-
-                    </div>
-                    <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                        <label class="col-6">Mail ID: </label>
-                        <label class="col-6">{{studentDetails.mailId}}</label>
-                    </div>
-                </div>
-
-
-                <div class="grid grid-nogutter">
-                    <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                        <label class="col-6">Blood Group: </label>
-                        <label class="col-6" >{{studentDetails.bloodGroup}}</label>
-                    </div>
-                    <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                        <label class="col-6">Address: </label>
-                        <label class="col-6">{{studentDetails.address}}</label>
-                    </div>
-                </div>
-                <div class="grid grid-nogutter">
-                    <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                        <label class="col-6">Date of Joining: </label>
-                        <label class="col-6">{{studentDetails.dateOfJoining | date: "dd/MM/yyyy"}}</label>
-
-                    </div>
-                    <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                        <label class="col-6">Department: </label>
-                        <label class="col-6" #department>{{studentDetails.department| titlecase}} </label>
-                    </div>
-                </div>
-                <div class="grid grid-nogutter">
-                    <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                        <label class="col-6">Department ID: </label>
-                        <label class="col-6">{{studentDetails.departmentId}}</label>
-
-                    </div> 
-                    <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                        <label class="col-6">Created Source: </label>
-                        <label class="col-6">{{studentDetails.createdSource}}</label>
-                    </div>
-                </div>
-                <div class="grid grid-nogutter">
-                    <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                        <label class="col-6">Created Source Type: </label>
-                        <label class="col-6">{{studentDetails.createdSourceType}}</label>
-
-                    </div>
-                    <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                        <label class="col-6">CreatedDttm: </label>
-                        <label class="col-6">{{studentDetails.createdDttm | date :" dd/MM/yyyy, h:mm a "}}</label>
-                    </div>
-                </div>
-                <div class="grid grid-nogutter">
-                    <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                        <label class="col-6">Modified Source: </label>
-                        <label class="col-6">{{studentDetails.modifiedSource}}</label>
-
-                    </div>
-                    <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                        <label class="col-6">Modified Source Type: </label>
-                        <label class="col-6">{{studentDetails.modifiedSourceType }}</label>
-                    </div>
-                </div>
-                <div class="grid grid-nogutter">
-                    <div class="col-12 sm:col-12 md:col-6 lg:col-6  grid-nogutter">
-                        <label class="col-6">ModifiedDttm: </label>
-                        <label class="col-6">{{studentDetails.modifiedDttm | date :"dd/MM/yyyy, h:mm a "}}</label>
-
-                    </div>
-                    <div class="detailsButtons">
-                        <button [disabled]="loggedInUser!='admin'" pButton label="Edit" class="p-button-primary addButtons"
-                            (click)="editStudentDetailes()"></button>
-            
-                        <button pButton label="Back" class="p-button-secondary addButtons" (click)="canExit()"></button>
-                    </div>
-                </div>
-
-               
+            <div>
+                <label class="col-6">Name: </label>
+                <label class="col-6">{{studentDetails.firstName +" "+ studentDetails.lastName}}</label>
             </div>
-        
-       
+            <div>
+                <label class="col-6">Date Of Birth: </label>
+                <label class="col-6">{{studentDetails.dob | date: "dd/MM/yyyy"}}</label>
+            </div>
+            <div>
+                <label class="col-6">Gender: </label>
+                <label class="col-6">{{studentDetails.gender | titlecase}}</label>
+            </div>
+
         </div>
-        <p-toast></p-toast>
+        <div class="col-12 sm:col-12 md:col-9 lg:col-9 xl:col-9  detailContainer">
+            <h3>{{studentDetails.studentId}} Details</h3>
+            <hr>
+            <div class="grid grid-nogutter">
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
+                    <label class="col-6">Phone Number: </label>
+                    <label class="col-6">{{studentDetails.phoneNumber}}</label>
+
+                </div>
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
+                    <label class="col-6">Mail ID: </label>
+                    <label class="col-6">{{studentDetails.mailId}}</label>
+                </div>
+            </div>
+
+
+            <div class="grid grid-nogutter">
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
+                    <label class="col-6">Blood Group: </label>
+                    <label class="col-6">{{studentDetails.bloodGroup}}</label>
+                </div>
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
+                    <label class="col-6">Address: </label>
+                    <label class="col-6">{{studentDetails.address}}</label>
+                </div>
+            </div>
+            <div class="grid grid-nogutter">
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
+                    <label class="col-6">Date of Joining: </label>
+                    <label class="col-6">{{studentDetails.dateOfJoining | date: "dd/MM/yyyy"}}</label>
+
+                </div>
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
+                    <label class="col-6">Department: </label>
+                    <label class="col-6" #department>{{studentDetails.department| titlecase}} </label>
+                </div>
+            </div>
+            <div class="grid grid-nogutter">
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
+                    <label class="col-6">Department ID: </label>
+                    <label class="col-6">{{studentDetails.departmentId}}</label>
+
+                </div>
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
+                    <label class="col-6">Created Source: </label>
+                    <label class="col-6">{{studentDetails.createdSource}}</label>
+                </div>
+            </div>
+            <div class="grid grid-nogutter">
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
+                    <label class="col-6">Created Source Type: </label>
+                    <label class="col-6">{{studentDetails.createdSourceType}}</label>
+
+                </div>
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
+                    <label class="col-6">CreatedDttm: </label>
+                    <label class="col-6">{{studentDetails.createdDttm | date :" dd/MM/yyyy, h:mm a "}}</label>
+                </div>
+            </div>
+            <div class="grid grid-nogutter">
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
+                    <label class="col-6">Modified Source: </label>
+                    <label class="col-6">{{studentDetails.modifiedSource}}</label>
+
+                </div>
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
+                    <label class="col-6">Modified Source Type: </label>
+                    <label class="col-6">{{studentDetails.modifiedSourceType }}</label>
+                </div>
+            </div>
+            <div class="grid grid-nogutter">
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6  grid-nogutter">
+                    <label class="col-6">ModifiedDttm: </label>
+                    <label class="col-6">{{studentDetails.modifiedDttm | date :"dd/MM/yyyy, h:mm a "}}</label>
+
+                </div>
+                <div class="detailsButtons">
+                    <button *ngIf="loggedInUser =='admin'" pButton label="Edit" class="p-button-primary Buttons"
+                        (click)="editStudentDetailes()"></button>
+
+                    <button pButton label="Back" class="p-button-secondary Buttons" (click)="canExit()"></button>
+                </div>
+            </div>
+        </div>
     </div>
 
-
     <div class="studentDetailsContainer" [ngStyle]="{'display': showStudentDetailes === false ? 'block' : 'none' }">
-
         <form #studentDetailsForm="ngForm">
             <div class="grid">
-
                 <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
                     <label>StudentId </label>
@@ -135,18 +119,22 @@
                     <label>First Name<span>*</span> </label>
                     <input type="text" pInputText id="firstName" name="firstName" placeholder="firstName"
                         pattern="[A-Za-z]+" required #firstName="ngModel" [(ngModel)]="studentDetails.firstName">
-                        <small  *ngIf="!firstName.touched && firstName.invalid &&  !fieldSelected" id="username-help" class="p-error">First Name is required.</small>
-                        <small  *ngIf="firstName.invalid && firstName.touched " id="username-help" class="p-error">First Name is Inavild.</small>
-        
+                    <small *ngIf="!firstName.touched && firstName.invalid &&  !fieldSelected" id="username-help"
+                        class="p-error">First Name is required.</small>
+                    <small *ngIf="firstName.invalid && firstName.touched " id="username-help" class="p-error">First Name
+                        is Inavild.</small>
+
 
                     <label>Last Name<span>*</span></label>
                     <input type="text" pInputText id="lastName" name="lastName" placeholder="lastName"
                         pattern="[A-Za-z]+" required #lastName="ngModel" [(ngModel)]="studentDetails.lastName">
-                        <small  *ngIf="!lastName.touched && lastName.invalid  &&  !fieldSelected" id="username-help" class="p-error">Last Name is required.</small>
-                        <small  *ngIf="lastName.invalid && lastName.touched " id="username-help" class="p-error">Last Name is Inavild.</small>
-        
+                    <small *ngIf="!lastName.touched && lastName.invalid  &&  !fieldSelected" id="username-help"
+                        class="p-error">Last Name is required.</small>
+                    <small *ngIf="lastName.invalid && lastName.touched " id="username-help" class="p-error">Last Name is
+                        Inavild.</small>
+
                     <label>Blood Group</label>
-                    <p-dropdown [options]="bloodGroupList" optionValue="type" optionLabel="type" 
+                    <p-dropdown [options]="bloodGroupList" optionValue="type" optionLabel="type" appendTo="body"
                         placeholder="bloodGroup" name="bloodGroup" [(ngModel)]="studentDetails.bloodGroup">
                     </p-dropdown>
 
@@ -169,10 +157,6 @@
                             <label for="others" class="ml-2">Others</label>
                         </div>
                     </div>
-                    <!-- <small *ngIf="gender.invalid && (gender.touched || !fieldSelected)  " id="username-help"
-                        class="p-error">Gender is required.</small> -->
-
-
 
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
@@ -182,60 +166,46 @@
                     <input type="text" pInputText id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}"
                         placeholder="phoneNumber" [maxLength]="10" [minlength]="10" ngModel
                         [(ngModel)]="studentDetails.phoneNumber">
-                        
+
 
                     <label>Address</label>
                     <input type="text" pInputText id="address" name="address" placeholder="address" ngModel
                         [(ngModel)]="studentDetails.address">
 
                     <label>DOB<span>*</span></label>
-                    <!-- <input type="date" pInputText  id="dob" name="dob" placeholder="dob" ngModel required #dob="ngModel"> -->
-                    <!-- <p-calendar  id="date" name="date"  ngModel [required]="true" #date="ngModel" appendTo="body" inputId="time" [(ngModel)]="attendanceDetails.date" ></p-calendar> -->
-
-                    <p-calendar [maxDate]="createdDttm" ngModel name="dob" #dob="ngModel" appendTo="body"
+                    <p-calendar [maxDate]="todaysDate" ngModel name="dob" #dob="ngModel" appendTo="body"
                         [required]="true" [(ngModel)]="studentDetails.dob"></p-calendar>
-                    <!-- <small *ngIf="dob.invalid && (dob.touched || !fieldSelected)" id="username-help"
-                        class="p-error">Date of Birth is required</small> -->
-
 
 
                     <label>Mail Id<span>*</span></label>
                     <input type="text" pInputText id="mailId" name="mailId" placeholder="mailId" ngModel
                         #mailId="ngModel" required email="true" [(ngModel)]="studentDetails.mailId">
-                        <small  *ngIf="!mailId.touched && mailId.invalid &&  !fieldSelected" id="username-help" class="p-error">MailId is required.</small>
-                        <small  *ngIf="mailId.invalid && mailId.touched " id="username-help" class="p-error">MailID is Inavild.</small>
-        
+                    <small *ngIf="!mailId.touched && mailId.invalid &&  !fieldSelected" id="username-help"
+                        class="p-error">MailId is required.</small>
+                    <small *ngIf="mailId.invalid && mailId.touched " id="username-help" class="p-error">MailID is
+                        Inavild.</small>
+
 
 
                     <label>Department<span>*</span></label>
-                    <p-dropdown [options]="departmentList" ngModel #department="ngModel" optionValue="departmentCode"
+                    <p-dropdown [options]="departmentList"  #department="ngModel" optionValue="departmentCode" appendTo="body"
                         [required]="true" optionLabel="departmentName" placeholder="Department" name="department"
                         [(ngModel)]="studentDetails.department">
                     </p-dropdown>
-                    <!-- <small *ngIf="department.invalid && (department.touched || !fieldSelected)" id="username-help"
-                        class="p-error">Departmnet is required.</small> -->
 
 
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
                     <label>Department Id<span>*</span></label>
-                    <!-- <input type="text" pInputText  id="departmentId" name="departmentId" placeholder="departmentId" ngModel required #departmentId="ngModel" > -->
-                    <p-dropdown [options]="departmentList" ngModel #departmentId="ngModel" optionValue="departmentId"
+                    <p-dropdown [options]="departmentList"  #departmentId="ngModel" optionValue="departmentId" appendTo="body"
                         optionLabel="departmentId" placeholder="DepartmentId" name="departmentId" [required]="true"
                         [(ngModel)]="studentDetails.departmentId">
                     </p-dropdown>
-                    <!-- <small *ngIf="departmentId.invalid && (departmentId.touched || !fieldSelected)" id="username-help"
-                        class="p-error">Departmnet Id is required.</small> -->
-
-
 
                     <label>Date Of Joining<span>*</span></label>
-                    <!-- <input type="date" pInputText  id="dateOfJoining" name="dateOfJoining" placeholder="dateOfJoining" ngModel required #dateOfJoining="ngModel"> -->
-                    <p-calendar [minDate]="createdDttm" ngModel name="dateOfJoining" #dateOfJoining="ngModel"
+                    <p-calendar [minDate]="todaysDate"  name="dateOfJoining" #dateOfJoining="ngModel" 
                         appendTo="body" [required]="true" [(ngModel)]="studentDetails.dateOfJoining"></p-calendar>
-                    <!-- <small *ngIf="dateOfJoining.invalid && (dateOfJoining.touched || !fieldSelected)" id="username-help"
-                        class="p-error">Date Of Joining is required</small> -->
 
                     <label for="image">Image</label>
                     <div *ngIf="!imageEditOption" class="imageNameContainer">
@@ -262,30 +232,36 @@
                 <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
                     <label>CreatedDttm</label>
-                    <input type="text" pInputText id="createdDttm" name="createdDttm" placeholder="createdDttm" ngModel
-                        [(ngModel)]="studentDetails.createdDttm" disabled>
+                    <p-calendar id="createdDttm" name="createdDttm" [required]="true" #createdDttm="ngModel" appendTo="body" disabled
+                    [showTime]="true" hourFormat="12"  [(ngModel)]="studentDetails.createdDttm"></p-calendar>
+                
+                    <!-- <input type="text" pInputText id="createdDttm" name="createdDttm" placeholder="createdDttm" ngModel
+                        [(ngModel)]="studentDetails.createdDttm" disabled> -->
 
 
                     <label>ModifiedSource</label>
                     <input type="text" pInputText id="modifiedSource" name="modifiedSource" placeholder="modifiedSource"
                         [(ngModel)]="studentDetails.modifiedSource" ngModel disabled>
+
                     <label>ModifiedSourceType</label>
                     <input type="text" pInputText id="modifiedSourceType" name="modifiedSourceType"
                         placeholder="modifiedSourceType" [disabled]="true"
                         [(ngModel)]="studentDetails.modifiedSourceType" readonly>
+
                     <label>ModifiedDttm</label>
-                    <input type="text" pInputText id="modifiedDttm" name="modifiedDttm" placeholder="modifiedDttm"
-                        ngModel [(ngModel)]="studentDetails.modifiedDttm" disabled>
+                    <p-calendar id="modifiedDttm" name="modifiedDttm" [required]="true" #modifiedDttm="ngModel" appendTo="body" disabled
+                    [showTime]="true" hourFormat="12" placeholder="ModifiedDttm" [(ngModel)]="studentDetails.modifiedDttm"></p-calendar>
+                
 
 
                 </div>
 
                 <div class="detailsButtons">
                     <!-- pristine is ture when any chnages are not made -->
-                    <button type="button" pButton class="p-button addButtons" label="Save"
+                    <button type="button" pButton class="p-button Buttons" label="Save"
                         (click)="fieldSelected=false; studentDetailsForm.valid && onSubmint()"
-                        [disabled]="studentDetailsForm.pristine"  ></button>
-                    <button type="button" pButton class="p-button-secondary addButtons" label="Cancel"
+                        [disabled]="studentDetailsForm.pristine"></button>
+                    <button type="button" pButton class="p-button-secondary Buttons" label="Cancel"
                         (click)="canExit()"></button>
                 </div>
             </div>

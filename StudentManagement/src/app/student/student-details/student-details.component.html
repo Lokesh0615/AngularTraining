@@ -1,25 +1,4 @@
-<!-- <app-navbar> -->
 
-<!-- <div class="card">
-    <h5>Vertical and Grid</h5>
-    <div class="formgrid grid">
-        <div class="field col">
-            <label for="firstname2">Firstname</label>
-            <input id="firstname2" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
-        </div>
-        <div class="field col">
-            <label for="lastname2">Lastname</label>
-            <input id="lastname2" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
-        </div>
-    </div>
-</div> -->
-
-<!-- <div class="grid">
-    <div class="col-6">6</div>
-    <div class="col-6">6</div>
-    <div class="col-6">6</div>
-    <div class="col-6">6</div>
-</div> -->
 <div class="studentDetailsContainer">
     <p-toast></p-toast>
 
@@ -42,7 +21,7 @@
                 <small  *ngIf="lastName.invalid && lastName.touched " id="username-help" class="p-error">Last Name is Inavild.</small>
 
                 <label>Blood Group</label>
-                <p-dropdown [options]="bloodGroupList" ngModel  optionValue="type"
+                <p-dropdown [options]="bloodGroupList" ngModel  optionValue="type" appendTo="body"
                             optionLabel="type" placeholder="bloodGroup" name="bloodGroup" [(ngModel)]="studentDetails.bloodGroup"
                             >
                 </p-dropdown>
@@ -58,16 +37,13 @@
                         <p-radioButton name="gender" value="female" inputId="female"  #gender="ngModel" [(ngModel)]="studentDetails.gender" required></p-radioButton>
                         <label for="female" class="ml-2">Female</label>
                     </div>
+
                     <div class="flex align-items-center">
                         <p-radioButton name="gender" value="others" inputId="others"  #gender="ngModel" [(ngModel)]="studentDetails.gender" required></p-radioButton>
                         <label for="others" class="ml-2">Others</label>
                     </div>
                 </div>
                 <small  *ngIf="!gender.touched &&  !fieldSelected" id="username-help" class="p-error">Gender is required.</small>
-                <!-- <small  *ngIf="gender.invalid && gender.touched " id="username-help" class="p-error">First Name is Inavild.</small> -->
-
-               
-                
 
             </div>
             <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
@@ -83,14 +59,9 @@
                 <input type="text" pInputText  id="address" name="address" placeholder="address"   [(ngModel)]="studentDetails.address" >
 
                 <label>DOB<span>*</span></label>
-                <!-- <input type="date" pInputText  id="dob" name="dob" placeholder="dob" ngModel required #dob="ngModel"> -->
-                <!-- <p-calendar  id="date" name="date"  ngModel [required]="true" #date="ngModel" appendTo="body" inputId="time" [(ngModel)]="attendanceDetails.date" ></p-calendar> -->
-
                 <p-calendar  [maxDate]="createdDttm"   name="dob"  #dob="ngModel" appendTo="body" [required]="true" [(ngModel)]="studentDetails.dob"  ></p-calendar>
                 <small  *ngIf="!dob.touched &&  !fieldSelected" id="username-help" class="p-error">Date of Birth is required.</small>
-                <!-- <small  *ngIf="dob.invalid && dob.touched " id="username-help" class="p-error">First Name is Inavild.</small> -->
 
-               
 
                 <label>Mail Id<span>*</span></label>
                 <input type="text" pInputText id="mailId" name="mailId" placeholder="mailId" pattern=".+@[a-z]+.com"  #mailId="ngModel" required email="true" [(ngModel)]="studentDetails.mailId" >
@@ -115,20 +86,16 @@
 
                 <label>Department Id<span>*</span></label>
                 <!-- <input type="text" pInputText  id="departmentId" name="departmentId" placeholder="departmentId" ngModel required #departmentId="ngModel" > -->
-                <p-dropdown [options]="departmentList"  #departmentId="ngModel" optionValue="departmentId"
+                <p-dropdown [options]="departmentList"  #departmentId="ngModel" optionValue="departmentId" appendTo="body"
                             optionLabel="departmentId" placeholder="DepartmentId" name="departmentId" [required]="true" [(ngModel)]="studentDetails.departmentId"
                             >
                 </p-dropdown>
                 <small  *ngIf="!departmentId.touched &&  !fieldSelected" id="username-help" class="p-error">DepartmentId is required.</small>
-                <!-- <small  *ngIf="departmentId.invalid && departmentId.touched " id="username-help" class="p-error">First Name is Inavild.</small> -->
 
-               
 
                 <label>Date Of Joining<span>*</span></label>
-                <!-- <input type="date" pInputText  id="dateOfJoining" name="dateOfJoining" placeholder="dateOfJoining" ngModel required #dateOfJoining="ngModel"> -->
                 <p-calendar  [minDate]="createdDttm"   name="dateOfJoining"  #dateOfJoining="ngModel" appendTo="body" [required]="true" [(ngModel)]="studentDetails.dateOfJoining" ></p-calendar>
                 <small  *ngIf="!dateOfJoining.touched &&  !fieldSelected" id="username-help" class="p-error">Date Of Joining is required.</small>
-                <!-- <small  *ngIf="dateOfJoining.invalid && dateOfJoining.touched " id="username-help" class="p-error">First Name is Inavild.</small> -->
 
                 <label for="image" >Image<span>*</span></label>
                 <input type="file"  placeholder="Image" id="imagePath" name="imagePath" accept=".jpg, .jpeg, .png" #imagePathValid="ngModel" ngModel  (change)="onFileSelect($event)" required> 
@@ -136,8 +103,7 @@
                 <small  *ngIf="imagePathValid.invalid && imagePathValid.touched " id="username-help" class="p-error">Image is Inavild.</small>
                 <small  *ngIf="!imageSize" id="username-help" class="p-error">Image size should be lessthan 30KB</small>
 
-                <!-- <p-fileUpload name="imagePath" placeholder="Image" (onUpload)="onFileSelect($event)" #fubauto mode="basic"
-                accept="image/*" [maxFileSize]="30000"></p-fileUpload> -->
+
 
                 <label>CreatedSource</label>
                 <input type="text" pInputText   name="createdSource" placeholder="createdSource"   disabled>
@@ -165,13 +131,9 @@
                
                 
             </div>
-            <!-- <div class="detailsButtons">
-                <button [disabled]="loggedInUser!='admin'" pButton label="Edit" class="p-button addButtons" (click)="editStudentDetailes()"></button>
-                <button pButton label="Back" class="p-button addButtons" (click)="ngOnDestroy()"></button>
-            </div> -->
             <div class="detailsButtons">
-                <button type="button" class="p-button-primary  addButtons" pButton label="Save" (click)="fieldSelected=false;  studentDetailsForm.valid && onSubmit() " ></button>
-                <button type="button" class="p-button-secondary addButtons" pButton label="Cancel"  (click)="canExit()"></button>
+                <button type="button" class="p-button-primary  Buttons" pButton label="Save" (click)="fieldSelected=false;  studentDetailsForm.valid && onSubmit() " ></button>
+                <button type="button" class="p-button-secondary Buttons" pButton label="Cancel"  (click)="canExit()"></button>
             </div>
 
         </div>
@@ -181,18 +143,3 @@
     <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
 </div>   
-
-<!-- <div class="formgroup">
-    <div class="field">
-        <label for="firstname5" class="p-sr-only">Firstname</label>
-        <input id="firstname5" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary" placeholder="Firstname">
-    </div>
-    <div class="field">
-        <label for="lastname5" class="p-sr-only">Lastname</label>
-        <input id="lastname5" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary" placeholder="Lastname">
-    </div>
-    <button type="button" class="text-white bg-primary-500 border-primary-500 px-3 py-2 text-base border-1 border-solid border-round cursor-pointer transition-all transition-duration-200 hover:bg-primary-600 hover:border-primary-600 active:bg-primary-700 active:border-primary-700">Submit</button>
-</div> -->
-
-
-<!-- </app-navbar> -->

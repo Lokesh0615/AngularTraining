@@ -26,14 +26,7 @@ input.ng-touched.ng-invalid{
 .p-dropdown .p-dropdown-label{
     width: 250px;
 }
-.buttonDiv{
-    height: 40%;
-    display: flex;
-    vertical-align: middle;
-    /* border: 1px solid red; */
-    
-    /* align-items: ; */
-}
+
 
 #imagePath{
     /* display:flex !important; */
@@ -43,11 +36,7 @@ input.ng-touched.ng-invalid{
     margin-top: 11px;
     /* margin-bottom: 30px !important; */
 }
-.buttonDiv>*{
-    height: 25%;
-    width: 100%;
-    margin-top: 10%;
-}
+
 .detailsButtons{
     width: 100%;
     display: flex;
@@ -55,7 +44,7 @@ input.ng-touched.ng-invalid{
     /* text-align: right; */
     /* margin: 0px 20px; */
 }
-.addButtons{
+.Buttons{
     margin: 0px 5px;
     width: 100px;
 }

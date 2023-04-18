@@ -39,20 +39,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   }
 
-  changeTitle(title:string, icon:string){
-    // this.VariableService.titleChange.subscribe((data)=>{
-    //   console.log(data);
+  // changeTitle(title:string, icon:string){
+  //   // this.VariableService.titleChange.subscribe((data)=>{
+  //   //   console.log(data);
       
-    //   this.title=String(data)
-    // })
-    this.title=title
-    console.log(title);
-    this.icon=icon;
-    this.ngOnInit()
+  //   //   this.title=String(data)
+  //   // })
+  //   this.title=title
+  //   console.log(title);
+  //   this.icon=icon;
+  //   this.ngOnInit()
 
     
     
-  }
+  // }
   logOut(){
     this.LoginService.logOut()
     localStorage.clear()

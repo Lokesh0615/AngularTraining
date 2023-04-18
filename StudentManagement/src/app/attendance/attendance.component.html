@@ -1,7 +1,7 @@
 <app-navbar>
     <div class="tableContainer" *ngIf="showAttendanceDetails && !childComponentOpend">
 
-        <p-dialog [(visible)]="dialogShow" [modal]="true" [style]="{width: '500px'}" position="center">
+        <p-dialog [(visible)]="dialogShow" [modal]="true"  position="center">
             <ng-template pTemplate="header">
                 <h3>Student Detailes</h3>
             </ng-template>
@@ -21,7 +21,7 @@
                 <!-- <small  *ngIf="date.invalid && date.touched" id="username-help" class="p-error">Date is required</small> -->
             </ng-template>
         </p-dialog>
-        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+        <p-confirmDialog  [baseZIndex]="1" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
         <p-toast></p-toast>
         <p-table #dt styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="500px" [value]="attendanceData"

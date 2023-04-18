@@ -42,10 +42,6 @@
             </ng-template>
             <ng-template pTemplate="body" let-studentData >
                 <tr (dblclick)="studentDetailesEdit(studentData.studentId)">
-                    <!-- <ng-container *ngFor="let key of studentData | keyvalue ; let i=index">
-                        <ng-container *ngIf="i<13">
-                            <td>{{key.value }}</td>
-                        </ng-container> -->
                     <td>{{studentData.studentId}}</td>
                     <td>{{studentData.firstName}}</td>
                     <td>{{studentData.lastName}}</td>
@@ -59,7 +55,6 @@
                     <td>{{studentData.modifiedSource}}</td>
                     <td>{{studentData.modifiedSourceType}}</td>
                     <td>{{studentData.modifiedDttm | date :" dd/MM/yyyy, h:mm a"}}</td>
-                    <!-- </ng-container> -->
                     <td *ngIf="loggedInUser=='admin' "><button  pButton  type="button" label="Delete" class="p-button-rounded p-button-danger"
                             (click)="deleteByStdId(studentData.studentId)"></button>
                     </td>
@@ -74,9 +69,6 @@
                 </tr>
             </ng-template>
         </p-table>
-        <!-- <p-paginator [rows]="4" [totalRecords]="studentsData.length" [pageLinkSize]="5" 
-                     [showJumpToPageDropdown]="false" [showFirstLastIcon]="false" [showPageLinks]="false"></p-paginator> -->
-
     </div>
     <div *ngIf="childComponentOpend">
         <router-outlet (deactivate)="ngOnInit()"></router-outlet>

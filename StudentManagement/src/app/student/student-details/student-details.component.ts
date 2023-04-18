@@ -41,7 +41,7 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
     createdSourceType: 'admin',
     modifiedSource: '',
     modifiedSourceType: '',
-    modifiedDttm: null,
+    modifiedDttm: '',
 
     imagePath: null,
     imageName:''
