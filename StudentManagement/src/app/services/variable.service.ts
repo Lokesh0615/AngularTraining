@@ -1,21 +1,9 @@
-import { Component, Injectable } from "@angular/core";
-import { Observable, Subject } from "rxjs";
-// // import { NavbarComponent } from "../navbar/navbar.component";
-// import { StudentDetailesService } from "./studentDetailes";
+import {Injectable } from "@angular/core";
 
-@Injectable({
+@Injectable()
 
-    providedIn: 'any'
-})
 export class VariableService {
-
     showStudentDetails = true;
-    studentId!: string;
-    attendanceStudentId!: string;
-    attendenceDepartmentId!: string;
-
-    title!: string;
-
     bloodGroupList = [
         { type: "O+" },
         { type: "O-" },
@@ -44,9 +32,6 @@ export class VariableService {
         { departmentName: 'Compuetr Scince',departmentCode:'computer scince', departmentId: 3 },
         { departmentName: 'Electronics & Electrical',departmentCode:'electronics & electical', departmentId: 4 }
     ];
-
-    
-
     studentTableHeaders = [
         {name:'Student Id', fieldName:'studentId'}, 
         {name:'First Name', fieldName:'firstName'},
@@ -62,7 +47,6 @@ export class VariableService {
         {name:'Modified Source Type', fieldName:'modifiedSourceType'},
         {name:'ModifiedDttm', fieldName:'modifiedDttm'},
     ]
-
     attendanceTableHeader=[
         {name:'Student Id', fieldName:'studentId'},
         {name:'Date', fieldName:'date'},

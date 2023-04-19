@@ -1,10 +1,10 @@
 <app-navbar>
     <div class="tableContainer" *ngIf="!showDepartmentDetails && !childComponentOpend">
-        <p-toast></p-toast>
         <p-table [rows]="paginatorValue" [paginator]="paginatorValue<departmentsData.length" [resizableColumns]="true"
             [totalRecords]="departmentsData.length" pageLinkSize="5" [showJumpToPageDropdown]="false"
             [showFirstLastIcon]="false" [value]="departmentsData" styleClass="p-datatable-striped" [scrollable]="true"
             scrollHeight="500px">
+
             <ng-template pTemplate="caption">
                 <div class="caption">
                     <h3>Department List</h3>
@@ -13,6 +13,7 @@
                 </div>
 
             </ng-template>
+
             <ng-template pTemplate="header">
                 <tr class="table_head">
                     <ng-container *ngFor="let header of departmentHeader">
@@ -21,6 +22,7 @@
 
                 </tr>
             </ng-template>
+
             <ng-template pTemplate="body" let-departmentData>
                 <tr (dblclick)="departmentDetailes(departmentData.departmentId)">
                     <td>{{departmentData.departmentId}}</td>
@@ -34,12 +36,10 @@
                     <td>{{departmentData.modifiedSourceType}}</td>
                     <td>{{departmentData.modifiedDttm | date :" dd/MM/yyyy, h:mm a"}}</td>
                 </tr>
-
             </ng-template>
+
             <ng-template pTemplate="emptymessage">
-                <tr>
-                    <td colspan="16">no data available</td>
-                </tr>
+                <tr><td colspan="16">no data available</td></tr>
             </ng-template>
         </p-table>
     </div>

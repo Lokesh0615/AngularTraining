@@ -10,7 +10,6 @@
             <input pInputText type="text" name="user_id" id="user_id" #user_id>
 
             <label for="password">Password<span >*</span></label>
-            <!-- <input type="text" pPassword   [feedback]="false" (toggle)="true" placeholder="Enter Password" > -->
             <p-password 
                 [inputStyle]="{'width':'370px'}"
                 [toggleMask]="true" 
@@ -22,10 +21,10 @@
         <div class="buttons">
             <button *ngIf="!isSignUp" pButton class="p-button-primary" label="Login" (click)="login(user_id.value, password.value); "></button>
             <button *ngIf="isSignUp" pButton class="p-button-primary" label="SignUp" (click)="signUp(user_id.value, password.value); "></button>
-            <!-- <button pButton class="p-button-danger" label="Cancel" (click)="cancel()"></button> -->
         </div>
         <p *ngIf="!isSignUp">Dont have an account? <a  class="links" (click)="signUpOption()">SignUp</a></p>
-         <a *ngIf="isSignUp"  class="links"  (click)="loginOption()" >Login</a>
+        <a *ngIf="isSignUp"  class="links"  (click)="loginOption()" >Login</a>
+        <p-toast></p-toast>
        
     </form>
 </div>

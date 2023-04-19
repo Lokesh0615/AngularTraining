@@ -20,7 +20,6 @@ export class APIService{
 
     // Student controller
     addStudent(studentData:object){
-        
         return this.HttpClient.post('http://localhost:9090/studentdetail/addstudent', studentData)
     }
     
@@ -34,12 +33,9 @@ export class APIService{
     }
     deleteByStudentId(studentId:number){
         return this.HttpClient.delete('http://localhost:9090/studentdetail/deletebystudentid?studentId='+studentId+'')
-        console.log("lll");
         
     }
     updateStudentDetails(studentData:object){
-        console.log(studentData);
-        
         return this.HttpClient.put('http://localhost:9090/studentdetail/updatestudent', studentData)
     }
 
@@ -69,8 +65,6 @@ export class APIService{
     }
 
     updateAttendance(attendanceData:object){
-        // console.log(attendanceData);
-        
         return this.HttpClient.put('http://localhost:9090/attendanceDetail/updateAttendance', attendanceData)
     }
 

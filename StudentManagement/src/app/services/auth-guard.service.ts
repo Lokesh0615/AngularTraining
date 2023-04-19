@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core'
 import { Router, CanActivate } from '@angular/router';
-import { LoginService } from './login.service';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
-    constructor(private loginService:LoginService, private router: Router){}
+    constructor( private router: Router){}
     canActivate(){
         if( localStorage.getItem('loggedIn')){
             return true
@@ -13,6 +12,5 @@ export class AuthGuardService implements CanActivate {
 
             return false
         }
-        // return true;
     }
 }

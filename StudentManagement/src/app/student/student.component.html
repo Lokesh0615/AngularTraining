@@ -5,41 +5,35 @@
             <div class="topContainerButtons">
                 <p-dropdown [options]="paginatorDropdown"  optionValue="rows"  optionLabel="rows" [(ngModel)]="paginatorValue"  ></p-dropdown>
                 <button *ngIf="loggedInUser=='admin' " pButton  Class="p-button-sm" (click)="showDialog()" label="+ADD"></button>
-
-
             </div>
         </div>
         <p-dialog [(visible)]="dialogShow" [modal]="true" [style]="{width: '350px'}" position="center">
             <ng-template pTemplate="header" ><h3>Student Details</h3></ng-template>
             <label>Student ID: </label>
             <input pInputText type="text" pattern="[A-Z]{2}[0-9]{4}"  placeholder="Student Id"  #checkStdId="ngModel" [(ngModel)]="studentId">
-            <p  *ngIf="checkStdId.touched && checkStdId.invalid " id="username-help" class="p-error" style="text-align: right;">StudentId Name is Invalid.</p>
+            <p  *ngIf="!fieldSelected   && !checkStdId.dirty" id="username-help" class="p-error text-right">StudentId  is Required.</p>
+            <p  *ngIf="checkStdId.dirty && checkStdId.invalid " id="username-help" class="p-error text-right" >StudentId  is Invalid.</p>
             <ng-template pTemplate="footer">
-                <p-button label="Cancel" (onClick)="dialogShow=false"></p-button>
-                <p-button label="Confirm" (onClick)="(checkStdId.value!='' && checkStdId.valid) && checkStudentId(checkStdId.value)"></p-button>
+                <button pButton label="Cancel" (click)="dialogShow=false"></button>
+                <button  pButton type="button" label="Confirm" (click)="fieldSelected=false; (checkStdId.value!='' && checkStdId.valid) && checkStudentId()"></button>
             </ng-template>
         </p-dialog>
         <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
-
         <p-toast></p-toast>
-        <!-- <p-paginator [rows]="4" [totalRecords]="studentsData.length" [pageLinkSize]="5" 
-        [showJumpToPageDropdown]="false" [showFirstLastIcon]="false" [showPageLinks]="false"></p-paginator> -->
 
-        <p-table   [rows]="paginatorValue" [paginator]="paginatorValue<studentsData.length" 
-        [totalRecords]="studentsData.length" pageLinkSize="5" [resizableColumns]="true"
-        [showJumpToPageDropdown]="false" [showFirstLastIcon]="false" 
-            styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="500px" [value]="studentsData" 
-            >
+        <p-table   [rows]="paginatorValue" [paginator]="paginatorValue<studentsData.length" [showFirstLastIcon]="false" 
+                    [totalRecords]="studentsData.length" pageLinkSize="5" [resizableColumns]="true" [showJumpToPageDropdown]="false"
+                    styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="500px" [value]="studentsData"  >
             
             <ng-template pTemplate="header">
                 <tr class="table_head" >
-                    <!-- <th ><span>Student Id</span><p-sortIcon pSortableColumn="studentId"  field="studentId" ></p-sortIcon></th> -->
                     <ng-container *ngFor="let header of studentTableHeaders">
                         <th><span>{{header.name}}</span><p-sortIcon pSortableColumn="{{header.fieldName}}" field="{{header.fieldName}}"></p-sortIcon></th>
                     </ng-container>
                    <th *ngIf="loggedInUser=='admin' ">Delete</th>
                 </tr>
             </ng-template>
+
             <ng-template pTemplate="body" let-studentData >
                 <tr (dblclick)="studentDetailesEdit(studentData.studentId)">
                     <td>{{studentData.studentId}}</td>
@@ -58,20 +52,16 @@
                     <td *ngIf="loggedInUser=='admin' "><button  pButton  type="button" label="Delete" class="p-button-rounded p-button-danger"
                             (click)="deleteByStdId(studentData.studentId)"></button>
                     </td>
-
                 </tr>
-              
-
             </ng-template>
+
             <ng-template pTemplate="emptymessage" >
-                <tr  >
-                    <td  colspan="16" >no data available</td>
-                </tr>
+                <tr><td  colspan="16" >no data available</td></tr>
             </ng-template>
+
         </p-table>
     </div>
     <div *ngIf="childComponentOpend">
         <router-outlet (deactivate)="ngOnInit()"></router-outlet>
     </div>
-
 </app-navbar>

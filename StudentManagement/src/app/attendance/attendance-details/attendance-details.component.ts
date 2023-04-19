@@ -14,17 +14,17 @@ import { VariableService } from 'src/app/services/variable.service';
 })
 export class AttendanceDetailsComponent implements OnInit, OnDestroy {
 
-  availability = [{ type: 'true', name:'True' }, { type: 'false', name:'False' }]
-  fieldSelected=true;
+  availability = [{ type: 'true', name: 'True' }, { type: 'false', name: 'False' }]
+  fieldSelected = true;
 
   attendanceDetails = {
-    studentId: null,
-    date:null,
+    studentId: '',
+    date: null,
     departmentId: null,
-    available:'',
-    checkIn:null,
-    checkout:null,
-    attendanceCount:null,
+    available: '',
+    checkIn: null,
+    checkout: null,
+    attendanceCount: null,
     createdSource: "admin",
     createdSourceType: 'admin',
     createdDttm: null,
@@ -33,39 +33,30 @@ export class AttendanceDetailsComponent implements OnInit, OnDestroy {
     modifiedDttm: null
   }
 
-  @ViewChild('attendanceDetailsForm') attendanceDetailsForm!:NgForm;
-
+  @ViewChild('attendanceDetailsForm') attendanceDetailsForm!: NgForm;
 
   constructor(private APIService: APIService, private router: Router, private activatedRoute: ActivatedRoute,
-    private VariableService: VariableService,private ConfirmationService: ConfirmationService,
-    private MessageService: MessageService, private LoginService: LoginService) { }
+    private ConfirmationService: ConfirmationService, private LoginService: LoginService) { }
 
-  
-    ngOnInit(): void {
-   this.attendanceDetails.studentId=this.VariableService.attendanceStudentId;
-   this.attendanceDetails.departmentId=this.VariableService.attendenceDepartmentId;
-   localStorage.setItem('path','Attendance/AddAttendanceDetails/:'+this.attendanceDetails.studentId+'')
-   this.activatedRoute.paramMap.subscribe((parm) => {
-    console.log(parm);
-    
-     this.attendanceDetails.studentId = parm.get('id')?.substring(1);
-     this.attendanceDetails.departmentId = parm.get('did')?.substring(1);
 
- })
+  ngOnInit(): void {
+
+    this.activatedRoute.paramMap.subscribe((parm) => {
+      this.attendanceDetails.studentId = parm.get('id')?.substring(1);
+      this.attendanceDetails.departmentId = parm.get('did')?.substring(1);
+      localStorage.setItem('path', 'Attendance/AddAttendanceDetails/:' + this.attendanceDetails.studentId + '/:' + this.attendanceDetails.departmentId + '')
+
+    })
 
   }
 
   ngOnDestroy(): void {
-    // throw new Error('Method not implemented.');
-    // this.router.navigateByUrl('/Attendance')
     this.LoginService.setChildComponentRefresh(false)
   }
 
   canExit() {
-   
+
     if (this.attendanceDetailsForm.dirty && this.attendanceDetailsForm.touched) {
-      // if (this.ConfirmExitService.canExit()) {
-      // this.router.navigateByUrl('/Student')
       this.ConfirmationService.confirm({
         message: 'Do you want to exit',
         header: 'Confirmation',
@@ -74,53 +65,25 @@ export class AttendanceDetailsComponent implements OnInit, OnDestroy {
           this.router.navigateByUrl('/Attendance')
           this.ngOnDestroy()
         },
-        reject: () => {}
+        reject: () => { }
       });
-      
+
     }
     else {
-      // this.router.navigateByUrl('/Student')
       this.router.navigateByUrl('/Attendance')
       this.ngOnDestroy()
     }
   }
 
+  onSubmit() {
+    this.attendanceDetails.createdDttm = new Date();
+    this.attendanceDetails.createdSource = "admin";
+    this.attendanceDetails.createdSourceType = "admin";
+    this.APIService.addAttendanceDetails(this.attendanceDetails).subscribe((results) => { }, (error) => {
+      this.router.navigateByUrl('/Attendance')
+      this.ngOnDestroy()
+    })
 
-  
-  onSubmit(){
-    // if(!studentAttendanceForm.valid){
-    //   alert("Required feilds are missing")
-      // console.log(studentDetailsForm);
-      // studentDetailsForm.value.department.value=this.departmentValue;
-      // console.log(studentDetailsForm.value.department.value);
-      // console.log(this.VariableService.formatedStudentData(studentDetailsForm.value));
-      
-    // }else{
-      this.attendanceDetails.createdDttm=new Date();
-      this.attendanceDetails.createdSource="admin";
-      this.attendanceDetails.createdSourceType="admin";
-      // studentAttendanceForm.value.
-      // this.studentAttendanceForm.value.department.value=this.departmentValue;
-      // console.log(studentDetailsForm.value.department.value);
-      
-      this.APIService.addAttendanceDetails(this.attendanceDetails).subscribe((results)=>{
-        console.log(results);
-        // this.MessageService.add({severity:'success', summary:'success Message', detail:'Student'+this.studentId+' detailes added successfully'});
-
-      }, (error)=>{
-        console.log(error);
-        this.MessageService.add({severity:'success', detail:'Student'+this.attendanceDetails.studentId+' detailes added successfully'});
-        this.router.navigateByUrl('/Attendance')
-        this.ngOnDestroy()
-        
-      })
-
-      console.log(this.attendanceDetails);
-      // this.router.navigateByUrl('/Attendance');
-     
-    }
-    
-  // }
-
+  }
 
 }

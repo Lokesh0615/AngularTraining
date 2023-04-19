@@ -1,83 +1,103 @@
 <div class="container">
-    <div *ngIf="showAttendanceDetailes" >
-        <div class="grid " >
-            <div class="col-12  md:col-12 lg:col-6 field detailsColumn">
-                <div>
-                    <!-- class="col-12 sm:col-12 md:col-6 lg:col-6" -->
+    <div class="grid " *ngIf="showAttendanceDetailes">
+   
+        <div class="col-12  sm:col-12 md:col-12 lg:col-12 field detailContainer">
+            <h3>{{attendanceDetails.studentId}} Details</h3>
+            <hr>
+            <div class="grid grid-nogutter">
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                     <label class="col-6">Student ID: </label>
                     <label class="col-6">{{attendanceDetails.studentId }} </label>
                 </div>
-
-                <div>
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                     <label class="col-6">Department Id: </label>
                     <label class="col-6">{{attendanceDetails.departmentId}}</label>
                 </div>
-                <div>
-                    <label class="col-6">Date: </label>
-                    <label class="col-6">{{attendanceDetails.date | date :" dd/MM/yyyy, h:mm a "}}</label>
-                </div>
-
-                <div>
-                    <label class="col-6">Available: </label>
-                    <label class="col-6">{{attendanceDetails.available | titlecase}}</label>
-                </div>
-                <div>
-                    <label class="col-6">CheckIn: </label>
-                    <label class="col-6">{{attendanceDetails.checkIn | date :" dd/MM/yyyy, h:mm a "}}</label>
-                </div>
-                <div>
-                    <label class="col-6">Checkout: </label>
-                    <label class="col-6">{{attendanceDetails.checkout | date :" dd/MM/yyyy, h:mm a "}}</label>
-                </div>
-                <div>
+            </div>
+            <div class="grid grid-nogutter">
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                     <label class="col-6">Attendance Count: </label>
                     <label class="col-6">{{attendanceDetails.attendanceCount}}</label>
                 </div>
-
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
+                    <label class="col-6">Date: </label>
+                    <label class="col-6">{{attendanceDetails.date | date :" dd/MM/yyyy, h:mm a "}}</label>
+                </div>
             </div>
-            <div class="col-12  md:col-12 lg:col-6 field detailsColumn">
+            <div class="grid grid-nogutter">
+                
 
-                <div>
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
+                    <label class="col-6">Available: </label>
+                    <label class="col-6">{{attendanceDetails.available | titlecase}}</label>
+                </div>
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
+                    <label class="col-6">CheckIn: </label>
+                    <label class="col-6">{{attendanceDetails.checkIn | date :" dd/MM/yyyy, h:mm a "}}</label>
+                </div>
+            </div>
+
+            <div class="grid grid-nogutter">
+               
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
+                    <label class="col-6">Checkout: </label>
+                    <label class="col-6">{{attendanceDetails.checkout | date :" dd/MM/yyyy, h:mm a "}}</label>
+                </div>
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                     <label class="col-6">Created Source: </label>
                     <label class="col-6">{{attendanceDetails.createdSource}}</label>
                 </div>
-                <div>
+            </div>
+
+            <div class="grid grid-nogutter">
+               
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                     <label class="col-6">Created Source Type: </label>
                     <label class="col-6">{{attendanceDetails.createdSourceType}}</label>
                 </div>
-                <div>
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                     <label class="col-6">CreatedDttm: </label>
                     <label class="col-6">{{attendanceDetails.createdDttm | date :" dd/MM/yyyy, h:mm a "}}</label>
                 </div>
-                <div>
+            </div>
+
+            <div class="grid grid-nogutter">
+               
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                     <label class="col-6">Modified Source: </label>
                     <label class="col-6">{{attendanceDetails.modifiedSource}}</label>
                 </div>
-                <div>
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                     <label class="col-6">Modified Source Type: </label>
                     <label class="col-6">{{attendanceDetails.modifiedSourceType}}</label>
                 </div>
-                <div>
+            </div>
+
+            <div class="grid grid-nogutter">
+               
+                <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                     <label class="col-6">ModifiedDttm: </label>
                     <label class="col-6">{{attendanceDetails.modifiedDttm | date :" dd/MM/yyyy, h:mm a "}}</label>
                 </div>
+
+                <div class="detailsButtons">
+                    <button pButton class="p-button-primary Buttons" label="Edit" *ngIf="loggedInUser=='admin' "
+                        (click)="editStudentDetailes()"></button>
+                    <button pButton class="p-button-secondary Buttons" label="Back" (click)="canExit()"></button>
+                </div>
             </div>
-            
-        </div>
-        <div class="detailsButtons">
-            <button pButton class="p-button-primary addButtons" label="Edit" *ngIf="loggedInUser=='admin' "
-                (click)="editStudentDetailes()"></button>
-            <button pButton class="p-button-secondary addButtons" label="Back" (click)="canExit()"></button>
         </div>
 
+        
     </div>
+
+
     <div class="attendanceDetailsForm" [ngStyle]="{'display': showAttendanceDetailes === false ? 'block' : 'none' }">
-        <!-- make form validation method as a service -->
-        <!-- work on local and global css -->
+
         <form #attendanceDetailsForm="ngForm">
             <div class=" grid ">
-
                 <div class="col-3 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
+                    
                     <label>StudentId</label>
                     <input type="text" pInputText id="studentId" name="studentId" placeholder="studentId"
                         [(ngModel)]="attendanceDetails.studentId" disabled>
@@ -85,37 +105,25 @@
                     <label>Department Id</label>
                     <input type="text" pInputText id="departmentId" name="departmentId" placeholder="departmentId"
                         [(ngModel)]="attendanceDetails.departmentId" disabled>
-              
 
                     <label>Available<span>*</span></label>
-                    <p-dropdown [options]="availability" #available="ngModel" optionValue="type" optionLabel="name"
+                    <p-dropdown [options]="availability" #available="ngModel" optionValue="type" optionLabel="name" appendTo="body"
                         [required]="true" name="available" [(ngModel)]="attendanceDetails.available"></p-dropdown>
-               
-
-                   
 
                 </div>
                 <div class="col-3 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
                     <label>Date<span>*</span></label>
-                    <!-- <input type="date" pInputText  id="date" name="date" placeholder="date" ngModel required #date="ngModel"> -->
                     <p-calendar id="date" name="date" [required]="true" #date="ngModel" appendTo="body"
                         [(ngModel)]="attendanceDetails.date"></p-calendar>
-               
 
                     <label>CheckIn<span>*</span></label>
-                    <p-calendar [showTime]="true" hourFormat="12" id="checkIn" name="checkIn" appendTo="body" [timeOnly]="true"
-                        [required]="true" #checkIn="ngModel" [(ngModel)]="attendanceDetails.checkIn"></p-calendar>
-
+                    <p-calendar [showTime]="true" hourFormat="12" id="checkIn" name="checkIn" appendTo="body"  [timeOnly]="true"
+                        [required]="true" #checkIn="ngModel"[(ngModel)]="attendanceDetails.checkIn"></p-calendar>
 
                     <label>Checkout<span>*</span></label>
-                    <p-calendar [showTime]="true" hourFormat="12" id="checkout" name="checkout"  [timeOnly]="true"
+                    <p-calendar [showTime]="true" hourFormat="12" id="checkout" name="checkout" [timeOnly]="true" appendTo="body"
                         [required]="true" #checkout="ngModel" [(ngModel)]="attendanceDetails.checkout"></p-calendar>
-
-                 
-
-
-                    
 
                 </div>
                 <div class="col-3 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
@@ -133,22 +141,12 @@
                     <input type="text" pInputText id="createdSource" name="createdSource" placeholder="createdSource"
                         disabled [(ngModel)]="attendanceDetails.createdSource">
 
-
-                    <!-- <label>CreatedSourceType</label>
-                    <input type="text" pInputText id="createdSourceType" name="createdSourceType"
-                        placeholder="createdSourceType" disabled [(ngModel)]="attendanceDetails.createdSourceType"> -->
-
                     <label>CreatedDttm</label>
-                    <p-calendar id="createdDttm" name="createdDttm" [required]="true" #createdDttm="ngModel" appendTo="body" disabled
-                       [showTime]="true" hourFormat="12"  [(ngModel)]="attendanceDetails.createdDttm"></p-calendar>
-                   
-
+                    <p-calendar id="createdDttm" name="createdDttm" [required]="true" #createdDttm="ngModel" appendTo="body"
+                         disabled [showTime]="true" hourFormat="12" [(ngModel)]="attendanceDetails.createdDttm"></p-calendar>
 
                 </div>
                 <div class="col-3 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
-
-
-
 
                     <label>ModifiedSource</label>
                     <input type="text" pInputText id="modifiedSource" name="modifiedSource" placeholder="modifiedSource"
@@ -159,32 +157,18 @@
                         placeholder="modifiedSourceType" disabled [(ngModel)]="attendanceDetails.modifiedSourceType">
 
                     <label>ModifiedDttm</label>
-                    <p-calendar id="modifiedDttm" name="modifiedDttm" [required]="true" #modifiedDttm="ngModel" appendTo="body" disabled
-                    [showTime]="true" hourFormat="12"  [(ngModel)]="attendanceDetails.modifiedDttm"></p-calendar>
-                
-                   
+                    <p-calendar id="modifiedDttm" name="modifiedDttm" [required]="true" #modifiedDttm="ngModel" appendTo="body"
+                         disabled [showTime]="true" hourFormat="12"[(ngModel)]="attendanceDetails.modifiedDttm"></p-calendar>
 
                 </div>
-
-
                 <div class="detailsButtons">
-                    <button [disabled]="attendanceDetailsForm.pristine" type="button"
-                        class="p-button-primary addButtons" pButton label="Save"
-                        (click)="fieldSelected=false; attendanceDetailsForm.valid && onSubmit()"></button>
-                    <button type="button" class="p-button-secondary addButtons" pButton label="Cancel"
+                    <button [disabled]="attendanceDetailsForm.pristine" type="button" class="p-button-primary Buttons"
+                        pButton label="Save" (click)="fieldSelected=false; attendanceDetailsForm.valid && onSubmit()"></button>
+                    <button type="button" class="p-button-secondary Buttons" pButton label="Cancel"
                         (click)="canExit()"></button>
                 </div>
-
-
             </div>
-
-
-
-
         </form>
-        <p-toast></p-toast>
-        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1"
-            rejectButtonStyleClass="p-button-text"></p-confirmDialog>
-
+        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
     </div>
 </div>

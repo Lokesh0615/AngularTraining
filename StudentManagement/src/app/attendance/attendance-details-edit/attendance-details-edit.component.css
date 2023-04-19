@@ -1,46 +1,27 @@
 .container{
     margin: 30px 10px 0px;
-   }
+}
+
+.detailContainer {
+    margin-bottom: 5px;
+    background-color: white;
+}
 .detailsColumn>*{
     display: inline-block;
     width: 90%;
-    /* border: 1px solid red; */
 }
+
 .detailsColumn>input{
     margin-bottom: 20px;
 }
-.studentDetailsContainer{
-    padding: 20px;
-}
-span{
-    color: red;
-}
-input.ng-touched.ng-invalid{
-    border: 1px solid red;
-}
-.buttonDiv{
-    /* height: 40%; */
-    display: flex;
-    vertical-align: middle;
-    /* border: 1px solid red; */
-    
-    /* align-items: ; */
-}
-.buttonDiv>*{
-    /* height: 15%; */
-    /* width: 100%; */
-    /* margin-top: 10%; */
-}
+
+
 .detailsButtons{
     width: 100%;
     display: flex;
     justify-content: right;
-    /* text-align: right; */
-    /* margin: 10px 20px 0px;
-    position: absolute;
-    bottom: 0px; */
 }
-.addButtons{
+.Buttons{
     margin: 0px 5px;
     width: 100px;
    

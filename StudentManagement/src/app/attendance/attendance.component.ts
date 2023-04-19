@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { APIService } from '../services/APIservice.service';
@@ -11,39 +11,36 @@ import { VariableService } from '../services/variable.service';
   styleUrls: ['./attendance.component.css'],
  
 })
+
 export class AttendanceComponent implements OnInit {
 
   paginatorDropdown=[{rows:5}, {rows:10}, {rows:15}]
   paginatorValue:number;
   attendanceTableHeader=this.VariableService.attendanceTableHeader;
+  studentId:string;
+  departmentId:string;
+  fieldSelected=true;
 
   loggedInUser!:string;
   dialogShow: boolean = false;
   attendanceData: {}[] = [];
-  attendanceDataLength!:number;
   showAttendanceDetails!: boolean;
   childComponentOpend:boolean;
   studentsData:any=[];
 
-  @ViewChild('checkStdId') checkStdId: ElementRef;
-  @ViewChild('checkDeptId') checkDeptId: ElementRef;
   constructor(private APIService: APIService, private MessageService: MessageService, private route: Router,
     private activatedRoute: ActivatedRoute, private VariableService: VariableService, private LoginService:LoginService,
     private ConfirmationService: ConfirmationService,
     ) { }
 
   ngOnInit(): void {
-    // localStorage.setItem('admin',JSON.stringify(this.LoginService.admin))
-    localStorage.setItem('path','Attendance')
-    localStorage.setItem('icons',JSON.stringify({'title':'Attendance', 'icon':'pi pi-table'}))
+    let storage=localStorage;
+    storage.setItem('path','Attendance')
+    storage.setItem('icons',JSON.stringify({'title':'Attendance', 'icon':'pi pi-table'}))
     
-    this.childComponentOpend=JSON.parse(localStorage.getItem('admin')).childComponentOpend;
+    this.childComponentOpend=JSON.parse(storage.getItem('admin')).childComponentOpend;
     this.showAttendanceDetails=false;
     this.loggedInUser=this.LoginService.logged_in_user;
-
-    // this.studentsData=[]
-    console.log("table");
-    this.VariableService.title='Attendance Details'
 
     this.getAttendanceDetailes()
     this.showAttendanceDetails = true;
@@ -54,44 +51,28 @@ export class AttendanceComponent implements OnInit {
     })
 
   }
-  showDialog() {
-    this.dialogShow = true;
-    
-    this.checkStdId.nativeElement.value = '';
-    this.checkDeptId.nativeElement.value = '';
-
+  showDialog(){
+    this.studentId='';
+    this.departmentId='';
+    this.dialogShow=true;
+    this.fieldSelected=true;
   }
 
   getAttendanceDetailes() {
-    // this.studentsData=[]
     this.attendanceData=[]
     this.APIService.getAllAttendanceDetailes().subscribe((results) => {
       console.log(results);
       for(let result in results){
-        let data=this.VariableService.getFormatedAttendanceData(results[result])
-        console.log(result);
-        
+        let data=this.VariableService.getFormatedAttendanceData(results[result])        
         this.attendanceData.push(data);
       }
-      // this.attendanceData = Object.values(results)
-      // if(this.attendanceData.length==0){
-      //   this.attendanceData.push({na:"loesh"});
-      //   console.log("0000");
-        
-      // }
-      this.attendanceDataLength=this.attendanceData.length;
-
-    }, (error) => {
-      console.log("error");
-      // this.attendanceData=Object.values(error)
-    })
+    }, (error) => {})
   }
 
   deleteAttendanceRecord(studentId: string, departmentId: string) {
     this.ConfirmationService.confirm({
       message: 'Are you want to delete the record?',
       header: 'Confirmation',
-      // icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.MessageService.add({ severity: 'success',  detail: 'Record is deleted successfully' });
         this.APIService.deleteAttendanceByStdIdDeptId(studentId, departmentId).subscribe((results) => { }, (error) => {
@@ -106,52 +87,26 @@ export class AttendanceComponent implements OnInit {
     });
   }
 
-  attendanceDetailesEdit(studentId: string) {
+  viewAttendanceDetailes(studentId: string) {
     this.childComponentOpend=true;
     this.LoginService.setChildComponentRefresh(true)
     this.route.navigate(['AttendanceDetails/:' + studentId + ''], { relativeTo: this.activatedRoute })
-    // this.showAttendanceDetails = false;
-   
-    
-    // this.showStudentDetails=false;
-  }
-  findAttendanceByStudentIdDepartmentId() { }
 
-  checkStudentId(studentId: string, departmentId: string) {
-    // this.dialogShow = false
-    // let studentcheckFunction = this.StudentComponent;
+  }
+
+  checkStudentId() {
     let checkData=this.studentsData.some((list)=>{  
-      let departmentIdCheck:any=list.departmentId;
-      return ( departmentIdCheck==departmentId && list.studentId==Number(studentId))
+      return ( list.departmentId==this.departmentId && list.studentId==this.studentId)
     });
-    // console.log(checkData);
     if (checkData) {
       this.dialogShow = false;
       this.showAttendanceDetails=false
-      this.VariableService.attendanceStudentId=studentId;
-      this.VariableService.attendenceDepartmentId=departmentId;
-      console.log("nextpage");
-      this.route.navigate(['AddAttendanceDetails/:'+studentId+'/:'+departmentId+''], { relativeTo: this.activatedRoute })
-      // this.checkStdId.nativeElement.value = '';
-      // this.checkDeptId.nativeElement.value = '';
       this.childComponentOpend=true
-      // this.childComponentOpend=true;
-    this.LoginService.setChildComponentRefresh(true)
+      this.LoginService.setChildComponentRefresh(true)
+      this.route.navigate(['AddAttendanceDetails/:'+this.studentId+'/:'+this.departmentId+''], { relativeTo: this.activatedRoute })
 
     }else{
-      // this.dialogShow = false;
-      console.log("elsepart");
-      
       this.MessageService.add({severity:'error', detail:'Student Id and Department Id dose not exist'});
     }
-    // this.dialogShow=true;
-    // if(){
-
-    // }
-    // this.route.navigateByUrl()
-
-
-    // this.showAttendanceDetails = false;
-
   }
 }

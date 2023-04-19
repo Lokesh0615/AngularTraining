@@ -1,24 +1,25 @@
 <app-navbar>
     <div class="tableContainer" *ngIf="showAttendanceDetails && !childComponentOpend">
 
-        <p-dialog [(visible)]="dialogShow" [modal]="true"  position="center">
+        <p-dialog [(visible)]="dialogShow" [modal]="true"  position="center" [style]="{width: '350px' }">
             <ng-template pTemplate="header">
                 <h3>Student Detailes</h3>
             </ng-template>
             
             <label>Student ID: </label>
-            <!-- <p-calendar  id="date" name="date"  ngModel [required]="true" #date="ngModel" appendTo="body" inputId="time" [(ngModel)]="attendanceDetails.date" ></p-calendar> -->
-            <input type="text" pInputText  pattern="[0-9]+$" placeholder="Student Id"  ngModel required #checkStd="ngModel" #checkStdId>
-            <p  *ngIf="checkStd.invalid && checkStd.dirty" id="username-help" class="p-error">Student Id is required (Number)</p>
+            <input pInputText type="text" pattern="[A-Z]{2}[0-9]{4}"  placeholder="Student Id"  #checkStdId="ngModel" [(ngModel)]="studentId" #studentIdFiled >
+            <p  *ngIf="!fieldSelected  && (!checkStdId.dirty || studentIdFiled.value=='')" id="username-help" class="p-error text-right" >Student Id  is Required.</p>
+            <p  *ngIf="checkStdId.dirty && checkStdId.invalid " id="username-help" class="p-error text-right" >Student Id is Invalid.</p>
 
-            <label>Department ID: </label>
-            <input type="text" pInputText  pattern="[0-9]+$"  placeholder="Department Id" ngModel  required #checkDept="ngModel" #checkDeptId >
-            <p  *ngIf="checkDept.invalid && checkDept.dirty" id="username-help" class="p-error">Departmnet Id is required (Number)</p>
+            <label>Department Id: </label>
+            <input pInputText type="text" pattern="[0-9]{1}"  placeholder="Department Id"  #checkDeptId="ngModel" [(ngModel)]="departmentId"  #departmentIdFiled>
+            <p  *ngIf="!fieldSelected   && (!checkDeptId.dirty || departmentIdFiled.value=='') "id="username-help" class="p-error text-right" >Department Id  is Required.</p>
+            <p  *ngIf="checkDeptId.dirty && checkDeptId.invalid" id="username-help" class="p-error text-right" >Department Id  is Invalid.</p>
+          
 
             <ng-template pTemplate="footer">
-                <p-button label="Cancel" (onClick)="dialogShow=false"></p-button>
-                <p-button label="Confirm" (onClick)=" checkStudentId(checkStd.value, checkDept.value)"></p-button>
-                <!-- <small  *ngIf="date.invalid && date.touched" id="username-help" class="p-error">Date is required</small> -->
+                <button pButton type="button"  label="Cancel" (click)="dialogShow=false"></button>
+                <button pButton type="button" label="Confirm" (click)="fieldSelected=false;(checkDeptId.valid && checkStdId.valid && checkDeptId.value!='' && checkStdId.value!='') && checkStudentId()"></button>
             </ng-template>
         </p-dialog>
         <p-confirmDialog  [baseZIndex]="1" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
@@ -28,10 +29,8 @@
             [rows]="paginatorValue" [globalFilterFields]="['studentId']" [paginator]="paginatorValue<attendanceData.length" [resizableColumns]="true"
             [totalRecords]="attendanceData.length" pageLinkSize="5" [showJumpToPageDropdown]="false"
             [showFirstLastIcon]="false">
-            <!-- <p-paginator [rows]="3" [totalRecords]="selectedstudentDatas1" [rowsPerPageOptions]="[2,4,6]" [showJumpToPageDropdown]="true"></p-paginator> -->
             <ng-template pTemplate="caption">
                 <div class="table-header">
-                    <div class="top-div">
                         <h3>Attendance List</h3>
                         <div class="topContainerButtons">
                             <span class="p-input-icon-left">
@@ -42,11 +41,9 @@
                             </span>
                             <p-dropdown [options]="paginatorDropdown" optionValue="rows" optionLabel="rows"
                                 [(ngModel)]="paginatorValue"></p-dropdown>
-                            <button *ngIf="loggedInUser=='admin' " pButton class="p-button-info addButtons"
+                            <button *ngIf="loggedInUser=='admin' " pButton class="p-button-info"
                                 (click)="showDialog()" label="+ADD"></button>
                         </div>
-                    </div>
-
                 </div>
             </ng-template>
 
@@ -59,10 +56,9 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-attendance>
-                <tr (dblclick)="attendanceDetailesEdit(attendance.studentId)">
+                <tr (dblclick)="viewAttendanceDetailes(attendance.studentId)">
 
                     <td>{{attendance.studentId}}</td>
-                    <!-- <td>{{attendance.month}}</td> -->
                     <td>{{attendance.date | date :" dd/MM/yyyy "}}</td>
                     <td>{{attendance.departmentId}}</td>
                     <td><button class="availabelButton"
@@ -77,21 +73,19 @@
                     <td>{{attendance.modifiedSource}}</td>
                     <td>{{attendance.modifiedSourceType}}</td>
                     <td>{{attendance.modifiedDttm | date :" dd/MM/yyyy, h:mm a "}}</td>
-                    <!-- </ng-container> -->
                     <td *ngIf="loggedInUser=='admin' "><button pButton type="button" label="Delete"
                             (click)="deleteAttendanceRecord(attendance.studentId, attendance.departmentId)"
                             class="p-button-rounded p-button-danger"></button>
                     </td>
                 </tr>
             </ng-template>
+
             <ng-template pTemplate="emptymessage">
-                <tr>
-                    <td  colspan="16">no data available</td>
-                </tr>
+                <tr><td  colspan="16">no data available</td></tr>
             </ng-template>
+
         </p-table>
     </div>
-
     <div *ngIf="childComponentOpend">
         <router-outlet (deactivate)="ngOnInit()"></router-outlet>
     </div>

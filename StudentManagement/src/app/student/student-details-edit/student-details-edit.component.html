@@ -1,7 +1,6 @@
 <div class="container">
-
-    <div class="grid " *ngIf="showStudentDetailes">
-        <div class="col-12 sm:col-12 md:col-3 lg:col-3  xl:col-3   detailContainer">
+    <div class="grid" *ngIf="showStudentDetailes">
+        <div class="col-12 sm:col-12 md:col-3 lg:col-3 xl:col-3 field detailContainer">
             <div class="studentImageContainer"><img [src]="studentDetails.imagePath" alt="noImage"></div>
             <div>
                 <label class="col-6">Student ID:</label>
@@ -21,7 +20,7 @@
             </div>
 
         </div>
-        <div class="col-12 sm:col-12 md:col-9 lg:col-9 xl:col-9  detailContainer">
+        <div class="col-12 sm:col-12 md:col-9 lg:col-9 xl:col-9 field detailContainer">
             <h3>{{studentDetails.studentId}} Details</h3>
             <hr>
             <div class="grid grid-nogutter">
@@ -124,7 +123,6 @@
                     <small *ngIf="firstName.invalid && firstName.touched " id="username-help" class="p-error">First Name
                         is Inavild.</small>
 
-
                     <label>Last Name<span>*</span></label>
                     <input type="text" pInputText id="lastName" name="lastName" placeholder="lastName"
                         pattern="[A-Za-z]+" required #lastName="ngModel" [(ngModel)]="studentDetails.lastName">
@@ -157,42 +155,35 @@
                             <label for="others" class="ml-2">Others</label>
                         </div>
                     </div>
-
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
-
 
                     <label>PhoneNumber</label>
                     <input type="text" pInputText id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}"
                         placeholder="phoneNumber" [maxLength]="10" [minlength]="10" ngModel
                         [(ngModel)]="studentDetails.phoneNumber">
 
-
                     <label>Address</label>
-                    <input type="text" pInputText id="address" name="address" placeholder="address" ngModel
+                    <input type="text" pInputText id="address" name="address" placeholder="address" 
                         [(ngModel)]="studentDetails.address">
 
                     <label>DOB<span>*</span></label>
-                    <p-calendar [maxDate]="todaysDate" ngModel name="dob" #dob="ngModel" appendTo="body"
+                    <p-calendar [maxDate]="todaysDate"  name="dob" #dob="ngModel" appendTo="body"
                         [required]="true" [(ngModel)]="studentDetails.dob"></p-calendar>
 
-
                     <label>Mail Id<span>*</span></label>
-                    <input type="text" pInputText id="mailId" name="mailId" placeholder="mailId" ngModel
+                    <input type="text" pInputText id="mailId" name="mailId" placeholder="mailId"   pattern="^[a-z0-9._%+-]+@[a-z0-9]+[.]+[a-z]{2,4}$"
                         #mailId="ngModel" required email="true" [(ngModel)]="studentDetails.mailId">
                     <small *ngIf="!mailId.touched && mailId.invalid &&  !fieldSelected" id="username-help"
                         class="p-error">MailId is required.</small>
-                    <small *ngIf="mailId.invalid && mailId.touched " id="username-help" class="p-error">MailID is
+                    <small *ngIf="mailId.invalid && mailId.touched " id="username-help" class="p-error">Mail ID is
                         Inavild.</small>
-
-
 
                     <label>Department<span>*</span></label>
                     <p-dropdown [options]="departmentList"  #department="ngModel" optionValue="departmentCode" appendTo="body"
                         [required]="true" optionLabel="departmentName" placeholder="Department" name="department"
                         [(ngModel)]="studentDetails.department">
                     </p-dropdown>
-
 
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
@@ -220,13 +211,13 @@
                     <small *ngIf="!imageSize" id="username-help" class="p-error">Image size should be lessthan
                         30KB</small>
 
-
                     <label>CreatedSource</label>
                     <input type="text" pInputText id="createdSource" name="createdSource" placeholder="createdSource"
-                        [(ngModel)]="studentDetails.createdSource" ngModel disabled>
+                        [(ngModel)]="studentDetails.createdSource"  disabled>
+
                     <label>CreatedSourceType</label>
                     <input type="text" pInputText id="createdSourceType" name="createdSourceType"
-                        [(ngModel)]="studentDetails.createdSourceType" placeholder="createdSourceType" ngModel disabled>
+                        [(ngModel)]="studentDetails.createdSourceType" placeholder="createdSourceType"  disabled>
 
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
@@ -235,25 +226,18 @@
                     <p-calendar id="createdDttm" name="createdDttm" [required]="true" #createdDttm="ngModel" appendTo="body" disabled
                     [showTime]="true" hourFormat="12"  [(ngModel)]="studentDetails.createdDttm"></p-calendar>
                 
-                    <!-- <input type="text" pInputText id="createdDttm" name="createdDttm" placeholder="createdDttm" ngModel
-                        [(ngModel)]="studentDetails.createdDttm" disabled> -->
-
-
                     <label>ModifiedSource</label>
                     <input type="text" pInputText id="modifiedSource" name="modifiedSource" placeholder="modifiedSource"
-                        [(ngModel)]="studentDetails.modifiedSource" ngModel disabled>
+                        [(ngModel)]="studentDetails.modifiedSource"  disabled>
 
                     <label>ModifiedSourceType</label>
-                    <input type="text" pInputText id="modifiedSourceType" name="modifiedSourceType"
-                        placeholder="modifiedSourceType" [disabled]="true"
-                        [(ngModel)]="studentDetails.modifiedSourceType" readonly>
+                    <input type="text" pInputText id="modifiedSourceType" name="modifiedSourceType"  placeholder="modifiedSourceType"
+                        [disabled]="true"  [(ngModel)]="studentDetails.modifiedSourceType" readonly>
 
                     <label>ModifiedDttm</label>
                     <p-calendar id="modifiedDttm" name="modifiedDttm" [required]="true" #modifiedDttm="ngModel" appendTo="body" disabled
                     [showTime]="true" hourFormat="12" placeholder="ModifiedDttm" [(ngModel)]="studentDetails.modifiedDttm"></p-calendar>
-                
-
-
+            
                 </div>
 
                 <div class="detailsButtons">
@@ -265,12 +249,7 @@
                         (click)="canExit()"></button>
                 </div>
             </div>
-
         </form>
-        <p-toast></p-toast>
-        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1"
-            rejectButtonStyleClass="p-button-text"></p-confirmDialog>
-
-
+        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
     </div>
 </div>

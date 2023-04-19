@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { APIService } from '../services/APIservice.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,69 +22,44 @@ export class StudentComponent implements OnInit {
   childComponentOpend:boolean
   loggedInUser!:string;
   studentId:string;
-  // studentTableHeaders=this.VariableService.studentTableHeaders;
+  fieldSelected=true;
 
-  // @ViewChild('checkStdId') checkStdId!:ElementRef;
   constructor(private APIService:APIService, private MessageService:MessageService, private route:Router ,
                private activatedRoute:ActivatedRoute, private VariableService:VariableService,
-               private ConfirmationService:ConfirmationService, private LoginService:LoginService ){
-
-  }
+               private ConfirmationService:ConfirmationService, private LoginService:LoginService ){ }
   
   ngOnInit(): void {
-    // console.log("cheke");
-    
-    localStorage.setItem('icons',JSON.stringify({'title':'Student', 'icon':'pi pi-table'}))
+    let storage=localStorage;
+    storage.setItem('icons',JSON.stringify({'title':'Student', 'icon':'pi pi-table'}))
+    storage.setItem('path','Student')
+    this.childComponentOpend=JSON.parse(storage.getItem('admin')).childComponentOpend;
     this.getAllStudentDetailes()
-    this.showStudentDetails=false;
-    this.childComponentOpend=JSON.parse(localStorage.getItem('admin')).childComponentOpend;
-    console.log(this.childComponentOpend);
-    
-    this.VariableService.title='Student Details'
+    this.showStudentDetails=false;    
     this.loggedInUser=this.LoginService.logged_in_user;
-    localStorage.setItem('path','Student')
-    // localStorage.setItem('admin',JSON.stringify(this.LoginService.admin))
-
     
   }
   showDialog(){
     this.dialogShow=true;
-    // this.checkStdId.nativeElement.value='';
     this.studentId=''
+    this.fieldSelected=true;
   }
   getAllStudentDetailes(){
     this.studentsData=[]
-    console.log(this.studentsData);
-    
     this.APIService.findAllStudents().subscribe((results)=>{
-      // this.studentsData=results;
-      for(let result of Object.values(results)){
-        console.log(result);
-        // this.studentsData=results;
-        let data=this.VariableService.getFormatedStudentData(result)
-        this.studentsData.push(data)
-        // console.log(data);
-       
-      }
+      this.studentsData=results;
     })
-    console.log(this.studentsData);
     
   }
 
-  checkStudentId(stdId:string){
-    let stdIdExist=this.studentsData.find((list)=> list.studentId==stdId);
+  checkStudentId(){
+    let stdIdExist=this.studentsData.find((list)=> list.studentId==this.studentId);
     if(!stdIdExist){
-      console.log("nextpage");
-      this.route.navigate(['AddStudentDetails/:'+stdId+''],{relativeTo:this.activatedRoute})
       this.dialogShow=false;
-      // this.checkStdId.nativeElement.value='';
-      this.studentId=''
       this.showStudentDetails=false;
-      this.VariableService.studentId=stdId
       this.childComponentOpend=true
       this.LoginService.setChildComponentRefresh(true)
-
-
+      this.route.navigate(['AddStudentDetails/:'+this.studentId+''],{relativeTo:this.activatedRoute})
+      this.studentId=''
     }else{
       this.MessageService.add({severity:'error', detail:'Student Id already Exists'});
     }
@@ -95,55 +70,22 @@ export class StudentComponent implements OnInit {
     this.ConfirmationService.confirm({
         message: 'Are you want to delete the record?',
         header: 'Confirmation',
-        // icon: 'pi pi-exclamation-triangle',
         accept: () => {
-          // console.log("acc");
-          
           this.APIService.deleteByStudentId(stdId).subscribe((results)=>{ }, (error)=>{
-            console.log(error);
             this.MessageService.add({severity:'success', detail:'Record is deleted successfully'});
             this.getAllStudentDetailes();
           })
         },
         reject: () => {
-          // console.log("no");
-          
           this.MessageService.add({severity:'error', detail:'Record is not Deleted'});
         }
     });
 }
 
-  // deleteByStdId(stdId:string){
-  //   this.APIService.deleteByStudentId(stdId).subscribe((results)=>{ }, (error)=>{
-  //     console.log(error);
-  //     this.getAllStudentDetailes();
-  //   })
-  // }
   studentDetailesEdit(studentId:string){
-    this.route.navigate(['StudentDetails/:'+studentId+''],{relativeTo:this.activatedRoute})
     this.childComponentOpend=true;
     this.LoginService.setChildComponentRefresh(true)
-
+    this.route.navigate(['StudentDetails/:'+studentId+''],{relativeTo:this.activatedRoute})
   }
 
-//   onStudentIdSort(event) {
-
-
-//     console.log(event);
-    
-//     let comparer = function (a, b) {
-//             let result = -1;
-
-//             if (a.studentId.length > b.studentId.length) result = 1;
-
-//             return result * event.order;
-//         };
-    
-//     this.studentsData.sort(comparer);
-//     // this.studentsData=this.studentsData.sort(comparer)
-//     // console.log(this.studentsData);
-    
-//   }
-
-  selectedStudenstData1:any=[]
 }

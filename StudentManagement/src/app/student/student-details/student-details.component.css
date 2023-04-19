@@ -1,62 +1,43 @@
 .detailsColumn>*{
     display: inline-block;
     width: 90%;
-    
-    /* border: 1px solid red; */
 }
-/* .dropdown{
-    display: inline-block;
-    width: 90%;
-    border: 4px solid red;
-} */
+
 .detailsColumn>label{
     margin-top: 20px;
 }
+
 .studentDetailsContainer{
     padding: 20px;
     margin: 0px 10px 0px;
-
 }
+
 span{
     color: red;
 }
 input.ng-touched.ng-invalid{
     border: 1px solid red;
 }
-.p-dropdown .p-dropdown-label{
-    width: 250px;
-}
-
 
 #imagePath{
-    /* display:flex !important; */
-    /* justify-content: space-between; */
-    /* text-align: right; */
-    /* justify-content: space-between; */
     margin-top: 11px;
-    /* margin-bottom: 30px !important; */
 }
 
 .detailsButtons{
     width: 100%;
     display: flex;
     justify-content: right;
-    /* text-align: right; */
-    /* margin: 0px 20px; */
 }
+
 .Buttons{
     margin: 0px 5px;
     width: 100px;
 }
 
-:host ::ng-deep .p-button.addButtons{
+:host ::ng-deep .p-button.Buttons{
     font-size:17px;  
     padding: 10px 1px;
   }
 :host ::ng-deep .p-dropdown, :host ::ng-deep.p-calendar{
     width: 100% !important;
-    /* margin-bottom: 20px; */
 }
-/* input.ng-invalid{
-    border: 1px solid red;
-} */

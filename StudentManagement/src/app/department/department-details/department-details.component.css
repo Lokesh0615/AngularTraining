@@ -1,54 +1,31 @@
-.container {
-    margin: 30px 10px 30px;
+.departmentDetailsContainer {
+    margin: 10px ;
     width: auto;
+    background-color:whitesmoke;
 }
-
-
 
 .detailsColumn>* {
-    display: inline-block;
-    width: 90%;
-    /* border: 1px solid red; */
+    width: 100%;
 }
 
-.detailsColumn>input {
-    margin-bottom: 20px;
-}
-
-.studentDetailsContainer {
-    padding: 20px;
-}
-
-span {
-    color: red;
-}
-
-input.ng-touched.ng-invalid {
-    border: 1px solid red;
-}
-
-.content {
-    display: flex;
-    justify-content: center;
+.detailsColumn {
+   background-color: white;
 }
 
 .detailsButtons {
     width: 93%;
     display: flex;
     justify-content: right;
-    /* text-align: right; */
     margin: 0px 20px;
-    /* position: absolute;
-    bottom: 0px; */
 }
 
-.addButtons {
+.Buttons {
     margin: 0px 5px;
     width: 100px;
 
 }
 
-:host ::ng-deep .p-button.addButtons {
+:host ::ng-deep .p-button.Buttons {
     font-size: 17px;
     padding: 10px 1px;
 }

@@ -8,12 +8,12 @@ import { LoginService } from 'src/app/services/login.service';
   templateUrl: './department-details.component.html',
   styleUrls: ['./department-details.component.css']
 })
-export class DepartmentDetailsComponent implements OnInit {
+export class DepartmentDetailsComponent implements OnInit, OnDestroy {
   
-  // showStudentDetailes = true;
   DepartmentId !:string;
   departmentData: any={};
-  constructor(private activatedRoute: ActivatedRoute, private router: Router,private APIService: APIService, private LoginService:LoginService){}
+  constructor(private activatedRoute: ActivatedRoute, private router: Router,
+              private APIService: APIService, private LoginService:LoginService){}
  
 
   ngOnInit() {
@@ -21,9 +21,8 @@ export class DepartmentDetailsComponent implements OnInit {
 
     //if the parameter value changes then use Obeservables
     this.activatedRoute.paramMap.subscribe((parm) => {
-      this.DepartmentId = String(parm.get('id')?.substring(1));
+      this.DepartmentId = parm.get('id')?.substring(1);
       this.APIService.findDepartmentByDptId(this.DepartmentId).subscribe((results) => {
-      console.log(results);
       this.departmentData = results;
       localStorage.setItem('path','Department/DepartmentDetailes/:'+this.DepartmentId+'')
 
@@ -33,22 +32,12 @@ export class DepartmentDetailsComponent implements OnInit {
   }
    
   departmentPage(){
-    this.router.navigateByUrl('/Department');
     this.LoginService.setChildComponentRefresh(false)
-    console.log("chilc departmentPage");
+    this.router.navigateByUrl('/Department');
 
   }
   ngOnDestroy(): void {
-    // this.LoginService.userData.userData=false
     this.LoginService.setChildComponentRefresh(false)
-    console.log(localStorage);
-    
-    // this.router.navigateByUrl('/Department');
-
-    console.log("chilc destroy");
-    
-    // let admin={user_id:'admin', password:'admin',logged_in:true, childComponentOpend:false}
-    //           localStorage.setItem('admin',JSON.stringify(admin))
   }
 
 }

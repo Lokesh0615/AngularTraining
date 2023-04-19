@@ -6,21 +6,16 @@
 }
 .tableContainer{
     margin: auto;
-    /* width: 1200px; */
     border: 1px solid rgba(200, 198, 198, 0.97) ;
     padding: 10px;
     
 }
 .topContainer{
-    /* display: inline-block;
-     */
      display: flex;
-     /* flex-direction: row; */
      flex-wrap: wrap;
      justify-content: space-between;
      align-items: baseline;
      margin: 10px 20px;
-     /* background-color: white; */
 
 }
 .topContainerButtons{
@@ -29,10 +24,7 @@
     flex-direction: row;
     justify-content: space-around;
 }
-.addButtons{
-    /* margin: 0px 5px; */
-    width: 100px;
-}
+
 
 
 :host ::ng-deep .p-paginator{
@@ -47,7 +39,8 @@
 }
 
 
-:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page , :host ::ng-deep .p-paginator-next, :host ::ng-deep .p-paginator-prev {
+:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page ,
+:host ::ng-deep .p-paginator-next, :host ::ng-deep .p-paginator-prev {
     border-radius: 0px;
     height: 30px;
     width: 50px;
@@ -55,8 +48,7 @@
     border: 1px solid black;
 }
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr > td{
-    /* text-align: center; */
-    padding: 15px 10px;
+    padding: 10px 10px;
    }
 
 

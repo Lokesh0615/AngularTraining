@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { APIService } from 'src/app/services/APIservice.service';
 import { LoginService } from 'src/app/services/login.service';
+import { VariableService } from 'src/app/services/variable.service';
 
 @Component({
   selector: 'app-attendance-details-edit',
@@ -16,9 +17,6 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
   loggedInUser!: string;
   fieldSelected=true
   showAttendanceDetailes = true;
-  // attendanceDetailesEdit = false;
-  StudentId!: any;
-  // attendanceData: any = {};
 
   availability = [{ type: 'true', name:'True' }, { type: 'false', name:'False' }]
 
@@ -40,22 +38,19 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
 
   }
 
-  checkoutTime!: any;
-  constructor(private activatedRoute: ActivatedRoute, private router: Router,
-    private APIService: APIService,private ConfirmationService: ConfirmationService,
-    private LoginService: LoginService, private MessageService: MessageService, ) { }
-
   @ViewChild('attendanceDetailsForm') attendanceDetailsForm!: NgForm;
+
+  checkoutTime!: any;
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, 
+    private APIService: APIService,private ConfirmationService: ConfirmationService,
+    private LoginService: LoginService, ) { }
+
   ngOnInit() {
-    console.log("child");
-
-
     this.loggedInUser = this.LoginService.logged_in_user;
-
-
     //if the parameter value changes then use Obeservables
     this.activatedRoute.paramMap.subscribe((parm) => {
       this.attendanceDetails.studentId = parm.get('id')?.substring(1);
+      // getting all attendance details 
       this.APIService.findAttendanceByStudentId(this.attendanceDetails.studentId).subscribe((results: any) => {
         this.attendanceDetails = results;
         this.attendanceDetails.date = new Date(results.date);
@@ -63,11 +58,8 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
         this.attendanceDetails.checkout = new Date(results.checkout);
         this.attendanceDetails.createdDttm=new Date(results.createdDttm)
         this.attendanceDetails.modifiedDttm=new Date(results.modifiedDttm)
-        localStorage.setItem('path', 'Attendance/AttendanceDetails/:' + this.attendanceDetails.studentId + '')
         this.attendanceDetails.available = String(results.available);
-
-
-
+        localStorage.setItem('path', 'Attendance/AttendanceDetails/:' + this.attendanceDetails.studentId + '')
       })
     })
 
@@ -75,12 +67,6 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
 
   editStudentDetailes() {
     this.showAttendanceDetailes = false;
-
-    this.attendanceDetails.available = this.attendanceDetails.available;
-
-   
-
-
   }
 
   ngOnDestroy(): void {
@@ -96,7 +82,6 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
         this.ConfirmationService.confirm({
           message: 'Do you want to exit',
           header: 'Confirmation',
-          icon: 'pi pi-exclamation-triangle',
           accept: () => {
             this.router.navigateByUrl('/Attendance')
             this.ngOnDestroy()
@@ -116,21 +101,14 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.attendanceDetails.modifiedSource = "admin";
     this.attendanceDetails.modifiedSourceType = "admin",
-      this.attendanceDetails.modifiedDttm = new Date()
+    this.attendanceDetails.modifiedDttm = new Date()
     this.attendanceDetails.available =this.attendanceDetails.available
-    // })
 
     this.APIService.updateAttendance(this.attendanceDetails).subscribe((results) => { }, (error) => {
-      
-      
-      this.MessageService.add({ severity: 'success', detail: 'Student' + this.StudentId + ' detailes added successfully' });
-      this.router.navigateByUrl('/Attendance')
+    this.router.navigateByUrl('/Attendance')
       this.ngOnDestroy()
 
     });
-    console.log(this.attendanceDetailsForm.value);
-
-    // this.router.navigateByUrl('/Attendance');
   }
 
 }

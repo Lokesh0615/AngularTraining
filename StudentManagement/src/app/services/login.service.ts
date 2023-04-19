@@ -5,6 +5,7 @@ import{ map, Subject, catchError, Observable } from 'rxjs'
 import { throwError } from 'rxjs';
 import { identifierName } from '@angular/compiler';
 import { APIService } from './APIservice.service';
+import { MessageService } from 'primeng/api';
 
 @Injectable()
 export class LoginService implements CanActivate {
@@ -14,7 +15,7 @@ export class LoginService implements CanActivate {
     logged_in_user!:string;
     user_password!:string;
     
-    constructor(private httpClient:HttpClient, private route:Router, private APIService:APIService){}
+    constructor(private httpClient:HttpClient, private route:Router, private APIService:APIService, private MessageService:MessageService){}
   
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
@@ -75,13 +76,13 @@ export class LoginService implements CanActivate {
             // this.logged_in_user=this.userData.user_id;
             this.route.navigateByUrl('Home')
 
-          }else{
-            alert('Incorrect UserID or Password')
-            // return false;
-            
-        }
+          }
           
-        }, (error)=>{})
+        }, (error)=>{
+          
+          this.MessageService.add({ severity: 'error',  detail: 'Incorrect UserID or Password' });
+
+        })
       }
   
       }

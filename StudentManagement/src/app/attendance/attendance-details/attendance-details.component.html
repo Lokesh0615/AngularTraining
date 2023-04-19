@@ -1,85 +1,95 @@
 <div class="attendanceDetailsContainer">
-    <form   #attendanceDetailsForm="ngForm"   >
-        <div class=" grid col-offset-1" >
+    <form #attendanceDetailsForm="ngForm">
+        <div class="grid">
+            <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
-            <div class="col-12  md:col-6 lg:col-6 field detailsColumn">
                 <label>StudentId </label>
-                <input type="text" pInputText  id="studentId" name="studentId" placeholder="studentId" ngModel [(ngModel)]="attendanceDetails.studentId" disabled>
+                <input type="text" pInputText id="studentId" name="studentId" placeholder="studentId"
+                    [(ngModel)]="attendanceDetails.studentId" disabled>
 
                 <label>Department Id</label>
-                <input type="text" pInputText  id="departmentId" name="departmentId" placeholder="departmentId" ngModel [(ngModel)]="attendanceDetails.departmentId" disabled >
-                <!-- <p-dropdown  ngModel #departmentId="ngModel" dataKey="departmentId"
-                             placeholder="DepartmentId" name="departmentId">
-                </p-dropdown> -->
-                <!-- <small  *ngIf="departmentId.invalid && departmentId.touched" id="username-help" class="p-error">Departmnet Id is required.</small> -->
+                <input type="text" pInputText id="departmentId" name="departmentId" placeholder="departmentId"
+                    [(ngModel)]="attendanceDetails.departmentId" disabled>
 
-              
                 <label>Available<span>*</span></label>
-                <!-- <input type="text" pInputText  id="available" name="available" placeholder="available" ngModel required #available="ngModel" [(ngModel)]="attendanceDetails.available"> -->
-                <p-dropdown [options]="availability"  #available="ngModel" optionValue="type" appendTo="body"  optionLabel="name" [required]="true" 
-                name="available" [(ngModel)]="attendanceDetails.available" ></p-dropdown>
-                <small  *ngIf="!available.touched &&  !fieldSelected" id="username-help" class="p-error">Available is required.</small>
-                <!-- <small  *ngIf="available.invalid && available.touched " id="username-help" class="p-error">MailId is Inavild.</small> -->
+                <p-dropdown [options]="availability" #available="ngModel" optionValue="type" appendTo="body"
+                    optionLabel="name" placeholder="Available" [required]="true" name="available"
+                    [(ngModel)]="attendanceDetails.available"></p-dropdown>
+
+                <small *ngIf="!available.touched &&  !fieldSelected" id="username-help" class="p-error">Available is
+                    required.</small>
 
                 <label>Date<span>*</span></label>
-                <!-- <input type="date" pInputText  id="date" name="date" placeholder="date" ngModel required #date="ngModel"> -->
-                <p-calendar  id="date" name="date"  ngModel [required]="true" #date="ngModel" appendTo="body" inputId="time" [(ngModel)]="attendanceDetails.date" ></p-calendar>
-                <small  *ngIf="!date.touched &&  !fieldSelected" id="username-help" class="p-error">Date is required.</small>
-                <!-- <small  *ngIf="date.invalid && date.touched " id="username-help" class="p-error">MailId is Inavild.</small> -->
+                <p-calendar id="date" name="date" [required]="true" #date="ngModel" appendTo="body" inputId="time"
+                    [(ngModel)]="attendanceDetails.date" placeholder="Date"></p-calendar>
+                <small *ngIf="!date.touched &&  !fieldSelected" id="username-help" class="p-error">Date is
+                    required.</small>
+            </div>
+            <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
                 <label>CheckIn<span>*</span></label>
-                <p-calendar [showTime]="true" hourFormat="12" id="checkIn" name="checkIn" appendTo="body" [timeOnly]="true" ngModel [required]="true" #checkIn="ngModel" [(ngModel)]="attendanceDetails.checkIn" ></p-calendar>
-                <small  *ngIf="!checkIn.touched &&  !fieldSelected" id="username-help" class="p-error">CheckIn is required.</small>
+                <p-calendar [showTime]="true" hourFormat="12" id="checkIn" name="checkIn" appendTo="body"
+                    [timeOnly]="true" [required]="true" #checkIn="ngModel"
+                    [(ngModel)]="attendanceDetails.checkIn" placeholder="CheckIn"></p-calendar>
+                <small *ngIf="!checkIn.touched &&  !fieldSelected" id="username-help" class="p-error">CheckIn is
+                    required.</small>
 
                 <label>Checkout<span>*</span></label>
-                <p-calendar [showTime]="true" hourFormat="12" id="checkout" name="checkout" appendTo="body" [timeOnly]="true" ngModel [required]="true" #checkout="ngModel" [(ngModel)]="attendanceDetails.checkout" ></p-calendar>
-                <small  *ngIf="!checkout.touched &&  !fieldSelected" id="username-help" class="p-error">Checkout is required.</small>
+                <p-calendar [showTime]="true" hourFormat="12" id="checkout" name="checkout" appendTo="body"
+                    [timeOnly]="true" [required]="true" #checkout="ngModel" placeholder="CheckOut"
+                    [(ngModel)]="attendanceDetails.checkout"></p-calendar>
+                <small *ngIf="!checkout.touched &&  !fieldSelected" id="username-help" class="p-error">Checkout is
+                    required.</small>
 
-               
                 <label>Attendance Count<span>*</span></label>
-                <input type="text" pInputText  id="attendanceCount" name="attendanceCount" placeholder="attendanceCount"   pattern="[0-9]+$"  required #attendanceCount="ngModel" [(ngModel)]="attendanceDetails.attendanceCount">
-                <small  *ngIf="!attendanceCount.touched && attendanceCount.invalid &&  !fieldSelected" id="username-help" class="p-error">Attendance Count is required.</small>
-                <small  *ngIf="attendanceCount.invalid && attendanceCount.touched " id="username-help" class="p-error">Attendance Count is Inavild.</small>
-
-
-              
+                <input type="text" pInputText id="attendanceCount" name="attendanceCount" placeholder="attendanceCount"
+                    pattern="[0-9]+$" required #attendanceCount="ngModel" 
+                    [(ngModel)]="attendanceDetails.attendanceCount">
+                <small *ngIf="!attendanceCount.touched && attendanceCount.invalid &&  !fieldSelected" id="username-help"
+                    class="p-error">Attendance Count is required.</small>
+                <small *ngIf="attendanceCount.invalid && attendanceCount.touched " id="username-help"
+                    class="p-error">Attendance Count is Inavild.</small>
 
             </div>
-            <div class="col-12  md:col-6 lg:col-6 field detailsColumn">
+            <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
-              
                 <label>CreatedSource</label>
-                <input type="text" pInputText  id="createdSource" name="createdSource"  placeholder="createdSource" ngModel disabled>
-                
-               
+                <input type="text" pInputText id="createdSource" name="createdSource" placeholder="createdSource"
+                    disabled>
+
                 <label>CreatedSourceType</label>
-                <input type="text" pInputText  id="createdSourceType" name="createdSourceType"  placeholder="createdSourceType" ngModel disabled >
+                <input type="text" pInputText id="createdSourceType" name="createdSourceType"
+                    placeholder="createdSourceType" disabled>
 
                 <label>CreatedDttm</label>
-                <input type="text" pInputText  id="createdDttm" name="createdDttm"   placeholder="createdDttm" ngModel disabled >
+                <input type="text" pInputText id="createdDttm" name="createdDttm" placeholder="createdDttm" disabled>
+            </div>
+            <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
                 <label>ModifiedSource</label>
-                <input type="text" pInputText  id="modifiedSource" name="modifiedSource" placeholder="modifiedSource" ngModel   disabled>
+                <input type="text" pInputText id="modifiedSource" name="modifiedSource" placeholder="modifiedSource"
+                    disabled>
 
                 <label>ModifiedSourceType</label>
-                <input type="text" pInputText  id="modifiedSourceType" name="modifiedSourceType"  placeholder="modifiedSourceType" ngModel   disabled >
+                <input type="text" pInputText id="modifiedSourceType" name="modifiedSourceType"
+                    placeholder="modifiedSourceType" disabled>
 
                 <label>ModifiedDttm</label>
-                <input type="text" pInputText  id="modifiedDttm" name="modifiedDttm" placeholder="modifiedDttm" ngModel disabled>
+                <input type="text" pInputText id="modifiedDttm" name="modifiedDttm" placeholder="modifiedDttm" disabled>
 
 
             </div>
 
             <div class="detailsButtons">
-                <button type="button" class="p-button-primary addButtons" pButton label="Save" (click)="fieldSelected=false; attendanceDetailsForm.valid && onSubmit()"></button>
-                <button type="button" class="p-button-secondary addButtons" pButton  label="Cancel" (click)=" canExit()"></button>
+                <button type="button" class="p-button-primary Buttons" pButton label="Save"
+                    (click)="fieldSelected=false; attendanceDetailsForm.valid && onSubmit()"></button>
+                <button type="button" class="p-button-secondary Buttons" pButton label="Cancel"
+                    (click)=" canExit()"></button>
             </div>
         </div>
-        <p-toast></p-toast>
-        
-        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
-        
+        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1"
+            rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
     </form>
-</div>   
+</div>
