@@ -1,12 +1,12 @@
 <div class="container">
-    <div class="grid " *ngIf="showAttendanceDetailes">
-   
-        <div class="col-12  sm:col-12 md:col-12 lg:col-12 field detailContainer">
+    <div class="grid detailContainer" *ngIf="showAttendanceDetailes">
+
+        <div class="col-12 sm:col-12 md:col-12 lg:col-12 field grid-nogutter">
             <h3>{{attendanceDetails.studentId}} Details</h3>
             <hr>
             <div class="grid grid-nogutter">
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Student ID: </label>
+                    <label class="col-6">Student ID:</label>
                     <label class="col-6">{{attendanceDetails.studentId }} </label>
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
@@ -16,89 +16,86 @@
             </div>
             <div class="grid grid-nogutter">
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Attendance Count: </label>
+                    <label class="col-6">Attendance Count:</label>
                     <label class="col-6">{{attendanceDetails.attendanceCount}}</label>
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Date: </label>
+                    <label class="col-6">Date:</label>
                     <label class="col-6">{{attendanceDetails.date | date :" dd/MM/yyyy, h:mm a "}}</label>
                 </div>
             </div>
             <div class="grid grid-nogutter">
-                
+
 
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Available: </label>
+                    <label class="col-6">Available:</label>
                     <label class="col-6">{{attendanceDetails.available | titlecase}}</label>
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">CheckIn: </label>
+                    <label class="col-6">CheckIn:</label>
                     <label class="col-6">{{attendanceDetails.checkIn | date :" dd/MM/yyyy, h:mm a "}}</label>
                 </div>
             </div>
 
             <div class="grid grid-nogutter">
-               
+
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Checkout: </label>
+                    <label class="col-6">Checkout:</label>
                     <label class="col-6">{{attendanceDetails.checkout | date :" dd/MM/yyyy, h:mm a "}}</label>
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Created Source: </label>
+                    <label class="col-6">Created Source:</label>
                     <label class="col-6">{{attendanceDetails.createdSource}}</label>
                 </div>
             </div>
 
             <div class="grid grid-nogutter">
-               
+
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Created Source Type: </label>
+                    <label class="col-6">Created Source Type:</label>
                     <label class="col-6">{{attendanceDetails.createdSourceType}}</label>
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">CreatedDttm: </label>
+                    <label class="col-6">CreatedDttm:</label>
                     <label class="col-6">{{attendanceDetails.createdDttm | date :" dd/MM/yyyy, h:mm a "}}</label>
                 </div>
             </div>
 
             <div class="grid grid-nogutter">
-               
+
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Modified Source: </label>
+                    <label class="col-6">Modified Source:</label>
                     <label class="col-6">{{attendanceDetails.modifiedSource}}</label>
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Modified Source Type: </label>
+                    <label class="col-6">Modified Source Type:</label>
                     <label class="col-6">{{attendanceDetails.modifiedSourceType}}</label>
                 </div>
             </div>
 
             <div class="grid grid-nogutter">
-               
+
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">ModifiedDttm: </label>
+                    <label class="col-6">ModifiedDttm:</label>
                     <label class="col-6">{{attendanceDetails.modifiedDttm | date :" dd/MM/yyyy, h:mm a "}}</label>
                 </div>
 
-                <div class="detailsButtons">
-                    <button pButton class="p-button-primary Buttons" label="Edit" *ngIf="loggedInUser=='admin' "
+                <div class="buttonsContainer">
+                    <button pButton class="p-button-primary buttons" label="Edit" *ngIf="loggedInUser=='admin'"
                         (click)="editStudentDetailes()"></button>
-                    <button pButton class="p-button-secondary Buttons" label="Back" (click)="canExit()"></button>
+                    <button pButton class="p-button-secondary buttons" label="Back" (click)="canExit()"></button>
                 </div>
             </div>
         </div>
-
-        
     </div>
-
 
     <div class="attendanceDetailsForm" [ngStyle]="{'display': showAttendanceDetailes === false ? 'block' : 'none' }">
 
         <form #attendanceDetailsForm="ngForm">
-            <div class=" grid ">
+            <div class="grid">
                 <div class="col-3 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
-                    
-                    <label>StudentId</label>
+
+                    <label>Student Id</label>
                     <input type="text" pInputText id="studentId" name="studentId" placeholder="studentId"
                         [(ngModel)]="attendanceDetails.studentId" disabled>
 
@@ -107,8 +104,9 @@
                         [(ngModel)]="attendanceDetails.departmentId" disabled>
 
                     <label>Available<span>*</span></label>
-                    <p-dropdown [options]="availability" #available="ngModel" optionValue="type" optionLabel="name" appendTo="body"
-                        [required]="true" name="available" [(ngModel)]="attendanceDetails.available"></p-dropdown>
+                    <p-dropdown [options]="availability" #available="ngModel" optionValue="type" optionLabel="name"
+                        appendTo="body" [required]="true" name="available"
+                        [(ngModel)]="attendanceDetails.available"></p-dropdown>
 
                 </div>
                 <div class="col-3 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
@@ -118,12 +116,14 @@
                         [(ngModel)]="attendanceDetails.date"></p-calendar>
 
                     <label>CheckIn<span>*</span></label>
-                    <p-calendar [showTime]="true" hourFormat="12" id="checkIn" name="checkIn" appendTo="body"  [timeOnly]="true"
-                        [required]="true" #checkIn="ngModel"[(ngModel)]="attendanceDetails.checkIn"></p-calendar>
+                    <p-calendar [showTime]="true" hourFormat="12" id="checkIn" name="checkIn" appendTo="body"
+                        [timeOnly]="true" [required]="true" #checkIn="ngModel"
+                        [(ngModel)]="attendanceDetails.checkIn"></p-calendar>
 
                     <label>Checkout<span>*</span></label>
-                    <p-calendar [showTime]="true" hourFormat="12" id="checkout" name="checkout" [timeOnly]="true" appendTo="body"
-                        [required]="true" #checkout="ngModel" [(ngModel)]="attendanceDetails.checkout"></p-calendar>
+                    <p-calendar [showTime]="true" hourFormat="12" id="checkout" name="checkout" [timeOnly]="true"
+                        appendTo="body" [required]="true" #checkout="ngModel"
+                        [(ngModel)]="attendanceDetails.checkout"></p-calendar>
 
                 </div>
                 <div class="col-3 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
@@ -135,40 +135,44 @@
                     <small *ngIf="!attendanceCount.touched && attendanceCount.invalid &&  !fieldSelected"
                         id="username-help" class="p-error">Attendance Count is required.</small>
                     <small *ngIf="attendanceCount.invalid && attendanceCount.touched " id="username-help"
-                        class="p-error">Attendance Count is Inavild.</small>
+                        class="p-error">Attendance Count is Invaild.</small>
 
-                    <label>CreatedSource</label>
+                    <label>Created Source</label>
                     <input type="text" pInputText id="createdSource" name="createdSource" placeholder="createdSource"
                         disabled [(ngModel)]="attendanceDetails.createdSource">
 
                     <label>CreatedDttm</label>
-                    <p-calendar id="createdDttm" name="createdDttm" [required]="true" #createdDttm="ngModel" appendTo="body"
-                         disabled [showTime]="true" hourFormat="12" [(ngModel)]="attendanceDetails.createdDttm"></p-calendar>
+                    <p-calendar id="createdDttm" name="createdDttm" [required]="true" #createdDttm="ngModel"
+                        appendTo="body" disabled [showTime]="true" hourFormat="12"
+                        [(ngModel)]="attendanceDetails.createdDttm"></p-calendar>
 
                 </div>
                 <div class="col-3 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
-                    <label>ModifiedSource</label>
+                    <label>Modified Source</label>
                     <input type="text" pInputText id="modifiedSource" name="modifiedSource" placeholder="modifiedSource"
                         disabled [(ngModel)]="attendanceDetails.modifiedSource">
 
-                    <label>ModifiedSourceType</label>
+                    <label>Modified Source Type</label>
                     <input type="text" pInputText id="modifiedSourceType" name="modifiedSourceType"
                         placeholder="modifiedSourceType" disabled [(ngModel)]="attendanceDetails.modifiedSourceType">
 
                     <label>ModifiedDttm</label>
-                    <p-calendar id="modifiedDttm" name="modifiedDttm" [required]="true" #modifiedDttm="ngModel" appendTo="body"
-                         disabled [showTime]="true" hourFormat="12"[(ngModel)]="attendanceDetails.modifiedDttm"></p-calendar>
+                    <p-calendar id="modifiedDttm" name="modifiedDttm" [required]="true" #modifiedDttm="ngModel"
+                        appendTo="body" disabled [showTime]="true" hourFormat="12"
+                        [(ngModel)]="attendanceDetails.modifiedDttm"></p-calendar>
 
                 </div>
-                <div class="detailsButtons">
-                    <button [disabled]="attendanceDetailsForm.pristine" type="button" class="p-button-primary Buttons"
-                        pButton label="Save" (click)="fieldSelected=false; attendanceDetailsForm.valid && onSubmit()"></button>
-                    <button type="button" class="p-button-secondary Buttons" pButton label="Cancel"
+                <div class="buttonsContainer">
+                    <button [disabled]="attendanceDetailsForm.pristine" type="button" class="p-button-primary buttons"
+                        pButton label="Save"
+                        (click)="fieldSelected=false; attendanceDetailsForm.valid && onSubmit()"></button>
+                    <button type="button" class="p-button-secondary buttons" pButton label="Cancel"
                         (click)="canExit()"></button>
                 </div>
             </div>
         </form>
-        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1"
+            rejectButtonStyleClass="p-button-text"></p-confirmDialog>
     </div>
 </div>

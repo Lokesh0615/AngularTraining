@@ -49,6 +49,7 @@
 
 .studentDetailsContainer {
     padding: 0px 20px;
+    overflow-y: auto;
 }
 
 span {
@@ -65,13 +66,13 @@ input.ng-touched.ng-invalid {
     margin-top: 12px;
 }
 
-.detailsButtons {
+.buttonsContainer {
     width: 100%;
     display: flex;
     justify-content: right;
 }
 
-.Buttons {
+.buttons {
     margin: 0px 5px;
     width: 100px;
 }
@@ -81,7 +82,7 @@ input.ng-touched.ng-invalid {
     width: 100% !important;
 }
 
-:host ::ng-deep .p-button.Buttons {
+:host ::ng-deep .p-button.buttons {
     font-size: 17px;
     padding: 10px 1px;
 }

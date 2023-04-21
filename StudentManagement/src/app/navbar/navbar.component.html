@@ -2,28 +2,26 @@
     <div class="homePageLoggedDetailes">
         <div class="homePageLogo"><img src="assets/ItorizonLogo.png" alt="noImage"></div>
         <div class="loggedInDetailes">
-            <p-avatar [label]='userIcon' styleClass="mr-2" size="large" shape="circle"></p-avatar>
-            <button pButton Class="p-button-primary" (click)="logOut()" >LogOut</button>
+            <p-avatar [label]='userIcon' size="large" shape="circle"></p-avatar>
+            <button pButton Class="p-button-primary" (click)="logOut()">LogOut</button>
         </div>
     </div>
     <div class="navBarContainer">
         <ul class="nav">
             <li routerLinkActive="active" ><a  routerLink="/Home">Home</a></li>
             <li  routerLinkActive="active"><a  routerLink="/Student">Student</a></li>
-            <li *ngIf="loggedInUser=='admin' " routerLinkActive="active"><a  routerLink="/Department">Department</a></li>
+            <li *ngIf="loggedInUser=='admin'" routerLinkActive="active"><a  routerLink="/Department">Department</a></li>
             <li routerLinkActive="active"><a  routerLink="/Attendance">Attendance</a></li>
         </ul>
     </div>
     <div class="dashBoard">
         <span  [class]="icon"></span>
         <span>{{title}}</span>
-
     </div>
     <div class="content">
         <ng-content  (change)="ngOnInit()" ></ng-content>
     </div>
-
     <div class="footer">
-        <p>2022-2023 Itorizon</p>
+        <span>2022-2023 Itorizon</span>
     </div>
 </div>

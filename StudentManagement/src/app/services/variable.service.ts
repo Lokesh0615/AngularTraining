@@ -64,37 +64,10 @@ export class VariableService {
 
     ]
 
-    getFormatedStudentData(data: any) {
-
-        let studentData={
-        studentId:data.studentId,
-        firstName:data.firstName,
-        lastName:data.lastName,
-        dob:data.dob,
-        gender:data.gender,
-        phoneNumber:data.phoneNumber,
-        createdSource:data.createdSource,
-        createdSourceType:data.createdSourceType,
-        createdDttm:data.createdDttm,
-        modifiedSource:data.modifiedSource,
-        modifiedSourceType:data.modifiedSourceType,
-        modifiedDttm:data.modifiedDttm,
-        bloodGroup:data.bloodGroup,
-        address:data.address,
-        department:data.department,
-        departmentId:Number(data.departmentId),
-        mailId:data.mailId,
-        dateOfJoining:data.dateOfJoining,
-        }
-
-        return studentData;
-    }
-
     getFormatedAttendanceData(studentDetailsFormvalue: any) {
-        console.log(studentDetailsFormvalue);
         
         let attendanceData = {
-            studentId: Number(studentDetailsFormvalue.studentId),
+            studentId:studentDetailsFormvalue.studentId,
             departmentId: Number(studentDetailsFormvalue.departmentId),
             date: studentDetailsFormvalue.date,
             available:String(studentDetailsFormvalue.available),

@@ -2,7 +2,7 @@
     <form #studentDetailsForm="ngForm">
         <div class="grid">
             <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
-                <label>StudentId </label>
+                <label>Student Id</label>
                 <input type="text" pInputText id="studentId" name="studentId" placeholder="studentId"
                     [(ngModel)]="studentDetails.studentId" disabled>
 
@@ -11,16 +11,16 @@
                     pattern="[A-Za-z]+" required #firstName="ngModel" [(ngModel)]="studentDetails.firstName">
                 <small *ngIf="!firstName.touched && firstName.invalid &&  !fieldSelected" id="username-help"
                     class="p-error">First Name is required.</small>
-                <small *ngIf="firstName.invalid && firstName.touched " id="username-help" class="p-error">First Name is
-                    Inavild.</small>
+                <small *ngIf="firstName.invalid && firstName.touched" id="username-help" class="p-error">First Name is
+                    Invalid.</small>
 
                 <label>Last Name<span>*</span></label>
                 <input type="text" pInputText id="lastName" name="lastName" placeholder="lastName" pattern="[A-Za-z]+"
                     required #lastName="ngModel" [(ngModel)]="studentDetails.lastName">
                 <small *ngIf="!lastName.touched && lastName.invalid &&  !fieldSelected" id="username-help"
                     class="p-error">Last Name is required.</small>
-                <small *ngIf="lastName.invalid && lastName.touched " id="username-help" class="p-error">Last Name is
-                    Inavild.</small>
+                <small *ngIf="lastName.invalid && lastName.touched" id="username-help" class="p-error">Last Name is
+                    Invalid.</small>
 
                 <label>Blood Group</label>
                 <p-dropdown [options]="bloodGroupList" optionValue="type" appendTo="body" optionLabel="type"
@@ -46,18 +46,18 @@
                         <label for="others" class="ml-2">Others</label>
                     </div>
                 </div>
-                <small *ngIf="!gender.touched &&  !fieldSelected" id="username-help" class="p-error">Gender is
+                <small *ngIf="!gender.touched && !fieldSelected" id="username-help" class="p-error">Gender is
                     required.</small>
 
             </div>
             <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
-                <label>PhoneNumber</label>
+                <label>Phone Number</label>
                 <input type="text" pInputText id="phoneNumber" name="phoneNumber" placeholder="phoneNumber"
                     #phoneNumber="ngModel" pattern="[0-9]{10}" [maxlength]="10" [minlength]="10"
                     [(ngModel)]="studentDetails.phoneNumber">
-                <small *ngIf="!phoneNumber.pristine && phoneNumber.invalid " id="username-help" class="p-error">Gender
-                    is required.</small>
+                <small *ngIf="!phoneNumber.pristine && phoneNumber.invalid" id="username-help" class="p-error">Phone Number
+                    is Invalid.</small>
 
                 <label>Address</label>
                 <input type="text" pInputText id="address" name="address" placeholder="address"
@@ -66,24 +66,24 @@
                 <label>DOB<span>*</span></label>
                 <p-calendar [maxDate]="createdDttm" name="dob" #dob="ngModel" appendTo="body" [required]="true"
                     [(ngModel)]="studentDetails.dob"></p-calendar>
-                <small *ngIf="!dob.touched &&  !fieldSelected" id="username-help" class="p-error">Date of Birth is
+                <small *ngIf="!dob.touched && !fieldSelected" id="username-help" class="p-error">Date of Birth is
                     required.</small>
 
                 <label>Mail Id<span>*</span></label>
                 <input type="text" pInputText id="mailId" name="mailId" placeholder="mailId"
                     pattern="^[a-z0-9._%+-]+@[a-z0-9]+[.]+[a-z]{2,4}$" #mailId="ngModel" required email="true"
                     [(ngModel)]="studentDetails.mailId">
-                <small *ngIf="!mailId.touched && mailId.invalid &&  !fieldSelected" id="username-help"
-                    class="p-error">MailId is required.</small>
-                <small *ngIf="mailId.invalid && mailId.touched " id="username-help" class="p-error">MailId is
-                    Inavild.</small>
+                <small *ngIf="!mailId.touched && mailId.invalid && !fieldSelected" id="username-help"
+                    class="p-error">Mail Id is required.</small>
+                <small *ngIf="mailId.invalid && mailId.touched " id="username-help" class="p-error">Mail Id is
+                    Invaild.</small>
 
                 <label>Department<span>*</span></label>
                 <p-dropdown [options]="departmentList" #department="ngModel" optionValue="departmentCode"
                     [required]="true" optionLabel="departmentName" placeholder="Department" name="department"
                     [(ngModel)]="studentDetails.department">
                 </p-dropdown>
-                <small *ngIf="!department.touched &&  !fieldSelected" id="username-help" class="p-error">Department is
+                <small *ngIf="!department.touched && !fieldSelected" id="username-help" class="p-error">Department is
                     required.</small>
 
             </div>
@@ -94,7 +94,7 @@
                     appendTo="body" optionLabel="departmentId" placeholder="DepartmentId" name="departmentId"
                     [required]="true" [(ngModel)]="studentDetails.departmentId">
                 </p-dropdown>
-                <small *ngIf="!departmentId.touched &&  !fieldSelected" id="username-help" class="p-error">DepartmentId
+                <small *ngIf="!departmentId.touched && !fieldSelected" id="username-help" class="p-error">Department Id
                     is required.</small>
 
                 <label>Date Of Joining<span>*</span></label>
@@ -109,13 +109,13 @@
                 <small *ngIf="imagePathValid.invalid && !imagePathValid.touched && !fieldSelected" id="username-help"
                     class="p-error">Image is reqiured</small>
                 <small *ngIf="imagePathValid.invalid && imagePathValid.touched " id="username-help"
-                    class="p-error">Image is Inavild.</small>
+                    class="p-error">Image is Invalid.</small>
                 <small *ngIf="!imageSize" id="username-help" class="p-error">Image size should be lessthan 30KB</small>
 
-                <label>CreatedSource</label>
+                <label>Created Source</label>
                 <input type="text" pInputText name="createdSource" placeholder="createdSource" disabled>
 
-                <label>CreatedSourceType</label>
+                <label>Created Source Type</label>
                 <input type="text" pInputText name="createdSourceType" placeholder="createdSourceType" disabled>
 
             </div>
@@ -124,11 +124,10 @@
                 <label>CreatedDttm</label>
                 <input type="text" pInputText id="createdDttm" name="createdDttm" placeholder="createdDttm" disabled>
 
-                <label>ModifiedSource</label>
-                <input type="text" pInputText id="modifiedSource" name="modifiedSource" placeholder="modifiedSource"
-                    disabled>
+                <label>Modified Source</label>
+                <input type="text" pInputText id="modifiedSource" name="modifiedSource" placeholder="modifiedSource" disabled>
 
-                <label>ModifiedSourceType</label>
+                <label>Modified Source Type</label>
                 <input type="text" pInputText id="modifiedSourceType" name="modifiedSourceType"
                     placeholder="modifiedSourceType" disabled>
 
@@ -136,10 +135,10 @@
                 <input type="text" pInputText id="modifiedDttm" name="modifiedDttm" placeholder="modifiedDttm" disabled>
 
             </div>
-            <div class="detailsButtons">
-                <button type="button" class="p-button-primary  Buttons" pButton label="Save"
+            <div class="buttonsContainer">
+                <button type="button" class="p-button-primary  buttons" pButton label="Save"
                     (click)="fieldSelected=false;  studentDetailsForm.valid && onSubmit() "></button>
-                <button type="button" class="p-button-secondary Buttons" pButton label="Cancel"
+                <button type="button" class="p-button-secondary buttons" pButton label="Cancel"
                     (click)="canExit()"></button>
             </div>
         </div>

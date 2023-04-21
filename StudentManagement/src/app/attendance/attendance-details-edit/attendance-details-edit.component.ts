@@ -1,11 +1,9 @@
-import { DatePipe } from '@angular/common';
-import { Component, OnDestroy, ViewChild, OnInit, ElementRef } from '@angular/core';
+import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { APIService } from 'src/app/services/APIservice.service';
 import { LoginService } from 'src/app/services/login.service';
-import { VariableService } from 'src/app/services/variable.service';
 
 @Component({
   selector: 'app-attendance-details-edit',
@@ -14,12 +12,12 @@ import { VariableService } from 'src/app/services/variable.service';
 })
 export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
 
+  // to hide the delete and add button we need who is loggedIn
   loggedInUser!: string;
-  fieldSelected=true
+  fieldSelected = true
+  // to show details screen while true and edit screen while false
   showAttendanceDetailes = true;
-
-  availability = [{ type: 'true', name:'True' }, { type: 'false', name:'False' }]
-
+  availability = [{ type: 'true', name: 'True' }, { type: 'false', name: 'False' }]
 
   attendanceDetails = {
     studentId: null,
@@ -40,24 +38,23 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
 
   @ViewChild('attendanceDetailsForm') attendanceDetailsForm!: NgForm;
 
-  checkoutTime!: any;
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, 
-    private APIService: APIService,private ConfirmationService: ConfirmationService,
-    private LoginService: LoginService, ) { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router,
+    private apiService: APIService, private confirmationService: ConfirmationService,
+    private loginService: LoginService,) { }
 
   ngOnInit() {
-    this.loggedInUser = this.LoginService.logged_in_user;
+    this.loggedInUser = this.loginService.loggedInUser;
     //if the parameter value changes then use Obeservables
     this.activatedRoute.paramMap.subscribe((parm) => {
       this.attendanceDetails.studentId = parm.get('id')?.substring(1);
       // getting all attendance details 
-      this.APIService.findAttendanceByStudentId(this.attendanceDetails.studentId).subscribe((results: any) => {
+      this.apiService.fecthAttendanceByStudentId(this.attendanceDetails.studentId).subscribe((results: any) => {
         this.attendanceDetails = results;
+        // to assing value to calender filed we need to convert to date 
         this.attendanceDetails.date = new Date(results.date);
         this.attendanceDetails.checkIn = new Date(results.checkIn);
         this.attendanceDetails.checkout = new Date(results.checkout);
-        this.attendanceDetails.createdDttm=new Date(results.createdDttm)
-        this.attendanceDetails.modifiedDttm=new Date(results.modifiedDttm)
+        this.attendanceDetails.createdDttm = new Date(results.createdDttm);
         this.attendanceDetails.available = String(results.available);
         localStorage.setItem('path', 'Attendance/AttendanceDetails/:' + this.attendanceDetails.studentId + '')
       })
@@ -65,47 +62,52 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
 
   }
 
+  // while edit mode is on, need to hide the details 
   editStudentDetailes() {
     this.showAttendanceDetailes = false;
   }
 
   ngOnDestroy(): void {
-    this.LoginService.setChildComponentRefresh(false)
+    this.loginService.setChildComponentRefresh(false);
   }
 
+  // to exit from the page while editting the details
   canExit() {
-    if(this.showAttendanceDetailes){
+    // checking if the details screen is on or not
+    if (this.showAttendanceDetailes) {
       this.router.navigateByUrl('/Attendance')
       this.ngOnDestroy()
-    }else{
+    } else {
+      // if the edit mode is on, then below conditions will execute
       if (this.attendanceDetailsForm.dirty && this.attendanceDetailsForm.touched) {
-        this.ConfirmationService.confirm({
+        this.confirmationService.confirm({
           message: 'Do you want to exit',
           header: 'Confirmation',
           accept: () => {
             this.router.navigateByUrl('/Attendance')
             this.ngOnDestroy()
           },
-          reject: () => {}
+          reject: () => { }
         });
-        
       }
       else {
         this.router.navigateByUrl('/Attendance')
         this.ngOnDestroy()
       }
     }
-   
+
   }
 
+  // to update the student details 
   onSubmit() {
+    // edit option is not there for user,otherwise we can store loggedInUser in a variable & then can assign that to modifiedSource & type
     this.attendanceDetails.modifiedSource = "admin";
     this.attendanceDetails.modifiedSourceType = "admin",
-    this.attendanceDetails.modifiedDttm = new Date()
-    this.attendanceDetails.available =this.attendanceDetails.available
+      // while on submitting the form , that time will taken
+      this.attendanceDetails.modifiedDttm = new Date()
 
-    this.APIService.updateAttendance(this.attendanceDetails).subscribe((results) => { }, (error) => {
-    this.router.navigateByUrl('/Attendance')
+    this.apiService.updateAttendance(this.attendanceDetails).subscribe((results) => { }, (error) => {
+      this.router.navigateByUrl('/Attendance')
       this.ngOnDestroy()
 
     });

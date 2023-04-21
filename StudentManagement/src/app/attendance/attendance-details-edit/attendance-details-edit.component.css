@@ -1,5 +1,5 @@
 .container{
-    margin: 30px 10px 0px;
+    margin: 20px 10px 0px;
 }
 
 .detailContainer {
@@ -11,17 +11,17 @@
     width: 90%;
 }
 
-.detailsColumn>input{
-    margin-bottom: 20px;
+.detailsColumn>label{
+    margin-top: 20px;
 }
 
 
-.detailsButtons{
+.buttonsContainer{
     width: 100%;
     display: flex;
     justify-content: right;
 }
-.Buttons{
+.buttons{
     margin: 0px 5px;
     width: 100px;
    
@@ -29,5 +29,5 @@
 
 :host ::ng-deep .p-dropdown, :host ::ng-deep.p-calendar{
     width: 100% !important;
-    margin-bottom: 20px;
+    /* margin-bottom: 10px; */
 }

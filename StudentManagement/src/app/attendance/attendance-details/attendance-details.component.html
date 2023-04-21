@@ -3,7 +3,7 @@
         <div class="grid">
             <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
-                <label>StudentId </label>
+                <label>Student Id</label>
                 <input type="text" pInputText id="studentId" name="studentId" placeholder="studentId"
                     [(ngModel)]="attendanceDetails.studentId" disabled>
 
@@ -15,7 +15,6 @@
                 <p-dropdown [options]="availability" #available="ngModel" optionValue="type" appendTo="body"
                     optionLabel="name" placeholder="Available" [required]="true" name="available"
                     [(ngModel)]="attendanceDetails.available"></p-dropdown>
-
                 <small *ngIf="!available.touched &&  !fieldSelected" id="username-help" class="p-error">Available is
                     required.</small>
 
@@ -47,8 +46,8 @@
                     [(ngModel)]="attendanceDetails.attendanceCount">
                 <small *ngIf="!attendanceCount.touched && attendanceCount.invalid &&  !fieldSelected" id="username-help"
                     class="p-error">Attendance Count is required.</small>
-                <small *ngIf="attendanceCount.invalid && attendanceCount.touched " id="username-help"
-                    class="p-error">Attendance Count is Inavild.</small>
+                <small *ngIf="attendanceCount.invalid && attendanceCount.touched" id="username-help"
+                    class="p-error">Attendance Count is Invaild.</small>
 
             </div>
             <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
@@ -77,13 +76,11 @@
                 <label>ModifiedDttm</label>
                 <input type="text" pInputText id="modifiedDttm" name="modifiedDttm" placeholder="modifiedDttm" disabled>
 
-
             </div>
-
-            <div class="detailsButtons">
-                <button type="button" class="p-button-primary Buttons" pButton label="Save"
+            <div class="buttonsContainer">
+                <button type="button" class="p-button-primary buttons" pButton label="Save"
                     (click)="fieldSelected=false; attendanceDetailsForm.valid && onSubmit()"></button>
-                <button type="button" class="p-button-secondary Buttons" pButton label="Cancel"
+                <button type="button" class="p-button-secondary buttons" pButton label="Cancel"
                     (click)=" canExit()"></button>
             </div>
         </div>

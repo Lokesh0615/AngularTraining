@@ -1,7 +1,7 @@
 import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MessageService, ConfirmationService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { APIService } from 'src/app/services/APIservice.service';
 import { LoginService } from 'src/app/services/login.service';
 import { VariableService } from 'src/app/services/variable.service';
@@ -18,8 +18,8 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
 
   showStudentDetailes = true;
   loggedInUser!: string;
-  bloodGroupList = this.VariableService.bloodGroupList;
-  departmentList = this.VariableService.departmentList;
+  bloodGroupList = this.variableService.bloodGroupList;
+  departmentList = this.variableService.departmentList;
   imageSize = true;
   imageEditOption = false;
   fieldSelected = true;
@@ -52,18 +52,18 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
 
   }
 
-  @ViewChild('studentDetailsForm', { static: false }) studentDetailsForm!: NgForm;
+  @ViewChild('studentDetailsForm') studentDetailsForm!: NgForm;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
-    private APIService: APIService, private ConfirmationService: ConfirmationService,
-    private LoginService: LoginService, private VariableService: VariableService,) { }
+    private apiService: APIService, private confirmationService: ConfirmationService,
+    private loginService: LoginService, private variableService: VariableService,) { }
 
 
   ngOnInit() {
-    this.loggedInUser = this.LoginService.logged_in_user;
+    this.loggedInUser = this.loginService.loggedInUser;
     this.activatedRoute.paramMap.subscribe((parm) => {
       this.studentDetails.studentId = parm.get('id')?.substring(1);
-      this.APIService.findByStudentId(this.studentDetails.studentId).subscribe((results: any) => {
+      this.apiService.fetchByStudentId(this.studentDetails.studentId).subscribe((results: any) => {
         this.studentDetails = results
         this.studentDetails.dob = new Date(results.dob);
         this.studentDetails.departmentId = Number(results.departmentId);
@@ -105,12 +105,12 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.LoginService.setChildComponentRefresh(false)
+    this.loginService.setChildComponentRefresh(false)
     this.fieldSelected = true;
   }
   canExit() {
     if (this.studentDetailsForm.dirty && this.studentDetailsForm.touched) {
-      this.ConfirmationService.confirm({
+      this.confirmationService.confirm({
         message: 'Do you want to exit',
         header: 'Confirmation',
         accept: () => {
@@ -131,7 +131,7 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
     this.studentDetails.modifiedSource = 'admin';
     this.studentDetails.modifiedSourceType = 'admin';
     this.studentDetails.modifiedDttm = new Date()
-    this.APIService.updateStudentDetails(this.studentDetails).subscribe((results) => { }, (error) => {
+    this.apiService.updateStudentDetails(this.studentDetails).subscribe((results) => { }, (error) => {
       this.router.navigate(['Student'])
       this.ngOnDestroy()
 

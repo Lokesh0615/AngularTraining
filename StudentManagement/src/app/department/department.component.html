@@ -11,15 +11,14 @@
                     <p-dropdown [options]="paginatorDropdown" optionValue="rows" optionLabel="rows"
                         [(ngModel)]="paginatorValue"></p-dropdown>
                 </div>
-
             </ng-template>
 
             <ng-template pTemplate="header">
                 <tr class="table_head">
                     <ng-container *ngFor="let header of departmentHeader">
-                        <th><span>{{header.name}}<p-sortIcon pSortableColumn="{{header.fieldName}}" field="{{header.fieldName}}"></p-sortIcon></span></th>
+                        <th><span>{{header.name}}<p-sortIcon pSortableColumn="{{header.fieldName}}"
+                                    field="{{header.fieldName}}"></p-sortIcon></span></th>
                     </ng-container>
-
                 </tr>
             </ng-template>
 
@@ -31,20 +30,20 @@
                     <td>{{departmentData.managerId}}</td>
                     <td>{{departmentData.createdSource }}</td>
                     <td>{{departmentData.createdSourceType}}</td>
-                    <td>{{departmentData.createdDttm | date :" dd/MM/yyyy, h:mm a"}}</td>
+                    <td>{{departmentData.createdDttm | date :"dd/MM/yyyy, h:mm a"}}</td>
                     <td>{{departmentData.modifiedSource}}</td>
                     <td>{{departmentData.modifiedSourceType}}</td>
-                    <td>{{departmentData.modifiedDttm | date :" dd/MM/yyyy, h:mm a"}}</td>
+                    <td>{{departmentData.modifiedDttm | date :"dd/MM/yyyy, h:mm a"}}</td>
                 </tr>
             </ng-template>
 
             <ng-template pTemplate="emptymessage">
                 <tr><td colspan="16">no data available</td></tr>
             </ng-template>
+
         </p-table>
     </div>
     <div *ngIf="childComponentOpend">
-        <router-outlet (deactivate)="ngOnInit();"></router-outlet>
+        <router-outlet (deactivate)="ngOnInit()"></router-outlet>
     </div>
-
 </app-navbar>

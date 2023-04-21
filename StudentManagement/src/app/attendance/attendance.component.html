@@ -1,87 +1,93 @@
 <app-navbar>
     <div class="tableContainer" *ngIf="showAttendanceDetails && !childComponentOpend">
 
-        <p-dialog [(visible)]="dialogShow" [modal]="true"  position="center" [style]="{width: '350px' }">
-            <ng-template pTemplate="header">
-                <h3>Student Detailes</h3>
-            </ng-template>
-            
-            <label>Student ID: </label>
-            <input pInputText type="text" pattern="[A-Z]{2}[0-9]{4}"  placeholder="Student Id"  #checkStdId="ngModel" [(ngModel)]="studentId" #studentIdFiled >
-            <p  *ngIf="!fieldSelected  && (!checkStdId.dirty || studentIdFiled.value=='')" id="username-help" class="p-error text-right" >Student Id  is Required.</p>
-            <p  *ngIf="checkStdId.dirty && checkStdId.invalid " id="username-help" class="p-error text-right" >Student Id is Invalid.</p>
+        <p-dialog [(visible)]="dialogShow" [modal]="true" position="center" [style]="{width: '350px' }">
+            <ng-template pTemplate="header"><h3>Student Detailes</h3></ng-template>
 
-            <label>Department Id: </label>
-            <input pInputText type="text" pattern="[0-9]{1}"  placeholder="Department Id"  #checkDeptId="ngModel" [(ngModel)]="departmentId"  #departmentIdFiled>
-            <p  *ngIf="!fieldSelected   && (!checkDeptId.dirty || departmentIdFiled.value=='') "id="username-help" class="p-error text-right" >Department Id  is Required.</p>
-            <p  *ngIf="checkDeptId.dirty && checkDeptId.invalid" id="username-help" class="p-error text-right" >Department Id  is Invalid.</p>
-          
+            <label>Student ID:</label>
+            <input pInputText type="text" pattern="[A-Z]{2}[0-9]{4}" placeholder="Student Id" #checkStdId="ngModel"
+                [(ngModel)]="studentId">
+            <p *ngIf="!fieldSelected && (!checkStdId.dirty || checkStdId.value=='')" id="username-help"
+                class="p-error text-right">Student Id is required.</p>
+            <p *ngIf="checkStdId.dirty && checkStdId.invalid " id="username-help" class="p-error text-right">Student Id
+                is Invalid.</p>
+
+            <label>Department Id:</label>
+            <input pInputText type="text" pattern="[0-9]{1}" placeholder="Department Id" #checkDeptId="ngModel"
+                [(ngModel)]="departmentId">
+            <p *ngIf="!fieldSelected && (!checkDeptId.dirty || checkDeptId.value=='') " id="username-help"
+                class="p-error text-right">Department Id is required.</p>
+            <p *ngIf="checkDeptId.dirty && checkDeptId.invalid" id="username-help" class="p-error text-right">Department
+                Id is Invalid.</p>
 
             <ng-template pTemplate="footer">
-                <button pButton type="button"  label="Cancel" (click)="dialogShow=false"></button>
-                <button pButton type="button" label="Confirm" (click)="fieldSelected=false;(checkDeptId.valid && checkStdId.valid && checkDeptId.value!='' && checkStdId.value!='') && checkStudentId()"></button>
+                <button pButton type="button" label="Cancel" (click)="dialogShow=false"></button>
+                <button pButton type="button" label="Confirm"
+                    (click)="fieldSelected=false;(checkDeptId.valid && checkStdId.valid && checkDeptId.value!='' && checkStdId.value!='') && checkStudentId()"></button>
             </ng-template>
         </p-dialog>
-        <p-confirmDialog  [baseZIndex]="1" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+        <p-confirmDialog [baseZIndex]="1" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
         <p-toast></p-toast>
-        <p-table #dt styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="500px" [value]="attendanceData"
-            [rows]="paginatorValue" [globalFilterFields]="['studentId']" [paginator]="paginatorValue<attendanceData.length" [resizableColumns]="true"
+        <p-table #dataTable styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="500px"
+            [value]="attendanceData" [rows]="paginatorValue" [globalFilterFields]="['studentId']"
+            [paginator]="paginatorValue<attendanceData.length" [resizableColumns]="true"
             [totalRecords]="attendanceData.length" pageLinkSize="5" [showJumpToPageDropdown]="false"
             [showFirstLastIcon]="false">
             <ng-template pTemplate="caption">
                 <div class="table-header">
-                        <h3>Attendance List</h3>
-                        <div class="topContainerButtons">
-                            <span class="p-input-icon-left">
-                                <i class="pi pi-search"></i>
-                                <input pInputText type="text"
-                                    (input)="dt.filterGlobal($any($event.target).value, 'contains')"
-                                    placeholder="Global Search" />
-                            </span>
-                            <p-dropdown [options]="paginatorDropdown" optionValue="rows" optionLabel="rows"
-                                [(ngModel)]="paginatorValue"></p-dropdown>
-                            <button *ngIf="loggedInUser=='admin' " pButton class="p-button-info"
-                                (click)="showDialog()" label="+ADD"></button>
-                        </div>
+                    <h3>Attendance List</h3>
+                    <div class="topContainerButtons">
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text"
+                                (input)="dataTable.filterGlobal($any($event.target).value, 'contains')"
+                                placeholder="Global Search" />
+                        </span>
+                        <p-dropdown [options]="paginatorDropdown" optionValue="rows" optionLabel="rows"
+                            [(ngModel)]="paginatorValue"></p-dropdown>
+                        <button *ngIf="loggedInUser=='admin' " pButton class="p-button-info" (click)="showDialog()"
+                            label="+ADD"></button>
+                    </div>
                 </div>
             </ng-template>
 
             <ng-template pTemplate="header">
                 <tr class="table_head">
                     <ng-container *ngFor="let header of attendanceTableHeader">
-                        <th><span>{{header.name}}</span><p-sortIcon pSortableColumn="{{header.fieldName}}" field="{{header.fieldName}}"></p-sortIcon></th>
+                        <th><span>{{header.name}}</span><p-sortIcon pSortableColumn="{{header.fieldName}}"
+                                field="{{header.fieldName}}"></p-sortIcon></th>
                     </ng-container>
-                    <th *ngIf="loggedInUser=='admin' "><span>Delete</span></th>
+                    <th *ngIf="loggedInUser=='admin'"><span>Delete</span></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-attendance>
                 <tr (dblclick)="viewAttendanceDetailes(attendance.studentId)">
 
                     <td>{{attendance.studentId}}</td>
-                    <td>{{attendance.date | date :" dd/MM/yyyy "}}</td>
+                    <td>{{attendance.date | date :"dd/MM/yyyy"}}</td>
                     <td>{{attendance.departmentId}}</td>
                     <td><button class="availabelButton"
                             [ngStyle]="{'background-color':attendance.available == 'true' ? 'rgb(75, 230, 75)' : 'rgb(232, 42, 42)' }">
                             {{attendance.available| titlecase}}</button></td>
-                    <td>{{attendance.checkIn |date :" hh:mm a "}}</td>
-                    <td>{{attendance.checkout | date :" hh:mm a "}}</td>
+                    <td>{{attendance.checkIn |date :"hh:mm a"}}</td>
+                    <td>{{attendance.checkout | date :"hh:mm a"}}</td>
                     <td>{{attendance.attendanceCount}}</td>
                     <td>{{attendance.createdSource}}</td>
                     <td>{{attendance.createdSourceType}}</td>
-                    <td>{{attendance.createdDttm | date :" dd/MM/yyyy, h:mm a "}}</td>
+                    <td>{{attendance.createdDttm | date :"dd/MM/yyyy, h:mm a"}}</td>
                     <td>{{attendance.modifiedSource}}</td>
                     <td>{{attendance.modifiedSourceType}}</td>
-                    <td>{{attendance.modifiedDttm | date :" dd/MM/yyyy, h:mm a "}}</td>
-                    <td *ngIf="loggedInUser=='admin' "><button pButton type="button" label="Delete"
+                    <td>{{attendance.modifiedDttm | date :"dd/MM/yyyy, h:mm a"}}</td>
+                    <td *ngIf="loggedInUser=='admin'"><button pButton type="button" label="Delete"
                             (click)="deleteAttendanceRecord(attendance.studentId, attendance.departmentId)"
-                            class="p-button-rounded p-button-danger"></button>
+                            class="p-button-danger p-button-sm" icon="pi pi-times"></button>
                     </td>
                 </tr>
             </ng-template>
 
             <ng-template pTemplate="emptymessage">
-                <tr><td  colspan="16">no data available</td></tr>
+                <tr><td colspan="16">no data available</td></tr>
             </ng-template>
 
         </p-table>

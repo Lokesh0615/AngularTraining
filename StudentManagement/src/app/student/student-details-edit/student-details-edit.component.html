@@ -7,15 +7,15 @@
                 <label class="col-6">{{studentDetails.studentId}}</label>
             </div>
             <div>
-                <label class="col-6">Name: </label>
+                <label class="col-6">Name:</label>
                 <label class="col-6">{{studentDetails.firstName +" "+ studentDetails.lastName}}</label>
             </div>
             <div>
-                <label class="col-6">Date Of Birth: </label>
+                <label class="col-6">Date Of Birth:</label>
                 <label class="col-6">{{studentDetails.dob | date: "dd/MM/yyyy"}}</label>
             </div>
             <div>
-                <label class="col-6">Gender: </label>
+                <label class="col-6">Gender:</label>
                 <label class="col-6">{{studentDetails.gender | titlecase}}</label>
             </div>
 
@@ -25,12 +25,12 @@
             <hr>
             <div class="grid grid-nogutter">
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Phone Number: </label>
+                    <label class="col-6">Phone Number:</label>
                     <label class="col-6">{{studentDetails.phoneNumber}}</label>
 
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Mail ID: </label>
+                    <label class="col-6">Mail ID:</label>
                     <label class="col-6">{{studentDetails.mailId}}</label>
                 </div>
             </div>
@@ -38,69 +38,69 @@
 
             <div class="grid grid-nogutter">
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Blood Group: </label>
+                    <label class="col-6">Blood Group:</label>
                     <label class="col-6">{{studentDetails.bloodGroup}}</label>
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Address: </label>
+                    <label class="col-6">Address:</label>
                     <label class="col-6">{{studentDetails.address}}</label>
                 </div>
             </div>
             <div class="grid grid-nogutter">
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Date of Joining: </label>
+                    <label class="col-6">Date of Joining:</label>
                     <label class="col-6">{{studentDetails.dateOfJoining | date: "dd/MM/yyyy"}}</label>
 
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Department: </label>
+                    <label class="col-6">Department:</label>
                     <label class="col-6" #department>{{studentDetails.department| titlecase}} </label>
                 </div>
             </div>
             <div class="grid grid-nogutter">
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Department ID: </label>
+                    <label class="col-6">Department ID:</label>
                     <label class="col-6">{{studentDetails.departmentId}}</label>
 
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Created Source: </label>
+                    <label class="col-6">Created Source:</label>
                     <label class="col-6">{{studentDetails.createdSource}}</label>
                 </div>
             </div>
             <div class="grid grid-nogutter">
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Created Source Type: </label>
+                    <label class="col-6">Created Source Type:</label>
                     <label class="col-6">{{studentDetails.createdSourceType}}</label>
 
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">CreatedDttm: </label>
+                    <label class="col-6">CreatedDttm:</label>
                     <label class="col-6">{{studentDetails.createdDttm | date :" dd/MM/yyyy, h:mm a "}}</label>
                 </div>
             </div>
             <div class="grid grid-nogutter">
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Modified Source: </label>
+                    <label class="col-6">Modified Source:</label>
                     <label class="col-6">{{studentDetails.modifiedSource}}</label>
 
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Modified Source Type: </label>
+                    <label class="col-6">Modified Source Type:</label>
                     <label class="col-6">{{studentDetails.modifiedSourceType }}</label>
                 </div>
             </div>
             <div class="grid grid-nogutter">
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6  grid-nogutter">
-                    <label class="col-6">ModifiedDttm: </label>
-                    <label class="col-6">{{studentDetails.modifiedDttm | date :"dd/MM/yyyy, h:mm a "}}</label>
+                    <label class="col-6">ModifiedDttm:</label>
+                    <label class="col-6">{{studentDetails.modifiedDttm | date :"dd/MM/yyyy, h:mm a"}}</label>
 
                 </div>
-                <div class="detailsButtons">
-                    <button *ngIf="loggedInUser =='admin'" pButton label="Edit" class="p-button-primary Buttons"
+                <div class="buttonsContainer">
+                    <button *ngIf="loggedInUser =='admin'" pButton label="Edit" class="p-button-primary buttons"
                         (click)="editStudentDetailes()"></button>
 
-                    <button pButton label="Back" class="p-button-secondary Buttons" (click)="canExit()"></button>
+                    <button pButton label="Back" class="p-button-secondary buttons" (click)="canExit()"></button>
                 </div>
             </div>
         </div>
@@ -111,7 +111,7 @@
             <div class="grid">
                 <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
-                    <label>StudentId </label>
+                    <label>Student Id</label>
                     <input type="text" pInputText id="studentId" name="studentId" placeholder="studentId"
                         [(ngModel)]="studentDetails.studentId" disabled>
 
@@ -121,7 +121,7 @@
                     <small *ngIf="!firstName.touched && firstName.invalid &&  !fieldSelected" id="username-help"
                         class="p-error">First Name is required.</small>
                     <small *ngIf="firstName.invalid && firstName.touched " id="username-help" class="p-error">First Name
-                        is Inavild.</small>
+                        is Invaild.</small>
 
                     <label>Last Name<span>*</span></label>
                     <input type="text" pInputText id="lastName" name="lastName" placeholder="lastName"
@@ -129,7 +129,7 @@
                     <small *ngIf="!lastName.touched && lastName.invalid  &&  !fieldSelected" id="username-help"
                         class="p-error">Last Name is required.</small>
                     <small *ngIf="lastName.invalid && lastName.touched " id="username-help" class="p-error">Last Name is
-                        Inavild.</small>
+                        Invaild.</small>
 
                     <label>Blood Group</label>
                     <p-dropdown [options]="bloodGroupList" optionValue="type" optionLabel="type" appendTo="body"
@@ -158,10 +158,12 @@
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
-                    <label>PhoneNumber</label>
+                    <label>Phone Number</label>
                     <input type="text" pInputText id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}"
-                        placeholder="phoneNumber" [maxLength]="10" [minlength]="10" ngModel
+                        placeholder="phoneNumber" [maxLength]="10" [minlength]="10"  #phoneNumber="ngModel"
                         [(ngModel)]="studentDetails.phoneNumber">
+                    <small *ngIf="!phoneNumber.pristine && phoneNumber.invalid" id="username-help" class="p-error">Phone Number
+                            is Invalid.</small>
 
                     <label>Address</label>
                     <input type="text" pInputText id="address" name="address" placeholder="address" 
@@ -175,9 +177,9 @@
                     <input type="text" pInputText id="mailId" name="mailId" placeholder="mailId"   pattern="^[a-z0-9._%+-]+@[a-z0-9]+[.]+[a-z]{2,4}$"
                         #mailId="ngModel" required email="true" [(ngModel)]="studentDetails.mailId">
                     <small *ngIf="!mailId.touched && mailId.invalid &&  !fieldSelected" id="username-help"
-                        class="p-error">MailId is required.</small>
+                        class="p-error">Mail Id is required.</small>
                     <small *ngIf="mailId.invalid && mailId.touched " id="username-help" class="p-error">Mail ID is
-                        Inavild.</small>
+                        Invaild.</small>
 
                     <label>Department<span>*</span></label>
                     <p-dropdown [options]="departmentList"  #department="ngModel" optionValue="departmentCode" appendTo="body"
@@ -211,11 +213,11 @@
                     <small *ngIf="!imageSize" id="username-help" class="p-error">Image size should be lessthan
                         30KB</small>
 
-                    <label>CreatedSource</label>
+                    <label>Created Source</label>
                     <input type="text" pInputText id="createdSource" name="createdSource" placeholder="createdSource"
                         [(ngModel)]="studentDetails.createdSource"  disabled>
 
-                    <label>CreatedSourceType</label>
+                    <label>Created Source Type</label>
                     <input type="text" pInputText id="createdSourceType" name="createdSourceType"
                         [(ngModel)]="studentDetails.createdSourceType" placeholder="createdSourceType"  disabled>
 
@@ -226,11 +228,11 @@
                     <p-calendar id="createdDttm" name="createdDttm" [required]="true" #createdDttm="ngModel" appendTo="body" disabled
                     [showTime]="true" hourFormat="12"  [(ngModel)]="studentDetails.createdDttm"></p-calendar>
                 
-                    <label>ModifiedSource</label>
+                    <label>Modified Source</label>
                     <input type="text" pInputText id="modifiedSource" name="modifiedSource" placeholder="modifiedSource"
                         [(ngModel)]="studentDetails.modifiedSource"  disabled>
 
-                    <label>ModifiedSourceType</label>
+                    <label>Modified Source Type</label>
                     <input type="text" pInputText id="modifiedSourceType" name="modifiedSourceType"  placeholder="modifiedSourceType"
                         [disabled]="true"  [(ngModel)]="studentDetails.modifiedSourceType" readonly>
 
@@ -240,12 +242,12 @@
             
                 </div>
 
-                <div class="detailsButtons">
+                <div class="buttonsContainer">
                     <!-- pristine is ture when any chnages are not made -->
-                    <button type="button" pButton class="p-button Buttons" label="Save"
+                    <button type="button" pButton class="p-button buttons" label="Save"
                         (click)="fieldSelected=false; studentDetailsForm.valid && onSubmint()"
                         [disabled]="studentDetailsForm.pristine"></button>
-                    <button type="button" pButton class="p-button-secondary Buttons" label="Cancel"
+                    <button type="button" pButton class="p-button-secondary buttons" label="Cancel"
                         (click)="canExit()"></button>
                 </div>
             </div>

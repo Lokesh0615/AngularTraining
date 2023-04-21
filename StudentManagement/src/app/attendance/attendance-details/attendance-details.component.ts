@@ -1,10 +1,9 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { APIService } from 'src/app/services/APIservice.service';
 import { LoginService } from 'src/app/services/login.service';
-import { VariableService } from 'src/app/services/variable.service';
 
 
 @Component({
@@ -35,8 +34,8 @@ export class AttendanceDetailsComponent implements OnInit, OnDestroy {
 
   @ViewChild('attendanceDetailsForm') attendanceDetailsForm!: NgForm;
 
-  constructor(private APIService: APIService, private router: Router, private activatedRoute: ActivatedRoute,
-    private ConfirmationService: ConfirmationService, private LoginService: LoginService) { }
+  constructor(private apiService: APIService, private router: Router, private activatedRoute: ActivatedRoute,
+    private confirmationService: ConfirmationService, private loginService: LoginService) { }
 
 
   ngOnInit(): void {
@@ -51,13 +50,13 @@ export class AttendanceDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.LoginService.setChildComponentRefresh(false)
+    this.loginService.setChildComponentRefresh(false)
   }
 
   canExit() {
 
     if (this.attendanceDetailsForm.dirty && this.attendanceDetailsForm.touched) {
-      this.ConfirmationService.confirm({
+      this.confirmationService.confirm({
         message: 'Do you want to exit',
         header: 'Confirmation',
         icon: 'pi pi-exclamation-triangle',
@@ -79,7 +78,7 @@ export class AttendanceDetailsComponent implements OnInit, OnDestroy {
     this.attendanceDetails.createdDttm = new Date();
     this.attendanceDetails.createdSource = "admin";
     this.attendanceDetails.createdSourceType = "admin";
-    this.APIService.addAttendanceDetails(this.attendanceDetails).subscribe((results) => { }, (error) => {
+    this.apiService.addAttendanceDetails(this.attendanceDetails).subscribe((results) => { }, (error) => {
       this.router.navigateByUrl('/Attendance')
       this.ngOnDestroy()
     })

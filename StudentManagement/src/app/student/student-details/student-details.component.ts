@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ViewChild, OnInit,  } from '@angular/core';
+import { Component, OnDestroy, ViewChild, OnInit, } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
@@ -13,10 +13,10 @@ import { VariableService } from 'src/app/services/variable.service';
 })
 export class StudentDetailsComponent implements OnInit, OnDestroy {
 
-  bloodGroupList = this.VariableService.bloodGroupList;
-  departmentList = this.VariableService.departmentList;
-  imageSize=true;
-  fieldSelected=true;
+  bloodGroupList = this.variableService.bloodGroupList;
+  departmentList = this.variableService.departmentList;
+  imageSize = true;
+  fieldSelected = true;
   // for min date in dob
   createdDttm = new Date()
 
@@ -41,13 +41,13 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
     modifiedDttm: '',
 
     imagePath: null,
-    imageName:''
+    imageName: ''
   }
 
   @ViewChild('studentDetailsForm') studentDetailsForm!: NgForm;
 
-  constructor(private APIService: APIService, private router: Router, private activatedRoute: ActivatedRoute,
-    private VariableService: VariableService, private ConfirmationService: ConfirmationService, private LoginService: LoginService, ) { }
+  constructor(private apiService: APIService, private router: Router, private activatedRoute: ActivatedRoute,
+    private variableService: VariableService, private confirmationService: ConfirmationService, private loginService: LoginService,) { }
 
 
   ngOnInit(): void {
@@ -59,26 +59,26 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
   }
 
   onFileSelect(event) {
-    if(event.target.files[0].size>30000){
-      this.imageSize=false;
-    }else{
+    if (event.target.files[0].size > 30000) {
+      this.imageSize = false;
+    } else {
       if (event.target.files[0]) {
         let file = event.target.files[0]
-        this.imageSize=true;
-        this.studentDetails.imageName=event.target.files[0].name;
-        
-        let reader= new FileReader();
-        reader.addEventListener('load', ()=>{
-          this.studentDetails.imagePath=reader.result;
+        this.imageSize = true;
+        this.studentDetails.imageName = event.target.files[0].name;
+
+        let reader = new FileReader();
+        reader.addEventListener('load', () => {
+          this.studentDetails.imagePath = reader.result;
         })
         reader.readAsDataURL(file)
       }
-  }
+    }
   }
 
   onSubmit() {
     this.studentDetails.createdDttm = new Date()
-    this.APIService.addStudent(this.studentDetails).subscribe((resluts) => {
+    this.apiService.addStudent(this.studentDetails).subscribe((resluts) => {
 
     }, (err) => {
       this.router.navigateByUrl('/Student');
@@ -87,13 +87,13 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.LoginService.setChildComponentRefresh(false)
-    this.fieldSelected=true;
+    this.loginService.setChildComponentRefresh(false)
+    this.fieldSelected = true;
   }
 
   canExit() {
     if (this.studentDetailsForm.dirty && this.studentDetailsForm.touched) {
-      this.ConfirmationService.confirm({
+      this.confirmationService.confirm({
         message: 'Do you want to exit',
         header: 'Confirmation',
         accept: () => {

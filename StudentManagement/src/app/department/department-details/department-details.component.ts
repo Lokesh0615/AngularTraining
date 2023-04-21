@@ -10,10 +10,10 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class DepartmentDetailsComponent implements OnInit, OnDestroy {
   
-  DepartmentId !:string;
+  departmentId !:string;
   departmentData: any={};
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
-              private APIService: APIService, private LoginService:LoginService){}
+              private apiService: APIService, private loginService:LoginService){}
  
 
   ngOnInit() {
@@ -21,10 +21,10 @@ export class DepartmentDetailsComponent implements OnInit, OnDestroy {
 
     //if the parameter value changes then use Obeservables
     this.activatedRoute.paramMap.subscribe((parm) => {
-      this.DepartmentId = parm.get('id')?.substring(1);
-      this.APIService.findDepartmentByDptId(this.DepartmentId).subscribe((results) => {
+      this.departmentId = parm.get('id')?.substring(1);
+      this.apiService.fetchDepartmentByDptId(this.departmentId).subscribe((results) => {
       this.departmentData = results;
-      localStorage.setItem('path','Department/DepartmentDetailes/:'+this.DepartmentId+'')
+      localStorage.setItem('path','Department/DepartmentDetailes/:'+this.departmentId+'')
 
     })
     })
@@ -32,12 +32,12 @@ export class DepartmentDetailsComponent implements OnInit, OnDestroy {
   }
    
   departmentPage(){
-    this.LoginService.setChildComponentRefresh(false)
+    this.loginService.setChildComponentRefresh(false)
     this.router.navigateByUrl('/Department');
 
   }
   ngOnDestroy(): void {
-    this.LoginService.setChildComponentRefresh(false)
+    this.loginService.setChildComponentRefresh(false)
   }
 
 }

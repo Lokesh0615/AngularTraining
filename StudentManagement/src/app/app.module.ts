@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
@@ -22,46 +21,38 @@ import { AttendanceDetailsEditComponent } from './attendance/attendance-details-
 import { LoginService } from './services/login.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { VariableService } from './services/variable.service';
+import { APIService } from './services/APIservice.service';
+import { AdminGuardServie } from './services/adminGuard.service';
 
 // primeng
 import { InputTextModule } from 'primeng/inputtext'
 import {PasswordModule} from 'primeng/password';
 import {StyleClassModule} from 'primeng/styleclass';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { BrowserModule } from '@angular/platform-browser'
-
 import {ButtonModule} from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
 import { BadgeModule } from 'primeng/badge';
 import {TableModule} from 'primeng/table';
 import {DialogModule} from 'primeng/dialog';
-import { APIService } from './services/APIservice.service';
 import {MessageService} from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
 import {KeyFilterModule} from 'primeng/keyfilter';
 import { StudentDetailsEditComponent } from './student/student-details-edit/student-details-edit.component';
-// import { StudentDetailesService } from './services/studentDetailes';
 import { MessagesModule } from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import { DropdownModule } from 'primeng/dropdown';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {ConfirmationService, ConfirmEventType} from 'primeng/api';
+import {ConfirmationService } from 'primeng/api';
 import {CalendarModule} from 'primeng/calendar';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { PaginatorModule } from 'primeng/paginator';
 import {FileUploadModule} from 'primeng/fileupload';
-import { AdminGuardServie } from './services/adminGuard.service';
-
-
 
 
 const appRoute:Routes=[
   {path:'', component:LoginComponent , canActivate:[LoginService]},
-  {path:'Login', component:LoginComponent},
-  {path:'Home', canActivate:[AuthGuardService], component:HomeComponent,
-    // children:[{path:'Home/Users', component:UsersComponent}]
-  },
+  {path:'Home', canActivate:[AuthGuardService], component:HomeComponent,},
   {path:'Student', component:StudentComponent, canActivate:[AuthGuardService, ],
     children:[{path:'AddStudentDetails/:id', component:StudentDetailsComponent, canActivate:[AdminGuardServie]},
               {path:'StudentDetails/:id', component:StudentDetailsEditComponent, canActivate:[AuthGuardService]}
@@ -75,8 +66,7 @@ const appRoute:Routes=[
               { path:"AddAttendanceDetails/:id/:did", component:AttendanceDetailsComponent, canActivate:[AdminGuardServie]}
     ]
   },
-  // {path:'Home/Users', component:UsersComponent},
-  {path:"**",  component:HomeComponent, canActivate:[LoginService]}
+  {path:"**",  component:LoginComponent, canActivate:[LoginService]}
 ]
 
 @NgModule({

@@ -16,7 +16,7 @@ export class StudentComponent implements OnInit {
   paginatorDropdown=[{rows:5}, {rows:10}, {rows:15}]
   paginatorValue:number;
   dialogShow:boolean=false;
-  studentTableHeaders=this.VariableService.studentTableHeaders;
+  studentTableHeaders=this.variableService.studentTableHeaders;
   studentsData:any=[];
   showStudentDetails!:boolean;
   childComponentOpend:boolean
@@ -24,9 +24,9 @@ export class StudentComponent implements OnInit {
   studentId:string;
   fieldSelected=true;
 
-  constructor(private APIService:APIService, private MessageService:MessageService, private route:Router ,
-               private activatedRoute:ActivatedRoute, private VariableService:VariableService,
-               private ConfirmationService:ConfirmationService, private LoginService:LoginService ){ }
+  constructor(private apiService:APIService, private messageService:MessageService, private route:Router ,
+               private activatedRoute:ActivatedRoute, private variableService:VariableService,
+               private confirmationService:ConfirmationService, private loginService:LoginService ){ }
   
   ngOnInit(): void {
     let storage=localStorage;
@@ -35,7 +35,7 @@ export class StudentComponent implements OnInit {
     this.childComponentOpend=JSON.parse(storage.getItem('admin')).childComponentOpend;
     this.getAllStudentDetailes()
     this.showStudentDetails=false;    
-    this.loggedInUser=this.LoginService.logged_in_user;
+    this.loggedInUser=this.loginService.loggedInUser;
     
   }
   showDialog(){
@@ -45,7 +45,7 @@ export class StudentComponent implements OnInit {
   }
   getAllStudentDetailes(){
     this.studentsData=[]
-    this.APIService.findAllStudents().subscribe((results)=>{
+    this.apiService.fetchAllStudentsDetails().subscribe((results)=>{
       this.studentsData=results;
     })
     
@@ -57,34 +57,35 @@ export class StudentComponent implements OnInit {
       this.dialogShow=false;
       this.showStudentDetails=false;
       this.childComponentOpend=true
-      this.LoginService.setChildComponentRefresh(true)
+      this.loginService.setChildComponentRefresh(true)
       this.route.navigate(['AddStudentDetails/:'+this.studentId+''],{relativeTo:this.activatedRoute})
       this.studentId=''
     }else{
-      this.MessageService.add({severity:'error', detail:'Student Id already Exists'});
+      this.messageService.add({severity:'error', detail:'Student Id already Exists'});
     }
   }
 
 
   deleteByStdId(stdId:number){
-    this.ConfirmationService.confirm({
+    this.confirmationService.confirm({
         message: 'Are you want to delete the record?',
         header: 'Confirmation',
+        icon: 'pi pi-exclamation-triangle',
         accept: () => {
-          this.APIService.deleteByStudentId(stdId).subscribe((results)=>{ }, (error)=>{
-            this.MessageService.add({severity:'success', detail:'Record is deleted successfully'});
+          this.apiService.deleteByStudentId(stdId).subscribe((results)=>{ }, (error)=>{
+            this.messageService.add({severity:'success', detail:'Record is deleted successfully'});
             this.getAllStudentDetailes();
           })
         },
         reject: () => {
-          this.MessageService.add({severity:'error', detail:'Record is not Deleted'});
+          this.messageService.add({severity:'error', detail:'Record is not Deleted'});
         }
     });
 }
 
   studentDetailesEdit(studentId:string){
     this.childComponentOpend=true;
-    this.LoginService.setChildComponentRefresh(true)
+    this.loginService.setChildComponentRefresh(true)
     this.route.navigate(['StudentDetails/:'+studentId+''],{relativeTo:this.activatedRoute})
   }
 

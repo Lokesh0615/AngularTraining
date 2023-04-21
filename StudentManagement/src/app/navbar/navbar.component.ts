@@ -11,10 +11,10 @@ export class NavbarComponent implements OnInit {
   icon: string;
   loggedInUser!: string;
   userIcon!: string
-  constructor(private LoginService: LoginService) { }
+  constructor(private loginService: LoginService) { }
 
   ngOnInit(): void {
-    this.loggedInUser = this.LoginService.logged_in_user;
+    this.loggedInUser = this.loginService.loggedInUser;
     this.userIcon = this.loggedInUser.substring(0, 1).toUpperCase();
     let icons = JSON.parse(localStorage.getItem('icons'));
     this.title = icons.title;
@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logOut() {
-    this.LoginService.logOut()
+    this.loginService.logOut()
     localStorage.clear()
 
   }

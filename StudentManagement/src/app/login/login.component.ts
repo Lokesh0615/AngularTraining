@@ -14,27 +14,27 @@ export class LoginComponent {
   formContent = 'Please use Registered UserID and Password'
   isSignUp: boolean = false;
   
-  @ViewChild('user_id') user_id!: ElementRef;
+  @ViewChild('userId') userId!: ElementRef;
   @ViewChild('password') password!: any;
 
-  constructor(private loginService: LoginService, private APIService: APIService, private MessageService: MessageService) { }
+  constructor(private loginService: LoginService, private apiService: APIService, private messageService: MessageService) { }
 
-  login(user_id: string, password: string) {
-    this.loginService.login(user_id, password)
+  login(userId: string, password: string) {
+    this.loginService.login(userId, password)
   }
 
-  signUp(user_id: string, password: string) {
-    if (user_id.toLocaleLowerCase() == 'admin') {
-      this.MessageService.add({ severity: 'error', detail: 'User Admin is already exist' });
+  signUp(userId: string, password: string) {
+    if (userId.toLocaleLowerCase() == 'admin') {
+      this.messageService.add({ severity: 'error', detail: 'User Admin is already exist' });
     } else {
-      this.APIService.addUser(user_id, password).subscribe((results) => {
-        this.MessageService.add({ severity: 'success', detail: 'User ' + user_id + ' is registered' });
+      this.apiService.addNewUser(userId, password).subscribe((results) => {
+        this.messageService.add({ severity: 'success', detail: 'User ' + userId + ' is registered' });
         this.isSignUp = false;
-        this.user_id.nativeElement.value = '';
+        this.userId.nativeElement.value = '';
         this.password.input.nativeElement.value = ''
 
       }, (error) => {
-        this.MessageService.add({ severity: 'error', detail: 'User ' + user_id + ' is already exist' });
+        this.messageService.add({ severity: 'error', detail: 'User ' + userId + ' is already exist' });
 
       })
     }
@@ -45,14 +45,14 @@ export class LoginComponent {
     this.formType = 'SignUp';
     this.formContent = "Please Register using UserID and Password"
     this.isSignUp = true;
-    this.user_id.nativeElement.value = '';
+    this.userId.nativeElement.value = '';
     this.password.input.nativeElement.value = ''
   }
   loginOption() {
     this.formType = 'Login';
     this.formContent = "Please use Registered UserID and Password"
     this.isSignUp = false;
-    this.user_id.nativeElement.value = '';
+    this.userId.nativeElement.value = '';
     this.password.input.nativeElement.value = ''
   }
 

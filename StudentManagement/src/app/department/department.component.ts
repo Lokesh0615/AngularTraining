@@ -14,13 +14,13 @@ export class DepartmentComponent implements OnInit{
   paginatorDropdown=[{rows:5}, {rows:10}, {rows:15}]
   paginatorValue:number;
 
-  departmentHeader=this.VariableService.departmentHeader;
+  departmentHeader=this.variableService.departmentHeader;
   departmentsData:any=[];
   showDepartmentDetails!:boolean;
   childComponentOpend!:boolean;
 
-  constructor(private APIService:APIService, private route:Router , private activatedRoute:ActivatedRoute, 
-              private LoginService:LoginService, private VariableService:VariableService){}
+  constructor(private apiService:APIService, private route:Router , private activatedRoute:ActivatedRoute, 
+              private loginService:LoginService, private variableService:VariableService){}
 
  
 
@@ -32,7 +32,7 @@ export class DepartmentComponent implements OnInit{
     this.childComponentOpend=JSON.parse(storage.getItem('admin')).childComponentOpend;
 
     // getting all departemnt details from database
-    this.APIService.getAllDepartmnetDetailes().subscribe((results)=>{
+    this.apiService.fetchAllDepartmentDetailes().subscribe((results)=>{
       this.departmentsData=results
     })
   
@@ -40,7 +40,7 @@ export class DepartmentComponent implements OnInit{
 
   departmentDetailes(departmenId:string){
     this.childComponentOpend=true;
-    this.LoginService.setChildComponentRefresh(true)  
+    this.loginService.setChildComponentRefresh(true)  
     this.route.navigate(['DepartmentDetailes/:'+departmenId+''],{relativeTo:this.activatedRoute})
     
   }

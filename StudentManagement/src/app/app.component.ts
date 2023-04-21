@@ -8,11 +8,11 @@ import { LoginService } from './services/login.service';
 })
 export class AppComponent {
   title = 'StudentManagement';
-  logged_in!:boolean;
+  loggedIn!:boolean;
   constructor(private loginService:LoginService){}
   ngOnInit(){
-    this.logged_in=this.loginService.logged_in;
-    // console.log(this.logged_in);
+    this.loggedIn=this.loginService.loggedIn;
+    // console.log(this.loggedIn);
     this.loginService.autoLogin()
   }
 }

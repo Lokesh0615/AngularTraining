@@ -4,64 +4,64 @@
     <div class="detailsColumn grid departmentDetailsContainer">
         <h3>{{departmentData.departmentName}} Department Details</h3>
         <hr>
-        
-        <div class="grid">
-            <div class="col-12 sm:col-12 md:col-6 lg:col-6 field ">
-                <label class="col-6">Department Id: </label>
+         
+        <div class="grid grid-nogutter">
+            <div class="col-12 sm:col-12 md:col-6 lg:col-6 field">
+                <label class="col-6">Department Id:</label>
                 <label class="col-6">{{departmentData.departmentId}}</label>
             </div>
-            <div class="col-12 sm:col-12 md:col-6 lg:col-6 field ">
-                <label class="col-6">Department Name: </label>
+            <div class="col-12 sm:col-12 md:col-6 lg:col-6 field">
+                <label class="col-6">Department Name:</label>
                 <label class="col-6">{{departmentData.departmentName}}</label>
             </div>
         </div>
 
-        <div class="grid">
-            <div class="col-12 sm:col-12 md:col-6 lg:col-6 field ">
-                <label class="col-6">No Of Students: </label>
+        <div class="grid grid-nogutter">
+            <div class="col-12 sm:col-12 md:col-6 lg:col-6 field">
+                <label class="col-6">No Of Students:</label>
                 <label class="col-6">{{departmentData.noOfEmployee }} </label>
             </div>
-            <div class="col-12 sm:col-12 md:col-6 lg:col-6 field ">
-                <label class="col-6">ManagerId: </label>
+            <div class="col-12 sm:col-12 md:col-6 lg:col-6 field">
+                <label class="col-6">Manager Id:</label>
                 <label class="col-6">{{departmentData.managerId}}</label>
             </div>
 
         </div>
-        <div class="grid">
-            <div class="col-12 sm:col-12 md:col-6 lg:col-6 field ">
-                <label class="col-6">Created Source: </label>
+        <div class="grid grid-nogutter">
+            <div class="col-12 sm:col-12 md:col-6 lg:col-6 field">
+                <label class="col-6">Created Source:</label>
                 <label class="col-6">{{departmentData.createdSource}}</label>
             </div>
 
-            <div class="col-12 sm:col-12 md:col-6 lg:col-6 field ">
-                <label class="col-6">Created Source Type: </label>
+            <div class="col-12 sm:col-12 md:col-6 lg:col-6 field">
+                <label class="col-6">Created Source Type:</label>
                 <label class="col-6">{{departmentData.createdSourceType}}</label>
             </div>
         </div>
 
-        <div class="grid">
-            <div class="col-12 sm:col-12 md:col-6 lg:col-6 field ">
-                <label class="col-6">CreatedDttm: </label>
+        <div class="grid grid-nogutter">
+            <div class="col-12 sm:col-12 md:col-6 lg:col-6 field">
+                <label class="col-6">CreatedDttm:</label>
                 <label class="col-6">{{departmentData.createdDttm | date :" dd/MM/yyyy, h:mm a"}}</label>
             </div>
             <div class="col-12 sm:col-12 md:col-6 lg:col-6 field ">
-                <label class="col-6">Modified Source: </label>
+                <label class="col-6">Modified Source:</label>
                 <label class="col-6">{{departmentData.modifiedSource}}</label>
             </div>
 
         </div>
-        <div class="grid">
+        <div class="grid grid-nogutter">
             <div class="col-12 sm:col-12 md:col-6 lg:col-6 field">
-                <label class="col-6">Modified Source Type: </label>
+                <label class="col-6">Modified Source Type:</label>
                 <label class="col-6">{{departmentData.modifiedSourceType}}</label>
             </div>
             <div class="col-12 sm:col-12 md:col-6 lg:col-6 field ">
-                <label class="col-6">ModifiedDttm: </label>
+                <label class="col-6">ModifiedDttm:</label>
                 <label class="col-6">{{departmentData.modifiedDttm | date :" dd/MM/yyyy, h:mm a"}}</label>
             </div>
         </div>
         <div class="detailsButtons">
-            <button pButton class="p-button-secondary Buttons" label="Back" (click)="departmentPage()"></button>
+            <button pButton class="p-button-secondary buttons" label="Back" (click)="departmentPage()"></button>
         </div>
     </div>
    

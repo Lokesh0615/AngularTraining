@@ -1,40 +1,50 @@
 <app-navbar>
     <div class="tableContainer" *ngIf="!showStudentDetails && !childComponentOpend">
-        <div class="topContainer" >
+        <div class="topContainer">
             <h3>Student List</h3>
             <div class="topContainerButtons">
-                <p-dropdown [options]="paginatorDropdown"  optionValue="rows"  optionLabel="rows" [(ngModel)]="paginatorValue"  ></p-dropdown>
-                <button *ngIf="loggedInUser=='admin' " pButton  Class="p-button-sm" (click)="showDialog()" label="+ADD"></button>
+                <p-dropdown [options]="paginatorDropdown" optionValue="rows" optionLabel="rows"
+                    [(ngModel)]="paginatorValue"></p-dropdown>
+                <button *ngIf="loggedInUser=='admin'" pButton Class="p-button-sm" (click)="showDialog()"
+                    label="+ADD"></button>
             </div>
         </div>
         <p-dialog [(visible)]="dialogShow" [modal]="true" [style]="{width: '350px'}" position="center">
-            <ng-template pTemplate="header" ><h3>Student Details</h3></ng-template>
-            <label>Student ID: </label>
-            <input pInputText type="text" pattern="[A-Z]{2}[0-9]{4}"  placeholder="Student Id"  #checkStdId="ngModel" [(ngModel)]="studentId">
-            <p  *ngIf="!fieldSelected   && !checkStdId.dirty" id="username-help" class="p-error text-right">StudentId  is Required.</p>
-            <p  *ngIf="checkStdId.dirty && checkStdId.invalid " id="username-help" class="p-error text-right" >StudentId  is Invalid.</p>
+            <ng-template pTemplate="header">
+                <h3>Student Details</h3>
+            </ng-template>
+            <label>Student ID:</label>
+            <input pInputText type="text" pattern="[A-Z]{2}[0-9]{4}" placeholder="Student Id" #checkStdId="ngModel"
+                [(ngModel)]="studentId">
+            <p *ngIf="!fieldSelected && !checkStdId.dirty" id="username-help" class="p-error text-right">Student Id is
+                required.</p>
+            <p *ngIf="checkStdId.dirty && checkStdId.invalid" id="username-help" class="p-error text-right">Student Id
+                is Invalid.</p>
             <ng-template pTemplate="footer">
                 <button pButton label="Cancel" (click)="dialogShow=false"></button>
-                <button  pButton type="button" label="Confirm" (click)="fieldSelected=false; (checkStdId.value!='' && checkStdId.valid) && checkStudentId()"></button>
+                <button pButton type="button" label="Confirm"
+                    (click)="fieldSelected=false; (checkStdId.value!='' && checkStdId.valid) && checkStudentId()"></button>
             </ng-template>
         </p-dialog>
-        <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+        <p-confirmDialog  [baseZIndex]="1" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
         <p-toast></p-toast>
 
-        <p-table   [rows]="paginatorValue" [paginator]="paginatorValue<studentsData.length" [showFirstLastIcon]="false" 
-                    [totalRecords]="studentsData.length" pageLinkSize="5" [resizableColumns]="true" [showJumpToPageDropdown]="false"
-                    styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="500px" [value]="studentsData"  >
-            
+        <p-table [rows]="paginatorValue" [paginator]="paginatorValue<studentsData.length" [showFirstLastIcon]="false"
+            [totalRecords]="studentsData.length" pageLinkSize="5" [resizableColumns]="true"
+            [showJumpToPageDropdown]="false" styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="500px"
+            [value]="studentsData">
+
             <ng-template pTemplate="header">
-                <tr class="table_head" >
+                <tr class="table_head">
                     <ng-container *ngFor="let header of studentTableHeaders">
-                        <th><span>{{header.name}}</span><p-sortIcon pSortableColumn="{{header.fieldName}}" field="{{header.fieldName}}"></p-sortIcon></th>
+                        <th><span>{{header.name}}</span><p-sortIcon pSortableColumn="{{header.fieldName}}"
+                                field="{{header.fieldName}}"></p-sortIcon></th>
                     </ng-container>
-                   <th *ngIf="loggedInUser=='admin' ">Delete</th>
+                    <th *ngIf="loggedInUser=='admin'">Delete</th>
                 </tr>
             </ng-template>
 
-            <ng-template pTemplate="body" let-studentData >
+            <ng-template pTemplate="body" let-studentData>
                 <tr (dblclick)="studentDetailesEdit(studentData.studentId)">
                     <td>{{studentData.studentId}}</td>
                     <td>{{studentData.firstName}}</td>
@@ -43,20 +53,20 @@
                     <td>{{studentData.gender | titlecase}}</td>
                     <td>{{studentData.phoneNumber}}</td>
                     <td>{{studentData.dateOfJoining | date :"dd/MM/yyyy"}}</td>
-                    <td>{{studentData.createdSource | titlecase}}</td>
+                    <td>{{studentData.createdSource }}</td>
                     <td>{{studentData.createdSourceType}}</td>
                     <td>{{studentData.createdDttm | date :" dd/MM/yyyy, h:mm a"}}</td>
                     <td>{{studentData.modifiedSource}}</td>
                     <td>{{studentData.modifiedSourceType}}</td>
                     <td>{{studentData.modifiedDttm | date :" dd/MM/yyyy, h:mm a"}}</td>
-                    <td *ngIf="loggedInUser=='admin' "><button  pButton  type="button" label="Delete" class="p-button-rounded p-button-danger"
-                            (click)="deleteByStdId(studentData.studentId)"></button>
+                    <td *ngIf="loggedInUser=='admin'"><button pButton type="button" label="Delete"
+                        class="p-button-danger p-button-sm" icon="pi pi-times" (click)="deleteByStdId(studentData.studentId)"></button>
                     </td>
                 </tr>
             </ng-template>
 
-            <ng-template pTemplate="emptymessage" >
-                <tr><td  colspan="16" >no data available</td></tr>
+            <ng-template pTemplate="emptymessage">
+                <tr><td colspan="16">no data available</td></tr>
             </ng-template>
 
         </p-table>

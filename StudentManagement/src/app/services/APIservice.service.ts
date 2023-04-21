@@ -3,73 +3,77 @@ import { Injectable } from '@angular/core';
 
 
 @Injectable()
-export class APIService{
+export class APIService {
 
-    constructor(private HttpClient:HttpClient){
-
-    }
+    constructor(private httpClient: HttpClient) { }
     // user controller
-    checkUserExists(userId:string, password:string){
-        return this.HttpClient.get('http://localhost:9090/userAccount/checkuserexists?employeeId='+userId+'&password='+password+'')
-        
+    // to check user exist or not
+    checkUserExists(userId: string, password: string) {
+        return this.httpClient.get('http://localhost:9090/userAccount/checkuserexists?employeeId=' + userId + '&password=' + password + '')
+
     }
-    addUser(userId:string, password:string){
-        let userData={employeeId:userId, password:password, type:"User"}
-        return this.HttpClient.post('http://localhost:9090/userAccount/adduseraccount', userData)
+    // to add new user
+    addNewUser(userId: string, password: string) {
+        let userData = { employeeId: userId, password: password, type: "User" }
+        return this.httpClient.post('http://localhost:9090/userAccount/adduseraccount', userData)
     }
 
     // Student controller
-    addStudent(studentData:object){
-        return this.HttpClient.post('http://localhost:9090/studentdetail/addstudent', studentData)
-    }
-    
-    findAllStudents(){
-        return this.HttpClient.get('http://localhost:9090/studentdetail/findallstudents')
+    // for adding new student
+    addStudent(studentData: object) {
+        return this.httpClient.post('http://localhost:9090/studentdetail/addstudent', studentData)
     }
 
-    findByStudentId(studentId:string){
-       return this.HttpClient.get('http://localhost:9090/studentdetail/findbystudentid?studentId=' + studentId + '')
-       
+    // to get all student details
+    fetchAllStudentsDetails() {
+        return this.httpClient.get('http://localhost:9090/studentdetail/findallstudents')
     }
-    deleteByStudentId(studentId:number){
-        return this.HttpClient.delete('http://localhost:9090/studentdetail/deletebystudentid?studentId='+studentId+'')
-        
+
+    // to get student details by id
+    fetchByStudentId(studentId: string) {
+        return this.httpClient.get('http://localhost:9090/studentdetail/findbystudentid?studentId=' + studentId + '')
+
     }
-    updateStudentDetails(studentData:object){
-        return this.HttpClient.put('http://localhost:9090/studentdetail/updatestudent', studentData)
+    // to delete student record by student id
+    deleteByStudentId(studentId: number) {
+        return this.httpClient.delete('http://localhost:9090/studentdetail/deletebystudentid?studentId=' + studentId + '')
+
+    }
+    // to update student details  
+    updateStudentDetails(studentData: object) {
+        return this.httpClient.put('http://localhost:9090/studentdetail/updatestudent', studentData)
     }
 
     // department controller
-    getAllDepartmnetDetailes(){
-        return this.HttpClient.get('http://localhost:9090/departmentdetail/findalldepartment')
+    // to get all depatrment details
+    fetchAllDepartmentDetailes() {
+        return this.httpClient.get('http://localhost:9090/departmentdetail/findalldepartment')
     }
-    findDepartmentByDptId(departmentId:string){
-        return this.HttpClient.get('http://localhost:9090/departmentdetail/findDepartmentByEmpId?departmentId='+departmentId+'')
+    // to get departmnet details by department id
+    fetchDepartmentByDptId(departmentId: string) {
+        return this.httpClient.get('http://localhost:9090/departmentdetail/findDepartmentByEmpId?departmentId=' + departmentId + '')
     }
 
     // Attendance controller
-
-    getAllAttendanceDetailes(){
-        return this.HttpClient.get('http://localhost:9090/attendanceDetail/findAllAttendance')
+    // to get all attendance details
+    fetchAllAttendanceDetailes() {
+        return this.httpClient.get('http://localhost:9090/attendanceDetail/findAllAttendance')
+    }
+    // to delete record by student id and department id
+    deleteAttendanceByStdIdDeptId(studentId: string, departmentId: string) {
+        return this.httpClient.delete('http://localhost:9090/attendanceDetail/deleteByEmpIdDepId?employeeId=' + studentId + '&departmentId=' + departmentId + '')
+    }
+    // to get attendance details by student id
+    fecthAttendanceByStudentId(studentId: string) {
+        return this.httpClient.get('http://localhost:9090/attendanceDetail/findAttendanceByEmpId?employeeid=' + studentId + '')
+    }
+    // to update the attendance
+    updateAttendance(attendanceData: object) {
+        return this.httpClient.put('http://localhost:9090/attendanceDetail/updateAttendance', attendanceData)
+    }
+    // to add attendance details
+    addAttendanceDetails(attendanceData: object) {
+        return this.httpClient.post('http://localhost:9090/attendanceDetail/addAttendance', attendanceData)
     }
 
-    findAttendanceByStudentIdDepartmentId(studentId:string, departmentId:string){
-        return this.HttpClient.get('http://localhost:9090/attendanceDetail/findByEmployeeIdDepartmentId?employeeid='+studentId+'&departmentid='+departmentId+'')
-    }
-
-    deleteAttendanceByStdIdDeptId(studentId:string, departmentId:string){
-        return this.HttpClient.delete('http://localhost:9090/attendanceDetail/deleteByEmpIdDepId?employeeId='+studentId+'&departmentId='+departmentId+'')
-    }
-    findAttendanceByStudentId(studentId:string){
-        return this.HttpClient.get('http://localhost:9090/attendanceDetail/findAttendanceByEmpId?employeeid='+studentId+'')
-    }
-
-    updateAttendance(attendanceData:object){
-        return this.HttpClient.put('http://localhost:9090/attendanceDetail/updateAttendance', attendanceData)
-    }
-
-    addAttendanceDetails(attendanceData:object){
-        return this.HttpClient.post('http://localhost:9090/attendanceDetail/addAttendance', attendanceData)
-    }
-   
 }

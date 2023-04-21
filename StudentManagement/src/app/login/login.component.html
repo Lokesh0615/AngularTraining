@@ -6,8 +6,8 @@
             <p>{{formContent}}</p>
         </div>
         <div class="userConatiner">
-            <label for="user_id">User ID<span >*</span></label>
-            <input pInputText type="text" name="user_id" id="user_id" #user_id>
+            <label for="userId">User ID<span >*</span></label>
+            <input pInputText type="text" name="userId" id="userId" #userId>
 
             <label for="password">Password<span >*</span></label>
             <p-password 
@@ -19,8 +19,8 @@
             <a *ngIf="!isSignUp" class="links">Forgot Password?</a>
         </div>
         <div class="buttons">
-            <button *ngIf="!isSignUp" pButton class="p-button-primary" label="Login" (click)="login(user_id.value, password.value); "></button>
-            <button *ngIf="isSignUp" pButton class="p-button-primary" label="SignUp" (click)="signUp(user_id.value, password.value); "></button>
+            <button *ngIf="!isSignUp" pButton class="p-button-primary" label="Login" (click)="login(userId.value, password.value)"></button>
+            <button *ngIf="isSignUp" pButton class="p-button-primary" label="SignUp" (click)="signUp(userId.value, password.value)"></button>
         </div>
         <p *ngIf="!isSignUp">Dont have an account? <a  class="links" (click)="signUpOption()">SignUp</a></p>
         <a *ngIf="isSignUp"  class="links"  (click)="loginOption()" >Login</a>
