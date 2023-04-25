@@ -13,7 +13,9 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class AttendanceDetailsComponent implements OnInit, OnDestroy {
 
+  // for available dropdown
   availability = [{ type: 'true', name: 'True' }, { type: 'false', name: 'False' }]
+  // to show error msg for not enter field
   fieldSelected = true;
 
   attendanceDetails = {
@@ -32,29 +34,26 @@ export class AttendanceDetailsComponent implements OnInit, OnDestroy {
     modifiedDttm: null
   }
 
+  // to check form is invalid or not
   @ViewChild('attendanceDetailsForm') attendanceDetailsForm!: NgForm;
 
   constructor(private apiService: APIService, private router: Router, private activatedRoute: ActivatedRoute,
     private confirmationService: ConfirmationService, private loginService: LoginService) { }
 
-
   ngOnInit(): void {
-
     this.activatedRoute.paramMap.subscribe((parm) => {
       this.attendanceDetails.studentId = parm.get('id')?.substring(1);
       this.attendanceDetails.departmentId = parm.get('did')?.substring(1);
       localStorage.setItem('path', 'Attendance/AddAttendanceDetails/:' + this.attendanceDetails.studentId + '/:' + this.attendanceDetails.departmentId + '')
-
     })
-
   }
 
   ngOnDestroy(): void {
     this.loginService.setChildComponentRefresh(false)
   }
 
+  //  to exit from the editting page 
   canExit() {
-
     if (this.attendanceDetailsForm.dirty && this.attendanceDetailsForm.touched) {
       this.confirmationService.confirm({
         message: 'Do you want to exit',
@@ -66,7 +65,6 @@ export class AttendanceDetailsComponent implements OnInit, OnDestroy {
         },
         reject: () => { }
       });
-
     }
     else {
       this.router.navigateByUrl('/Attendance')
@@ -74,6 +72,7 @@ export class AttendanceDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
+  // to submiting the form details
   onSubmit() {
     this.attendanceDetails.createdDttm = new Date();
     this.attendanceDetails.createdSource = "admin";
@@ -82,7 +81,5 @@ export class AttendanceDetailsComponent implements OnInit, OnDestroy {
       this.router.navigateByUrl('/Attendance')
       this.ngOnDestroy()
     })
-
   }
-
 }

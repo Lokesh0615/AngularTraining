@@ -32,7 +32,9 @@
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeflex/primeflex.css"
             ],
-            "scripts": []
+            "scripts": [
+              "https://kit.fontawesome.com/6ac93262d0.js"
+            ]
           },
           "configurations": {
             "production": {

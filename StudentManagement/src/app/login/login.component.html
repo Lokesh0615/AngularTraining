@@ -1,14 +1,13 @@
-<div class="loginFormContainer" >
+<div class="loginFormContainer">
     <form >
         <div class="imgContainer">
-            <img src="assets/ItorizonLogo.png"  >
+            <img src="assets/ItorizonLogo.png">
             <h2>{{formType}}</h2>
             <p>{{formContent}}</p>
         </div>
         <div class="userConatiner">
             <label for="userId">User ID<span >*</span></label>
             <input pInputText type="text" name="userId" id="userId" #userId>
-
             <label for="password">Password<span >*</span></label>
             <p-password 
                 [inputStyle]="{'width':'370px'}"
@@ -23,8 +22,7 @@
             <button *ngIf="isSignUp" pButton class="p-button-primary" label="SignUp" (click)="signUp(userId.value, password.value)"></button>
         </div>
         <p *ngIf="!isSignUp">Dont have an account? <a  class="links" (click)="signUpOption()">SignUp</a></p>
-        <a *ngIf="isSignUp"  class="links"  (click)="loginOption()" >Login</a>
+        <a *ngIf="isSignUp" class="links" (click)="loginOption()">Login</a>
         <p-toast></p-toast>
-       
     </form>
 </div>

@@ -16,8 +16,8 @@
             <ng-template pTemplate="header">
                 <tr class="table_head">
                     <ng-container *ngFor="let header of departmentHeader">
-                        <th><span>{{header.name}}<p-sortIcon pSortableColumn="{{header.fieldName}}"
-                                    field="{{header.fieldName}}"></p-sortIcon></span></th>
+                        <th>{{header.name}}<p-sortIcon pSortableColumn="{{header.fieldName}}"
+                                    field="{{header.fieldName}}"></p-sortIcon></th>
                     </ng-container>
                 </tr>
             </ng-template>

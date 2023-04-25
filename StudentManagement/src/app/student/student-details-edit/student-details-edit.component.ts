@@ -17,11 +17,17 @@ import { VariableService } from 'src/app/services/variable.service';
 export class StudentDetailsEditComponent implements OnInit, OnDestroy {
 
   showStudentDetailes = true;
+  // to check logedin user
   loggedInUser!: string;
+  //  for bloodgroup dropdown values
   bloodGroupList = this.variableService.bloodGroupList;
+  // for department dropdown
   departmentList = this.variableService.departmentList;
+  // to avoid image size morethan 30kb
   imageSize = true;
+  // to update the image
   imageEditOption = false;
+  // to show error which fields are not selected
   fieldSelected = true;
 
   // for min date in calender
@@ -38,6 +44,7 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
     address: '',
     mailId: '',
     department: '',
+    // if department id is number so, we cant give empty string
     departmentId: null,
     dateOfJoining: new Date(),
     createdDttm: new Date(),
@@ -47,11 +54,12 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
     modifiedSourceType: 'admin',
     modifiedDttm: new Date(),
 
+    // imagepath is not assignable if we give empty string
     imagePath: null,
     imageName: ''
 
   }
-
+  // to check the form whether valid or not
   @ViewChild('studentDetailsForm') studentDetailsForm!: NgForm;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
@@ -69,6 +77,7 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
         this.studentDetails.departmentId = Number(results.departmentId);
         this.studentDetails.dateOfJoining = new Date(results.dateOfJoining)
         this.studentDetails.createdDttm = new Date(results.createdDttm)
+        // if we dont apply condition, if modified date is notthere, then also it we disply todays date
         if (results.modifiedDttm != '') {
           this.studentDetails.modifiedDttm = new Date(results.modifiedDttm)
         }
@@ -77,13 +86,16 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
     })
   }
 
+  // to bind the image path and name
   onFileSelect(event) {
+    // if file size more then 30kb, need to show error
     if (event.target.files[0].size > 30000) {
       this.imageSize = false;
     } else {
       if (event.target.files[0]) {
         let file = event.target.files[0]
         this.imageSize = true;
+        // getting image url 
         let reader = new FileReader();
         reader.addEventListener('load', () => {
           if (this.imageEditOption) {
@@ -96,10 +108,11 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
     }
   }
 
+  // to edit image
   showImageEdit(status: boolean) {
     this.imageEditOption = status;
   }
-
+  // to disply edit screen
   editStudentDetailes() {
     this.showStudentDetailes = false;
   }
@@ -108,11 +121,14 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
     this.loginService.setChildComponentRefresh(false)
     this.fieldSelected = true;
   }
+
+  // to exit from page, while in edit mode
   canExit() {
     if (this.studentDetailsForm.dirty && this.studentDetailsForm.touched) {
       this.confirmationService.confirm({
-        message: 'Do you want to exit',
+        message: 'Do you want to exit?',
         header: 'Confirmation',
+        icon: 'pi pi-exclamation-triangle',
         accept: () => {
           this.router.navigate(['Student'])
           this.ngOnDestroy()
@@ -121,12 +137,14 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
       });
 
     }
+    // if the form is not dirty then exit form the page
     else {
       this.router.navigate(['Student'])
       this.ngOnDestroy()
     }
   }
 
+  // to submit the edited student data
   onSubmint() {
     this.studentDetails.modifiedSource = 'admin';
     this.studentDetails.modifiedSourceType = 'admin';

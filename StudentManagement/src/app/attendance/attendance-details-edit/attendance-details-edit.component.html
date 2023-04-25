@@ -1,16 +1,15 @@
 <div class="container">
     <div class="grid detailContainer" *ngIf="showAttendanceDetailes">
-
         <div class="col-12 sm:col-12 md:col-12 lg:col-12 field grid-nogutter">
             <h3>{{attendanceDetails.studentId}} Details</h3>
             <hr>
             <div class="grid grid-nogutter">
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                     <label class="col-6">Student ID:</label>
-                    <label class="col-6">{{attendanceDetails.studentId }} </label>
+                    <label class="col-6">{{attendanceDetails.studentId }}</label>
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
-                    <label class="col-6">Department Id: </label>
+                    <label class="col-6">Department Id:</label>
                     <label class="col-6">{{attendanceDetails.departmentId}}</label>
                 </div>
             </div>
@@ -21,48 +20,40 @@
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                     <label class="col-6">Date:</label>
-                    <label class="col-6">{{attendanceDetails.date | date :" dd/MM/yyyy, h:mm a "}}</label>
+                    <label class="col-6">{{attendanceDetails.date | date :"dd/MM/yyyy, h:mm a"}}</label>
                 </div>
             </div>
             <div class="grid grid-nogutter">
-
-
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                     <label class="col-6">Available:</label>
                     <label class="col-6">{{attendanceDetails.available | titlecase}}</label>
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                     <label class="col-6">CheckIn:</label>
-                    <label class="col-6">{{attendanceDetails.checkIn | date :" dd/MM/yyyy, h:mm a "}}</label>
+                    <label class="col-6">{{attendanceDetails.checkIn | date :"dd/MM/yyyy, h:mm a"}}</label>
                 </div>
             </div>
-
             <div class="grid grid-nogutter">
-
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                     <label class="col-6">Checkout:</label>
-                    <label class="col-6">{{attendanceDetails.checkout | date :" dd/MM/yyyy, h:mm a "}}</label>
+                    <label class="col-6">{{attendanceDetails.checkout | date :"dd/MM/yyyy, h:mm a"}}</label>
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                     <label class="col-6">Created Source:</label>
                     <label class="col-6">{{attendanceDetails.createdSource}}</label>
                 </div>
             </div>
-
             <div class="grid grid-nogutter">
-
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                     <label class="col-6">Created Source Type:</label>
                     <label class="col-6">{{attendanceDetails.createdSourceType}}</label>
                 </div>
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                     <label class="col-6">CreatedDttm:</label>
-                    <label class="col-6">{{attendanceDetails.createdDttm | date :" dd/MM/yyyy, h:mm a "}}</label>
+                    <label class="col-6">{{attendanceDetails.createdDttm | date :"dd/MM/yyyy, h:mm a"}}</label>
                 </div>
             </div>
-
             <div class="grid grid-nogutter">
-
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                     <label class="col-6">Modified Source:</label>
                     <label class="col-6">{{attendanceDetails.modifiedSource}}</label>
@@ -72,14 +63,11 @@
                     <label class="col-6">{{attendanceDetails.modifiedSourceType}}</label>
                 </div>
             </div>
-
             <div class="grid grid-nogutter">
-
                 <div class="col-12 sm:col-12 md:col-6 lg:col-6 field grid-nogutter">
                     <label class="col-6">ModifiedDttm:</label>
-                    <label class="col-6">{{attendanceDetails.modifiedDttm | date :" dd/MM/yyyy, h:mm a "}}</label>
+                    <label class="col-6">{{attendanceDetails.modifiedDttm | date :"dd/MM/yyyy, h:mm a"}}</label>
                 </div>
-
                 <div class="buttonsContainer">
                     <button pButton class="p-button-primary buttons" label="Edit" *ngIf="loggedInUser=='admin'"
                         (click)="editStudentDetailes()"></button>
@@ -93,7 +81,7 @@
 
         <form #attendanceDetailsForm="ngForm">
             <div class="grid">
-                <div class="col-3 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
+                <div class="col-3 xs:col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
                     <label>Student Id</label>
                     <input type="text" pInputText id="studentId" name="studentId" placeholder="studentId"
@@ -109,7 +97,7 @@
                         [(ngModel)]="attendanceDetails.available"></p-dropdown>
 
                 </div>
-                <div class="col-3 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
+                <div class="col-3 xs:col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
                     <label>Date<span>*</span></label>
                     <p-calendar id="date" name="date" [required]="true" #date="ngModel" appendTo="body"
@@ -126,15 +114,15 @@
                         [(ngModel)]="attendanceDetails.checkout"></p-calendar>
 
                 </div>
-                <div class="col-3 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
+                <div class="col-3 xs:col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
                     <label>Attendance Count<span>*</span></label>
                     <input type="text" pInputText id="attendanceCount" name="attendanceCount"
                         placeholder="attendanceCount" pattern="[0-9]+$" required #attendanceCount="ngModel"
                         [(ngModel)]="attendanceDetails.attendanceCount">
-                    <small *ngIf="!attendanceCount.touched && attendanceCount.invalid &&  !fieldSelected"
+                    <small *ngIf="!attendanceCount.touched && attendanceCount.invalid && !fieldSelected"
                         id="username-help" class="p-error">Attendance Count is required.</small>
-                    <small *ngIf="attendanceCount.invalid && attendanceCount.touched " id="username-help"
+                    <small *ngIf="attendanceCount.invalid && attendanceCount.touched" id="username-help"
                         class="p-error">Attendance Count is Invaild.</small>
 
                     <label>Created Source</label>
@@ -147,7 +135,7 @@
                         [(ngModel)]="attendanceDetails.createdDttm"></p-calendar>
 
                 </div>
-                <div class="col-3 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
+                <div class="col-3 xs:col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
                     <label>Modified Source</label>
                     <input type="text" pInputText id="modifiedSource" name="modifiedSource" placeholder="modifiedSource"

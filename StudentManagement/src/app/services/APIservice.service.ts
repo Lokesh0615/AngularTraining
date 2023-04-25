@@ -35,7 +35,7 @@ export class APIService {
 
     }
     // to delete student record by student id
-    deleteByStudentId(studentId: number) {
+    deleteByStudentId(studentId: string) {
         return this.httpClient.delete('http://localhost:9090/studentdetail/deletebystudentid?studentId=' + studentId + '')
 
     }

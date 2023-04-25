@@ -8,18 +8,18 @@
     </div>
     <div class="navBarContainer">
         <ul class="nav">
-            <li routerLinkActive="active" ><a  routerLink="/Home">Home</a></li>
-            <li  routerLinkActive="active"><a  routerLink="/Student">Student</a></li>
-            <li *ngIf="loggedInUser=='admin'" routerLinkActive="active"><a  routerLink="/Department">Department</a></li>
-            <li routerLinkActive="active"><a  routerLink="/Attendance">Attendance</a></li>
+            <li routerLinkActive="active" ><a routerLink="/Home">Home</a></li>
+            <li routerLinkActive="active"><a routerLink="/Student">Student</a></li>
+            <li *ngIf="loggedInUser=='admin'" routerLinkActive="active"><a routerLink="/Department">Department</a></li>
+            <li routerLinkActive="active"><a routerLink="/Attendance">Attendance</a></li>
         </ul>
     </div>
     <div class="dashBoard">
-        <span  [class]="icon"></span>
+        <span [class]="icon"></span>
         <span>{{title}}</span>
     </div>
     <div class="content">
-        <ng-content  (change)="ngOnInit()" ></ng-content>
+        <ng-content (change)="ngOnInit()"></ng-content>
     </div>
     <div class="footer">
         <span>2022-2023 Itorizon</span>

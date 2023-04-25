@@ -17,6 +17,19 @@
     
 }
 
+
+@media  screen and (max-width: 450px) {
+    .topContainerButtons{
+        flex-direction: column !important;
+    }
+    :host ::ng-deep .p-dropdown{
+        width: 99% !important;
+    }
+    .topContainerButtons>*{
+        margin-top: 3px;
+    }
+  }
+
 .topContainerButtons{
     width: auto;
     display: flex;
@@ -24,6 +37,7 @@
     justify-content: space-around;
 
 }
+
 .topContainerButtons>*{
     margin-left: 5px;
 }
@@ -67,3 +81,5 @@
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr > td{
     padding: 7px 10px;
 }
+
+

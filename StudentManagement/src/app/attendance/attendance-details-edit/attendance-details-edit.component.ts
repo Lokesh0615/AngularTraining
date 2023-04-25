@@ -36,6 +36,7 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
 
   }
 
+  //  to check whether any changes are made in from or not
   @ViewChild('attendanceDetailsForm') attendanceDetailsForm!: NgForm;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
@@ -56,10 +57,12 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
         this.attendanceDetails.checkout = new Date(results.checkout);
         this.attendanceDetails.createdDttm = new Date(results.createdDttm);
         this.attendanceDetails.available = String(results.available);
+        if (results.modifiedDttm != '') {
+          this.attendanceDetails.modifiedDttm = new Date(results.modifiedDttm)
+        }
         localStorage.setItem('path', 'Attendance/AttendanceDetails/:' + this.attendanceDetails.studentId + '')
       })
     })
-
   }
 
   // while edit mode is on, need to hide the details 
@@ -95,7 +98,6 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
         this.ngOnDestroy()
       }
     }
-
   }
 
   // to update the student details 
@@ -104,14 +106,11 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
     this.attendanceDetails.modifiedSource = "admin";
     this.attendanceDetails.modifiedSourceType = "admin",
       // while on submitting the form , that time will taken
-      this.attendanceDetails.modifiedDttm = new Date()
-
+    this.attendanceDetails.modifiedDttm = new Date()
     this.apiService.updateAttendance(this.attendanceDetails).subscribe((results) => { }, (error) => {
       this.router.navigateByUrl('/Attendance')
       this.ngOnDestroy()
-
     });
   }
-
 }
 

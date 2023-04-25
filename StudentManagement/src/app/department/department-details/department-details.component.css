@@ -4,6 +4,10 @@
     background-color:whitesmoke;
 }
 
+#departmentIdLabel{
+    margin: 10px 10px 0px;
+}
+
 .detailsColumn>* {
     width: 100%;
 }

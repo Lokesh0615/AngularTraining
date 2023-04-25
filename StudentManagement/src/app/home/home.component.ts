@@ -14,10 +14,9 @@ export class HomeComponent implements OnInit {
     let storage = localStorage;
     storage.setItem('icons', JSON.stringify({ 'title': 'Home', 'icon': 'pi pi-home' }))
     storage.setItem('path', 'Home')
-
   }
+  
   logOut() {
     this.loginService.logOut()
-
   }
 }

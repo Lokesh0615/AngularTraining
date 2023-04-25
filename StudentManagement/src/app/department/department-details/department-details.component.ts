@@ -9,35 +9,30 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./department-details.component.css']
 })
 export class DepartmentDetailsComponent implements OnInit, OnDestroy {
-  
-  departmentId !:string;
-  departmentData: any={};
+
+  // to get the department data based on department id 
+  departmentId !: string;
+  // to store the department data
+  departmentData: any = {};
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
-              private apiService: APIService, private loginService:LoginService){}
- 
+    private apiService: APIService, private loginService: LoginService) { }
 
   ngOnInit() {
-
-
-    //if the parameter value changes then use Obeservables
     this.activatedRoute.paramMap.subscribe((parm) => {
       this.departmentId = parm.get('id')?.substring(1);
       this.apiService.fetchDepartmentByDptId(this.departmentId).subscribe((results) => {
-      this.departmentData = results;
-      localStorage.setItem('path','Department/DepartmentDetailes/:'+this.departmentId+'')
-
+        this.departmentData = results;
+        localStorage.setItem('path', 'Department/DepartmentDetailes/:' + this.departmentId + '')
+      })
     })
-    })
-    
   }
-   
-  departmentPage(){
+// to navigato back
+  departmentPage() {
     this.loginService.setChildComponentRefresh(false)
     this.router.navigateByUrl('/Department');
-
   }
+
   ngOnDestroy(): void {
     this.loginService.setChildComponentRefresh(false)
   }
-
 }

@@ -5,7 +5,7 @@
             <div class="topContainerButtons">
                 <p-dropdown [options]="paginatorDropdown" optionValue="rows" optionLabel="rows"
                     [(ngModel)]="paginatorValue"></p-dropdown>
-                <button *ngIf="loggedInUser=='admin'" pButton Class="p-button-sm" (click)="showDialog()"
+                <button *ngIf="loggedInUser=='admin'" pButton Class="p-button-sm" (click)="showStudentIdDialog()"
                     label="+ADD"></button>
             </div>
         </div>
@@ -26,18 +26,18 @@
                     (click)="fieldSelected=false; (checkStdId.value!='' && checkStdId.valid) && checkStudentId()"></button>
             </ng-template>
         </p-dialog>
-        <p-confirmDialog  [baseZIndex]="1" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+        <p-confirmDialog [baseZIndex]="1" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
         <p-toast></p-toast>
 
         <p-table [rows]="paginatorValue" [paginator]="paginatorValue<studentsData.length" [showFirstLastIcon]="false"
             [totalRecords]="studentsData.length" pageLinkSize="5" [resizableColumns]="true"
-            [showJumpToPageDropdown]="false" styleClass="p-datatable-striped" [scrollable]="true" scrollHeight="500px"
+            [showJumpToPageDropdown]="false" styleClass="p-datatable-striped" [scrollable]="true"
             [value]="studentsData">
 
             <ng-template pTemplate="header">
                 <tr class="table_head">
                     <ng-container *ngFor="let header of studentTableHeaders">
-                        <th><span>{{header.name}}</span><p-sortIcon pSortableColumn="{{header.fieldName}}"
+                        <th>{{header.name}}<p-sortIcon pSortableColumn="{{header.fieldName}}"
                                 field="{{header.fieldName}}"></p-sortIcon></th>
                     </ng-container>
                     <th *ngIf="loggedInUser=='admin'">Delete</th>
@@ -45,7 +45,7 @@
             </ng-template>
 
             <ng-template pTemplate="body" let-studentData>
-                <tr (dblclick)="studentDetailesEdit(studentData.studentId)">
+                <tr (dblclick)="studentDetailes(studentData.studentId)">
                     <td>{{studentData.studentId}}</td>
                     <td>{{studentData.firstName}}</td>
                     <td>{{studentData.lastName}}</td>
@@ -60,13 +60,16 @@
                     <td>{{studentData.modifiedSourceType}}</td>
                     <td>{{studentData.modifiedDttm | date :" dd/MM/yyyy, h:mm a"}}</td>
                     <td *ngIf="loggedInUser=='admin'"><button pButton type="button" label="Delete"
-                        class="p-button-danger p-button-sm" icon="pi pi-times" (click)="deleteByStdId(studentData.studentId)"></button>
+                            class="p-button-danger p-button-sm" icon="pi pi-times"
+                            (click)="deleteByStdId(studentData.studentId)"></button>
                     </td>
                 </tr>
             </ng-template>
 
             <ng-template pTemplate="emptymessage">
-                <tr><td colspan="16">no data available</td></tr>
+                <tr>
+                    <td colspan="16">no data available</td>
+                </tr>
             </ng-template>
 
         </p-table>

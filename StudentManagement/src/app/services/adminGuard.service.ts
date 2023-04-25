@@ -12,7 +12,6 @@ export class AdminGuardServie implements CanActivate {
             if (!localStorage.getItem('path')) {
                 this.route.navigateByUrl('');
                 return false
-
             } else {
                 this.route.navigateByUrl(localStorage.getItem('path'));
                 return false

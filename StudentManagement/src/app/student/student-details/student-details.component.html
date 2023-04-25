@@ -9,7 +9,7 @@
                 <label>First Name<span>*</span> </label>
                 <input type="text" pInputText id="firstName" name="firstName" placeholder="firstName"
                     pattern="[A-Za-z]+" required #firstName="ngModel" [(ngModel)]="studentDetails.firstName">
-                <small *ngIf="!firstName.touched && firstName.invalid &&  !fieldSelected" id="username-help"
+                <small *ngIf="!firstName.touched && firstName.invalid && !fieldSelected" id="username-help"
                     class="p-error">First Name is required.</small>
                 <small *ngIf="firstName.invalid && firstName.touched" id="username-help" class="p-error">First Name is
                     Invalid.</small>
@@ -17,7 +17,7 @@
                 <label>Last Name<span>*</span></label>
                 <input type="text" pInputText id="lastName" name="lastName" placeholder="lastName" pattern="[A-Za-z]+"
                     required #lastName="ngModel" [(ngModel)]="studentDetails.lastName">
-                <small *ngIf="!lastName.touched && lastName.invalid &&  !fieldSelected" id="username-help"
+                <small *ngIf="!lastName.touched && lastName.invalid && !fieldSelected" id="username-help"
                     class="p-error">Last Name is required.</small>
                 <small *ngIf="lastName.invalid && lastName.touched" id="username-help" class="p-error">Last Name is
                     Invalid.</small>
@@ -56,7 +56,8 @@
                 <input type="text" pInputText id="phoneNumber" name="phoneNumber" placeholder="phoneNumber"
                     #phoneNumber="ngModel" pattern="[0-9]{10}" [maxlength]="10" [minlength]="10"
                     [(ngModel)]="studentDetails.phoneNumber">
-                <small *ngIf="!phoneNumber.pristine && phoneNumber.invalid" id="username-help" class="p-error">Phone Number
+                <small *ngIf="!phoneNumber.pristine && phoneNumber.invalid" id="username-help" class="p-error">Phone
+                    Number
                     is Invalid.</small>
 
                 <label>Address</label>
@@ -100,7 +101,7 @@
                 <label>Date Of Joining<span>*</span></label>
                 <p-calendar [minDate]="createdDttm" name="dateOfJoining" #dateOfJoining="ngModel" appendTo="body"
                     [required]="true" [(ngModel)]="studentDetails.dateOfJoining"></p-calendar>
-                <small *ngIf="!dateOfJoining.touched &&  !fieldSelected" id="username-help" class="p-error">Date Of
+                <small *ngIf="!dateOfJoining.touched && !fieldSelected" id="username-help" class="p-error">Date Of
                     Joining is required.</small>
 
                 <label for="image">Image<span>*</span></label>
@@ -125,7 +126,8 @@
                 <input type="text" pInputText id="createdDttm" name="createdDttm" placeholder="createdDttm" disabled>
 
                 <label>Modified Source</label>
-                <input type="text" pInputText id="modifiedSource" name="modifiedSource" placeholder="modifiedSource" disabled>
+                <input type="text" pInputText id="modifiedSource" name="modifiedSource" placeholder="modifiedSource"
+                    disabled>
 
                 <label>Modified Source Type</label>
                 <input type="text" pInputText id="modifiedSourceType" name="modifiedSourceType"
@@ -136,14 +138,15 @@
 
             </div>
             <div class="buttonsContainer">
-                <button type="button" class="p-button-primary  buttons" pButton label="Save"
-                    (click)="fieldSelected=false;  studentDetailsForm.valid && onSubmit() "></button>
+                <button type="button" class="p-button-primary buttons" pButton label="Save"
+                    (click)="fieldSelected=false; studentDetailsForm.valid && onSubmit()"></button>
                 <button type="button" class="p-button-secondary buttons" pButton label="Cancel"
                     (click)="canExit()"></button>
             </div>
         </div>
         <p-toast></p-toast>
     </form>
-    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1"rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="1"
+        rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 
 </div>
