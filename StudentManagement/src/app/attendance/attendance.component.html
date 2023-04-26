@@ -45,7 +45,7 @@
                         </span>
                         <p-dropdown [options]="paginatorDropdown" optionValue="rows" optionLabel="rows"
                             [(ngModel)]="paginatorValue"></p-dropdown>
-                        <button *ngIf="loggedInUser=='admin'" pButton class="p-button-info" (click)="showDialog()"
+                        <button *ngIf="loggedInUser=='admin'" pButton class="p-button-info" (click)="showStudentIdAndDepartmentIdDialog()"
                             label="+ADD"></button>
                     </div>
                 </div>

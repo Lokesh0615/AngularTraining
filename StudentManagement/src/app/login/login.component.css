@@ -9,30 +9,37 @@
     align-items: center;
     box-shadow: 0px 0px 10px 3px;
     background-color: whitesmoke;
-    
 }
+
 .imgContainer{
     text-align: center;
 }
+
 .imgContainer img{
     width: 60%;
 }
+
 .imgContainer h2{
     margin-top: 20px;
 }
+
 .userConatiner{
     margin: 20px 0px;
 }
+
 .userConatiner > *{
     width: 370px;
 }
+
 .buttons>*{
  width: 100%;
 }
+
 .links{
     color: blue;
     
 }
+
 span{
     color: red;
 }

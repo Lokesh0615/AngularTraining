@@ -11,7 +11,7 @@ import { LoginService } from 'src/app/services/login.service';
 export class DepartmentDetailsComponent implements OnInit, OnDestroy {
 
   // to get the department data based on department id 
-  departmentId !: string;
+  departmentId: string;
   // to store the department data
   departmentData: any = {};
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
@@ -26,7 +26,7 @@ export class DepartmentDetailsComponent implements OnInit, OnDestroy {
       })
     })
   }
-// to navigato back
+  // to navigato back
   departmentPage() {
     this.loginService.setChildComponentRefresh(false)
     this.router.navigateByUrl('/Department');

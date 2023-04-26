@@ -1,85 +1,86 @@
-.table_head th{
-    background-color:rgba(200, 198, 198, 0.733) ;
+.table_head th {
+    background-color: rgba(200, 198, 198, 0.733);
 }
-.table_head th:hover{
-    background-color:rgba(200, 198, 198, 0.97) ;
+
+.table_head th:hover {
+    background-color: rgba(200, 198, 198, 0.97);
 }
-.tableContainer{
-    border: 1px solid rgba(200, 198, 198, 0.97) ;
+
+.tableContainer {
+    border: 1px solid rgba(200, 198, 198, 0.97);
     padding: 10px;
 }
-.table-header{
+
+.table-header {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: baseline;
     margin: 5px 20px;
-    
 }
 
-
-@media  screen and (max-width: 450px) {
-    .topContainerButtons{
+@media screen and (max-width: 450px) {
+    .topContainerButtons {
         flex-direction: column !important;
     }
-    :host ::ng-deep .p-dropdown{
+
+    :host ::ng-deep .p-dropdown {
         width: 99% !important;
     }
-    .topContainerButtons>*{
+
+    .topContainerButtons>* {
         margin-top: 3px;
     }
-  }
+}
 
-.topContainerButtons{
+.topContainerButtons {
     width: auto;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-
 }
 
-.topContainerButtons>*{
+.topContainerButtons>* {
     margin-left: 5px;
 }
 
-:host ::ng-deep .p-button.Buttons{
-    font-size:17px;  
+:host ::ng-deep .p-button.Buttons {
+    font-size: 17px;
     padding: 10px 1px;
-  }
+}
 
-.availabelButton{
+.availabelButton {
     padding: 4px 20px;
     border-radius: 20px;
     border: none;
     cursor: auto;
 }
 
-
-:host ::ng-deep .p-inputtext{
+:host ::ng-deep .p-inputtext {
     width: 98%;
 }
-:host ::ng-deep .p-paginator{
+
+:host ::ng-deep .p-paginator {
     display: flex;
     justify-content: right;
     float: right;
-    max-width:max-content;
+    max-width: max-content;
     margin: 14px 10px;
     height: auto;
     background-color: whitesmoke;
-    border:none;
+    border: none;
 }
 
-
-:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page ,
-:host ::ng-deep .p-paginator-next, :host ::ng-deep .p-paginator-prev {
+:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page,
+:host ::ng-deep .p-paginator-next,
+:host ::ng-deep .p-paginator-prev {
     border-radius: 0px;
     height: 30px;
     width: 50px;
     margin: 0px;
     border: 1px solid black;
 }
-:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td{
+
+:host ::ng-deep .p-datatable .p-datatable-tbody>tr>td {
     padding: 7px 10px;
 }
-
-

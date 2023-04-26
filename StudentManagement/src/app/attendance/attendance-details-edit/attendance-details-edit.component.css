@@ -1,4 +1,4 @@
-.container{
+.container {
     margin: 20px 10px 0px;
 }
 
@@ -6,28 +6,29 @@
     margin-bottom: 5px;
     background-color: white;
 }
-.detailsColumn>*{
+
+.detailsColumn>* {
     display: inline-block;
     width: 90%;
 }
 
-.detailsColumn>label{
+.detailsColumn>label {
     margin-top: 20px;
 }
 
-
-.buttonsContainer{
+.buttonsContainer {
     width: 100%;
     display: flex;
     justify-content: right;
 }
-.buttons{
+
+.buttons {
     margin: 0px 5px;
     width: 100px;
-   
+
 }
 
-:host ::ng-deep .p-dropdown, :host ::ng-deep.p-calendar{
+:host ::ng-deep .p-dropdown,
+:host ::ng-deep.p-calendar {
     width: 100% !important;
-    /* margin-bottom: 10px; */
 }

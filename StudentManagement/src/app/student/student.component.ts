@@ -23,10 +23,10 @@ export class StudentComponent implements OnInit {
   studentTableHeaders = this.variableService.studentTableHeaders;
   studentsData: any = [];
   // to dispay the childcomponent details
-  showStudentDetails!: boolean;
+  showStudentDetails: boolean;
   childComponentOpend: boolean
   // to check whether loggedIn user is admin or not
-  loggedInUser!: string;
+  loggedInUser: string;
   // to check the student id
   studentId: string;
   // to show error message while input fields are empty
@@ -37,19 +37,13 @@ export class StudentComponent implements OnInit {
     private confirmationService: ConfirmationService, private loginService: LoginService) { }
 
   ngOnInit(): void {
+    this.fetchingAllStudentDetailes()
     let storage = localStorage;
     storage.setItem('icons', JSON.stringify({ 'title': 'Student', 'icon': 'pi pi-table' }))
     storage.setItem('path', 'Student')
     this.childComponentOpend = JSON.parse(storage.getItem('admin')).childComponentOpend;
-    this.fetchingAllStudentDetailes()
     this.showStudentDetails = false;
     this.loggedInUser = this.loginService.loggedInUser;
-  }
-  // to show the student id ckecking dialog box
-  showStudentIdDialog() {
-    this.dialogShow = true;
-    this.studentId = ''
-    this.fieldSelected = true;
   }
 
   // geting all thedetails of students from database
@@ -59,6 +53,13 @@ export class StudentComponent implements OnInit {
     this.apiService.fetchAllStudentsDetails().subscribe((results) => {
       this.studentsData = results;
     })
+  }
+
+  // to show the student id ckecking dialog box
+  showStudentIdDialog() {
+    this.dialogShow = true;
+    this.studentId = ''
+    this.fieldSelected = true;
   }
 
   // to check the student id before navigating to the form page

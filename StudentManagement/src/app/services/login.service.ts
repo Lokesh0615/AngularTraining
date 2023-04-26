@@ -6,13 +6,13 @@ import { MessageService } from 'primeng/api';
 @Injectable()
 export class LoginService implements CanActivate {
   // storing user data 
-  userData!: any;
+  userData: any;
   // loggedIn or not
-  loggedIn!: boolean;
+  loggedIn: boolean;
   // loggedIn user name
-  loggedInUser!: string;
+  loggedInUser: string;
   // user Password
-  userPassword!: string;
+  userPassword: string;
   // localStorage variable
   storage = localStorage;
 
@@ -90,6 +90,5 @@ export class LoginService implements CanActivate {
     this.storage.setItem('loggedIn', 'true')
     this.storage.clear();
     this.route.navigateByUrl('')
-
   }
 }

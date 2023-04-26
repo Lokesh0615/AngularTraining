@@ -1,8 +1,12 @@
 import { Injectable } from "@angular/core";
+import { ConfirmationService } from 'primeng/api';
+import {  Router } from '@angular/router';
 
 @Injectable()
 
 export class VariableService {
+
+    constructor(private confirmationService: ConfirmationService, private router: Router) { }
     showStudentDetails = true;
     // for bloodGroup
     bloodGroupList = [
@@ -89,5 +93,18 @@ export class VariableService {
             modifiedDttm: studentDetailsFormvalue.modifiedDttm,
         }
         return attendanceData;
+    }
+
+    // to exit from page while updating the form details
+    canExit(path: string) {
+        this.confirmationService.confirm({
+            message: 'Do you want to exit?',
+            header: 'Confirmation',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                this.router.navigate([path])
+            },
+            reject: () => { }
+        });
     }
 }

@@ -14,6 +14,7 @@ import { VariableService } from '../services/variable.service';
 
 export class AttendanceComponent implements OnInit {
 
+  //  for paginator dropdown to select the no.of rows
   paginatorDropdown = [{ rows: 5 }, { rows: 10 }, { rows: 15 }]
   // to display number of record selected in dropdown
   paginatorValue: number;
@@ -24,7 +25,7 @@ export class AttendanceComponent implements OnInit {
   departmentId: string;
   fieldSelected = true;
   // to check loggedIn user adimn or not
-  loggedInUser!: string;
+  loggedInUser: string;
   // to display the student Id check dialog box
   dialogShow: boolean = false;
   attendanceData: any = [];
@@ -45,18 +46,17 @@ export class AttendanceComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.fetchingAttendanceDetailes()
     let storage = localStorage;
     storage.setItem('path', 'Attendance')
     storage.setItem('icons', JSON.stringify({ 'title': 'Attendance', 'icon': 'pi pi-table' }))
     this.childComponentOpend = JSON.parse(storage.getItem('admin')).childComponentOpend;
     this.showAttendanceDetails = false;
     this.loggedInUser = this.loginService.loggedInUser;
-
-    this.fetchingAttendanceDetailes()
     this.showAttendanceDetails = true;
     // i need to check whether studentId And department Id matches or not , so i need student data
     this.apiService.fetchAllStudentsDetails().subscribe((results) => {
-      this.studentsData = results
+      this.studentsData = results;
     })
   }
 
@@ -80,12 +80,12 @@ export class AttendanceComponent implements OnInit {
     if (this.checktableRows.length < this.paginatorValue) {
       this.attendanceDataLength = this.checktableRows.length;
     } else {
-      this.attendanceDataLength = this.attendanceData.length
+      this.attendanceDataLength = this.attendanceData.length;
     }
   }
 
   // to show the dialoge box to check the student id and department id
-  showDialog() {
+  showStudentIdAndDepartmentIdDialog() {
     this.studentId = '';
     this.departmentId = '';
     this.dialogShow = true;
@@ -119,16 +119,17 @@ export class AttendanceComponent implements OnInit {
   }
 
   checkStudentIdAndDepartmentId() {
-    // to check student id and department id in student data
-    let checkStudIdAndDeptId = this.studentsData.some((list) => {
-      return (list.departmentId == this.departmentId && list.studentId == this.studentId)
-    });
+
     //  to check student id in attendance data
     let checkAttendance = this.attendanceData.some((list) => {
       return list.studentId == this.studentId
     })
     // if student id and department id is availbale in student data and student id not available in attendance data
     if (!checkAttendance) {
+      // to check student id and department id in student data
+      let checkStudIdAndDeptId = this.studentsData.some((list) => {
+        return (list.departmentId == this.departmentId && list.studentId == this.studentId)
+      });
       // if studnet id not exist in attendance data then only check for department id and student id in student data;
       if (checkStudIdAndDeptId) {
         this.dialogShow = false;

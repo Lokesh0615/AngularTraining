@@ -14,8 +14,8 @@ export class LoginComponent {
   formContent = 'Please use Registered UserID and Password'
   isSignUp: boolean = false;
   
-  @ViewChild('userId') userId!: ElementRef;
-  @ViewChild('password') password!: any;
+  @ViewChild('userId') userId: ElementRef;
+  @ViewChild('password') password: any;
 
   constructor(private loginService: LoginService, private apiService: APIService, private messageService: MessageService) { }
   // checking the user details while login

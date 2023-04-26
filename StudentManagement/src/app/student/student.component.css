@@ -1,56 +1,54 @@
-.table_head th{
-    background-color:rgba(200, 198, 198, 0.733) ;
+.table_head th {
+    background-color: rgba(200, 198, 198, 0.733);
 }
-.table_head th:hover{
-    background-color:rgba(200, 198, 198, 0.97) ;
+
+.table_head th:hover {
+    background-color: rgba(200, 198, 198, 0.97);
 }
-.tableContainer{
+
+.tableContainer {
     margin: auto;
-    border: 1px solid rgba(200, 198, 198, 0.97) ;
+    border: 1px solid rgba(200, 198, 198, 0.97);
     padding: 10px;
-    
 }
-.topContainer{
-     display: flex;
-     flex-wrap: wrap;
-     justify-content: space-between;
-     align-items: baseline;
-     margin: 10px 20px;
+
+.topContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 10px 20px;
 
 }
-.topContainerButtons{
+
+.topContainerButtons {
     width: 200px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
 
-
-
-:host ::ng-deep .p-paginator{
+:host ::ng-deep .p-paginator {
     display: flex;
     justify-content: right;
     float: right;
-    max-width:max-content;
+    max-width: max-content;
     margin: 14px 10px;
     height: auto;
     background-color: whitesmoke;
-    border:none;
+    border: none;
 }
 
-
-:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page ,
-:host ::ng-deep .p-paginator-next, :host ::ng-deep .p-paginator-prev {
+:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page,
+:host ::ng-deep .p-paginator-next,
+:host ::ng-deep .p-paginator-prev {
     border-radius: 0px;
     height: 30px;
     width: 50px;
     margin: 0px;
     border: 1px solid black;
 }
-:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td{
+
+:host ::ng-deep .p-datatable .p-datatable-tbody>tr>td {
     padding: 10px 10px;
-   }
-
-
-
-
+}

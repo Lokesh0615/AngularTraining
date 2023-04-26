@@ -1,7 +1,6 @@
 import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/api';
 import { APIService } from 'src/app/services/APIservice.service';
 import { LoginService } from 'src/app/services/login.service';
 import { VariableService } from 'src/app/services/variable.service';
@@ -18,7 +17,7 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
 
   showStudentDetailes = true;
   // to check logedin user
-  loggedInUser!: string;
+  loggedInUser: string;
   //  for bloodgroup dropdown values
   bloodGroupList = this.variableService.bloodGroupList;
   // for department dropdown
@@ -63,8 +62,8 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
   @ViewChild('studentDetailsForm') studentDetailsForm!: NgForm;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
-    private apiService: APIService, private confirmationService: ConfirmationService,
-    private loginService: LoginService, private variableService: VariableService,) { }
+    private apiService: APIService, private loginService: LoginService,
+    private variableService: VariableService,) { }
 
 
   ngOnInit() {
@@ -125,17 +124,8 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
   // to exit from page, while in edit mode
   canExit() {
     if (this.studentDetailsForm.dirty && this.studentDetailsForm.touched) {
-      this.confirmationService.confirm({
-        message: 'Do you want to exit?',
-        header: 'Confirmation',
-        icon: 'pi pi-exclamation-triangle',
-        accept: () => {
-          this.router.navigate(['Student'])
-          this.ngOnDestroy()
-        },
-        reject: () => { }
-      });
-
+      // in variable service canExit methods will show confirm dailog
+      this.variableService.canExit('Student')
     }
     // if the form is not dirty then exit form the page
     else {

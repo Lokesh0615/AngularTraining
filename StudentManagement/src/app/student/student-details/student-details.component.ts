@@ -1,7 +1,6 @@
 import { Component, OnDestroy, ViewChild, OnInit, } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/api';
 import { APIService } from 'src/app/services/APIservice.service';
 import { LoginService } from 'src/app/services/login.service';
 import { VariableService } from 'src/app/services/variable.service';
@@ -52,7 +51,7 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
   @ViewChild('studentDetailsForm') studentDetailsForm!: NgForm;
 
   constructor(private apiService: APIService, private router: Router, private activatedRoute: ActivatedRoute,
-    private variableService: VariableService, private confirmationService: ConfirmationService, private loginService: LoginService,) { }
+    private variableService: VariableService, private loginService: LoginService,) { }
 
 
   ngOnInit(): void {
@@ -89,7 +88,6 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.studentDetails.createdDttm = new Date()
     this.apiService.addStudent(this.studentDetails).subscribe((resluts) => {
-
     }, (err) => {
       this.router.navigateByUrl('/Student');
       this.ngOnDestroy()
@@ -104,16 +102,8 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
   //  to check whether can exit or not from editing the form
   canExit() {
     if (this.studentDetailsForm.dirty && this.studentDetailsForm.touched) {
-      this.confirmationService.confirm({
-        message: 'Do you want to exit?',
-        header: 'Confirmation',
-        icon: 'pi pi-exclamation-triangle',
-        accept: () => {
-          this.router.navigateByUrl('/Student');
-          this.ngOnDestroy()
-        },
-        reject: () => { }
-      });
+      // in variable service canExit methods will show confirm dailog
+      this.variableService.canExit('Student')
     }
     // if the form is not dirty then exit form the page
     else {

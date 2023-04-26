@@ -1,9 +1,9 @@
 import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/api';
 import { APIService } from 'src/app/services/APIservice.service';
 import { LoginService } from 'src/app/services/login.service';
+import { VariableService } from 'src/app/services/variable.service';
 
 @Component({
   selector: 'app-attendance-details-edit',
@@ -13,7 +13,7 @@ import { LoginService } from 'src/app/services/login.service';
 export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
 
   // to hide the delete and add button we need who is loggedIn
-  loggedInUser!: string;
+  loggedInUser: string;
   fieldSelected = true
   // to show details screen while true and edit screen while false
   showAttendanceDetailes = true;
@@ -40,8 +40,8 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
   @ViewChild('attendanceDetailsForm') attendanceDetailsForm!: NgForm;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
-    private apiService: APIService, private confirmationService: ConfirmationService,
-    private loginService: LoginService,) { }
+    private apiService: APIService, private loginService: LoginService,
+    private variableService: VariableService) { }
 
   ngOnInit() {
     this.loggedInUser = this.loginService.loggedInUser;
@@ -76,28 +76,16 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
 
   // to exit from the page while editting the details
   canExit() {
-    // checking if the details screen is on or not
-    if (this.showAttendanceDetailes) {
+    // if the edit mode is on, then below conditions will execute
+    if (this.attendanceDetailsForm.dirty && this.attendanceDetailsForm.touched) {
+      // in variable service canExit methods will show confirm dailog
+      this.variableService.canExit('Attendance')
+    }
+    else {
       this.router.navigateByUrl('/Attendance')
       this.ngOnDestroy()
-    } else {
-      // if the edit mode is on, then below conditions will execute
-      if (this.attendanceDetailsForm.dirty && this.attendanceDetailsForm.touched) {
-        this.confirmationService.confirm({
-          message: 'Do you want to exit',
-          header: 'Confirmation',
-          accept: () => {
-            this.router.navigateByUrl('/Attendance')
-            this.ngOnDestroy()
-          },
-          reject: () => { }
-        });
-      }
-      else {
-        this.router.navigateByUrl('/Attendance')
-        this.ngOnDestroy()
-      }
     }
+    // }
   }
 
   // to update the student details 
@@ -106,7 +94,7 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
     this.attendanceDetails.modifiedSource = "admin";
     this.attendanceDetails.modifiedSourceType = "admin",
       // while on submitting the form , that time will taken
-    this.attendanceDetails.modifiedDttm = new Date()
+      this.attendanceDetails.modifiedDttm = new Date()
     this.apiService.updateAttendance(this.attendanceDetails).subscribe((results) => { }, (error) => {
       this.router.navigateByUrl('/Attendance')
       this.ngOnDestroy()

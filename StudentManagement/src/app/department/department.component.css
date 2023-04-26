@@ -26,7 +26,6 @@
     border:none;
 }
 
-
 :host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page , :host ::ng-deep .p-paginator-next, :host ::ng-deep .p-paginator-prev {
     border-radius: 0px;
     height: 30px;
@@ -34,6 +33,7 @@
     margin: 0px;
     border: 1px solid black;
 }
+
 :host ::ng-deep .p-datatable .p-datatable-tbody > tr > td{
  padding: 15px 10px;
 }

@@ -11,9 +11,9 @@ export class NavbarComponent implements OnInit {
   title: string;
   icon: string;
   // to check the loggedIn user admin or not 
-  loggedInUser!: string;
+  loggedInUser: string;
   // to set the user name icon
-  userIcon!: string
+  userIcon: string
   constructor(private loginService: LoginService) { }
 
   ngOnInit(): void {

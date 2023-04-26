@@ -7,7 +7,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* padding: 20px 10px 20px 30px; */
     margin: 5px 20px;
 }
 
@@ -24,13 +23,10 @@
     width: 180px;
     display: flex;
     justify-content: space-around;
-    /* ju */
-
     align-items: baseline;
 }
 
 .navBarContainer {
-    /* height: 25px; */
     width: 100%;
     background-color: rgb(2, 124, 152);
     position: sticky;
@@ -39,11 +35,8 @@
 }
 
 .nav {
-  
-    /* justify-content: space-between; */
     list-style-type: none;
     margin: auto 40px;
-  
 }
 
 .nav li {
@@ -78,14 +71,10 @@
     font-size: x-large;
     color: white;
     font-weight: bold;
-    /* size: 300%; */
-    /* size: ; */
 }
 
 .content {
-    /* padding: 20px ; */
     min-height: 400px;
-
     /* made maxheigh as below to remove hole scroll */
     max-height: 470px;
     height: auto;
@@ -102,10 +91,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* align-content: center; */
-    /* text-align: center; */
     position: fixed !important;
-    /* align-items: baseline; */
     left: 0;
     bottom: 0px;
     width: 100%;
@@ -114,10 +100,6 @@
 }
 
 @media only screen and (min-width: 750px) {
-    /* .footer {
-        position: fixed !important;
-        bottom: 0px;
-    } */
     .content{
         max-height: auto !important;
         height: auto;

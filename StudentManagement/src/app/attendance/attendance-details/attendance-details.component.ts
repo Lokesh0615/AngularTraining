@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/api';
 import { APIService } from 'src/app/services/APIservice.service';
 import { LoginService } from 'src/app/services/login.service';
-
+import { VariableService } from 'src/app/services/variable.service';
 
 @Component({
   selector: 'app-attendance-details',
@@ -38,7 +37,7 @@ export class AttendanceDetailsComponent implements OnInit, OnDestroy {
   @ViewChild('attendanceDetailsForm') attendanceDetailsForm!: NgForm;
 
   constructor(private apiService: APIService, private router: Router, private activatedRoute: ActivatedRoute,
-    private confirmationService: ConfirmationService, private loginService: LoginService) { }
+     private loginService: LoginService, private variableService:VariableService) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((parm) => {
@@ -55,16 +54,8 @@ export class AttendanceDetailsComponent implements OnInit, OnDestroy {
   //  to exit from the editting page 
   canExit() {
     if (this.attendanceDetailsForm.dirty && this.attendanceDetailsForm.touched) {
-      this.confirmationService.confirm({
-        message: 'Do you want to exit',
-        header: 'Confirmation',
-        icon: 'pi pi-exclamation-triangle',
-        accept: () => {
-          this.router.navigateByUrl('/Attendance')
-          this.ngOnDestroy()
-        },
-        reject: () => { }
-      });
+      // in variable service canExit methods will show confirm dailog
+      this.variableService.canExit('Attendance')
     }
     else {
       this.router.navigateByUrl('/Attendance')

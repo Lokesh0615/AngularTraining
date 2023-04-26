@@ -26,7 +26,6 @@
 .buttons {
     margin: 0px 5px;
     width: 100px;
-
 }
 
 :host ::ng-deep .p-button.buttons {

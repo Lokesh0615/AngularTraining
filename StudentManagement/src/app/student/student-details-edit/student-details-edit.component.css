@@ -22,6 +22,12 @@
     text-align: center;
 }
 
+#imagePath {
+    margin-top: 5px;
+    margin-bottom: 6px;
+    border: 0px;
+}
+
 .studentImageContainer img {
     display: block;
     width: 100%;
@@ -42,11 +48,6 @@
     margin-top: 20px;
 }
 
-#imagePath {
-    margin-top: 5px;
-    margin-bottom: 6px;
-}
-
 .studentDetailsContainer {
     padding: 0px 20px;
     overflow-y: auto;
@@ -63,7 +64,10 @@ input.ng-touched.ng-invalid {
 .imageNameContainer {
     display: flex !important;
     justify-content: space-between;
-    margin-top: 12px;
+    margin-top: 2px;
+    margin-bottom: 6px;
+    padding: 3px 5px;
+    background-color: rgb(207, 207, 215);
 }
 
 .buttonsContainer {
