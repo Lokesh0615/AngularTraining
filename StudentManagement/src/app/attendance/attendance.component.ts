@@ -1,4 +1,4 @@
-import { Component, OnInit, QueryList, ViewChildren, } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren, } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { APIService } from '../services/APIservice.service';
@@ -38,7 +38,7 @@ export class AttendanceComponent implements OnInit {
   studentsData: any = [];
 
   // to hide the paginator while global search is not found
-  @ViewChildren('checktableRows') checktableRows!: QueryList<any>;
+  @ViewChildren('checktableRows') checktableRows: QueryList<any>;
 
   constructor(private apiService: APIService, private messageService: MessageService, private route: Router,
     private activatedRoute: ActivatedRoute, private variableService: VariableService, private loginService: LoginService,
@@ -47,6 +47,8 @@ export class AttendanceComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchingAttendanceDetailes()
+    // i need to check whether studentId And department Id matches or not , so i need student data
+    this.studentsData = this.variableService.studentsData;
     let storage = localStorage;
     storage.setItem('path', 'Attendance')
     storage.setItem('icons', JSON.stringify({ 'title': 'Attendance', 'icon': 'pi pi-table' }))
@@ -54,10 +56,6 @@ export class AttendanceComponent implements OnInit {
     this.showAttendanceDetails = false;
     this.loggedInUser = this.loginService.loggedInUser;
     this.showAttendanceDetails = true;
-    // i need to check whether studentId And department Id matches or not , so i need student data
-    this.apiService.fetchAllStudentsDetails().subscribe((results) => {
-      this.studentsData = results;
-    })
   }
 
   // to get all attendance details
@@ -75,8 +73,8 @@ export class AttendanceComponent implements OnInit {
 
 
   // to hide the paginator while search data is lessthan paginatorvalue
-  hidePaginator() {
-    // we can not try to assign the lenth to paginatorvalue, bcz in padinator dropdown its always shows 5, so the paginator value also be 5, 
+  hidePaginator() {        
+    // we can not try to assign the lenth to paginatorvalue, bcz in paginator dropdown its always shows 5, so the paginator value also be 5, 
     if (this.checktableRows.length < this.paginatorValue) {
       this.attendanceDataLength = this.checktableRows.length;
     } else {

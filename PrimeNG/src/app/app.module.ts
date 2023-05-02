@@ -24,8 +24,14 @@ import { EditorModule } from 'primeng/editor';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { PaginatorModule } from 'primeng/paginator';
 import { TreeTableModule } from 'primeng/treetable';
-
-
+import {AccordionModule} from 'primeng/accordion';
+import {CardModule} from 'primeng/card';
+import {DividerModule} from 'primeng/divider';
+import {FieldsetModule} from 'primeng/fieldset';
+import {TabViewModule} from 'primeng/tabview';
+import {SidebarModule} from 'primeng/sidebar';
+import {TooltipModule} from 'primeng/tooltip';
+import {ChartModule} from 'primeng/chart';
 
 
 // my services
@@ -34,13 +40,15 @@ import { ConfirmAlertService } from './confirmAlert.service';
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { TableComponent } from './table/table.component'
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
+import { PrimengExtraComponent } from './primeng-extra/primeng-extra.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ReactiveFormComponent,
-    TableComponent
+    TableComponent,
+    PrimengExtraComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +73,14 @@ import {VirtualScrollerModule} from 'primeng/virtualscroller';
     PaginatorModule,
     VirtualScrollerModule,
     TreeTableModule,
+    AccordionModule,
+    CardModule,
+    DividerModule,
+    FieldsetModule,
+    TabViewModule,
+    SidebarModule,
+    TooltipModule,
+    ChartModule,
   ],
     
     providers: [ ConfirmationService, MessageService, FormService, ConfirmAlertService],

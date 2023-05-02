@@ -5,8 +5,8 @@
             <div class="topContainerButtons">
                 <p-dropdown [options]="paginatorDropdown" optionValue="rows" optionLabel="rows"
                     [(ngModel)]="paginatorValue"></p-dropdown>
-                <button *ngIf="loggedInUser=='admin'" pButton Class="p-button-sm" (click)="showStudentIdDialog()"
-                    label="+ADD"></button>
+                <button *ngIf="loggedInUser=='admin'" pButton Class="p-button-sm" icon="pi pi-plus" (click)="showStudentIdDialog()"
+                    label="ADD"></button>
             </div>
         </div>
         <p-dialog [(visible)]="dialogShow" [modal]="true" [style]="{width: '350px'}" position="center">
@@ -16,8 +16,8 @@
             <label>Student ID:</label>
             <input pInputText type="text" pattern="[A-Z]{2}[0-9]{4}" placeholder="Student Id" #checkStdId="ngModel"
                 [(ngModel)]="studentId">
-            <p *ngIf="!fieldSelected && !checkStdId.dirty" id="username-help" class="p-error text-right">Student Id is
-                required.</p>
+            <p *ngIf="!fieldSelected && (!checkStdId.dirty || checkStdId.value=='')" id="username-help"
+                class="p-error text-right">Student Id is required.</p>
             <p *ngIf="checkStdId.dirty && checkStdId.invalid" id="username-help" class="p-error text-right">Student Id
                 is Invalid.</p>
             <ng-template pTemplate="footer">

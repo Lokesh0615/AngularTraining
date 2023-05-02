@@ -52,11 +52,11 @@
             </div>
             <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
-                <label>CreatedSource</label>
+                <label>Created Source</label>
                 <input type="text" pInputText id="createdSource" name="createdSource" placeholder="createdSource"
                     disabled>
 
-                <label>CreatedSourceType</label>
+                <label>Created Source Type</label>
                 <input type="text" pInputText id="createdSourceType" name="createdSourceType"
                     placeholder="createdSourceType" disabled>
 
@@ -65,11 +65,11 @@
             </div>
             <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
-                <label>ModifiedSource</label>
+                <label>Modified Source</label>
                 <input type="text" pInputText id="modifiedSource" name="modifiedSource" placeholder="modifiedSource"
                     disabled>
 
-                <label>ModifiedSourceType</label>
+                <label>Modified Source Type</label>
                 <input type="text" pInputText id="modifiedSourceType" name="modifiedSourceType"
                     placeholder="modifiedSourceType" disabled>
 
@@ -81,7 +81,7 @@
                 <button type="button" class="p-button-primary buttons" pButton label="Save"
                     (click)="fieldSelected=false; attendanceDetailsForm.valid && onSubmit()"></button>
                 <button type="button" class="p-button-secondary buttons" pButton label="Cancel"
-                    (click)=" canExit()"></button>
+                    (click)="canExitFromPage()"></button>
             </div>
         </div>
 

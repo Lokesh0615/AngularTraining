@@ -43,15 +43,15 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
     address: '',
     mailId: '',
     department: '',
-    // if department id is number so, we cant give empty string
+    // department id is number so, we cant give empty string
     departmentId: null,
     dateOfJoining: new Date(),
     createdDttm: new Date(),
     createdSource: "",
     createdSourceType: '',
-    modifiedSource: 'admin',
-    modifiedSourceType: 'admin',
-    modifiedDttm: new Date(),
+    modifiedSource: '',
+    modifiedSourceType: '',
+    modifiedDttm:null,
 
     // imagepath is not assignable if we give empty string
     imagePath: null,
@@ -122,7 +122,7 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
   }
 
   // to exit from page, while in edit mode
-  canExit() {
+  canExitFromPage() {
     if (this.studentDetailsForm.dirty && this.studentDetailsForm.touched) {
       // in variable service canExit methods will show confirm dailog
       this.variableService.canExit('Student')
@@ -136,13 +136,12 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
 
   // to submit the edited student data
   onSubmint() {
-    this.studentDetails.modifiedSource = 'admin';
-    this.studentDetails.modifiedSourceType = 'admin';
+    this.studentDetails.modifiedSource =this.loggedInUser;
+    this.studentDetails.modifiedSourceType = this.loggedInUser;
     this.studentDetails.modifiedDttm = new Date()
     this.apiService.updateStudentDetails(this.studentDetails).subscribe((results) => { }, (error) => {
       this.router.navigate(['Student'])
       this.ngOnDestroy()
-
     });
   }
 }

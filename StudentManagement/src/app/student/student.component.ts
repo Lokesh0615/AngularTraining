@@ -48,10 +48,10 @@ export class StudentComponent implements OnInit {
 
   // geting all thedetails of students from database
   fetchingAllStudentDetailes() {
-    // when the chlid componet is closed then again all the details will load, to prevent that, need to empty the array
     this.studentsData = []
     this.apiService.fetchAllStudentsDetails().subscribe((results) => {
       this.studentsData = results;
+      this.variableService.studentsData=results;
     })
   }
 
@@ -79,13 +79,13 @@ export class StudentComponent implements OnInit {
   }
 
   // to delete the record by student id
-  deleteByStdId(stdId: string) {
+  deleteByStdId(studentId: string) {
     this.confirmationService.confirm({
       message: 'Are you want to delete the record?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.apiService.deleteByStudentId(stdId).subscribe((results) => { }, (error) => {
+        this.apiService.deleteByStudentId(studentId).subscribe((results) => { }, (error) => {
           this.messageService.add({ severity: 'success', detail: 'Record is deleted successfully' });
           this.fetchingAllStudentDetailes();
         })

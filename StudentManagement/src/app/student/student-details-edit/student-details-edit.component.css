@@ -67,7 +67,11 @@ input.ng-touched.ng-invalid {
     margin-top: 2px;
     margin-bottom: 6px;
     padding: 3px 5px;
-    background-color: rgb(207, 207, 215);
+    background-color: #ffffff;
+}
+
+.genderContainer{
+    flex-wrap: wrap;
 }
 
 .buttonsContainer {

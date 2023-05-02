@@ -23,7 +23,7 @@
             <ng-template pTemplate="footer">
                 <button pButton type="button" label="Cancel" (click)="dialogShow=false"></button>
                 <button pButton type="button" label="Confirm"
-                    (click)="fieldSelected=false;(checkDeptId.valid && checkStdId.valid && checkDeptId.value!='' && checkStdId.value!='') && checkStudentIdAndDepartmentId()"></button>
+                    (click)="fieldSelected=false; (checkDeptId.valid && checkStdId.valid && checkDeptId.value!='' && checkStdId.value!='') && checkStudentIdAndDepartmentId()"></button>
             </ng-template>
         </p-dialog>
         <p-confirmDialog [baseZIndex]="1" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
@@ -45,8 +45,8 @@
                         </span>
                         <p-dropdown [options]="paginatorDropdown" optionValue="rows" optionLabel="rows"
                             [(ngModel)]="paginatorValue"></p-dropdown>
-                        <button *ngIf="loggedInUser=='admin'" pButton class="p-button-info" (click)="showStudentIdAndDepartmentIdDialog()"
-                            label="+ADD"></button>
+                        <button *ngIf="loggedInUser=='admin'" pButton class="p-button-info" icon="pi pi-plus" (click)="showStudentIdAndDepartmentIdDialog()"
+                            label="ADD"></button>
                     </div>
                 </div>
             </ng-template>

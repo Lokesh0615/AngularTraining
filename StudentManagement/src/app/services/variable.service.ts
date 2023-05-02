@@ -7,7 +7,8 @@ import {  Router } from '@angular/router';
 export class VariableService {
 
     constructor(private confirmationService: ConfirmationService, private router: Router) { }
-    showStudentDetails = true;
+    // to check student data in attendace
+    studentsData;
     // for bloodGroup
     bloodGroupList = [
         { type: "O+" },

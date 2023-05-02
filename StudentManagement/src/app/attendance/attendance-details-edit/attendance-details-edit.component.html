@@ -71,7 +71,7 @@
                 <div class="buttonsContainer">
                     <button pButton class="p-button-primary buttons" label="Edit" *ngIf="loggedInUser=='admin'"
                         (click)="editStudentDetailes()"></button>
-                    <button pButton class="p-button-secondary buttons" label="Back" (click)="canExit()"></button>
+                    <button pButton class="p-button-secondary buttons" label="Back" (click)="canExitFromPage()"></button>
                 </div>
             </div>
         </div>
@@ -81,7 +81,7 @@
 
         <form #attendanceDetailsForm="ngForm">
             <div class="grid">
-                <div class="col-3 xs:col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
+                <div class="col-12 xs:col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
                     <label>Student Id</label>
                     <input type="text" pInputText id="studentId" name="studentId" placeholder="studentId"
@@ -97,7 +97,7 @@
                         [(ngModel)]="attendanceDetails.available"></p-dropdown>
 
                 </div>
-                <div class="col-3 xs:col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
+                <div class="col-12 xs:col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
                     <label>Date<span>*</span></label>
                     <p-calendar id="date" name="date" [required]="true" #date="ngModel" appendTo="body"
@@ -114,7 +114,7 @@
                         [(ngModel)]="attendanceDetails.checkout"></p-calendar>
 
                 </div>
-                <div class="col-3 xs:col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
+                <div class="col-12 xs:col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
                     <label>Attendance Count<span>*</span></label>
                     <input type="text" pInputText id="attendanceCount" name="attendanceCount"
@@ -135,7 +135,7 @@
                         [(ngModel)]="attendanceDetails.createdDttm"></p-calendar>
 
                 </div>
-                <div class="col-3 xs:col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
+                <div class="col-12 xs:col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
 
                     <label>Modified Source</label>
                     <input type="text" pInputText id="modifiedSource" name="modifiedSource" placeholder="modifiedSource"
@@ -146,7 +146,7 @@
                         placeholder="modifiedSourceType" disabled [(ngModel)]="attendanceDetails.modifiedSourceType">
 
                     <label>ModifiedDttm</label>
-                    <p-calendar id="modifiedDttm" name="modifiedDttm" [required]="true" #modifiedDttm="ngModel"
+                    <p-calendar id="modifiedDttm" name="modifiedDttm" [required]="true" #modifiedDttm="ngModel" placeholder="modifiedDttm"
                         appendTo="body" disabled [showTime]="true" hourFormat="12"
                         [(ngModel)]="attendanceDetails.modifiedDttm"></p-calendar>
 
@@ -156,7 +156,7 @@
                         pButton label="Save"
                         (click)="fieldSelected=false; attendanceDetailsForm.valid && onSubmit()"></button>
                     <button type="button" class="p-button-secondary buttons" pButton label="Cancel"
-                        (click)="canExit()"></button>
+                        (click)="canExitFromPage()"></button>
                 </div>
             </div>
         </form>

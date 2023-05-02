@@ -20,18 +20,18 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
   availability = [{ type: 'true', name: 'True' }, { type: 'false', name: 'False' }]
 
   attendanceDetails = {
-    studentId: null,
+    studentId:'',
     date: null,
     departmentId: null,
     available: null,
     checkIn: null,
     checkout: null,
     attendanceCount: null,
-    createdSource: "admin",
-    createdSourceType: 'admin',
+    createdSource: "",
+    createdSourceType: '',
     createdDttm: null,
-    modifiedSource: 'admin',
-    modifiedSourceType: 'admin',
+    modifiedSource: '',
+    modifiedSourceType: '',
     modifiedDttm: null,
 
   }
@@ -75,7 +75,7 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
   }
 
   // to exit from the page while editting the details
-  canExit() {
+  canExitFromPage() {
     // if the edit mode is on, then below conditions will execute
     if (this.attendanceDetailsForm.dirty && this.attendanceDetailsForm.touched) {
       // in variable service canExit methods will show confirm dailog
@@ -91,8 +91,9 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
   // to update the student details 
   onSubmit() {
     // edit option is not there for user,otherwise we can store loggedInUser in a variable & then can assign that to modifiedSource & type
-    this.attendanceDetails.modifiedSource = "admin";
-    this.attendanceDetails.modifiedSourceType = "admin",
+    this.attendanceDetails.modifiedSource = this.loggedInUser;
+    this.attendanceDetails.modifiedSourceType = this.loggedInUser;
+    
       // while on submitting the form , that time will taken
       this.attendanceDetails.modifiedDttm = new Date()
     this.apiService.updateAttendance(this.attendanceDetails).subscribe((results) => { }, (error) => {

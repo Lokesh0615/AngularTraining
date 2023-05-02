@@ -1,0 +1,99 @@
+<!-- autocomplete -->
+<p-autoComplete [(ngModel)]="selectedItem" [suggestions]="sugNations" [dropdown]="true" [multiple]="true"
+    (completeMethod)="autoCompleteMethod($event)"></p-autoComplete>
+
+<hr>
+
+<!-- accordion -->
+<!-- 
+<p-accordion [multiple]="true">
+    <p-accordionTab header="Header 1" [selected]="true">
+       Content 1
+    </p-accordionTab>
+    <p-accordionTab header="Header 2" [disabled]="true">
+        Content 2
+    </p-accordionTab>
+    <ng-container *ngFor="let a of nations;let i=index">
+        <p-accordionTab header="Header {{i+1}}">
+            {{a}}
+        </p-accordionTab>
+    </ng-container>
+</p-accordion> -->
+
+<!-- card -->
+<!-- <p-card header="Card" [style]="{'width':'200px'}">
+    Body Content
+    <ng-template pTemplate="footer">
+        <button class="btn btn-dark">cancel</button>
+        <button class="btn btn-primary">Okay</button>
+    </ng-template>
+</p-card> -->
+
+<!-- divider -->
+<!-- <div>Content 1</div>
+<p-divider type="dashed" layout="vertical"></p-divider >
+<p-card header="Card" [style]="{'width':'200px'}">
+    Body Content
+    <ng-template pTemplate="footer">
+        <button class="btn btn-dark">cancel</button>
+        <button class="btn btn-primary">Okay</button>
+    </ng-template>
+</p-card>
+<p-divider align="left" type="dashed" >
+    <div class="inline-flex align-items-center">
+        <i class="pi pi-user mr-2"></i>
+        <b>Icon</b>
+    </div>
+<div>Content 2</div> -->
+
+<!-- filedSet -->
+<!-- <p-fieldset legend="Header" [toggleable]="true">
+    <p-card header="Card" [style]="{'width':'200px'}">
+        Body Content
+        <ng-template pTemplate="footer">
+            <button class="btn btn-dark">cancel</button>
+            <button class="btn btn-primary">Okay</button>
+        </ng-template>
+    </p-card>
+</p-fieldset> -->
+
+<!-- tabView -->
+<!-- <p-tabView>
+    <p-tabPanel header="Header 1">
+        <p-card header="Card" [style]="{'width':'200px'}">
+            Body Content
+            <ng-template pTemplate="footer">
+                <button class="btn btn-dark">cancel</button>
+                <button class="btn btn-primary">Okay</button>
+            </ng-template>
+        </p-card>
+    </p-tabPanel>
+    <p-tabPanel header="Header 2">
+        Content 2
+    </p-tabPanel>
+    <p-tabPanel header="Header 3">
+        <p-card header="Card" [style]="{'width':'200px'}">
+            Body Content
+            <ng-template pTemplate="footer">
+                <button class="btn btn-dark">cancel</button>
+                <button class="btn btn-primary">Okay</button>
+            </ng-template>
+        </p-card>
+    </p-tabPanel>
+</p-tabView> -->
+
+<!-- sideBar -->
+<!-- <p-sidebar [(visible)]="display" position="bottom">
+    Content
+</p-sidebar>
+
+<p-button type="text" (click)="display = true" icon="pi pi-plus" label="Show"></p-button> -->
+
+
+<!-- toolTip -->
+<!-- <input pInputText type="text" pTooltip="Enter your username" tooltipPosition="bottom" [life]="2000" [showDelay]="2000"> -->
+
+<!-- chartModel -->
+<p-chart type="radar" [data]="data" [options]="data" width="600px" height="400px"></p-chart>
+
+

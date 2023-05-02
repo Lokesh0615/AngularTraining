@@ -37,8 +37,8 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
     departmentId: undefined,
     dateOfJoining: undefined,
     createdDttm: null,
-    createdSource: "admin",
-    createdSourceType: 'admin',
+    createdSource: this.loginService.loggedInUser,
+    createdSourceType: this.loginService.loggedInUser,
     modifiedSource: '',
     modifiedSourceType: '',
     modifiedDttm: '',
@@ -53,12 +53,10 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
   constructor(private apiService: APIService, private router: Router, private activatedRoute: ActivatedRoute,
     private variableService: VariableService, private loginService: LoginService,) { }
 
-
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((parm) => {
       this.studentDetails.studentId = parm.get('id')?.substring(1);
       localStorage.setItem('path', 'Student/AddStudentDetails/:' + this.studentDetails.studentId + '')
-
     })
   }
 
@@ -94,13 +92,8 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnDestroy(): void {
-    this.loginService.setChildComponentRefresh(false)
-    this.fieldSelected = true;
-  }
-
   //  to check whether can exit or not from editing the form
-  canExit() {
+  canExitFromPage() {
     if (this.studentDetailsForm.dirty && this.studentDetailsForm.touched) {
       // in variable service canExit methods will show confirm dailog
       this.variableService.canExit('Student')
@@ -110,5 +103,10 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
       this.router.navigateByUrl('/Student');
       this.ngOnDestroy()
     }
+  }
+  
+  ngOnDestroy(): void {
+    this.loginService.setChildComponentRefresh(false)
+    this.fieldSelected = true;
   }
 }

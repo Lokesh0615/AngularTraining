@@ -72,7 +72,7 @@ export class LoginService implements CanActivate {
     } else {
       // return JSON.parse(localStorage.getItem('admin'))
       // to avoid error we provide {}, 
-      this.userData = JSON.parse(this.storage.getItem('admin') || '{}')
+      this.userData = JSON.parse(this.storage.getItem('admin'))
       this.userPassword = this.userData.password;
       this.loggedIn = true;
       this.loggedInUser = this.userData.userId;

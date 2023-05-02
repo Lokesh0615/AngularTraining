@@ -25,12 +25,12 @@ export class AttendanceDetailsComponent implements OnInit, OnDestroy {
     checkIn: null,
     checkout: null,
     attendanceCount: null,
-    createdSource: "admin",
-    createdSourceType: 'admin',
+    createdSource: "",
+    createdSourceType: '',
     createdDttm: null,
     modifiedSource: '',
     modifiedSourceType: '',
-    modifiedDttm: null
+    modifiedDttm: ''
   }
 
   // to check form is invalid or not
@@ -52,7 +52,7 @@ export class AttendanceDetailsComponent implements OnInit, OnDestroy {
   }
 
   //  to exit from the editting page 
-  canExit() {
+  canExitFromPage() {
     if (this.attendanceDetailsForm.dirty && this.attendanceDetailsForm.touched) {
       // in variable service canExit methods will show confirm dailog
       this.variableService.canExit('Attendance')
@@ -66,8 +66,8 @@ export class AttendanceDetailsComponent implements OnInit, OnDestroy {
   // to submiting the form details
   onSubmit() {
     this.attendanceDetails.createdDttm = new Date();
-    this.attendanceDetails.createdSource = "admin";
-    this.attendanceDetails.createdSourceType = "admin";
+    this.attendanceDetails.createdSource = this.loginService.loggedInUser;
+    this.attendanceDetails.createdSourceType = this.loginService.loggedInUser;
     this.apiService.addAttendanceDetails(this.attendanceDetails).subscribe((results) => { }, (error) => {
       this.router.navigateByUrl('/Attendance')
       this.ngOnDestroy()

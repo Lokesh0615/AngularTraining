@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "PrimeNG": {
+    "D3": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/prime-ng",
+            "outputPath": "dist/d3",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -25,15 +25,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/primeicons/primeicons.css",
-              "node_modules/primeng/resources/themes/bootstrap4-light-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeflex/primeflex.css"
+              "src/styles.css"
             ],
             "scripts": [
-              "node_modules/chart.js/dist/chart.js"
+              "node_modules/d3/dist/d3.min.js"
             ]
           },
           "configurations": {
@@ -67,10 +62,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "PrimeNG:build:production"
+              "browserTarget": "D3:build:production"
             },
             "development": {
-              "browserTarget": "PrimeNG:build:development"
+              "browserTarget": "D3:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +73,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "PrimeNG:build"
+            "browserTarget": "D3:build"
           }
         },
         "test": {
