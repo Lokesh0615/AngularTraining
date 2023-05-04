@@ -52,24 +52,21 @@ import { PaginatorModule } from 'primeng/paginator';
 const appRoute: Routes = [
   { path: '', component: LoginComponent, canActivate: [LoginService] },
   { path: 'Home', canActivate: [AuthGuardService], component: HomeComponent, },
-  {
-    path: 'Student', component: StudentComponent, canActivate: [AuthGuardService,],
+  { path: 'Student', component: StudentComponent, canActivate: [AuthGuardService,],
     children: [{ path: 'AddStudentDetails/:id', component: StudentDetailsComponent, canActivate: [AdminGuardServie] },
     { path: 'StudentDetails/:id', component: StudentDetailsEditComponent, canActivate: [AuthGuardService] }
     ]
   },
-  {
-    path: 'Department', component: DepartmentComponent, canActivate: [AdminGuardServie],
-    children: [{ path: "DepartmentDetailes/:id", component: DepartmentDetailsComponent, canActivate: [AdminGuardServie] }]
+  {path: 'Department', component: DepartmentComponent, canActivate: [AdminGuardServie],
+    children: [{ path: "DepartmentDetails/:id", component: DepartmentDetailsComponent, canActivate: [AdminGuardServie] }]
   },
-  {
-    path: "Attendance", component: AttendanceComponent, canActivate: [AuthGuardService],
+  {path: "Attendance", component: AttendanceComponent, canActivate: [AuthGuardService],
     children: [{ path: "AttendanceDetails/:id", component: AttendanceDetailsEditComponent, canActivate: [AuthGuardService] },
-    { path: "AddAttendanceDetails/:id/:did", component: AttendanceDetailsComponent, canActivate: [AdminGuardServie] }
+    { path: "AddAttendanceDetails/:id/:departmentId", component: AttendanceDetailsComponent, canActivate: [AdminGuardServie] }
     ]
   },
   { path: "**", component: LoginComponent, canActivate: [LoginService] }
-]
+];
 
 @NgModule({
   declarations: [

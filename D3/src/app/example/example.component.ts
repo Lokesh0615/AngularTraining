@@ -9,111 +9,76 @@ import * as d3 from 'd3';
 })
 export class ExampleComponent implements OnInit {
 
+
   data = [
     { name: 'Lokesh', score: 45 },
     { name: 'loki', score: 48 },
     { name: 'jai', score: 92 },
-    { name: 'nag', score: 94},
+    { name: 'nag', score: 94 },
     { name: 'nagendra', score: 74 },
     { name: 'anay', score: 27 },
     { name: 'prajval', score: 84 },
     { name: 'okay', score: 46 },
   ]
 
+  private svg: any;
+  private margin = 50;
+  private width = 750;
+  private height = 600;
+  // The radius of the pie chart is half the smallest side
+  private radius = Math.min(this.width, this.height) / 2 - this.margin;
+  private colors;
+
   ngOnInit(): void {
-    this.createChart();
-    if(this.data){
-      this.updateChart()
-    }
-    
+    this.createColors();
+
+    this.createSvg();
+    // this.createSvg();
+    this.drawPieChart()
   }
 
-  @ViewChild('garp') garp: ElementRef;
-
-  margin: any = { top: 20, bottom: 20, left: 20, right: 20 };
-  width=800;
-  height=400;
-  chart: any;
-  // data
- 
-  xScale!: any;
-  yScale !: any;
-  colors!: any;
-  xAxis!: any;
-  yAxis!: any;
-
-  svg=d3.select('garp').append('svg')
-  .attr('height')
-  // .attr('width')
-
-  createChart(){
-    let element=this.garp.nativeElement;
-    this.width=element.offsetWidth - this.margin.left - this.margin.right;
-    this.height=element.offsetHeight - this.margin.top - this.margin.bottom;
-
-    let svg =d3.select(element).append('svg')
-          .attr('width', element.offsetWidth)
-          .attr('height', element.offsetHeight);
-    
-          // chartplot area
-          this.chart=svg.append('g')
-          .attr('class', 'bars')
-          .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`)
-
-          // define x and y domains
-          let xDomain = this.data.map(d=>d[0]);
-          let yDomain= [0, d3.max(this.data, d=>d[1])]
-
-          // create scales
-          this.xScale=d3.scaleBand().padding(0.1).domain(xDomain).rangeRound([0, this.width])
-          this.yScale=d3.scaleBand().domain(yDomain).range([this.height, 0])
-
-          // bar colors
-          this.colors=d3.scaleLinear().domain([0, this.data.length]).range(<any[]>['red', 'blue'])
-
-          // x and y axis
-          this.xAxis=svg.append('g')
-          .attr('calss', 'axis axis-x')
-          .attr('transform', `translate(${this.margin.left}, ${this.margin.top + this.height})`)
-          .call(d3.axisLeft(this.yScale))
-
+  createSvg() {
+    this.svg = d3.select('div#grap')
+      .append('svg')
+      .attr('width', this.width)
+      .attr('height', this.height)
+      .append('g')
+      .attr('transform', "translate(" + this.width / 2 + "," + this.height / 2 + ")")
   }
 
-  updateChart() {
-    // update scales & axis
-    this.xScale.domain(this.data.map(d => d[0]));
-    this.yScale.domain([0, d3.max(this.data, d => d[1])]);
-    this.colors.domain([0, this.data.length]);
-    this.xAxis.transition().call(d3.axisBottom(this.xScale));
-    this.yAxis.transition().call(d3.axisLeft(this.yScale));
+  createColors() {
+    this.colors = d3.scaleOrdinal()
+      .domain(this.data.map(d => d.name))
+      .range(["#c7d3ec", "#a5b8db", "#879cc4", "#677795", "#5a6782", "#879cc6", "#677747", "#5a6728"])
+  }
 
-    let update = this.chart.selectAll('.bar')
-      .data(this.data);
+  drawPieChart() {
+    const pie = d3.pie<any>().value((d => d.score))
 
-    // remove exiting bars
-    update.exit().remove();
-
-    // update existing bars
-    this.chart.selectAll('.bar').transition()
-      .attr('x', d => this.xScale(d[0]))
-      .attr('y', d => this.yScale(d[1]))
-      .attr('width', d => this.xScale.bandwidth())
-      .attr('height', d => this.height - this.yScale(d[1]))
-      .style('fill', (d, i) => this.colors(i));
-
-    // add new bars
-    update
+    this.svg.selectAll('pieces')
+      .data(pie(this.data))
       .enter()
-      .append('rect')
-      .attr('class', 'bar')
-      .attr('x', d => this.xScale(d[0]))
-      .attr('y', d => this.yScale(0))
-      .attr('width', this.xScale.bandwidth())
-      .attr('height', 0)
-      .style('fill', (d, i) => this.colors(i))
-      .transition()
-      .delay((d, i) => i * 10)
-      .attr('y', d => this.yScale(d[1]))
-      .attr('height', d => this.height - this.yScale(d[1]));
+      .append('path')
+      .attr('d', d3.arc()
+        .innerRadius(0)
+        .outerRadius(this.radius))
+      .attr('fill', (d: any, i: any) => (this.colors(i)))
+      .attr("stroke", "#121926")
+      .style("stroke-width", "1px");
+
+    // Add labels
+    const labelLocation = d3.arc()
+      .innerRadius(100)
+      .outerRadius(this.radius)
+
+    this.svg
+      .selectAll('pieces')
+      .data(pie(this.data))
+      .enter()
+      .append('text')
+      .text((d: any) => d.data.name)
+      .attr("transform", (d: any) => "translate(" + labelLocation.centroid(d) + ")")
+      .style("text-anchor", "middle")
+      .style("font-size", 15);
   }
 }

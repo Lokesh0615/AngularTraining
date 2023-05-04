@@ -41,6 +41,7 @@ import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { TableComponent } from './table/table.component'
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
 import { PrimengExtraComponent } from './primeng-extra/primeng-extra.component';
+import { D3Component } from './d3/d3.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { PrimengExtraComponent } from './primeng-extra/primeng-extra.component';
     AppComponent,
     ReactiveFormComponent,
     TableComponent,
-    PrimengExtraComponent
+    PrimengExtraComponent,
+    D3Component
   ],
   imports: [
     BrowserModule,

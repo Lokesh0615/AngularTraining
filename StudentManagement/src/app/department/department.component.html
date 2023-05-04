@@ -17,13 +17,13 @@
                 <tr class="table_head">
                     <ng-container *ngFor="let header of departmentHeader">
                         <th>{{header.name}}<p-sortIcon pSortableColumn="{{header.fieldName}}"
-                                    field="{{header.fieldName}}"></p-sortIcon></th>
+                                field="{{header.fieldName}}"></p-sortIcon></th>
                     </ng-container>
                 </tr>
             </ng-template>
 
             <ng-template pTemplate="body" let-departmentData>
-                <tr (dblclick)="departmentDetailes(departmentData.departmentId)">
+                <tr (dblclick)="departmentDetails(departmentData.departmentId)">
                     <td>{{departmentData.departmentId}}</td>
                     <td>{{departmentData.departmentName}}</td>
                     <td>{{departmentData.noOfEmployee}}</td>
@@ -38,7 +38,9 @@
             </ng-template>
 
             <ng-template pTemplate="emptymessage">
-                <tr><td colspan="16">no data available</td></tr>
+                <tr>
+                    <td colspan="10">no data available</td>
+                </tr>
             </ng-template>
 
         </p-table>

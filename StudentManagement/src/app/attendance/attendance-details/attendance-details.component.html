@@ -15,13 +15,13 @@
                 <p-dropdown [options]="availability" #available="ngModel" optionValue="type" appendTo="body"
                     optionLabel="name" placeholder="Available" [required]="true" name="available"
                     [(ngModel)]="attendanceDetails.available"></p-dropdown>
-                <small *ngIf="!available.touched && !fieldSelected" id="username-help" class="p-error">Available is
+                <small *ngIf="!available.dirty && !fieldSelected" id="username-help" class="p-error">Available is
                     required.</small>
 
                 <label>Date<span>*</span></label>
                 <p-calendar id="date" name="date" [required]="true" #date="ngModel" appendTo="body" inputId="time"
                     [(ngModel)]="attendanceDetails.date" placeholder="Date"></p-calendar>
-                <small *ngIf="!date.touched && !fieldSelected" id="username-help" class="p-error">Date is
+                <small *ngIf="!date.dirty && !fieldSelected" id="username-help" class="p-error">Date is
                     required.</small>
             </div>
             <div class="col-12 sm:col-12 md:col-6 lg:col-3 field detailsColumn">
@@ -30,21 +30,21 @@
                 <p-calendar [showTime]="true" hourFormat="12" id="checkIn" name="checkIn" appendTo="body"
                     [timeOnly]="true" [required]="true" #checkIn="ngModel"
                     [(ngModel)]="attendanceDetails.checkIn" placeholder="CheckIn"></p-calendar>
-                <small *ngIf="!checkIn.touched && !fieldSelected" id="username-help" class="p-error">CheckIn is
+                <small *ngIf="!checkIn.dirty && !fieldSelected" id="username-help" class="p-error">CheckIn is
                     required.</small>
 
                 <label>Checkout<span>*</span></label>
                 <p-calendar [showTime]="true" hourFormat="12" id="checkout" name="checkout" appendTo="body"
                     [timeOnly]="true" [required]="true" #checkout="ngModel" placeholder="CheckOut"
                     [(ngModel)]="attendanceDetails.checkout"></p-calendar>
-                <small *ngIf="!checkout.touched && !fieldSelected" id="username-help" class="p-error">Checkout is
+                <small *ngIf="!checkout.dirty && !fieldSelected" id="username-help" class="p-error">Checkout is
                     required.</small>
 
                 <label>Attendance Count<span>*</span></label>
                 <input type="text" pInputText id="attendanceCount" name="attendanceCount" placeholder="attendanceCount"
                     pattern="[0-9]+$" required #attendanceCount="ngModel" 
                     [(ngModel)]="attendanceDetails.attendanceCount">
-                <small *ngIf="!attendanceCount.touched && attendanceCount.invalid && !fieldSelected" id="username-help"
+                <small *ngIf="!attendanceCount.dirty && attendanceCount.invalid && !fieldSelected" id="username-help"
                     class="p-error">Attendance Count is required.</small>
                 <small *ngIf="attendanceCount.invalid && attendanceCount.touched" id="username-help"
                     class="p-error">Attendance Count is Invaild.</small>

@@ -11,10 +11,10 @@ export class AdminGuardServie implements CanActivate {
         } else {
             if (!localStorage.getItem('path')) {
                 this.route.navigateByUrl('');
-                return false
+                return false;
             } else {
                 this.route.navigateByUrl(localStorage.getItem('path'));
-                return false
+                return false;
             }
         }
     }

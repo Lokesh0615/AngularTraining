@@ -11,8 +11,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     let storage = localStorage;
-    storage.setItem('icons', JSON.stringify({ 'title': 'Home', 'icon': 'pi pi-home' }))
-    storage.setItem('path', 'Home')
+    storage.setItem('icons', JSON.stringify({ 'title': 'Home', 'icon': 'pi pi-home' }));
+    storage.setItem('path', 'Home');
   }
   
 }

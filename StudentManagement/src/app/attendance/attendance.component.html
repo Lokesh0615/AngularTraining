@@ -2,7 +2,9 @@
     <div class="tableContainer" *ngIf="showAttendanceDetails && !childComponentOpend">
 
         <p-dialog [(visible)]="dialogShow" [modal]="true" position="center" [style]="{width: '350px' }">
-            <ng-template pTemplate="header"><h3>Student Detailes</h3></ng-template>
+            <ng-template pTemplate="header">
+                <h3>Student Detailes</h3>
+            </ng-template>
 
             <label>Student ID:</label>
             <input pInputText type="text" pattern="[A-Z]{2}[0-9]{4}" placeholder="Student Id" #checkStdId="ngModel"
@@ -40,13 +42,13 @@
                     <div class="topContainerButtons">
                         <span class="p-input-icon-left">
                             <i class="pi pi-search"></i>
-                            <input pInputText type="text" placeholder="Global Search"
-                                (input)="dataTable.filterGlobal($any($event.target).value, 'contains'); hidePaginator()"/>
+                            <input pInputText type="text" placeholder="Global Search" #globalSearch
+                                (input)="dataTable.filterGlobal($any($event.target).value, 'contains'); hidePaginator()" />
                         </span>
                         <p-dropdown [options]="paginatorDropdown" optionValue="rows" optionLabel="rows"
                             [(ngModel)]="paginatorValue"></p-dropdown>
-                        <button *ngIf="loggedInUser=='admin'" pButton class="p-button-info" icon="pi pi-plus" (click)="showStudentIdAndDepartmentIdDialog()"
-                            label="ADD"></button>
+                        <button *ngIf="loggedInUser=='admin'" pButton class="p-button-info" icon="pi pi-plus"
+                            (click)="showStudentIdAndDepartmentIdDialog()" label="ADD"></button>
                     </div>
                 </div>
             </ng-template>
@@ -55,14 +57,14 @@
                 <tr class="table_head">
                     <ng-container *ngFor="let header of attendanceTableHeader">
                         <th>{{header.name}}<p-sortIcon icon="pi-sort" pSortableColumn="{{header.fieldName}}"
-                                field="{{header.fieldName}}"></p-sortIcon>  
-                            </th>
+                                field="{{header.fieldName}}"></p-sortIcon>
+                        </th>
                     </ng-container>
                     <th *ngIf="loggedInUser=='admin'"><span>Delete</span></th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-attendance >
-                <tr (dblclick)="viewAttendanceDetailes(attendance.studentId)" #checktableRows>
+            <ng-template pTemplate="body" let-attendance #checktableRows1>
+                <tr (dblclick)="viewAttendanceDetails(attendance.studentId)" #checktableRows>
 
                     <td>{{attendance.studentId}}</td>
                     <td>{{attendance.date | date :"dd/MM/yyyy"}}</td>
@@ -86,8 +88,10 @@
                 </tr>
             </ng-template>
 
-            <ng-template pTemplate="emptymessage" >
-                <tr><td colspan="16">no data available</td></tr>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="16">no data available</td>
+                </tr>
             </ng-template>
 
         </p-table>

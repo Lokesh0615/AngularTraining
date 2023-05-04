@@ -28,6 +28,15 @@
     justify-content: space-around;
 }
 
+.checkStudentIdContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+:host .p-inputtext {
+    margin-right: 8px;
+}
+
 :host ::ng-deep .p-paginator {
     display: flex;
     justify-content: right;

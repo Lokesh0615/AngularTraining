@@ -9,17 +9,17 @@
                 <label>First Name<span>*</span> </label>
                 <input type="text" pInputText id="firstName" name="firstName" placeholder="firstName"
                     pattern="[A-Za-z]+" required #firstName="ngModel" [(ngModel)]="studentDetails.firstName">
-                <small *ngIf="!firstName.touched && firstName.invalid && !fieldSelected" id="username-help"
+                <small *ngIf="!firstName.dirty && firstName.invalid && !fieldSelected" id="username-help"
                     class="p-error">First Name is required.</small>
-                <small *ngIf="firstName.invalid && firstName.touched" id="username-help" class="p-error">First Name is
+                <small *ngIf="firstName.invalid && firstName.dirty" id="username-help" class="p-error">First Name is
                     Invalid.</small>
 
                 <label>Last Name<span>*</span></label>
                 <input type="text" pInputText id="lastName" name="lastName" placeholder="lastName" pattern="[A-Za-z]+"
                     required #lastName="ngModel" [(ngModel)]="studentDetails.lastName">
-                <small *ngIf="!lastName.touched && lastName.invalid && !fieldSelected" id="username-help"
+                <small *ngIf="!lastName.dirty && lastName.invalid && !fieldSelected" id="username-help"
                     class="p-error">Last Name is required.</small>
-                <small *ngIf="lastName.invalid && lastName.touched" id="username-help" class="p-error">Last Name is
+                <small *ngIf="lastName.invalid && lastName.dirty" id="username-help" class="p-error">Last Name is
                     Invalid.</small>
 
                 <label>Blood Group</label>
@@ -57,8 +57,7 @@
                     #phoneNumber="ngModel" pattern="[0-9]{10}" [maxlength]="10" [minlength]="10"
                     [(ngModel)]="studentDetails.phoneNumber">
                 <small *ngIf="!phoneNumber.pristine && phoneNumber.invalid" id="username-help" class="p-error">Phone
-                    Number
-                    is Invalid.</small>
+                    Number is Invalid.</small>
 
                 <label>Address</label>
                 <input type="text" pInputText id="address" name="address" placeholder="address"
@@ -67,16 +66,16 @@
                 <label>DOB<span>*</span></label>
                 <p-calendar [maxDate]="createdDttm" name="dob" #dob="ngModel" appendTo="body" [required]="true"
                     [(ngModel)]="studentDetails.dob"></p-calendar>
-                <small *ngIf="!dob.touched && !fieldSelected" id="username-help" class="p-error">Date of Birth is
+                <small *ngIf="!dob.dirty && !fieldSelected" id="username-help" class="p-error">Date of Birth is
                     required.</small>
 
                 <label>Mail Id<span>*</span></label>
                 <input type="text" pInputText id="mailId" name="mailId" placeholder="mailId"
                     pattern="^[a-z0-9._%+-]+@[a-z0-9]+[.]+[a-z]{2,4}$" #mailId="ngModel" required email="true"
                     [(ngModel)]="studentDetails.mailId">
-                <small *ngIf="!mailId.touched && mailId.invalid && !fieldSelected" id="username-help"
+                <small *ngIf="!mailId.dirty && mailId.invalid && !fieldSelected" id="username-help"
                     class="p-error">Mail Id is required.</small>
-                <small *ngIf="mailId.invalid && mailId.touched " id="username-help" class="p-error">Mail Id is
+                <small *ngIf="mailId.invalid && mailId.dirty" id="username-help" class="p-error">Mail Id is
                     Invaild.</small>
 
                 <label>Department<span>*</span></label>
@@ -84,7 +83,7 @@
                     [required]="true" optionLabel="departmentName" placeholder="Department" name="department"
                     [(ngModel)]="studentDetails.department">
                 </p-dropdown>
-                <small *ngIf="!department.touched && !fieldSelected" id="username-help" class="p-error">Department is
+                <small *ngIf="!department.dirty && !fieldSelected" id="username-help" class="p-error">Department is
                     required.</small>
 
             </div>
@@ -95,13 +94,13 @@
                     appendTo="body" optionLabel="departmentId" placeholder="DepartmentId" name="departmentId"
                     [required]="true" [(ngModel)]="studentDetails.departmentId">
                 </p-dropdown>
-                <small *ngIf="!departmentId.touched && !fieldSelected" id="username-help" class="p-error">Department Id
+                <small *ngIf="!departmentId.dirty && !fieldSelected" id="username-help" class="p-error">Department Id
                     is required.</small>
 
                 <label>Date Of Joining<span>*</span></label>
                 <p-calendar [minDate]="createdDttm" name="dateOfJoining" #dateOfJoining="ngModel" appendTo="body"
                     [required]="true" [(ngModel)]="studentDetails.dateOfJoining"></p-calendar>
-                <small *ngIf="!dateOfJoining.touched && !fieldSelected" id="username-help" class="p-error">Date Of
+                <small *ngIf="!dateOfJoining.dirty && !fieldSelected" id="username-help" class="p-error">Date Of
                     Joining is required.</small>
 
                 <label for="image">Image<span>*</span></label>
@@ -109,9 +108,9 @@
                     <input type="file" placeholder="Image" id="imagePath" name="imagePath" accept=".jpg, .jpeg, .png"
                         #imagePathValid="ngModel" ngModel (change)="onFileSelect($event)" required>
                 </div>
-                <small *ngIf="imagePathValid.invalid && !imagePathValid.touched && !fieldSelected" id="username-help"
+                <small *ngIf="imagePathValid.invalid && !imagePathValid.dirty && !fieldSelected" id="username-help"
                     class="p-error">Image is reqiured</small>
-                <small *ngIf="imagePathValid.invalid && imagePathValid.touched " id="username-help"
+                <small *ngIf="imagePathValid.invalid && imagePathValid.dirty" id="username-help"
                     class="p-error">Image is Invalid.</small>
                 <small *ngIf="!imageSize" id="username-help" class="p-error">Image size should be lessthan 30KB</small>
 

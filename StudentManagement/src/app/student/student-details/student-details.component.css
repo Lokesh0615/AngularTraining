@@ -1,33 +1,36 @@
-.detailsColumn>*{
+.detailsColumn>* {
     display: inline-block;
     width: 90%;
 }
 
-.detailsColumn>label{
+.detailsColumn>label {
     margin-top: 20px;
 }
 
-.studentDetailsContainer{
+.studentDetailsContainer {
     padding: 20px;
     margin: 0px 10px 0px;
     overflow-y: auto;
 }
 
-span{
+span {
     color: red;
 }
-input.ng-touched.ng-invalid{
+
+input.ng-touched.ng-invalid {
     border: 1px solid red;
 }
 
-.genderContainer{
+.genderContainer {
     flex-wrap: wrap;
 }
 
-#imagePath{
+#imagePath {
+    color: #cbc3c3;
     margin-top: 11px;
     width: 100%;
 }
+
 .imageContainer {
     margin-top: 2px;
     margin-bottom: 6px;
@@ -35,21 +38,23 @@ input.ng-touched.ng-invalid{
     background-color: #ffffff;
 }
 
-.buttonsContainer{
+.buttonsContainer {
     width: 100%;
     display: flex;
     justify-content: right;
 }
 
-.buttons{
+.buttons {
     margin: 0px 5px;
     width: 100px;
 }
 
-:host ::ng-deep .p-button.buttons{
-    font-size:17px;  
+:host ::ng-deep .p-button.buttons {
+    font-size: 17px;
     padding: 10px 1px;
-  }
-:host ::ng-deep .p-dropdown, :host ::ng-deep.p-calendar{
+}
+
+:host ::ng-deep .p-dropdown,
+:host ::ng-deep.p-calendar {
     width: 100% !important;
 }

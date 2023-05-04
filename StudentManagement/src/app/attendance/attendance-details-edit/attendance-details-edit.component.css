@@ -16,6 +16,10 @@
     margin-top: 20px;
 }
 
+span {
+    color: red;
+}
+
 .buttonsContainer {
     width: 100%;
     display: flex;

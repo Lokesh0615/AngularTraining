@@ -13,7 +13,8 @@ import { VariableService } from 'src/app/services/variable.service';
 export class AttendanceDetailsComponent implements OnInit, OnDestroy {
 
   // for available dropdown
-  availability = [{ type: 'true', name: 'True' }, { type: 'false', name: 'False' }]
+  availability;
+
   // to show error msg for not enter field
   fieldSelected = true;
 
@@ -25,7 +26,7 @@ export class AttendanceDetailsComponent implements OnInit, OnDestroy {
     checkIn: null,
     checkout: null,
     attendanceCount: null,
-    createdSource: "",
+    createdSource: '',
     createdSourceType: '',
     createdDttm: null,
     modifiedSource: '',
@@ -42,24 +43,24 @@ export class AttendanceDetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((parm) => {
       this.attendanceDetails.studentId = parm.get('id')?.substring(1);
-      this.attendanceDetails.departmentId = parm.get('did')?.substring(1);
-      localStorage.setItem('path', 'Attendance/AddAttendanceDetails/:' + this.attendanceDetails.studentId + '/:' + this.attendanceDetails.departmentId + '')
-    })
+      this.attendanceDetails.departmentId = parm.get('departmentId')?.substring(1);
+      localStorage.setItem('path', 'Attendance/AddAttendanceDetails/:' + this.attendanceDetails.studentId + '/:' + this.attendanceDetails.departmentId + '');
+    });
+    this.availability=this.variableService.availability;
   }
 
   ngOnDestroy(): void {
-    this.loginService.setChildComponentRefresh(false)
+    this.loginService.setChildComponentRefresh(false);
   }
 
   //  to exit from the editting page 
   canExitFromPage() {
     if (this.attendanceDetailsForm.dirty && this.attendanceDetailsForm.touched) {
-      // in variable service canExit methods will show confirm dailog
-      this.variableService.canExit('Attendance')
-    }
-    else {
-      this.router.navigateByUrl('/Attendance')
-      this.ngOnDestroy()
+      // in variable service canExit method will show confirm dailog
+      this.variableService.canExit('Attendance');
+    }else {
+      this.router.navigateByUrl('/Attendance');
+      this.ngOnDestroy();
     }
   }
 
@@ -69,8 +70,8 @@ export class AttendanceDetailsComponent implements OnInit, OnDestroy {
     this.attendanceDetails.createdSource = this.loginService.loggedInUser;
     this.attendanceDetails.createdSourceType = this.loginService.loggedInUser;
     this.apiService.addAttendanceDetails(this.attendanceDetails).subscribe((results) => { }, (error) => {
-      this.router.navigateByUrl('/Attendance')
-      this.ngOnDestroy()
-    })
+      this.router.navigateByUrl('/Attendance');
+      this.ngOnDestroy();
+    });
   }
 }

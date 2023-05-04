@@ -7,13 +7,19 @@ import { LoginService } from '../services/login.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  // to set the dashboard values
+
+  // to set the dashboard title
   title: string;
+
+  // toset the dashboard icon
   icon: string;
+
   // to check the loggedIn user admin or not 
   loggedInUser: string;
+
   // to set the user name icon
-  userIcon: string
+  userIcon: string;
+
   constructor(private loginService: LoginService) { }
 
   ngOnInit(): void {
@@ -25,7 +31,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logOut() {
-    this.loginService.logOut()
-    localStorage.clear()
+    this.loginService.logOut();
+    localStorage.clear();
   }
 }

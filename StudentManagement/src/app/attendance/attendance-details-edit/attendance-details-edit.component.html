@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="grid detailContainer" *ngIf="showAttendanceDetailes">
+    <div class="grid detailContainer" *ngIf="showAttendanceDetails">
         <div class="col-12 sm:col-12 md:col-12 lg:col-12 field grid-nogutter">
             <h3>{{attendanceDetails.studentId}} Details</h3>
             <hr>
@@ -70,14 +70,15 @@
                 </div>
                 <div class="buttonsContainer">
                     <button pButton class="p-button-primary buttons" label="Edit" *ngIf="loggedInUser=='admin'"
-                        (click)="editStudentDetailes()"></button>
-                    <button pButton class="p-button-secondary buttons" label="Back" (click)="canExitFromPage()"></button>
+                        (click)="editStudentDetails()"></button>
+                    <button pButton class="p-button-secondary buttons" label="Back"
+                        (click)="canExitFromPage()"></button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="attendanceDetailsForm" [ngStyle]="{'display': showAttendanceDetailes === false ? 'block' : 'none' }">
+    <div class="attendanceDetailsForm" [ngStyle]="{'display': showAttendanceDetails === false ? 'block' : 'none' }">
 
         <form #attendanceDetailsForm="ngForm">
             <div class="grid">
@@ -120,9 +121,9 @@
                     <input type="text" pInputText id="attendanceCount" name="attendanceCount"
                         placeholder="attendanceCount" pattern="[0-9]+$" required #attendanceCount="ngModel"
                         [(ngModel)]="attendanceDetails.attendanceCount">
-                    <small *ngIf="!attendanceCount.touched && attendanceCount.invalid && !fieldSelected"
+                    <small *ngIf="!attendanceCount.dirty && attendanceCount.invalid && !fieldSelected"
                         id="username-help" class="p-error">Attendance Count is required.</small>
-                    <small *ngIf="attendanceCount.invalid && attendanceCount.touched" id="username-help"
+                    <small *ngIf="attendanceCount.invalid && attendanceCount.dirty" id="username-help"
                         class="p-error">Attendance Count is Invaild.</small>
 
                     <label>Created Source</label>
@@ -146,14 +147,14 @@
                         placeholder="modifiedSourceType" disabled [(ngModel)]="attendanceDetails.modifiedSourceType">
 
                     <label>ModifiedDttm</label>
-                    <p-calendar id="modifiedDttm" name="modifiedDttm" [required]="true" #modifiedDttm="ngModel" placeholder="modifiedDttm"
-                        appendTo="body" disabled [showTime]="true" hourFormat="12"
+                    <p-calendar id="modifiedDttm" name="modifiedDttm" [required]="true" #modifiedDttm="ngModel"
+                        placeholder="modifiedDttm" appendTo="body" disabled [showTime]="true" hourFormat="12"
                         [(ngModel)]="attendanceDetails.modifiedDttm"></p-calendar>
 
                 </div>
                 <div class="buttonsContainer">
-                    <button [disabled]="attendanceDetailsForm.pristine" type="button" class="p-button-primary buttons"
-                        pButton label="Save"
+                    <button type="button" class="p-button-primary buttons" pButton label="Save"
+                        [disabled]="attendanceDetailsForm.pristine"
                         (click)="fieldSelected=false; attendanceDetailsForm.valid && onSubmit()"></button>
                     <button type="button" class="p-button-secondary buttons" pButton label="Cancel"
                         (click)="canExitFromPage()"></button>

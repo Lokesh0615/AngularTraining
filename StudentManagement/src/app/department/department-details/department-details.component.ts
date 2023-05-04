@@ -12,8 +12,10 @@ export class DepartmentDetailsComponent implements OnInit, OnDestroy {
 
   // to get the department data based on department id 
   departmentId: string;
+
   // to store the department data
   departmentData: any = {};
+
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
     private apiService: APIService, private loginService: LoginService) { }
 
@@ -22,17 +24,18 @@ export class DepartmentDetailsComponent implements OnInit, OnDestroy {
       this.departmentId = parm.get('id')?.substring(1);
       this.apiService.fetchDepartmentByDptId(this.departmentId).subscribe((results) => {
         this.departmentData = results;
-        localStorage.setItem('path', 'Department/DepartmentDetailes/:' + this.departmentId + '')
-      })
-    })
+        localStorage.setItem('path', 'Department/DepartmentDetails/:' + this.departmentId + '');
+      });
+    });
   }
-  // to navigato back
+
+  // to navigate back to department component
   departmentPage() {
-    this.loginService.setChildComponentRefresh(false)
+    this.loginService.setChildComponentRefresh(false);
     this.router.navigateByUrl('/Department');
   }
 
   ngOnDestroy(): void {
-    this.loginService.setChildComponentRefresh(false)
+    this.loginService.setChildComponentRefresh(false);
   }
 }

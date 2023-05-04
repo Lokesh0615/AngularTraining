@@ -10,17 +10,27 @@ import { LoginService } from '../services/login.service';
 })
 export class LoginComponent {
 
+  // to dislpay form type whether login or singUp
   formType = 'Login';
-  formContent = 'Please use Registered UserID and Password'
+
+  // to display login content
+  formContent = 'Please use Registered UserID and Password';
+
+  // to display signup form input fields
   isSignUp: boolean = false;
   
+  //  to get entered userId and also to make input filed empty while form newly opend
   @ViewChild('userId') userId: ElementRef;
+
+  //  to get entered password and also to make input filed empty while form newly opend
   @ViewChild('password') password: any;
 
+
   constructor(private loginService: LoginService, private apiService: APIService, private messageService: MessageService) { }
+  
   // checking the user details while login
   login(userId: string, password: string) {
-    this.loginService.login(userId, password)
+    this.loginService.login(userId, password);
   }
 
   //  to create a new user
@@ -34,7 +44,7 @@ export class LoginComponent {
         this.messageService.add({ severity: 'success', detail: 'User ' + userId + ' is registered' });
         this.isSignUp = false;
         this.userId.nativeElement.value = '';
-        this.password.input.nativeElement.value = ''
+        this.password.input.nativeElement.value = '';
 
       }, (error) => {
         this.messageService.add({ severity: 'error', detail: 'User ' + userId + ' is already exist' });
@@ -45,17 +55,17 @@ export class LoginComponent {
   // to show the signUp from
   signUpOption() {
     this.formType = 'SignUp';
-    this.formContent = "Please Register using UserID and Password"
+    this.formContent = "Please Register using UserID and Password";
     this.isSignUp = true;
     this.userId.nativeElement.value = '';
-    this.password.input.nativeElement.value = ''
+    this.password.input.nativeElement.value = '';
   }
   // to show the login form
   loginOption() {
     this.formType = 'Login';
-    this.formContent = "Please use Registered UserID and Password"
+    this.formContent = "Please use Registered UserID and Password";
     this.isSignUp = false;
     this.userId.nativeElement.value = '';
-    this.password.input.nativeElement.value = ''
+    this.password.input.nativeElement.value = '';
   }
 }
