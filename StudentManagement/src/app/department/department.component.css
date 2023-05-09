@@ -1,32 +1,36 @@
-.table_head th{
-    background-color:rgba(200, 198, 198, 0.733) ;
-}
-.table_head th:hover{
-    background-color:rgba(200, 198, 198, 0.97) ;
-}
-.tableContainer{
-    margin: auto;
-    padding: 10px;
-    border: 1px solid rgba(200, 198, 198, 0.97) ;
+.table_head th {
+    background-color: rgba(200, 198, 198, 0.733);
 }
 
-.caption{
+.table_head th:hover {
+    background-color: rgba(200, 198, 198, 0.97);
+}
+
+.tableContainer {
+    margin: auto;
+    padding: 10px;
+    border: 1px solid rgba(200, 198, 198, 0.97);
+}
+
+.caption {
     display: flex;
     justify-content: space-between;
 }
 
-:host ::ng-deep .p-paginator{
+:host ::ng-deep .p-paginator {
     display: flex;
     justify-content: right;
     float: right;
-    max-width:max-content;
+    max-width: max-content;
     margin: 14px 10px;
     height: auto;
     background-color: whitesmoke;
-    border:none;
+    border: none;
 }
 
-:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page , :host ::ng-deep .p-paginator-next, :host ::ng-deep .p-paginator-prev {
+:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page,
+:host ::ng-deep .p-paginator-next,
+:host ::ng-deep .p-paginator-prev {
     border-radius: 0px;
     height: 30px;
     width: 50px;
@@ -34,6 +38,6 @@
     border: 1px solid black;
 }
 
-:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td{
- padding: 15px 10px;
+:host ::ng-deep .p-datatable .p-datatable-tbody>tr>td {
+    padding: 15px 10px;
 }

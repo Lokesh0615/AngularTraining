@@ -66,10 +66,10 @@ export class AttendanceDetailsEditComponent implements OnInit, OnDestroy {
         this.attendanceDetails.checkout = new Date(results.checkout);
         this.attendanceDetails.createdDttm = new Date(results.createdDttm);
         this.attendanceDetails.available = results.available.toString();
-        if (results.modifiedDttm != '') {
+        if (results.modifiedDttm != '' && results.modifiedDttm != null) {
           this.attendanceDetails.modifiedDttm = new Date(results.modifiedDttm);
         }
-        localStorage.setItem('path', 'Attendance/AttendanceDetails/:' + this.attendanceDetails.studentId + '');
+        localStorage.setItem('path', 'Attendance/AttendanceDetails/:' + this.attendanceDetails.studentId);
       });
     });
   }

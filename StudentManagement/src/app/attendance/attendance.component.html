@@ -43,7 +43,7 @@
                         <span class="p-input-icon-left">
                             <i class="pi pi-search"></i>
                             <input pInputText type="text" placeholder="Global Search" #globalSearch
-                                (input)="dataTable.filterGlobal($any($event.target).value, 'contains'); hidePaginator()" />
+                                (input)="dataTable.filterGlobal($any($event.target).value, 'contains'); hidePaginator()"/>
                         </span>
                         <p-dropdown [options]="paginatorDropdown" optionValue="rows" optionLabel="rows"
                             [(ngModel)]="paginatorValue"></p-dropdown>

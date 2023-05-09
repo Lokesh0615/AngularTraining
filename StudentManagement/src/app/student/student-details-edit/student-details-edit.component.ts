@@ -37,7 +37,7 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
   fieldSelected = true;
 
   // for min date in calender
-  todaysDate = new Date();
+  todaysDate: Date;
 
   studentDetails = {
     studentId: '',
@@ -73,9 +73,7 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.bloodGroupList = this.variableService.bloodGroupList;
-    this.departmentList = this.variableService.departmentList;
-    this.loggedInUser = this.loginService.loggedInUser;
+
     this.activatedRoute.paramMap.subscribe((parm) => {
       this.studentDetails.studentId = parm.get('id')?.substring(1);
       this.apiService.fetchByStudentId(this.studentDetails.studentId).subscribe((results: any) => {
@@ -86,12 +84,17 @@ export class StudentDetailsEditComponent implements OnInit, OnDestroy {
         this.studentDetails.createdDttm = new Date(results.createdDttm);
 
         // if we dont apply condition, if modified date is notthere, then also it we disply todays date
-        if (results.modifiedDttm != '') {
+        if (results.modifiedDttm != '' && results.modifiedDttm !=null) {
           this.studentDetails.modifiedDttm = new Date(results.modifiedDttm);
         }
-        localStorage.setItem('path', 'Student/StudentDetails/:' + this.studentDetails.studentId + '');
+        localStorage.setItem('path', 'Student/StudentDetails/:' + this.studentDetails.studentId);
       });
     });
+
+    this.todaysDate = new Date();
+    this.bloodGroupList = this.variableService.bloodGroupList;
+    this.departmentList = this.variableService.departmentList;
+    this.loggedInUser = this.loginService.loggedInUser;
   }
 
   // to bind the image path and name

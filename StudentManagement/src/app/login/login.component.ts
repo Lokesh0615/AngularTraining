@@ -14,7 +14,7 @@ export class LoginComponent {
   formType = 'Login';
 
   // to display login content
-  formContent = 'Please use Registered UserID and Password';
+  formContent = 'Please use registered User ID and Password';
 
   // to display signup form input fields
   isSignUp: boolean = false;
@@ -24,7 +24,6 @@ export class LoginComponent {
 
   //  to get entered password and also to make input filed empty while form newly opend
   @ViewChild('password') password: any;
-
 
   constructor(private loginService: LoginService, private apiService: APIService, private messageService: MessageService) { }
   
@@ -55,7 +54,7 @@ export class LoginComponent {
   // to show the signUp from
   signUpOption() {
     this.formType = 'SignUp';
-    this.formContent = "Please Register using UserID and Password";
+    this.formContent = "Please register using User ID and Password";
     this.isSignUp = true;
     this.userId.nativeElement.value = '';
     this.password.input.nativeElement.value = '';
@@ -63,7 +62,7 @@ export class LoginComponent {
   // to show the login form
   loginOption() {
     this.formType = 'Login';
-    this.formContent = "Please use Registered UserID and Password";
+    this.formContent = "Please use registered UserID and Password";
     this.isSignUp = false;
     this.userId.nativeElement.value = '';
     this.password.input.nativeElement.value = '';

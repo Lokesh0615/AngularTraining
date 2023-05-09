@@ -50,6 +50,6 @@ export class DepartmentComponent implements OnInit {
   departmentDetails(departmenId: string) {
     this.childComponentOpend = true;
     this.loginService.setChildComponentRefresh(true);
-    this.route.navigate(['DepartmentDetails/:' + departmenId + ''], { relativeTo: this.activatedRoute });
+    this.route.navigate(['DepartmentDetails/:' + departmenId], { relativeTo: this.activatedRoute });
   }
 }

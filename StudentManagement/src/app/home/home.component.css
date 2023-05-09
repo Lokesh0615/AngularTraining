@@ -1,0 +1,31 @@
+#svg {
+    display: inline;
+    height: inherit !important;
+    overflow: auto;
+    margin-top: 4px;
+}
+
+#graphContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 430px;
+    text-align: right;
+    overflow: auto;
+    padding: 3px;
+}
+
+#graphDropdown {
+    margin-right: 20px;
+    position: sticky;
+    left: 100%;
+}
+:host ::ng-deep .p-dropdown{
+    width: 150px;
+    text-align: left;
+}
+
+:host ::ng-deep .p-dropdown-panel .p-dropdown-items{
+    text-align: left;
+    padding: 0px;
+}

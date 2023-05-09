@@ -28,8 +28,8 @@
 
                 <label>CheckIn<span>*</span></label>
                 <p-calendar [showTime]="true" hourFormat="12" id="checkIn" name="checkIn" appendTo="body"
-                    [timeOnly]="true" [required]="true" #checkIn="ngModel"
-                    [(ngModel)]="attendanceDetails.checkIn" placeholder="CheckIn"></p-calendar>
+                    [timeOnly]="true" [required]="true" #checkIn="ngModel" [(ngModel)]="attendanceDetails.checkIn"
+                    placeholder="CheckIn"></p-calendar>
                 <small *ngIf="!checkIn.dirty && !fieldSelected" id="username-help" class="p-error">CheckIn is
                     required.</small>
 
@@ -42,11 +42,11 @@
 
                 <label>Attendance Count<span>*</span></label>
                 <input type="text" pInputText id="attendanceCount" name="attendanceCount" placeholder="attendanceCount"
-                    pattern="[0-9]+$" required #attendanceCount="ngModel" 
+                    pattern="[0-9]+$" required #attendanceCount="ngModel"
                     [(ngModel)]="attendanceDetails.attendanceCount">
                 <small *ngIf="!attendanceCount.dirty && attendanceCount.invalid && !fieldSelected" id="username-help"
                     class="p-error">Attendance Count is required.</small>
-                <small *ngIf="attendanceCount.invalid && attendanceCount.touched" id="username-help"
+                <small *ngIf="attendanceCount.invalid && attendanceCount.dirty" id="username-help"
                     class="p-error">Attendance Count is Invaild.</small>
 
             </div>

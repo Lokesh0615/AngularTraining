@@ -38,15 +38,15 @@ export class AttendanceDetailsComponent implements OnInit, OnDestroy {
   @ViewChild('attendanceDetailsForm') attendanceDetailsForm!: NgForm;
 
   constructor(private apiService: APIService, private router: Router, private activatedRoute: ActivatedRoute,
-     private loginService: LoginService, private variableService:VariableService) { }
+    private loginService: LoginService, private variableService: VariableService) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((parm) => {
       this.attendanceDetails.studentId = parm.get('id')?.substring(1);
       this.attendanceDetails.departmentId = parm.get('departmentId')?.substring(1);
-      localStorage.setItem('path', 'Attendance/AddAttendanceDetails/:' + this.attendanceDetails.studentId + '/:' + this.attendanceDetails.departmentId + '');
+      localStorage.setItem('path', 'Attendance/AddAttendanceDetails/:' + this.attendanceDetails.studentId + '/:' + this.attendanceDetails.departmentId);
     });
-    this.availability=this.variableService.availability;
+    this.availability = this.variableService.availability;
   }
 
   ngOnDestroy(): void {
@@ -58,7 +58,7 @@ export class AttendanceDetailsComponent implements OnInit, OnDestroy {
     if (this.attendanceDetailsForm.dirty && this.attendanceDetailsForm.touched) {
       // in variable service canExit method will show confirm dailog
       this.variableService.canExit('Attendance');
-    }else {
+    } else {
       this.router.navigateByUrl('/Attendance');
       this.ngOnDestroy();
     }

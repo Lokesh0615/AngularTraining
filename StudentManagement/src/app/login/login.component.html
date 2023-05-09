@@ -1,27 +1,25 @@
 <div class="loginFormContainer">
-    <form >
+    <form>
         <div class="imgContainer">
             <img src="assets/ItorizonLogo.png">
             <h2>{{formType}}</h2>
             <p>{{formContent}}</p>
         </div>
         <div class="userConatiner">
-            <label for="userId">User ID<span >*</span></label>
+            <label for="userId">User ID<span>*</span></label>
             <input pInputText type="text" name="userId" id="userId" #userId>
-            <label for="password">Password<span >*</span></label>
-            <p-password 
-                [inputStyle]="{'width':'370px'}"
-                [toggleMask]="true" 
-                [feedback]="false"
-                #password >
+            <label for="password">Password<span>*</span></label>
+            <p-password  [toggleMask]="true" [feedback]="false" #password>
             </p-password>
             <a *ngIf="!isSignUp" class="links">Forgot Password?</a>
         </div>
         <div class="buttons">
-            <button *ngIf="!isSignUp" pButton class="p-button-primary" label="Login" (click)="login(userId.value, password.value)"></button>
-            <button *ngIf="isSignUp" pButton class="p-button-primary" label="SignUp" (click)="signUp(userId.value, password.value)"></button>
+            <button *ngIf="!isSignUp" pButton class="p-button-primary" label="Login"
+                (click)="login(userId.value, password.value)"></button>
+            <button *ngIf="isSignUp" pButton class="p-button-primary" label="SignUp"
+                (click)="signUp(userId.value, password.value)"></button>
         </div>
-        <p *ngIf="!isSignUp">Dont have an account? <a  class="links" (click)="signUpOption()">SignUp</a></p>
+        <p *ngIf="!isSignUp">Dont have an account? <a class="links" (click)="signUpOption()">SignUp</a></p>
         <a *ngIf="isSignUp" class="links" (click)="loginOption()">Login</a>
         <p-toast></p-toast>
     </form>

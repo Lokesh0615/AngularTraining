@@ -1,5 +1,5 @@
-.loginFormContainer{
-    margin: 8vh auto  ;
+.loginFormContainer {
+    margin: 8vh auto;
     width: 450px;
     padding: 20px 40px;
     border: 1px solid black;
@@ -11,35 +11,39 @@
     background-color: whitesmoke;
 }
 
-.imgContainer{
+.imgContainer {
     text-align: center;
 }
 
-.imgContainer img{
+.imgContainer img {
     width: 60%;
 }
 
-.imgContainer h2{
+.imgContainer h2 {
     margin-top: 20px;
 }
 
-.userConatiner{
+.userConatiner {
     margin: 20px 0px;
 }
 
-.userConatiner > *{
+.userConatiner>* {
     width: 370px;
 }
 
-.buttons>*{
- width: 100%;
+.buttons>* {
+    width: 100%;
 }
 
-.links{
+.links {
     color: blue;
-    
+
 }
 
-span{
+span {
     color: red;
+}
+
+:host ::ng-deep .p-password .p-inputtext {
+    width: 370px;
 }

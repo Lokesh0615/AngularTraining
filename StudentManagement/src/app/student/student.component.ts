@@ -52,10 +52,11 @@ export class StudentComponent implements OnInit {
     let storage = localStorage;
     storage.setItem('icons', JSON.stringify({ 'title': 'Student', 'icon': 'pi pi-table' }));
     storage.setItem('path', 'Student');
-    this.childComponentOpend = JSON.parse(storage.getItem('admin')).childComponentOpend || {};
+    this.childComponentOpend = JSON.parse(storage.getItem('admin')).childComponentOpend;
     this.showStudentDetails = false;
     this.loggedInUser = this.loginService.loggedInUser;
     this.studentTableHeaders = this.variableService.studentTableHeaders;
+
   }
 
   // getting all the details of students from database
@@ -63,7 +64,6 @@ export class StudentComponent implements OnInit {
     this.studentsData = [];
     this.apiService.fetchAllStudentsDetails().subscribe((results) => {
       this.studentsData = results;
-      this.variableService.studentsData = results;
     });
   }
 
@@ -81,9 +81,8 @@ export class StudentComponent implements OnInit {
       this.dialogShow = false;
       this.showStudentDetails = false;
       this.childComponentOpend = true;
-      this.studentId = '';
       this.loginService.setChildComponentRefresh(true);
-      this.route.navigate(['AddStudentDetails/:' + this.studentId + ''], { relativeTo: this.activatedRoute });
+      this.route.navigate(['AddStudentDetails/:' + this.studentId], { relativeTo: this.activatedRoute });
     } else {
       //  if student id exist show error message
       this.messageService.add({ severity: 'error', detail: 'Student Id already Exists' });
@@ -112,6 +111,7 @@ export class StudentComponent implements OnInit {
   studentDetails(studentId: string) {
     this.childComponentOpend = true;
     this.loginService.setChildComponentRefresh(true);
-    this.route.navigate(['StudentDetails/:' + studentId + ''], { relativeTo: this.activatedRoute });
+    this.route.navigate(['StudentDetails/:' + studentId], { relativeTo: this.activatedRoute });
   }
+  
 }

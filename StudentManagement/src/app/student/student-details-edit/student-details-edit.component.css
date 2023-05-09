@@ -1,6 +1,6 @@
 .container {
     margin: 10px 35px 0px;
-    /* width: auto; */
+    width: auto;
 }
 
 .detailContainer {
@@ -77,7 +77,7 @@ input.ng-touched.ng-invalid {
     background-color: #ffffff;
 }
 
-.genderContainer{
+.genderContainer {
     flex-wrap: wrap;
 }
 

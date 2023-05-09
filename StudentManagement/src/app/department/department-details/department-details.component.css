@@ -1,10 +1,10 @@
 .departmentDetailsContainer {
-    margin: 10px ;
+    margin: 10px;
     width: auto;
-    background-color:whitesmoke;
+    background-color: whitesmoke;
 }
 
-#departmentIdLabel{
+#departmentIdLabel {
     margin: 10px 10px 0px;
 }
 
@@ -13,7 +13,7 @@
 }
 
 .detailsColumn {
-   background-color: white;
+    background-color: white;
 }
 
 .detailsButtons {

@@ -22,9 +22,9 @@ export class DepartmentDetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((parm) => {
       this.departmentId = parm.get('id')?.substring(1);
-      this.apiService.fetchDepartmentByDptId(this.departmentId).subscribe((results) => {
+      this.apiService.fetchDepartmentByDepartmentId(this.departmentId).subscribe((results) => {
         this.departmentData = results;
-        localStorage.setItem('path', 'Department/DepartmentDetails/:' + this.departmentId + '');
+        localStorage.setItem('path', 'Department/DepartmentDetails/:' + this.departmentId);
       });
     });
   }

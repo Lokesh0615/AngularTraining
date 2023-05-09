@@ -73,8 +73,8 @@
                 <input type="text" pInputText id="mailId" name="mailId" placeholder="mailId"
                     pattern="^[a-z0-9._%+-]+@[a-z0-9]+[.]+[a-z]{2,4}$" #mailId="ngModel" required email="true"
                     [(ngModel)]="studentDetails.mailId">
-                <small *ngIf="!mailId.dirty && mailId.invalid && !fieldSelected" id="username-help"
-                    class="p-error">Mail Id is required.</small>
+                <small *ngIf="!mailId.dirty && mailId.invalid && !fieldSelected" id="username-help" class="p-error">Mail
+                    Id is required.</small>
                 <small *ngIf="mailId.invalid && mailId.dirty" id="username-help" class="p-error">Mail Id is
                     Invaild.</small>
 
@@ -110,8 +110,8 @@
                 </div>
                 <small *ngIf="imagePathValid.invalid && !imagePathValid.dirty && !fieldSelected" id="username-help"
                     class="p-error">Image is reqiured</small>
-                <small *ngIf="imagePathValid.invalid && imagePathValid.dirty" id="username-help"
-                    class="p-error">Image is Invalid.</small>
+                <small *ngIf="imagePathValid.invalid && imagePathValid.dirty" id="username-help" class="p-error">Image
+                    is Invalid.</small>
                 <small *ngIf="!imageSize" id="username-help" class="p-error">Image size should be lessthan 30KB</small>
 
                 <label>Created Source</label>

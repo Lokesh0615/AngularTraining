@@ -28,6 +28,7 @@ export class NavbarComponent implements OnInit {
     let icons = JSON.parse(localStorage.getItem('icons'));
     this.title = icons.title;
     this.icon = icons.icon;
+    
   }
 
   logOut() {

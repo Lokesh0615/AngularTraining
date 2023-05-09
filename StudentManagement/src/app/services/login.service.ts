@@ -4,7 +4,7 @@ import { APIService } from './APIservice.service';
 import { MessageService } from 'primeng/api';
 
 @Injectable()
-export class LoginService implements CanActivate {
+export class LoginService {
 
   // storing user data 
   userData: any;
@@ -23,17 +23,6 @@ export class LoginService implements CanActivate {
 
   constructor(private route: Router, private apiService: APIService, private messageService: MessageService) { }
 
-  //  to activate the login page
-  canActivate(): boolean {
-    if (!this.storage.getItem('loggedIn')) {
-      return true;
-    } else {
-      this.autoLogin()
-      let path = localStorage.getItem('path');
-      this.route.navigateByUrl(path);
-      return false;
-    }
-  }
 
   // to check user while login
   login(userName: string, password: string) {

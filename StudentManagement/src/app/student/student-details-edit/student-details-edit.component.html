@@ -94,7 +94,8 @@
                 <div class="buttonsContainer">
                     <button *ngIf="loggedInUser =='admin'" pButton label="Edit" class="p-button-primary buttons"
                         (click)="editStudentDetails()"></button>
-                    <button pButton label="Back" class="p-button-secondary buttons" (click)="canExitFromPage()"></button>
+                    <button pButton label="Back" class="p-button-secondary buttons"
+                        (click)="canExitFromPage()"></button>
                 </div>
             </div>
         </div>
@@ -112,7 +113,7 @@
                     <label>First Name<span>*</span> </label>
                     <input type="text" pInputText id="firstName" name="firstName" placeholder="firstName"
                         pattern="[A-Za-z]+" required #firstName="ngModel" [(ngModel)]="studentDetails.firstName">
-                    <small *ngIf="!firstName.touched && firstName.invalid &&  !fieldSelected" id="username-help"
+                    <small *ngIf="!firstName.dirty && firstName.invalid && !fieldSelected" id="username-help"
                         class="p-error">First Name is required.</small>
                     <small *ngIf="firstName.invalid && firstName.touched" id="username-help" class="p-error">First Name
                         is Invaild.</small>
@@ -120,9 +121,9 @@
                     <label>Last Name<span>*</span></label>
                     <input type="text" pInputText id="lastName" name="lastName" placeholder="lastName"
                         pattern="[A-Za-z]+" required #lastName="ngModel" [(ngModel)]="studentDetails.lastName">
-                    <small *ngIf="!lastName.touched && lastName.invalid  &&  !fieldSelected" id="username-help"
+                    <small *ngIf="!lastName.dirty && lastName.invalid && !fieldSelected" id="username-help"
                         class="p-error">Last Name is required.</small>
-                    <small *ngIf="lastName.invalid && lastName.touched" id="username-help" class="p-error">Last Name is
+                    <small *ngIf="lastName.invalid && lastName.dirty" id="username-help" class="p-error">Last Name is
                         Invaild.</small>
 
                     <label>Blood Group</label>
@@ -171,9 +172,9 @@
                     <input type="text" pInputText id="mailId" name="mailId" placeholder="mailId"
                         pattern="^[a-z0-9._%+-]+@[a-z0-9]+[.]+[a-z]{2,4}$" #mailId="ngModel" required email="true"
                         [(ngModel)]="studentDetails.mailId">
-                    <small *ngIf="!mailId.touched && mailId.invalid && !fieldSelected" id="username-help"
+                    <small *ngIf="!mailId.dirty && mailId.invalid && !fieldSelected" id="username-help"
                         class="p-error">Mail Id is required.</small>
-                    <small *ngIf="mailId.invalid && mailId.touched" id="username-help" class="p-error">Mail ID is
+                    <small *ngIf="mailId.invalid && mailId.dirty" id="username-help" class="p-error">Mail ID is
                         Invaild.</small>
 
                     <label>Department<span>*</span></label>

@@ -47,25 +47,29 @@ import { CalendarModule } from 'primeng/calendar';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { PaginatorModule } from 'primeng/paginator';
+import { LoginPageActivateService } from './services/loginPageActivate.service';
 
 
 const appRoute: Routes = [
-  { path: '', component: LoginComponent, canActivate: [LoginService] },
+  { path: '', component: LoginComponent, canActivate: [LoginPageActivateService] },
   { path: 'Home', canActivate: [AuthGuardService], component: HomeComponent, },
-  { path: 'Student', component: StudentComponent, canActivate: [AuthGuardService,],
+  {
+    path: 'Student', component: StudentComponent, canActivate: [AuthGuardService,],
     children: [{ path: 'AddStudentDetails/:id', component: StudentDetailsComponent, canActivate: [AdminGuardServie] },
     { path: 'StudentDetails/:id', component: StudentDetailsEditComponent, canActivate: [AuthGuardService] }
     ]
   },
-  {path: 'Department', component: DepartmentComponent, canActivate: [AdminGuardServie],
+  {
+    path: 'Department', component: DepartmentComponent, canActivate: [AdminGuardServie],
     children: [{ path: "DepartmentDetails/:id", component: DepartmentDetailsComponent, canActivate: [AdminGuardServie] }]
   },
-  {path: "Attendance", component: AttendanceComponent, canActivate: [AuthGuardService],
+  {
+    path: "Attendance", component: AttendanceComponent, canActivate: [AuthGuardService],
     children: [{ path: "AttendanceDetails/:id", component: AttendanceDetailsEditComponent, canActivate: [AuthGuardService] },
     { path: "AddAttendanceDetails/:id/:departmentId", component: AttendanceDetailsComponent, canActivate: [AdminGuardServie] }
     ]
   },
-  { path: "**", component: LoginComponent, canActivate: [LoginService] }
+  { path: "**", component: LoginComponent, canActivate: [LoginPageActivateService] }
 ];
 
 @NgModule({
@@ -84,6 +88,7 @@ const appRoute: Routes = [
     AttendanceDetailsEditComponent,
 
   ],
+
   imports: [
     BrowserModule,
     FormsModule,
@@ -110,11 +115,12 @@ const appRoute: Routes = [
     RadioButtonModule,
     PaginatorModule,
 
-
   ],
+
   providers: [LoginService, AuthGuardService, APIService, MessageService,
-    VariableService, AdminGuardServie,
-    ConfirmationService, NavbarComponent,],
+    VariableService, AdminGuardServie, LoginPageActivateService,
+    ConfirmationService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

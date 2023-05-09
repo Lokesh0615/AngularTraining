@@ -7,8 +7,6 @@ import { Router } from '@angular/router';
 export class VariableService {
 
     constructor(private confirmationService: ConfirmationService, private router: Router) { }
-    // to check student data in attendace
-    studentsData;
 
     // for vailable dropdown in attendance 
     availability = [{ type: 'true', name: 'True' }, { type: 'false', name: 'False' }];

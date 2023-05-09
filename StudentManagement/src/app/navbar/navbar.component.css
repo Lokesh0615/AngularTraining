@@ -1,4 +1,4 @@
-.navigationPageContainer{
+.navigationPageContainer {
     width: 100%;
     margin: 0px;
 }
@@ -41,6 +41,7 @@
 
 .nav li {
     float: left;
+    width: 120px;
 }
 
 .nav li:hover {
@@ -65,7 +66,8 @@
     padding: 10px 20px 20px 40px;
     background-color: rgb(36, 202, 240);
 }
-.dashBoard>*{
+
+.dashBoard>* {
     display: inline-block;
     margin-left: 2%;
     font-size: x-large;
@@ -99,9 +101,20 @@
     z-index: 10;
 }
 
+@media only screen and (max-width: 450px) {
+    #avatarLabel {
+        display: none;
+    }
+
+    .nav {
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
 @media only screen and (min-width: 750px) {
-    .content{
+    .content {
         max-height: auto !important;
         height: auto;
     }
-  }
+}

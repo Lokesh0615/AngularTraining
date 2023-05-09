@@ -63,7 +63,9 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
     this.studentDetails.createdSourceType = this.loginService.loggedInUser;
     this.activatedRoute.paramMap.subscribe((parm) => {
       this.studentDetails.studentId = parm.get('id')?.substring(1);
-      localStorage.setItem('path', 'Student/AddStudentDetails/:' + this.studentDetails.studentId + '');
+      console.log(this.studentDetails.studentId);
+      
+      localStorage.setItem('path', 'Student/AddStudentDetails/:' + this.studentDetails.studentId);
     });
   }
 

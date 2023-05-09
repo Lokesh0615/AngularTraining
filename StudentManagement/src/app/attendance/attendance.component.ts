@@ -22,7 +22,7 @@ export class AttendanceComponent implements OnInit {
 
   //  for table header
   attendanceTableHeader: any;
-  
+
   // to check student Id we need student Id
   studentId: string;
 
@@ -56,9 +56,6 @@ export class AttendanceComponent implements OnInit {
 
   // to hide the paginator while global search is not found
   @ViewChildren('checktableRows') checktableRows: QueryList<any>;
-  // @ViewChild('checktableRows') checktableRows1:ElementRef
-  // @ContentChild('checktableRows') checktableRows: QueryList<any>;
-
 
   constructor(private apiService: APIService, private messageService: MessageService, private route: Router,
     private activatedRoute: ActivatedRoute, private variableService: VariableService, private loginService: LoginService,
@@ -68,7 +65,9 @@ export class AttendanceComponent implements OnInit {
 
     this.fetchingAttendanceDetails();
     // i need to check whether studentId And department Id matches or not , so i need student data
-    this.studentsData = this.variableService.studentsData;
+    this.apiService.fetchAllStudentsDetails().subscribe((results) => {
+      this.studentsData = results;
+    });
     this.attendanceTableHeader = this.variableService.attendanceTableHeader;
     let storage = localStorage;
     storage.setItem('path', 'Attendance');
@@ -120,7 +119,7 @@ export class AttendanceComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.messageService.add({ severity: 'success', detail: 'Record is deleted successfully' });
-        this.apiService.deleteAttendanceByStdIdDeptId(studentId, departmentId).subscribe((results) => { }, (error) => {
+        this.apiService.deleteAttendanceByStudentIdDepartmentId(studentId, departmentId).subscribe((results) => { }, (error) => {
           this.fetchingAttendanceDetails();
         });
       },
@@ -134,7 +133,7 @@ export class AttendanceComponent implements OnInit {
   viewAttendanceDetails(studentId: string) {
     this.childComponentOpend = true;
     this.loginService.setChildComponentRefresh(true);
-    this.route.navigate(['AttendanceDetails/:' + studentId + ''], { relativeTo: this.activatedRoute });
+    this.route.navigate(['AttendanceDetails/:' + studentId], { relativeTo: this.activatedRoute });
   }
 
   checkStudentIdAndDepartmentId() {
@@ -154,7 +153,7 @@ export class AttendanceComponent implements OnInit {
         this.showAttendanceDetails = false;
         this.childComponentOpend = true;
         this.loginService.setChildComponentRefresh(true);
-        this.route.navigate(['AddAttendanceDetails/:' + this.studentId + '/:' + this.departmentId + ''], { relativeTo: this.activatedRoute });
+        this.route.navigate(['AddAttendanceDetails/:' + this.studentId + '/:' + this.departmentId], { relativeTo: this.activatedRoute });
       } else {
         // if student id and departmnet id is already exist in student data show error messege
         this.messageService.add({ severity: 'error', detail: 'Student Id and Department Id dose not exist' });

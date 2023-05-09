@@ -12,7 +12,7 @@ export class ShortenPipe implements PipeTransform {
             return value
         }
         else if (value.length > limit) {
-            return value.substr(0, limit) + ' ...';
+            return value.substr(0, limit) + '...';
         }
         return value;
     }
